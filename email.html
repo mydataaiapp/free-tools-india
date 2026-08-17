@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Email Writer - Professional Email Generator | FreeToolsIndia</title>
+    <meta name="description" content="Write professional emails instantly with our free AI email writer. Perfect for business, job applications, and formal communication.">
+    <meta name="keywords" content="email writer, AI email generator, professional email, business email, free email tool">
+    <meta name="robots" content="index, follow">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        #result {
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            display: none;
+            margin-top: 20px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6366f1;
+            display: none;
+            margin: 20px 0;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Free AI Email Writer</h1>
+            <p>Generate professional emails for any purpose</p>
+        </div>
+
+        <select id="emailType">
+            <option value="Business">Business Email</option>
+            <option value="Job Application">Job Application</option>
+            <option value="Complaint">Complaint</option>
+            <option value="Thank You">Thank You</option>
+            <option value="Follow Up">Follow Up</option>
+        </select>
+
+        <input type="text" id="recipient" placeholder="Recipient (e.g., HR Manager)">
+        <textarea id="keyPoints" rows="4" placeholder="Key points to include..."></textarea>
+
+        <button class="btn" onclick="writeEmail()">Generate Email</button>
+
+        <div class="loading" id="loading">⏳ Writing email...</div>
+
+        <div id="result"></div>
+
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        async function writeEmail() {
+            var emailType = document.getElementById('emailType').value;
+            var recipient = document.getElementById('recipient').value;
+            var keyPoints = document.getElementById('keyPoints').value;
+            var result = document.getElementById('result');
+            var loading = document.getElementById('loading');
+
+            if (!recipient) {
+                alert('Please enter recipient.');
+                return;
+            }
+
+            loading.style.display = 'block';
+            result.style.display = 'none';
+
+            try {
+                var response = await fetch(CONFIG.GROK_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + CONFIG.GROK_API_KEY
+                    },
+                    body: JSON.stringify({
+                        model: CONFIG.GROK_MODEL,
+                        messages: [
+                            {
+                                role: 'user',
+                                content: `Write a ${emailType} email to ${recipient}. Key points: ${keyPoints || 'Not specified'}. Include subject line, greeting, body, and professional signature.`
+                            }
+                        ],
+                        max_tokens: CONFIG.MAX_TOKENS,
+                        temperature: CONFIG.TEMPERATURE
+                    })
+                });
+
+                var data = await response.json();
+
+                if (data.choices && data.choices[0]) {
+                    result.innerHTML = '<strong>✅ Your Email:</strong><br><br>' + 
+                        data.choices[0].message.content.replace(/\n/g, '<br>');
+                    result.style.display = 'block';
+                } else {
+                    result.innerHTML = '❌ Error: ' + JSON.stringify(data);
+                    result.style.display = 'block';
+                }
+
+            } catch (error) {
+                result.innerHTML = '❌ Error: ' + error.message;
+                result.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
