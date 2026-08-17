@@ -1,13 +1,29 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreeToolsIndia - 100% Free AI Tools</title>
-    <meta name="description" content="India ka sabse fast free AI tools platform. PDF converter, AI writer, resume builder - sab kuch free!">
+    <title>Free Tools India - Free AI Tools, PDF Converter, Resume Builder Online</title>
+    <meta name="description" content="Free online tools - AI writer, summary generator, resume builder, Excel formula generator, PDF converter. 100% free, no signup required. Made in India.">
+    <meta name="keywords" content="free tools, AI tools, resume builder, PDF converter, summary generator, excel formula, free online tools india">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free Tools India - 100% Free Online Tools">
+    <meta property="og:description" content="AI-powered free tools for everyone. Resume builder, summary generator, Excel formulas, and more.">
+    <meta property="og:type" content="website">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Free Tools India",
+        "url": "https://sprightly-paprenjak-ec7044.netlify.app/",
+        "description": "Free online AI tools and productivity tools for everyone"
+    }
+    </script>
     
     <style>
         * {
@@ -31,7 +47,6 @@
             min-height: 100vh;
         }
 
-        /* Header */
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -76,7 +91,6 @@
             color: var(--primary);
         }
 
-        /* Hero Section */
         .hero {
             text-align: center;
             padding: 4rem 5%;
@@ -131,7 +145,6 @@
             transform: scale(1.05);
         }
 
-        /* Tools Grid */
         .tools-section {
             max-width: 1200px;
             margin: 3rem auto;
@@ -222,7 +235,52 @@
             color: var(--primary);
         }
 
-        /* Animations */
+        .features-section {
+            background: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .feature-item {
+            padding: 1.5rem;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .feature-item p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -234,7 +292,6 @@
             }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -253,82 +310,135 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <a href="/" class="logo">🇮🇳 FreeToolsIndia</a>
+            <a href="index.html" class="logo">🇮🇳 FreeToolsIndia</a>
             <div class="nav-links">
-                <a href="#tools">Tools</a>
-                <a href="#about">About</a>
+                <a href="#tools">All Tools</a>
+                <a href="#features">Why Us</a>
                 <a href="#contact">Contact</a>
-                <a href="#" style="background: var(--primary); color: white; padding: 0.5rem 1rem; border-radius: 20px;">Get Premium</a>
             </div>
         </nav>
     </header>
 
     <section class="hero">
-        <h1>🛠️ India Ka Sabse Fast AI Tools Platform</h1>
-        <p>100% Free • No Signup • Unlimited Use • Made with ❤️ in India</p>
+        <h1>🛠️ Free Online AI Tools Platform</h1>
+        <p>100% Free • No Signup Required • Unlimited Use • Made with ❤️ in India</p>
         
         <div class="search-bar">
-            <input type="text" placeholder="🔍 Kya karna chahte ho? (e.g., PDF to Word, Resume banao...)" id="searchInput">
+            <input type="text" placeholder="Search tools... (e.g., resume builder, summary)" id="searchInput">
             <button onclick="searchTool()">Search</button>
         </div>
     </section>
 
     <section class="tools-section" id="tools">
-        <h2 class="section-title">🔥 Most Popular Tools</h2>
+        <h2 class="section-title">🔥 Most Popular Free Tools</h2>
         
         <div class="tools-grid" id="toolsGrid">
-            <!-- AI Tools -->
-            <div class="tool-card" onclick="openTool('ai-writer')">
-                <div class="tool-icon">✍️</div>
-                <h3>AI Article Writer</h3>
-                <p>Topic se complete article generate karo</p>
+            <div class="tool-card" onclick="location.href='summary.html'">
+                <div class="tool-icon">📝</div>
+                <h3>AI Summary Generator</h3>
+                <p>Summarize long text into 5 key points instantly</p>
                 <span class="badge badge-popular">🔥 Popular</span>
                 <span class="badge badge-free">Free</span>
             </div>
 
-            <div class="tool-card" onclick="openTool('summary')">
-                <div class="tool-icon">📝</div>
-                <h3>AI Summary Generator</h3>
-                <p>Lamba text ka short summary</p>
-                <span class="badge badge-new">✨ New</span>
+            <div class="tool-card" onclick="location.href='resume.html'">
+                <div class="tool-icon">💼</div>
+                <h3>Resume Builder</h3>
+                <p>Create professional resume content in minutes</p>
+                <span class="badge badge-popular">🔥 Popular</span>
                 <span class="badge badge-free">Free</span>
             </div>
 
-            <div class="tool-card" onclick="openTool('excel-formula')">
+            <div class="tool-card" onclick="location.href='excel.html'">
                 <div class="tool-icon">📊</div>
                 <h3>Excel Formula Generator</h3>
-                <p>Plain Hindi me bolo, formula pao</p>
+                <p>Describe in plain English, get the formula</p>
                 <span class="badge badge-new">💡 Smart</span>
                 <span class="badge badge-free">Free</span>
             </div>
 
-            <div class="tool-card" onclick="openTool('resume')">
-                <div class="tool-icon">💼</div>
-                <h3>Resume Builder</h3>
-                <p>Professional resume minutes me</p>
-                <span class="badge badge-popular">🔥 Popular</span>
+            <div class="tool-card" onclick="location.href='writer.html'">
+                <div class="tool-icon">✍️</div>
+                <h3>AI Article Writer</h3>
+                <p>Generate complete articles from any topic</p>
+                <span class="badge badge-new">✨ New</span>
                 <span class="badge badge-free">Free</span>
             </div>
 
-            <div class="tool-card" onclick="openTool('pdf-converter')">
-                <div class="tool-icon">📄</div>
-                <h3>PDF Converter</h3>
-                <p>PDF se Word, Excel, Image</p>
-                <span class="badge badge-popular">🔥 Popular</span>
+            <div class="tool-card" onclick="location.href='email.html'">
+                <div class="tool-icon">📧</div>
+                <h3>Email Writer</h3>
+                <p>Professional emails for any purpose</p>
                 <span class="badge badge-free">Free</span>
             </div>
 
-            <div class="tool-card" onclick="openTool('image-text')">
-                <div class="tool-icon">🖼️</div>
-                <h3>Image to Text (OCR)</h3>
-                <p>Photo se text extract karo</p>
+            <div class="tool-card" onclick="location.href='social.html'">
+                <div class="tool-icon">📱</div>
+                <h3>Social Media Post Generator</h3>
+                <p>Engaging posts with hashtags for all platforms</p>
                 <span class="badge badge-free">Free</span>
             </div>
         </div>
     </section>
 
-    <script src="config.js"></script>
-    <script src="grok-api.js"></script>
-    <script src="script.js"></script>
+    <section class="features-section" id="features">
+        <h2>Why Choose FreeToolsIndia?</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Powered by Grok AI - Get results in seconds</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💰</div>
+                <h3>100% Free</h3>
+                <p>No hidden charges, no credit card required</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🔒</div>
+                <h3>No Signup</h3>
+                <p>Use tools instantly without registration</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📱</div>
+                <h3>Mobile Friendly</h3>
+                <p>Works perfectly on all devices</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <p>&copy; 2026 FreeToolsIndia - All Rights Reserved</p>
+        <p style="margin-top: 1rem;">
+            <a href="mailto:contact@freetoolsindia.com">Email</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </p>
+    </footer>
+
+    <script>
+        function searchTool() {
+            var query = document.getElementById('searchInput').value.toLowerCase();
+            var tools = {
+                'summary': 'summary.html',
+                'resume': 'resume.html',
+                'excel': 'excel.html',
+                'formula': 'excel.html',
+                'writer': 'writer.html',
+                'article': 'writer.html',
+                'email': 'email.html',
+                'social': 'social.html',
+                'post': 'social.html'
+            };
+            
+            for (var key in tools) {
+                if (query.includes(key)) {
+                    location.href = tools[key];
+                    return;
+                }
+            }
+            alert('Tool not found. Try: summary, resume, excel, writer, email, social');
+        }
+    </script>
 </body>
 </html>
