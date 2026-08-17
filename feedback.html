@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Free Tools India</title>
+    <meta name="description" content="Share your feedback about Free Tools India. Help us improve our free AI tools.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #6b7280;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .rating-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .rating-container p {
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .stars {
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+
+        .star {
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .star:hover {
+            transform: scale(1.3);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .success-message {
+            display: none;
+            background: #10b981;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⭐ Feedback</h1>
+            <p>Help us improve our free tools</p>
+        </div>
+
+        <select id="toolName">
+            <option value="summary">📝 Summary Generator</option>
+            <option value="resume">💼 Resume Builder</option>
+            <option value="excel">📊 Excel Formula Generator</option>
+            <option value="writer">✍️ Article Writer</option>
+            <option value="email">📧 Email Writer</option>
+            <option value="social">📱 Social Media Post Generator</option>
+        </select>
+
+        <div class="rating-container">
+            <p>Rate your experience:</p>
+            <div class="stars">
+                <span class="star" onclick="setRating(1)">⭐</span>
+                <span class="star" onclick="setRating(2)">⭐</span>
+                <span class="star" onclick="setRating(3)">⭐</span>
+                <span class="star" onclick="setRating(4)">⭐</span>
+                <span class="star" onclick="setRating(5)">⭐</span>
+            </div>
+            <input type="hidden" id="rating" value="5">
+        </div>
+
+        <textarea id="message" rows="5" placeholder="Write your feedback here..."></textarea>
+
+        <button class="btn" onclick="submitFeedback()">Submit Feedback</button>
+
+        <div class="success-message" id="successMessage">
+            ✅ Thank you for your feedback!
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </div>
+
+    <script src="supabase-config.js"></script>
+    <script src="supabase.js"></script>
+    <script>
+        function setRating(stars) {
+            document.getElementById('rating').value = stars;
+            var allStars = document.querySelectorAll('.star');
+            allStars.forEach(function(star, index) {
+                if (index < stars) {
+                    star.style.opacity = '1';
+                } else {
+                    star.style.opacity = '0.3';
+                }
+            });
+        }
+
+        async function submitFeedback() {
+            var toolName = document.getElementById('toolName').value;
+            var rating = parseInt(document.getElementById('rating').value);
+            var message = document.getElementById('message').value;
+
+            if (!message) {
+                alert('Please write your feedback!');
+                return;
+            }
+
+            var success = await supabaseDB.saveFeedback(toolName, rating, message);
+
+            if (success) {
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('message').value = '';
+                
+                setTimeout(function() {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            } else {
+                alert('❌ Error saving feedback. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
