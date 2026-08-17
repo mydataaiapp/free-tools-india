@@ -1,25 +1,26 @@
-# 🇮🇳 FreeToolsIndia
+# Free Tools India 🇮🇳
 
-**India ka sabse fast AI tools platform - 100% Free**
+Free AI-powered online tools for everyone.
 
-## ✨ Features
-- 🤖 AI Article Writer (Grok API)
-- 📝 Smart Summary Generator
+## Tools Available:
+- 📝 AI Summary Generator
+- 💼 Resume Builder
 - 📊 Excel Formula Generator
-- 💼 Professional Resume Builder
-- 📄 PDF Converter
-- 🖼️ Image to Text (OCR)
+- ✍️ AI Article Writer
+- 📧 Email Writer
+- 📱 Social Media Post Generator
 
-## 🚀 Live Demo
-[Visit Website](https://github.com/mydataaiapp/free-tools-india/tree/main)
+## Tech Stack:
+- HTML, CSS, JavaScript
+- Groq API (Free AI)
+- Vercel Hosting
 
-## 🛠️ Tech Stack
-- HTML5, CSS3, JavaScript
-- Grok API (xAI)
-- GitHub Pages (Hosting)
+## Live Demo:
+[Visit Website](https://free-tools-india.vercel.app)
 
-## 📦 Installation
-```bash
-git clone https://github.com/mydataaiapp/free-tools-india.git
-cd free-tools-india
-# Open index.html in browser
+## Setup:
+1. Clone repository
+2. Add Groq API key in config.js
+3. Deploy on Vercel
+
+Made with ❤️ in India
