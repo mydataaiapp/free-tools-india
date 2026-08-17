@@ -44,7 +44,7 @@
             margin-bottom: 10px;
         }
 
-        input, textarea {
+        input {
             width: 100%;
             padding: 12px 15px;
             font-size: 16px;
@@ -63,11 +63,6 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: transform 0.3s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
         }
 
         #result {
@@ -132,14 +127,14 @@
             result.style.display = 'none';
 
             try {
-                var response = await fetch(CONFIG.GROK_API_URL, {
+                var response = await fetch(CONFIG.GROQ_API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + CONFIG.GROK_API_KEY
+                        'Authorization': 'Bearer ' + CONFIG.GROQ_API_KEY
                     },
                     body: JSON.stringify({
-                        model: CONFIG.GROK_MODEL,
+                        model: CONFIG.GROQ_MODEL,
                         messages: [
                             {
                                 role: 'user',
