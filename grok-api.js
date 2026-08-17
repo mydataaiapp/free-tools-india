@@ -1,24 +1,26 @@
-// Grok API Integration
+// Groq AI Integration (Free API)
 class GrokAI {
     constructor() {
-        this.apiKey = CONFIG.GROK_API_KEY;
-        this.apiUrl = CONFIG.GROK_API_URL;
+        this.apiKey = CONFIG.GROQ_API_KEY;
+        this.apiUrl = CONFIG.GROQ_API_URL;
+        this.model = CONFIG.GROQ_MODEL;
     }
 
-    async generateResponse(prompt, maxTokens = 1000) {
+    // Main API call function
+    async generateResponse(prompt, maxTokens = 1000, systemPrompt = '') {
         try {
             const response = await fetch(this.apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.apiKey}`
+                    'Authorization': 'Bearer ' + this.apiKey
                 },
                 body: JSON.stringify({
-                    model: CONFIG.GROK_MODEL,
+                    model: this.model,
                     messages: [
                         {
                             role: 'system',
-                            content: 'You are a helpful assistant for Indian users. Respond in simple language.'
+                            content: systemPrompt || 'You are a helpful assistant. Respond in simple English.'
                         },
                         {
                             role: 'user',
@@ -31,16 +33,22 @@ class GrokAI {
             });
 
             const data = await response.json();
-            return data.choices[0].message.content;
+            
+            if (data.choices && data.choices[0]) {
+                return data.choices[0].message.content;
+            } else {
+                console.error('API Error:', data);
+                return 'Error: ' + JSON.stringify(data);
+            }
         } catch (error) {
-            console.error('Grok API Error:', error);
+            console.error('API Error:', error);
             return 'Error: API call failed. Please try again.';
         }
     }
 
     // AI Summary Generator
     async generateSummary(text) {
-        const prompt = `Please summarize this text in 5 bullet points (Hindi + English mix):
+        const prompt = `Please summarize this text in 5 bullet points:
         
         ${text}
         
@@ -51,18 +59,16 @@ class GrokAI {
         ✅ Point 4
         ✅ Point 5`;
         
-        return await this.generateResponse(prompt, 500);
+        return await this.generateResponse(prompt, 500, 'You are a professional content summarizer.');
     }
 
     // AI Article Writer
     async generateArticle(topic, wordCount = 500) {
         const prompt = `Write a comprehensive article about "${topic}" 
-        in simple Hinglish language.
         Word count: ${wordCount}
-        Include: Introduction, Main Points, Conclusion
-        Add emojis where appropriate`;
+        Include: Title, Introduction, Main Points with Subheadings, Conclusion`;
         
-        return await this.generateResponse(prompt, wordCount * 2);
+        return await this.generateResponse(prompt, wordCount * 2, 'You are a professional content writer.');
     }
 
     // Excel Formula Generator
@@ -70,18 +76,21 @@ class GrokAI {
         const prompt = `Generate Excel formula for: ${description}
         
         Provide:
-        1. Formula
-        2. Explanation in Hindi
-        3. Example usage`;
+        1. FORMULA: [the formula]
+        2. EXPLANATION: [simple explanation]
+        3. EXAMPLE: [practical example]`;
         
-        return await this.generateResponse(prompt, 300);
+        return await this.generateResponse(prompt, 300, 'You are an Excel expert.');
     }
 
     // Resume Content Generator
-    async generateResumeContent(jobTitle, experience) {
+    async generateResumeContent(name, jobTitle, experience, skills, education) {
         const prompt = `Create professional resume content for:
+        Name: ${name}
         Job Title: ${jobTitle}
-        Experience: ${experience} years
+        Experience: ${experience}
+        Skills: ${skills}
+        Education: ${education}
         
         Include:
         - Professional Summary
@@ -89,9 +98,27 @@ class GrokAI {
         - Work Experience bullets (3)
         - Achievements (3)`;
         
-        return await this.generateResponse(prompt, 800);
+        return await this.generateResponse(prompt, 800, 'You are a professional resume writer.');
+    }
+
+    // Email Writer
+    async generateEmail(emailType, recipient, keyPoints) {
+        const prompt = `Write a ${emailType} email to ${recipient}. 
+        Key points: ${keyPoints || 'Not specified'}
+        Include: Subject line, Greeting, Body, Professional Signature`;
+        
+        return await this.generateResponse(prompt, 500, 'You are a business communication expert.');
+    }
+
+    // Social Media Post Generator
+    async generateSocialPost(platform, topic, details) {
+        const prompt = `Create an engaging ${platform} post about "${topic}". 
+        Details: ${details || 'None'}
+        Include: Catchy headline, Main content, 10 relevant hashtags, Call to action`;
+        
+        return await this.generateResponse(prompt, 500, 'You are a social media marketing expert.');
     }
 }
 
-// Export for use
+// Create instance for use
 const grokAI = new GrokAI();
