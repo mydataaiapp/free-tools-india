@@ -135,14 +135,14 @@
             result.style.display = 'none';
 
             try {
-                var response = await fetch(CONFIG.GROK_API_URL, {
+                var response = await fetch(CONFIG.GROQ_API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + CONFIG.GROK_API_KEY
+                        'Authorization': 'Bearer ' + CONFIG.GROQ_API_KEY
                     },
                     body: JSON.stringify({
-                        model: CONFIG.GROK_MODEL,
+                        model: CONFIG.GROQ_MODEL,
                         messages: [
                             {
                                 role: 'user',
