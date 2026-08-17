@@ -170,4 +170,69 @@
             document.getElementById('requirement').value = element.textContent;
         }
 
-        async function generateFormula
+        async function generateFormula() {
+            var requirement = document.getElementById('requirement').value;
+            var result = document.getElementById('result');
+            var loading = document.getElementById('loading');
+            var btn = document.getElementById('generateBtn');
+
+            if (!requirement) {
+                alert('Please describe what formula you need.');
+                return;
+            }
+
+            btn.disabled = true;
+            loading.style.display = 'block';
+            result.style.display = 'none';
+
+            try {
+                var response = await fetch(CONFIG.GROK_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + CONFIG.GROK_API_KEY
+                    },
+                    body: JSON.stringify({
+                        model: CONFIG.GROK_MODEL,
+                        messages: [
+                            {
+                                role: 'system',
+                                content: 'You are an Excel expert. Provide accurate formulas with explanations.'
+                            },
+                            {
+                                role: 'user',
+                                content: `Generate Excel formula for: ${requirement}
+                                
+                                Format:
+                                FORMULA: [the formula]
+                                EXPLANATION: [simple explanation]
+                                EXAMPLE: [practical example]`
+                            }
+                        ],
+                        max_tokens: CONFIG.MAX_TOKENS,
+                        temperature: CONFIG.TEMPERATURE
+                    })
+                });
+
+                var data = await response.json();
+
+                if (data.choices && data.choices[0]) {
+                    result.innerHTML = '<strong>✅ Formula:</strong><br><br>' + 
+                        data.choices[0].message.content.replace(/\n/g, '<br>');
+                    result.style.display = 'block';
+                } else {
+                    result.innerHTML = '❌ Error: ' + JSON.stringify(data);
+                    result.style.display = 'block';
+                }
+
+            } catch (error) {
+                result.innerHTML = '❌ Error: ' + error.message;
+                result.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                loading.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
