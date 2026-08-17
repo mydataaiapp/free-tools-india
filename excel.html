@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Excel Formula Generator - AI Powered | FreeToolsIndia</title>
+    <meta name="description" content="Generate Excel formulas instantly. Describe what you need in plain English and get the correct formula with explanation. Free online tool.">
+    <meta name="keywords" content="excel formula generator, excel formulas, spreadsheet help, free excel tool, formula maker">
+    <meta name="robots" content="index, follow">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #6b7280;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin: 20px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #result {
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6366f1;
+            display: none;
+            margin: 20px 0;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .examples {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0f4ff;
+            border-radius: 10px;
+        }
+
+        .examples h3 {
+            color: #6366f1;
+            margin-bottom: 10px;
+        }
+
+        .example-item {
+            padding: 8px;
+            color: #4b5563;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .example-item:hover {
+            background: #e0e7ff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Free Excel Formula Generator</h1>
+            <p>Describe what you need in plain English and get the correct formula</p>
+        </div>
+
+        <textarea id="requirement" placeholder="Example: I need to calculate the total of column A from row 1 to 10"></textarea>
+
+        <button class="btn" id="generateBtn" onclick="generateFormula()">Generate Formula</button>
+
+        <div class="loading" id="loading">⏳ Generating formula with AI...</div>
+
+        <div id="result"></div>
+
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+
+        <div class="examples">
+            <h3>💡 Try These Examples:</h3>
+            <div class="example-item" onclick="fillExample(this)">Calculate sum of sales in column B</div>
+            <div class="example-item" onclick="fillExample(this)">Find average of marks in row 2</div>
+            <div class="example-item" onclick="fillExample(this)">Count cells with value greater than 100</div>
+            <div class="example-item" onclick="fillExample(this)">Look up employee name based on ID</div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        function fillExample(element) {
+            document.getElementById('requirement').value = element.textContent;
+        }
+
+        async function generateFormula
