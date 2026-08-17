@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Social Media Post Generator - AI Powered | FreeToolsIndia</title>
+    <meta name="description" content="Generate engaging social media posts with hashtags for Instagram, Facebook, LinkedIn, and Twitter. Free AI tool.">
+    <meta name="keywords" content="social media post generator, Instagram captions, Facebook posts, LinkedIn content, free social media tool">
+    <meta name="robots" content="index, follow">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        #result {
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            display: none;
+            margin-top: 20px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6366f1;
+            display: none;
+            margin: 20px 0;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 Free Social Media Post Generator</h1>
+            <p>Create engaging posts with hashtags for any platform</p>
+        </div>
+
+        <select id="platform">
+            <option value="Instagram">Instagram</option>
+            <option value="Facebook">Facebook</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="Twitter">Twitter/X</option>
+        </select>
+
+        <input type="text" id="topic" placeholder="Post topic (e.g., New product launch)">
+        <textarea id="details" rows="3" placeholder="Additional details (optional)..."></textarea>
+
+        <button class="btn" onclick="generatePost()">Generate Post</button>
+
+        <div class="loading" id="loading">⏳ Creating your post...</div>
+
+        <div id="result"></div>
+
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        async function generatePost() {
+            var platform = document.getElementById('platform').value;
+            var topic = document.getElementById('topic').value;
+            var details = document.getElementById('details').value;
+            var result = document.getElementById('result');
+            var loading = document.getElementById('loading');
+
+            if (!topic) {
+                alert('Please enter a topic.');
+                return;
+            }
+
+            loading.style.display = 'block';
+            result.style.display = 'none';
+
+            try {
+                var response = await fetch(CONFIG.GROK_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + CONFIG.GROK_API_KEY
+                    },
+                    body: JSON.stringify({
+                        model: CONFIG.GROK_MODEL,
+                        messages: [
+                            {
+                                role: 'user',
+                                content: `Create an engaging ${platform} post about "${topic}". Details: ${details || 'None'}. Include catchy headline, main content, 10 relevant hashtags, and call to action.`
+                            }
+                        ],
+                        max_tokens: CONFIG.MAX_TOKENS,
+                        temperature: 0.8
+                    })
+                });
+
+                var data = await response.json();
+
+                if (data.choices && data.choices[0]) {
+                    result.innerHTML = '<strong>✅ Your Post:</strong><br><br>' + 
+                        data.choices[0].message.content.replace(/\n/g, '<br>');
+                    result.style.display = 'block';
+                } else {
+                    result.innerHTML = '❌ Error: ' + JSON.stringify(data);
+                    result.style.display = 'block';
+                }
+
+            } catch (error) {
+                result.innerHTML = '❌ Error: ' + error.message;
+                result.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
