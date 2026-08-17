@@ -11,7 +11,7 @@
 - 🖼️ Image to Text (OCR)
 
 ## 🚀 Live Demo
-[Visit Website](https://your-username.github.io/free-tools-india)
+[Visit Website](https://github.com/mydataaiapp/free-tools-india/tree/main)
 
 ## 🛠️ Tech Stack
 - HTML5, CSS3, JavaScript
@@ -20,6 +20,6 @@
 
 ## 📦 Installation
 ```bash
-git clone https://github.com/your-username/free-tools-india.git
+git clone https://github.com/mydataaiapp/free-tools-india.git
 cd free-tools-india
 # Open index.html in browser
