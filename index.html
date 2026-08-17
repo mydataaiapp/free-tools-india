@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Tools India - Free AI Tools, PDF Converter, Resume Builder Online</title>
-    <meta name="description" content="Free online tools - AI writer, summary generator, resume builder, Excel formula generator, PDF converter. 100% free, no signup required. Made in India.">
-    <meta name="keywords" content="free tools, AI tools, resume builder, PDF converter, summary generator, excel formula, free online tools india">
+    <title>Free Tools India - Free AI Tools Online | Resume, Summary, Excel</title>
+    <meta name="description" content="Free online AI tools - Summary Generator, Resume Builder, Excel Formula Generator, Article Writer, Email Writer, Social Media Post Generator. 100% Free, No Signup.">
+    <meta name="keywords" content="free AI tools, summary generator, resume builder, excel formula, article writer, email writer, social media post generator, free online tools">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Free Tools India - 100% Free Online Tools">
-    <meta property="og:description" content="AI-powered free tools for everyone. Resume builder, summary generator, Excel formulas, and more.">
+    <meta property="og:title" content="Free Tools India - 100% Free AI Tools">
+    <meta property="og:description" content="AI-powered free tools for everyone. No signup, no charges.">
     <meta property="og:type" content="website">
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Free Tools India",
         "url": "https://sprightly-paprenjak-ec7044.netlify.app/",
-        "description": "Free online AI tools and productivity tools for everyone"
+        "description": "Free online AI tools for everyone"
     }
     </script>
     
@@ -107,42 +105,6 @@
             font-size: 1.2rem;
             margin-bottom: 2rem;
             opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s backwards;
-        }
-
-        .search-bar {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-            animation: fadeInUp 1s ease 0.4s backwards;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 1.2rem 2rem;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            outline: none;
-        }
-
-        .search-bar button {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            padding: 0.9rem 1.5rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.3s;
-        }
-
-        .search-bar button:hover {
-            transform: scale(1.05);
         }
 
         .tools-section {
@@ -175,21 +137,6 @@
             overflow: hidden;
         }
 
-        .tool-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            transition: left 0.3s;
-        }
-
-        .tool-card:hover::before {
-            left: 0;
-        }
-
         .tool-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
@@ -218,6 +165,7 @@
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
+            margin: 0 3px;
         }
 
         .badge-free {
@@ -228,11 +176,6 @@
         .badge-popular {
             background: #ef444420;
             color: #ef4444;
-        }
-
-        .badge-new {
-            background: #6366f120;
-            color: var(--primary);
         }
 
         .features-section {
@@ -249,23 +192,9 @@
             margin: 2rem auto;
         }
 
-        .feature-item {
-            padding: 1.5rem;
-        }
-
         .feature-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-        }
-
-        .feature-item h3 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .feature-item p {
-            color: #6b7280;
-            font-size: 0.9rem;
         }
 
         footer {
@@ -296,13 +225,8 @@
             .hero h1 {
                 font-size: 2rem;
             }
-            
             .nav-links {
                 display: none;
-            }
-            
-            .tools-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -314,25 +238,19 @@
             <div class="nav-links">
                 <a href="#tools">All Tools</a>
                 <a href="#features">Why Us</a>
-                <a href="#contact">Contact</a>
             </div>
         </nav>
     </header>
 
     <section class="hero">
         <h1>🛠️ Free Online AI Tools Platform</h1>
-        <p>100% Free • No Signup Required • Unlimited Use • Made with ❤️ in India</p>
-        
-        <div class="search-bar">
-            <input type="text" placeholder="Search tools... (e.g., resume builder, summary)" id="searchInput">
-            <button onclick="searchTool()">Search</button>
-        </div>
+        <p>100% Free • No Signup Required • Powered by AI • Made in India</p>
     </section>
 
     <section class="tools-section" id="tools">
         <h2 class="section-title">🔥 Most Popular Free Tools</h2>
         
-        <div class="tools-grid" id="toolsGrid">
+        <div class="tools-grid">
             <div class="tool-card" onclick="location.href='summary.html'">
                 <div class="tool-icon">📝</div>
                 <h3>AI Summary Generator</h3>
@@ -353,7 +271,6 @@
                 <div class="tool-icon">📊</div>
                 <h3>Excel Formula Generator</h3>
                 <p>Describe in plain English, get the formula</p>
-                <span class="badge badge-new">💡 Smart</span>
                 <span class="badge badge-free">Free</span>
             </div>
 
@@ -361,7 +278,6 @@
                 <div class="tool-icon">✍️</div>
                 <h3>AI Article Writer</h3>
                 <p>Generate complete articles from any topic</p>
-                <span class="badge badge-new">✨ New</span>
                 <span class="badge badge-free">Free</span>
             </div>
 
@@ -387,7 +303,7 @@
             <div class="feature-item">
                 <div class="feature-icon">⚡</div>
                 <h3>Lightning Fast</h3>
-                <p>Powered by Grok AI - Get results in seconds</p>
+                <p>Powered by Groq AI - Get results in seconds</p>
             </div>
             <div class="feature-item">
                 <div class="feature-icon">💰</div>
@@ -407,7 +323,7 @@
         </div>
     </section>
 
-    <footer id="contact">
+    <footer>
         <p>&copy; 2026 FreeToolsIndia - All Rights Reserved</p>
         <p style="margin-top: 1rem;">
             <a href="mailto:contact@freetoolsindia.com">Email</a>
@@ -415,30 +331,5 @@
             <a href="#">Terms of Service</a>
         </p>
     </footer>
-
-    <script>
-        function searchTool() {
-            var query = document.getElementById('searchInput').value.toLowerCase();
-            var tools = {
-                'summary': 'summary.html',
-                'resume': 'resume.html',
-                'excel': 'excel.html',
-                'formula': 'excel.html',
-                'writer': 'writer.html',
-                'article': 'writer.html',
-                'email': 'email.html',
-                'social': 'social.html',
-                'post': 'social.html'
-            };
-            
-            for (var key in tools) {
-                if (query.includes(key)) {
-                    location.href = tools[key];
-                    return;
-                }
-            }
-            alert('Tool not found. Try: summary, resume, excel, writer, email, social');
-        }
-    </script>
 </body>
 </html>
