@@ -89,12 +89,10 @@
             cursor: pointer;
             width: 100%;
             margin: 20px 0;
-            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
         }
 
         .btn:disabled {
@@ -191,14 +189,14 @@
             result.style.display = 'none';
 
             try {
-                var response = await fetch(CONFIG.GROK_API_URL, {
+                var response = await fetch(CONFIG.GROQ_API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + CONFIG.GROK_API_KEY
+                        'Authorization': 'Bearer ' + CONFIG.GROQ_API_KEY
                     },
                     body: JSON.stringify({
-                        model: CONFIG.GROK_MODEL,
+                        model: CONFIG.GROQ_MODEL,
                         messages: [
                             {
                                 role: 'system',
