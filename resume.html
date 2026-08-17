@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Resume Builder - Create Professional Resume Online | FreeToolsIndia</title>
+    <meta name="description" content="Create professional resume content instantly with our free AI resume builder. Perfect for job seekers. No signup required.">
+    <meta name="keywords" content="resume builder, CV maker, free resume creator, professional resume, job application">
+    <meta name="robots" content="index, follow">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #6b7280;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin: 20px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #result {
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6366f1;
+            display: none;
+            margin: 20px 0;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💼 Free AI Resume Builder</h1>
+            <p>Fill in your details and get professional resume content instantly</p>
+        </div>
+
+        <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="name" placeholder="e.g., Rahul Sharma">
+        </div>
+
+        <div class="form-group">
+            <label>Job Title *</label>
+            <input type="text" id="jobTitle" placeholder="e.g., Data Entry Operator">
+        </div>
+
+        <div class="form-group">
+            <label>Years of Experience</label>
+            <input type="text" id="experience" placeholder="e.g., 2 years">
+        </div>
+
+        <div class="form-group">
+            <label>Skills (comma separated)</label>
+            <textarea id="skills" placeholder="e.g., Excel, Typing 40 WPM, Data Management, MS Office"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Education</label>
+            <input type="text" id="education" placeholder="e.g., Bachelor of Commerce">
+        </div>
+
+        <button class="btn" id="generateBtn" onclick="buildResume()">Generate Resume Content</button>
+
+        <div class="loading" id="loading">⏳ Creating your professional resume...</div>
+
+        <div id="result"></div>
+
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        async function buildResume() {
+            var name = document.getElementById('name').value;
+            var jobTitle = document.getElementById('jobTitle').value;
+            var experience = document.getElementById('experience').value || 'Fresher';
+            var skills = document.getElementById('skills').value || 'Not specified';
+            var education = document.getElementById('education').value || 'Not specified';
+            var result = document.getElementById('result');
+            var loading = document.getElementById('loading');
+            var btn = document.getElementById('generateBtn');
+
+            if (!name || !jobTitle) {
+                alert('Please fill in your name and job title.');
+                return;
+            }
+
+            btn.disabled = true;
+            loading.style.display = 'block';
+            result.style.display = 'none';
+
+            try {
+                var response = await fetch(CONFIG.GROK_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + CONFIG.GROK_API_KEY
+                    },
+                    body: JSON.stringify({
+                        model: CONFIG.GROK_MODEL,
+                        messages: [
+                            {
+                                role: 'system',
+                                content: 'You are a professional resume writer. Create ATS-friendly resume content.'
+                            },
+                            {
+                                role: 'user',
+                                content: `Create professional resume content for:
+                                Name: ${name}
+                                Job Title: ${jobTitle}
+                                Experience: ${experience}
+                                Skills: ${skills}
+                                Education: ${education}
+                                
+                                Include sections: Professional Summary, Key Skills, Work Experience, Education, Achievements`
+                            }
+                        ],
+                        max_tokens: CONFIG.MAX_TOKENS,
+                        temperature: CONFIG.TEMPERATURE
+                    })
+                });
+
+                var data = await response.json();
+
+                if (data.choices && data.choices[0]) {
+                    result.innerHTML = '<strong>✅ Your Professional Resume Content:</strong><br><br>' + 
+                        data.choices[0].message.content.replace(/\n/g, '<br>');
+                    result.style.display = 'block';
+                } else {
+                    result.innerHTML = '❌ Error: ' + JSON.stringify(data);
+                    result.style.display = 'block';
+                }
+
+            } catch (error) {
+                result.innerHTML = '❌ Error: ' + error.message;
+                result.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                loading.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
