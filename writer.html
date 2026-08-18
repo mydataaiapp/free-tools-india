@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free AI Article Writer - Generate Articles Online | FreeToolsIndia</title>
-    <meta name="description" content="Generate complete articles from any topic with our free AI article writer. Perfect for bloggers, students, and content creators.">
-    <meta name="keywords" content="AI article writer, content generator, blog writer, free writing tool, article maker">
+    <title>Free AI Article Writer - Blog, SEO, Academic Articles | FreeToolsIndia</title>
+    <meta name="description" content="Generate professional articles instantly with AI. Blog posts, SEO articles, academic content, product reviews, and more. Free PDF download.">
+    <meta name="keywords" content="AI article writer, content generator, blog writer, SEO article, free writing tool, article maker">
     <meta name="robots" content="index, follow">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- jsPDF for PDF download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
         * {
@@ -25,7 +28,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -40,17 +43,101 @@
 
         .header h1 {
             color: #6366f1;
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 10px;
         }
 
-        input {
+        .header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        .form-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+        }
+
+        .form-section h2 {
+            color: #6366f1;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        label .required {
+            color: #ef4444;
+        }
+
+        input, textarea, select {
             width: 100%;
             padding: 12px 15px;
-            font-size: 16px;
+            font-size: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .article-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .article-type-btn {
+            padding: 12px 15px;
+            background: white;
             border: 2px solid #e5e7eb;
             border-radius: 10px;
-            margin-bottom: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .article-type-btn:hover {
+            border-color: #6366f1;
+            background: #eef2ff;
+            transform: translateY(-2px);
+        }
+
+        .article-type-btn.selected {
+            background: #6366f1;
+            color: white;
+            border-color: #6366f1;
         }
 
         .btn {
@@ -63,16 +150,72 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
+            margin: 20px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         #result {
-            padding: 20px;
-            background: #f9fafb;
+            padding: 25px;
+            background: #ffffff;
             border-radius: 10px;
             white-space: pre-wrap;
-            line-height: 1.6;
+            line-height: 1.8;
             display: none;
+            border: 2px solid #e5e7eb;
             margin-top: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .download-btns {
+            display: none;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .download-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-pdf {
+            background: #ef4444;
+            color: white;
+        }
+
+        .download-txt {
+            background: #6366f1;
+            color: white;
+        }
+
+        .copy-btn {
+            background: #10b981;
+            color: white;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .loading {
@@ -80,6 +223,7 @@
             color: #6366f1;
             display: none;
             margin: 20px 0;
+            font-size: 1.1rem;
         }
 
         .back-link {
@@ -88,6 +232,92 @@
             margin-top: 20px;
             color: #6366f1;
             text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .toast {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .tips {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f4ff;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .tips h3 {
+            color: #6366f1;
+            margin-bottom: 10px;
+        }
+
+        .tips ul {
+            list-style-position: inside;
+            color: #4b5563;
+            line-height: 1.8;
+        }
+
+        .topic-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .topic-chip {
+            padding: 8px 15px;
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .topic-chip:hover {
+            background: #6366f1;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -95,36 +325,169 @@
     <div class="container">
         <div class="header">
             <h1>✍️ Free AI Article Writer</h1>
-            <p>Enter a topic and get a complete article instantly</p>
+            <p>Generate Professional Articles - Blog, SEO, Academic & More</p>
         </div>
 
-        <input type="text" id="topic" placeholder="Enter topic (e.g., Benefits of Yoga)">
-        <input type="number" id="wordCount" placeholder="Word count (default: 500)" min="100" max="2000" value="500">
+        <!-- Article Type Selection -->
+        <div class="form-section">
+            <h2>📋 Select Article Type</h2>
+            <div class="article-type-grid" id="articleTypeGrid">
+                <button class="article-type-btn selected" onclick="selectArticleType('Blog Post', this)">📝 Blog Post</button>
+                <button class="article-type-btn" onclick="selectArticleType('SEO Article', this)">🔍 SEO Article</button>
+                <button class="article-type-btn" onclick="selectArticleType('Academic', this)">🎓 Academic</button>
+                <button class="article-type-btn" onclick="selectArticleType('Product Review', this)">⭐ Product Review</button>
+                <button class="article-type-btn" onclick="selectArticleType('How-to Guide', this)">📖 How-to Guide</button>
+                <button class="article-type-btn" onclick="selectArticleType('News Article', this)">📰 News Article</button>
+            </div>
+        </div>
 
-        <button class="btn" onclick="writeArticle()">Generate Article</button>
+        <!-- Article Details -->
+        <div class="form-section">
+            <h2>✏️ Article Details</h2>
+            <div class="form-group">
+                <label>Topic/Title <span class="required">*</span></label>
+                <input type="text" id="topic" placeholder="e.g., Benefits of Yoga for Mental Health">
+            </div>
+            
+            <div class="topic-suggestions">
+                <span class="topic-chip" onclick="fillTopic('Top 10 Digital Marketing Strategies for 2026')">Digital Marketing</span>
+                <span class="topic-chip" onclick="fillTopic('How to Improve Productivity at Work')">Productivity</span>
+                <span class="topic-chip" onclick="fillTopic('Benefits of Meditation for Students')">Meditation</span>
+                <span class="topic-chip" onclick="fillTopic('Future of Artificial Intelligence in India')">AI in India</span>
+                <span class="topic-chip" onclick="fillTopic('Healthy Eating Habits for Busy Professionals')">Health</span>
+            </div>
+        </div>
 
-        <div class="loading" id="loading">⏳ Writing your article...</div>
+        <!-- Article Configuration -->
+        <div class="form-section">
+            <h2>⚙️ Article Configuration</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Word Count <span class="required">*</span></label>
+                    <select id="wordCount">
+                        <option value="300">Short (300 words)</option>
+                        <option value="500" selected>Medium (500 words)</option>
+                        <option value="800">Long (800 words)</option>
+                        <option value="1000">Very Long (1000 words)</option>
+                        <option value="1500">Comprehensive (1500 words)</option>
+                        <option value="2000">Detailed (2000 words)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tone</label>
+                    <select id="tone">
+                        <option value="Professional">Professional</option>
+                        <option value="Casual">Casual</option>
+                        <option value="Informative">Informative</option>
+                        <option value="Persuasive">Persuasive</option>
+                        <option value="Academic">Academic</option>
+                        <option value="Friendly">Friendly</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Language</label>
+                    <select id="language">
+                        <option value="English">English</option>
+                        <option value="Hindi">Hindi (Devanagari)</option>
+                        <option value="Hinglish">Hinglish (Hindi + English)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Target Audience</label>
+                    <select id="audience">
+                        <option value="General">General Public</option>
+                        <option value="Students">Students</option>
+                        <option value="Professionals">Professionals</option>
+                        <option value="Business Owners">Business Owners</option>
+                        <option value="Technical">Technical Readers</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>SEO Keywords (comma separated - Optional)</label>
+                <input type="text" id="seoKeywords" placeholder="e.g., yoga benefits, mental health, stress relief">
+            </div>
+        </div>
+
+        <button class="btn" id="generateBtn" onclick="writeArticle()">🚀 Generate Article</button>
+
+        <div class="loading" id="loading">⏳ Writing your professional article...</div>
 
         <div id="result"></div>
+
+        <!-- Download Buttons -->
+        <div class="download-btns" id="downloadBtns">
+            <button class="download-btn download-pdf" onclick="downloadPDF()">
+                📄 Download PDF
+            </button>
+            <button class="download-btn download-txt" onclick="downloadTXT()">
+                📝 Download TXT
+            </button>
+            <button class="download-btn copy-btn" onclick="copyArticle()">
+                📋 Copy to Clipboard
+            </button>
+        </div>
+
+        <div class="tips">
+            <h3>💡 Tips for Better Articles:</h3>
+            <ul>
+                <li>Be specific with your topic for better results</li>
+                <li>Include SEO keywords for search engine visibility</li>
+                <li>Choose appropriate tone for your audience</li>
+                <li>Use Hinglish for Indian audience engagement</li>
+                <li>Review and customize the generated content</li>
+            </ul>
+        </div>
 
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">✅ Success!</div>
+
     <script src="config.js"></script>
     <script>
+        let selectedArticleType = 'Blog Post';
+        let lastArticleContent = '';
+        let articleData = {};
+
+        function selectArticleType(type, element) {
+            selectedArticleType = type;
+            
+            document.querySelectorAll('.article-type-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function fillTopic(topic) {
+            document.getElementById('topic').value = topic;
+        }
+
         async function writeArticle() {
-            var topic = document.getElementById('topic').value;
-            var wordCount = document.getElementById('wordCount').value || 500;
+            articleData = {
+                topic: document.getElementById('topic').value,
+                wordCount: document.getElementById('wordCount').value,
+                tone: document.getElementById('tone').value,
+                language: document.getElementById('language').value,
+                audience: document.getElementById('audience').value,
+                seoKeywords: document.getElementById('seoKeywords').value || 'None'
+            };
+
             var result = document.getElementById('result');
             var loading = document.getElementById('loading');
+            var btn = document.getElementById('generateBtn');
+            var downloadBtns = document.getElementById('downloadBtns');
 
-            if (!topic) {
-                alert('Please enter a topic.');
+            if (!articleData.topic) {
+                alert('Please enter a topic for your article.');
                 return;
             }
 
+            btn.disabled = true;
             loading.style.display = 'block';
             result.style.display = 'none';
+            downloadBtns.style.display = 'none';
 
             try {
                 var response = await fetch(CONFIG.GROQ_API_URL, {
@@ -137,21 +500,46 @@
                         model: CONFIG.GROQ_MODEL,
                         messages: [
                             {
+                                role: 'system',
+                                content: 'You are a professional content writer. Create engaging, well-structured, and informative articles.'
+                            },
+                            {
                                 role: 'user',
-                                content: `Write a comprehensive article about "${topic}" in approximately ${wordCount} words. Include title, introduction, main points with subheadings, and conclusion.`
+                                content: `Write a ${selectedArticleType} article.
+
+TOPIC: ${articleData.topic}
+WORD COUNT: Approximately ${articleData.wordCount} words
+TONE: ${articleData.tone}
+LANGUAGE: ${articleData.language}
+TARGET AUDIENCE: ${articleData.audience}
+SEO KEYWORDS: ${articleData.seoKeywords}
+
+Structure the article with:
+1. CATCHY TITLE
+2. INTRODUCTION (Hook + Context)
+3. MAIN BODY (3-5 sections with subheadings)
+4. CONCLUSION (Summary + Call to Action)
+5. KEY TAKEAWAYS
+
+Make it engaging, informative, and ready to publish.`
                             }
                         ],
-                        max_tokens: 2000,
-                        temperature: CONFIG.TEMPERATURE
+                        max_tokens: 3000,
+                        temperature: 0.7
                     })
                 });
 
                 var data = await response.json();
 
                 if (data.choices && data.choices[0]) {
+                    lastArticleContent = data.choices[0].message.content;
                     result.innerHTML = '<strong>✅ Your Article:</strong><br><br>' + 
-                        data.choices[0].message.content.replace(/\n/g, '<br>');
+                        lastArticleContent.replace(/\n/g, '<br>');
                     result.style.display = 'block';
+                    downloadBtns.style.display = 'flex';
+                    
+                    // Scroll to result
+                    result.scrollIntoView({ behavior: 'smooth' });
                 } else {
                     result.innerHTML = '❌ Error: ' + JSON.stringify(data);
                     result.style.display = 'block';
@@ -161,8 +549,99 @@
                 result.innerHTML = '❌ Error: ' + error.message;
                 result.style.display = 'block';
             } finally {
+                btn.disabled = false;
                 loading.style.display = 'none';
             }
+        }
+
+        // Download as PDF
+        function downloadPDF() {
+            if (!lastArticleContent) return;
+            
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Header
+            doc.setFillColor(99, 102, 241);
+            doc.rect(0, 0, 210, 25, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'bold');
+            doc.text(articleData.topic || 'Article', 105, 12, { align: 'center' });
+            
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`${selectedArticleType} | ${articleData.wordCount} words`, 105, 19, { align: 'center' });
+            
+            // Content
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(11);
+            
+            const lines = doc.splitTextToSize(lastArticleContent, 180);
+            let y = 35;
+            
+            lines.forEach(line => {
+                if (y > 280) {
+                    doc.addPage();
+                    y = 20;
+                }
+                doc.text(line, 15, y);
+                y += 6;
+            });
+            
+            const fileName = articleData.topic.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50);
+            doc.save(fileName + '_Article.pdf');
+            showToast('PDF Downloaded!');
+        }
+
+        // Download as TXT
+        function downloadTXT() {
+            if (!lastArticleContent) return;
+            
+            const txtContent = '='.repeat(60) + '\n' +
+                'ARTICLE\n' +
+                'Topic: ' + articleData.topic + '\n' +
+                'Type: ' + selectedArticleType + '\n' +
+                'Word Count: ' + articleData.wordCount + '\n' +
+                '='.repeat(60) + '\n\n' +
+                lastArticleContent;
+            
+            const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            
+            const fileName = articleData.topic.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50);
+            link.download = fileName + '_Article.txt';
+            link.click();
+            showToast('TXT Downloaded!');
+        }
+
+        // Copy to Clipboard
+        function copyArticle() {
+            if (!lastArticleContent) return;
+            
+            navigator.clipboard.writeText(lastArticleContent).then(() => {
+                showToast('Article Copied!');
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = lastArticleContent;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('Article Copied!');
+            });
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = '✅ ' + message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
         }
     </script>
 </body>
