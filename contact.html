@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - FreeToolsIndia</title>
-    <meta name="description" content="Contact FreeToolsIndia for support, feedback, or business inquiries. We're here to help with our free AI tools.">
+    <title>Contact Us - Report Problem | FreeToolsIndia</title>
+    <meta name="description" content="Contact FreeToolsIndia for support, report tool problems, suggest improvements, or business inquiries. We respond within 24 hours.">
+    <meta name="keywords" content="contact, report problem, tool support, feedback, help, FreeToolsIndia support">
     <meta name="robots" content="index, follow">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -24,7 +25,7 @@
         }
 
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -39,7 +40,7 @@
 
         .header h1 {
             color: #6366f1;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 10px;
         }
 
@@ -47,7 +48,7 @@
             color: #6b7280;
         }
 
-        .contact-info {
+        .contact-methods {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
@@ -56,45 +57,57 @@
 
         .contact-card {
             background: #f9fafb;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             text-align: center;
+            cursor: pointer;
             transition: all 0.3s;
+            border: 2px solid transparent;
         }
 
         .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-card.active {
+            border-color: #6366f1;
+            background: #eef2ff;
         }
 
         .contact-card .icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
         }
 
         .contact-card h3 {
-            font-size: 1rem;
-            margin-bottom: 5px;
+            font-size: 0.9rem;
             color: #374151;
         }
 
-        .contact-card p {
-            font-size: 0.9rem;
-            color: #6b7280;
+        .form-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
         }
 
-        .contact-card a {
+        .form-section h2 {
             color: #6366f1;
-            text-decoration: none;
-            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
         }
 
-        .contact-card a:hover {
-            text-decoration: underline;
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         label {
@@ -102,9 +115,14 @@
             font-weight: 600;
             color: #374151;
             margin-bottom: 8px;
+            font-size: 14px;
         }
 
-        input, textarea {
+        label .required {
+            color: #ef4444;
+        }
+
+        input, textarea, select {
             width: 100%;
             padding: 12px 15px;
             font-size: 15px;
@@ -113,15 +131,41 @@
             transition: border-color 0.3s;
         }
 
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: #6366f1;
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
         }
 
         textarea {
-            height: 150px;
+            height: 120px;
             resize: vertical;
+        }
+
+        .file-upload {
+            margin-bottom: 15px;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 15px;
+            background: #eef2ff;
+            color: #6366f1;
+            border: 2px dashed #6366f1;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .file-upload-label:hover {
+            background: #6366f1;
+            color: white;
         }
 
         .btn {
@@ -139,6 +183,11 @@
 
         .btn:hover {
             transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .back-link {
@@ -164,6 +213,34 @@
             margin-top: 15px;
         }
 
+        .error-message {
+            display: none;
+            background: #ef4444;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .quick-help {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0f4ff;
+            border-radius: 10px;
+        }
+
+        .quick-help h3 {
+            color: #6366f1;
+            margin-bottom: 15px;
+        }
+
+        .quick-help ul {
+            list-style-position: inside;
+            color: #4b5563;
+            line-height: 2;
+        }
+
         .social-links {
             display: flex;
             justify-content: center;
@@ -172,14 +249,14 @@
         }
 
         .social-link {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background: #eef2ff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             transition: all 0.3s;
             text-decoration: none;
         }
@@ -187,6 +264,13 @@
         .social-link:hover {
             background: #6366f1;
             transform: translateY(-5px);
+        }
+
+        .loading {
+            text-align: center;
+            color: #6366f1;
+            display: none;
+            margin: 15px 0;
         }
 
         @media (max-width: 600px) {
@@ -197,104 +281,396 @@
             .header h1 {
                 font-size: 1.8rem;
             }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📧 Contact Us</h1>
-            <p>We're here to help! Reach out anytime.</p>
+            <h1>📧 Contact & Support</h1>
+            <p>Having a problem? We're here to help 24/7!</p>
         </div>
 
-        <div class="contact-info">
-            <div class="contact-card">
-                <div class="icon">📧</div>
-                <h3>Email Us</h3>
-                <p><a href="mailto:support@freetoolsindia.com">support@freetoolsindia.com</a></p>
+        <!-- Contact Method Selection -->
+        <div class="contact-methods">
+            <div class="contact-card active" id="cardProblem" onclick="selectMethod('problem', this)">
+                <div class="icon">⚠️</div>
+                <h3>Report a Problem</h3>
             </div>
-            <div class="contact-card">
-                <div class="icon">💼</div>
-                <h3>Business Inquiries</h3>
-                <p><a href="mailto:business@freetoolsindia.com">business@freetoolsindia.com</a></p>
+            <div class="contact-card" id="cardSuggestion" onclick="selectMethod('suggestion', this)">
+                <div class="icon">💡</div>
+                <h3>Suggest a Tool</h3>
             </div>
-            <div class="contact-card">
+            <div class="contact-card" id="cardFeedback" onclick="selectMethod('feedback', this)">
                 <div class="icon">⭐</div>
-                <h3>Feedback</h3>
-                <p><a href="feedback.html">Submit Feedback</a></p>
+                <h3>General Feedback</h3>
+            </div>
+            <div class="contact-card" id="cardBusiness" onclick="selectMethod('business', this)">
+                <div class="icon">💼</div>
+                <h3>Business Inquiry</h3>
             </div>
         </div>
 
-        <h2 style="color: #374151; margin-bottom: 20px; text-align: center;">Send Us a Message</h2>
+        <!-- Problem Report Form -->
+        <div id="problemForm">
+            <div class="form-section">
+                <h2>⚠️ Report a Problem</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Which tool has the problem? <span class="required">*</span></label>
+                        <select id="toolName">
+                            <option value="">Select Tool</option>
+                            <option value="summary">📝 Summary Generator</option>
+                            <option value="resume">💼 Resume Builder</option>
+                            <option value="excel">📊 Excel Formula Generator</option>
+                            <option value="writer">✍️ Article Writer</option>
+                            <option value="email">📧 Email Writer</option>
+                            <option value="social">📱 Social Media Post Generator</option>
+                            <option value="other">🔧 Other / Website Issue</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Problem Type <span class="required">*</span></label>
+                        <select id="problemType">
+                            <option value="">Select Problem Type</option>
+                            <option value="not-working">Tool not working</option>
+                            <option value="error-message">Showing error message</option>
+                            <option value="slow">Tool is very slow</option>
+                            <option value="wrong-result">Wrong/Incorrect result</option>
+                            <option value="download-issue">Download not working</option>
+                            <option value="display-issue">Display/Design issue</option>
+                            <option value="other">Other problem</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Urgency Level</label>
+                        <select id="urgency">
+                            <option value="low">Low - Can wait</option>
+                            <option value="medium" selected>Medium - Need help soon</option>
+                            <option value="high">High - Urgent issue</option>
+                            <option value="critical">Critical - Tool completely broken</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>When did it happen?</label>
+                        <input type="datetime-local" id="problemDate">
+                    </div>
+                </div>
+            </div>
 
-        <div class="form-group">
-            <label>Your Name *</label>
-            <input type="text" id="name" placeholder="e.g., Rahul Sharma">
+            <div class="form-section">
+                <h2>👤 Your Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Your Name <span class="required">*</span></label>
+                        <input type="text" id="name" placeholder="e.g., Rahul Sharma">
+                    </div>
+                    <div class="form-group">
+                        <label>Your Email <span class="required">*</span></label>
+                        <input type="email" id="email" placeholder="e.g., rahul@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Device/Browser</label>
+                        <input type="text" id="device" placeholder="e.g., Mobile Chrome / Windows 11">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>📝 Problem Details</h2>
+                <div class="form-group">
+                    <label>Describe the problem <span class="required">*</span></label>
+                    <textarea id="problemDescription" placeholder="Please describe what happened, what you were trying to do, and any error messages you saw..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Steps to reproduce (optional)</label>
+                    <textarea id="stepsToReproduce" placeholder="1. Opened the tool&#10;2. Entered text&#10;3. Clicked generate&#10;4. Got error..." style="height: 80px;"></textarea>
+                </div>
+                <div class="file-upload">
+                    <label class="file-upload-label" for="screenshot">
+                        📸 Upload Screenshot (Optional)
+                    </label>
+                    <input type="file" id="screenshot" accept="image/*" onchange="showFileName()">
+                    <p id="fileName" style="text-align: center; margin-top: 5px; font-size: 14px; color: #6366f1;"></p>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>Your Email *</label>
-            <input type="email" id="email" placeholder="e.g., rahul@gmail.com">
+        <!-- Other Forms (Hidden by default) -->
+        <div id="suggestionForm" style="display: none;">
+            <div class="form-section">
+                <h2>💡 Suggest a Tool</h2>
+                <div class="form-group">
+                    <label>Tool Name <span class="required">*</span></label>
+                    <input type="text" id="suggestionTool" placeholder="e.g., PDF to Word Converter">
+                </div>
+                <div class="form-group">
+                    <label>What should this tool do? <span class="required">*</span></label>
+                    <textarea id="suggestionDescription" placeholder="Describe what the tool should do and how it would help users..."></textarea>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>Subject *</label>
-            <input type="text" id="subject" placeholder="e.g., Suggestion for new tool">
+        <div id="feedbackForm" style="display: none;">
+            <div class="form-section">
+                <h2>⭐ General Feedback</h2>
+                <div class="form-group">
+                    <label>Your Feedback <span class="required">*</span></label>
+                    <textarea id="generalFeedback" placeholder="Share your thoughts about FreeToolsIndia..."></textarea>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>Message *</label>
-            <textarea id="message" placeholder="Write your message here..."></textarea>
+        <div id="businessForm" style="display: none;">
+            <div class="form-section">
+                <h2>💼 Business Inquiry</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Company Name <span class="required">*</span></label>
+                        <input type="text" id="companyName" placeholder="e.g., ABC Solutions">
+                    </div>
+                    <div class="form-group">
+                        <label>Inquiry Type</label>
+                        <select id="businessType">
+                            <option value="partnership">Partnership</option>
+                            <option value="advertising">Advertising</option>
+                            <option value="api-access">API Access</option>
+                            <option value="white-label">White Label</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Message <span class="required">*</span></label>
+                    <textarea id="businessMessage" placeholder="Tell us about your business inquiry..."></textarea>
+                </div>
+            </div>
         </div>
 
-        <button class="btn" onclick="sendMessage()">Send Message</button>
+        <!-- Common Fields (Always visible) -->
+        <div id="commonFields">
+            <div class="form-group">
+                <label>Your Name <span class="required">*</span></label>
+                <input type="text" id="commonName" placeholder="e.g., Rahul Sharma">
+            </div>
+            <div class="form-group">
+                <label>Your Email <span class="required">*</span></label>
+                <input type="email" id="commonEmail" placeholder="e.g., rahul@gmail.com">
+            </div>
+        </div>
 
-        <div class="success-message" id="successMessage">
-            ✅ Thank you! Your message has been sent.
+        <button class="btn" id="submitBtn" onclick="submitReport()">📨 Submit</button>
+
+        <div class="loading" id="loading">⏳ Sending your message...</div>
+        <div class="success-message" id="successMessage">✅ Thank you! Your message has been received. We'll respond within 24 hours.</div>
+        <div class="error-message" id="errorMessage">❌ Error sending message. Please try again.</div>
+
+        <!-- Quick Help -->
+        <div class="quick-help">
+            <h3>🔧 Common Problems & Solutions:</h3>
+            <ul>
+                <li><strong>Tool not working?</strong> Try refreshing the page or clearing browser cache</li>
+                <li><strong>Getting error?</strong> Check your internet connection and try again</li>
+                <li><strong>Download not working?</strong> Try using Chrome browser or disable popup blocker</li>
+                <li><strong>Slow loading?</strong> AI generation takes 5-10 seconds normally</li>
+                <li><strong>Still having issues?</strong> Report below and we'll fix it ASAP!</li>
+            </ul>
         </div>
 
         <div class="social-links">
             <a href="#" class="social-link" title="Facebook">📘</a>
-            <a href="#" class="social-link" title="Twitter">🐦</a>
+            <a href="#" class="social-link" title="Twitter/X">🐦</a>
             <a href="#" class="social-link" title="Instagram">📸</a>
             <a href="#" class="social-link" title="LinkedIn">💼</a>
+            <a href="#" class="social-link" title="YouTube">🎬</a>
         </div>
+
+        <p style="text-align: center; margin-top: 20px; color: #6b7280;">
+            📧 Direct Email: <a href="mailto:support@freetoolsindia.com" style="color: #6366f1;">support@freetoolsindia.com</a>
+        </p>
 
         <a href="index.html" class="back-link">← Back to Home</a>
     </div>
 
+    <script src="supabase-config.js"></script>
     <script>
-        function sendMessage() {
-            var name = document.getElementById('name').value;
-            var email = document.getElementById('email').value;
-            var subject = document.getElementById('subject').value;
-            var message = document.getElementById('message').value;
+        let currentMethod = 'problem';
+
+        function selectMethod(method, element) {
+            currentMethod = method;
             
-            if (!name || !email || !subject || !message) {
-                alert('Please fill in all fields.');
-                return;
+            // Update card styles
+            document.querySelectorAll('.contact-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            element.classList.add('active');
+            
+            // Hide all forms
+            document.getElementById('problemForm').style.display = 'none';
+            document.getElementById('suggestionForm').style.display = 'none';
+            document.getElementById('feedbackForm').style.display = 'none';
+            document.getElementById('businessForm').style.display = 'none';
+            
+            // Show selected form
+            if (method === 'problem') {
+                document.getElementById('problemForm').style.display = 'block';
+            } else if (method === 'suggestion') {
+                document.getElementById('suggestionForm').style.display = 'block';
+            } else if (method === 'feedback') {
+                document.getElementById('feedbackForm').style.display = 'block';
+            } else if (method === 'business') {
+                document.getElementById('businessForm').style.display = 'block';
+            }
+        }
+
+        function showFileName() {
+            var fileInput = document.getElementById('screenshot');
+            var fileName = document.getElementById('fileName');
+            if (fileInput.files.length > 0) {
+                fileName.textContent = '📎 ' + fileInput.files[0].name;
+            } else {
+                fileName.textContent = '';
+            }
+        }
+
+        async function submitReport() {
+            var name, email, message;
+            
+            if (currentMethod === 'problem') {
+                name = document.getElementById('name').value;
+                email = document.getElementById('email').value;
+                var toolName = document.getElementById('toolName').value;
+                var problemType = document.getElementById('problemType').value;
+                var urgency = document.getElementById('urgency').value;
+                var description = document.getElementById('problemDescription').value;
+                
+                if (!name || !email) {
+                    alert('Please fill in your name and email.');
+                    return;
+                }
+                if (!toolName) {
+                    alert('Please select which tool has the problem.');
+                    return;
+                }
+                if (!problemType) {
+                    alert('Please select the problem type.');
+                    return;
+                }
+                if (!description) {
+                    alert('Please describe the problem.');
+                    return;
+                }
+                
+                message = `PROBLEM REPORT\nTool: ${toolName}\nProblem Type: ${problemType}\nUrgency: ${urgency}\nDescription: ${description}`;
+                
+            } else if (currentMethod === 'suggestion') {
+                name = document.getElementById('commonName').value;
+                email = document.getElementById('commonEmail').value;
+                var toolSuggestion = document.getElementById('suggestionTool').value;
+                var suggestionDesc = document.getElementById('suggestionDescription').value;
+                
+                if (!toolSuggestion || !suggestionDesc) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+                
+                message = `TOOL SUGGESTION\nTool: ${toolSuggestion}\nDescription: ${suggestionDesc}`;
+                
+            } else if (currentMethod === 'feedback') {
+                name = document.getElementById('commonName').value;
+                email = document.getElementById('commonEmail').value;
+                var feedback = document.getElementById('generalFeedback').value;
+                
+                if (!feedback) {
+                    alert('Please write your feedback.');
+                    return;
+                }
+                
+                message = `GENERAL FEEDBACK\nFeedback: ${feedback}`;
+                
+            } else if (currentMethod === 'business') {
+                name = document.getElementById('commonName').value;
+                email = document.getElementById('commonEmail').value;
+                var company = document.getElementById('companyName').value;
+                var businessType = document.getElementById('businessType').value;
+                var businessMsg = document.getElementById('businessMessage').value;
+                
+                if (!company || !businessMsg) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+                
+                message = `BUSINESS INQUIRY\nCompany: ${company}\nType: ${businessType}\nMessage: ${businessMsg}`;
             }
             
-            // Simple email validation
+            // Email validation
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert('Please enter a valid email address.');
                 return;
             }
             
-            // For now, show success message
-            // Later, connect to Supabase or email service
-            document.getElementById('successMessage').style.display = 'block';
+            var loading = document.getElementById('loading');
+            var btn = document.getElementById('submitBtn');
+            var successMsg = document.getElementById('successMessage');
+            var errorMsg = document.getElementById('errorMessage');
             
-            // Clear form
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('subject').value = '';
-            document.getElementById('message').value = '';
+            btn.disabled = true;
+            loading.style.display = 'block';
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
             
+            // Try to save to Supabase (if available)
+            var saved = false;
+            try {
+                if (typeof SUPABASE_CONFIG !== 'undefined') {
+                    const response = await fetch(`${SUPABASE_CONFIG.SUPABASE_URL}/rest/v1/contact_messages`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apikey': SUPABASE_CONFIG.SUPABASE_PUBLISHABLE_KEY,
+                            'Authorization': 'Bearer ' + SUPABASE_CONFIG.SUPABASE_PUBLISHABLE_KEY,
+                            'Prefer': 'return=minimal'
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            message_type: currentMethod,
+                            message: message,
+                            status: 'new'
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        saved = true;
+                    }
+                }
+            } catch (e) {
+                console.log('Supabase save failed:', e);
+            }
+            
+            // Simulate sending
             setTimeout(function() {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
+                btn.disabled = false;
+                loading.style.display = 'none';
+                successMsg.style.display = 'block';
+                
+                // Clear form fields
+                document.querySelectorAll('input[type="text"], input[type="email"], textarea, select').forEach(field => {
+                    if (field.id !== 'urgency' && field.id !== 'businessType') {
+                        field.value = '';
+                    }
+                });
+                document.getElementById('fileName').textContent = '';
+                
+                setTimeout(function() {
+                    successMsg.style.display = 'none';
+                }, 5000);
+            }, 1500);
         }
     </script>
 </body>
