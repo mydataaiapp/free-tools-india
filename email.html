@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free AI Email Writer - Professional Email Generator | FreeToolsIndia</title>
-    <meta name="description" content="Write professional emails instantly with our free AI email writer. Perfect for business, job applications, and formal communication.">
-    <meta name="keywords" content="email writer, AI email generator, professional email, business email, free email tool">
+    <title>Free AI Email Writer - 10+ Email Types | FreeToolsIndia</title>
+    <meta name="description" content="Write professional emails instantly with AI. Business email, job application, complaint, thank you, follow up, and more. Free download PDF/TXT.">
+    <meta name="keywords" content="email writer, AI email generator, professional email, business email, job application email, free email tool">
     <meta name="robots" content="index, follow">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- jsPDF for PDF download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
         * {
@@ -25,7 +28,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -40,17 +43,101 @@
 
         .header h1 {
             color: #6366f1;
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 10px;
         }
 
-        input, select, textarea {
+        .header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        .form-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+        }
+
+        .form-section h2 {
+            color: #6366f1;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        label .required {
+            color: #ef4444;
+        }
+
+        input, textarea, select {
             width: 100%;
             padding: 12px 15px;
-            font-size: 16px;
+            font-size: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .email-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .email-type-btn {
+            padding: 12px 15px;
+            background: white;
             border: 2px solid #e5e7eb;
             border-radius: 10px;
-            margin-bottom: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .email-type-btn:hover {
+            border-color: #6366f1;
+            background: #eef2ff;
+            transform: translateY(-2px);
+        }
+
+        .email-type-btn.selected {
+            background: #6366f1;
+            color: white;
+            border-color: #6366f1;
         }
 
         .btn {
@@ -63,15 +150,70 @@
             font-weight: 600;
             cursor: pointer;
             width: 100%;
+            margin: 20px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         #result {
-            padding: 20px;
-            background: #f9fafb;
+            padding: 25px;
+            background: #ffffff;
             border-radius: 10px;
             white-space: pre-wrap;
+            line-height: 1.8;
             display: none;
+            border: 2px solid #e5e7eb;
             margin-top: 20px;
+        }
+
+        .download-btns {
+            display: none;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .download-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-pdf {
+            background: #ef4444;
+            color: white;
+        }
+
+        .download-txt {
+            background: #6366f1;
+            color: white;
+        }
+
+        .copy-btn {
+            background: #10b981;
+            color: white;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .loading {
@@ -79,6 +221,7 @@
             color: #6366f1;
             display: none;
             margin: 20px 0;
+            font-size: 1.1rem;
         }
 
         .back-link {
@@ -87,6 +230,69 @@
             margin-top: 20px;
             color: #6366f1;
             text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .toast {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .tips {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f4ff;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .tips h3 {
+            color: #6366f1;
+            margin-bottom: 10px;
+        }
+
+        .tips ul {
+            list-style-position: inside;
+            color: #4b5563;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -94,45 +300,187 @@
     <div class="container">
         <div class="header">
             <h1>📧 Free AI Email Writer</h1>
-            <p>Generate professional emails for any purpose</p>
+            <p>Generate Professional Emails - 10+ Types Available</p>
         </div>
 
-        <select id="emailType">
-            <option value="Business">Business Email</option>
-            <option value="Job Application">Job Application</option>
-            <option value="Complaint">Complaint</option>
-            <option value="Thank You">Thank You</option>
-            <option value="Follow Up">Follow Up</option>
-        </select>
+        <!-- Email Type Selection -->
+        <div class="form-section">
+            <h2>📋 Select Email Type</h2>
+            <div class="email-type-grid" id="emailTypeGrid">
+                <button class="email-type-btn selected" onclick="selectEmailType('Business', this)">💼 Business</button>
+                <button class="email-type-btn" onclick="selectEmailType('Job Application', this)">🎯 Job Application</button>
+                <button class="email-type-btn" onclick="selectEmailType('Complaint', this)">⚠️ Complaint</button>
+                <button class="email-type-btn" onclick="selectEmailType('Thank You', this)">🙏 Thank You</button>
+                <button class="email-type-btn" onclick="selectEmailType('Follow Up', this)">📞 Follow Up</button>
+                <button class="email-type-btn" onclick="selectEmailType('Resignation', this)">📤 Resignation</button>
+                <button class="email-type-btn" onclick="selectEmailType('Leave Request', this)">🏖️ Leave Request</button>
+                <button class="email-type-btn" onclick="selectEmailType('Apology', this)">😔 Apology</button>
+                <button class="email-type-btn" onclick="selectEmailType('Meeting Request', this)">📅 Meeting Request</button>
+                <button class="email-type-btn" onclick="selectEmailType('Sales Pitch', this)">💰 Sales Pitch</button>
+            </div>
+        </div>
 
-        <input type="text" id="recipient" placeholder="Recipient (e.g., HR Manager)">
-        <textarea id="keyPoints" rows="4" placeholder="Key points to include..."></textarea>
+        <!-- Email Details -->
+        <div class="form-section">
+            <h2>✉️ Email Details</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Your Name <span class="required">*</span></label>
+                    <input type="text" id="senderName" placeholder="e.g., Rahul Sharma">
+                </div>
+                <div class="form-group">
+                    <label>Recipient Name/Position <span class="required">*</span></label>
+                    <input type="text" id="recipient" placeholder="e.g., HR Manager / Mr. Sharma">
+                </div>
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input type="text" id="companyName" placeholder="e.g., ABC Solutions Pvt Ltd">
+                </div>
+                <div class="form-group">
+                    <label>Tone</label>
+                    <select id="tone">
+                        <option value="Professional">Professional</option>
+                        <option value="Formal">Formal</option>
+                        <option value="Friendly">Friendly</option>
+                        <option value="Persuasive">Persuasive</option>
+                        <option value="Apologetic">Apologetic</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Subject (Optional - AI will generate if empty)</label>
+                <input type="text" id="subject" placeholder="e.g., Application for Data Entry Position">
+            </div>
+            <div class="form-group">
+                <label>Key Points to Include <span class="required">*</span></label>
+                <textarea id="keyPoints" placeholder="e.g., I have 2 years experience in data entry, Typing speed 40 WPM, Proficient in Excel and MS Office"></textarea>
+            </div>
+        </div>
 
-        <button class="btn" onclick="writeEmail()">Generate Email</button>
+        <!-- Additional Details -->
+        <div class="form-section">
+            <h2>📎 Additional Details (Optional)</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Your Email Address</label>
+                    <input type="email" id="senderEmail" placeholder="e.g., rahul@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label>Your Phone Number</label>
+                    <input type="tel" id="senderPhone" placeholder="e.g., +91 98765 43210">
+                </div>
+                <div class="form-group">
+                    <label>Attachment Mention</label>
+                    <input type="text" id="attachments" placeholder="e.g., Resume, Portfolio">
+                </div>
+                <div class="form-group">
+                    <label>Deadline/Date</label>
+                    <input type="text" id="deadline" placeholder="e.g., 25th August 2026">
+                </div>
+            </div>
+        </div>
 
-        <div class="loading" id="loading">⏳ Writing email...</div>
+        <button class="btn" id="generateBtn" onclick="writeEmail()">🚀 Generate Email</button>
+
+        <div class="loading" id="loading">⏳ Writing your professional email...</div>
 
         <div id="result"></div>
+
+        <!-- Download Buttons -->
+        <div class="download-btns" id="downloadBtns">
+            <button class="download-btn download-pdf" onclick="downloadPDF()">
+                📄 Download PDF
+            </button>
+            <button class="download-btn download-txt" onclick="downloadTXT()">
+                📝 Download TXT
+            </button>
+            <button class="download-btn copy-btn" onclick="copyEmail()">
+                📋 Copy to Clipboard
+            </button>
+        </div>
+
+        <div class="tips">
+            <h3>💡 Tips for Professional Emails:</h3>
+            <ul>
+                <li>Keep subject line clear and specific</li>
+                <li>Use professional greeting (Dear Mr./Ms.)</li>
+                <li>Be concise - 3-4 paragraphs maximum</li>
+                <li>Include call to action at the end</li>
+                <li>Proofread before sending</li>
+                <li>Use professional signature with contact details</li>
+            </ul>
+        </div>
 
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">✅ Success!</div>
+
     <script src="config.js"></script>
     <script>
+        let selectedEmailType = 'Business';
+        let lastEmailContent = '';
+        let emailData = {};
+
+        function selectEmailType(type, element) {
+            selectedEmailType = type;
+            
+            document.querySelectorAll('.email-type-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            // Auto-fill example based on email type
+            const examples = {
+                'Business': 'Discussing project timeline and deliverables',
+                'Job Application': 'Applying for the position with 2 years experience',
+                'Complaint': 'Product damaged on delivery, order number #12345',
+                'Thank You': 'Thank you for the interview opportunity',
+                'Follow Up': 'Following up on my previous email regarding the proposal',
+                'Resignation': 'Resigning from my position with 30 days notice',
+                'Leave Request': 'Requesting leave from 20th to 25th August for family event',
+                'Apology': 'Apologizing for missing the deadline on project report',
+                'Meeting Request': 'Requesting a meeting to discuss quarterly results',
+                'Sales Pitch': 'Introducing our new product line for your business'
+            };
+            
+            document.getElementById('keyPoints').placeholder = examples[type] || 'Key points to include...';
+        }
+
         async function writeEmail() {
-            var emailType = document.getElementById('emailType').value;
-            var recipient = document.getElementById('recipient').value;
-            var keyPoints = document.getElementById('keyPoints').value;
+            emailData = {
+                senderName: document.getElementById('senderName').value,
+                recipient: document.getElementById('recipient').value,
+                companyName: document.getElementById('companyName').value || 'Not specified',
+                tone: document.getElementById('tone').value,
+                subject: document.getElementById('subject').value,
+                keyPoints: document.getElementById('keyPoints').value,
+                senderEmail: document.getElementById('senderEmail').value || 'Not specified',
+                senderPhone: document.getElementById('senderPhone').value || 'Not specified',
+                attachments: document.getElementById('attachments').value || 'None',
+                deadline: document.getElementById('deadline').value || 'Not specified'
+            };
+
             var result = document.getElementById('result');
             var loading = document.getElementById('loading');
+            var btn = document.getElementById('generateBtn');
+            var downloadBtns = document.getElementById('downloadBtns');
 
-            if (!recipient) {
-                alert('Please enter recipient.');
+            if (!emailData.senderName || !emailData.recipient) {
+                alert('Please fill in your name and recipient name.');
                 return;
             }
 
+            if (!emailData.keyPoints) {
+                alert('Please enter key points to include in the email.');
+                return;
+            }
+
+            btn.disabled = true;
             loading.style.display = 'block';
             result.style.display = 'none';
+            downloadBtns.style.display = 'none';
 
             try {
                 var response = await fetch(CONFIG.GROQ_API_URL, {
@@ -145,21 +493,49 @@
                         model: CONFIG.GROQ_MODEL,
                         messages: [
                             {
+                                role: 'system',
+                                content: 'You are a professional email writer. Create clear, concise, and effective emails.'
+                            },
+                            {
                                 role: 'user',
-                                content: `Write a ${emailType} email to ${recipient}. Key points: ${keyPoints || 'Not specified'}. Include subject line, greeting, body, and professional signature.`
+                                content: `Write a ${selectedEmailType} email with ${emailData.tone} tone.
+
+DETAILS:
+From: ${emailData.senderName}
+To: ${emailData.recipient}
+Company: ${emailData.companyName}
+${emailData.subject ? 'Subject: ' + emailData.subject : 'Subject: Generate appropriate subject'}
+Key Points: ${emailData.keyPoints}
+${emailData.attachments !== 'None' ? 'Attachments: ' + emailData.attachments : ''}
+${emailData.deadline !== 'Not specified' ? 'Deadline: ' + emailData.deadline : ''}
+
+SENDER CONTACT:
+Email: ${emailData.senderEmail}
+Phone: ${emailData.senderPhone}
+
+Format:
+1. SUBJECT LINE
+2. SALUTATION
+3. BODY (3-4 paragraphs)
+4. CALL TO ACTION
+5. PROFESSIONAL SIGNATURE
+
+Make it professional and ready to send.`
                             }
                         ],
-                        max_tokens: CONFIG.MAX_TOKENS,
-                        temperature: CONFIG.TEMPERATURE
+                        max_tokens: 1500,
+                        temperature: 0.7
                     })
                 });
 
                 var data = await response.json();
 
                 if (data.choices && data.choices[0]) {
-                    result.innerHTML = '<strong>✅ Your Email:</strong><br><br>' + 
-                        data.choices[0].message.content.replace(/\n/g, '<br>');
+                    lastEmailContent = data.choices[0].message.content;
+                    result.innerHTML = '<strong>✅ Your Professional Email:</strong><br><br>' + 
+                        lastEmailContent.replace(/\n/g, '<br>');
                     result.style.display = 'block';
+                    downloadBtns.style.display = 'flex';
                 } else {
                     result.innerHTML = '❌ Error: ' + JSON.stringify(data);
                     result.style.display = 'block';
@@ -169,8 +545,85 @@
                 result.innerHTML = '❌ Error: ' + error.message;
                 result.style.display = 'block';
             } finally {
+                btn.disabled = false;
                 loading.style.display = 'none';
             }
+        }
+
+        // Download as PDF
+        function downloadPDF() {
+            if (!lastEmailContent) return;
+            
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Header
+            doc.setFillColor(99, 102, 241);
+            doc.rect(0, 0, 210, 25, 'F');
+            
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Professional Email', 105, 12, { align: 'center' });
+            
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            doc.text(`${selectedEmailType} Email`, 105, 19, { align: 'center' });
+            
+            // Content
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(11);
+            const lines = doc.splitTextToSize(lastEmailContent, 180);
+            doc.text(lines, 15, 35);
+            
+            doc.save(selectedEmailType.replace(/\s+/g, '_') + '_Email.pdf');
+            showToast('PDF Downloaded!');
+        }
+
+        // Download as TXT
+        function downloadTXT() {
+            if (!lastEmailContent) return;
+            
+            const txtContent = '='.repeat(60) + '\n' +
+                'PROFESSIONAL EMAIL\n' +
+                'Type: ' + selectedEmailType + '\n' +
+                '='.repeat(60) + '\n\n' +
+                lastEmailContent;
+            
+            const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = selectedEmailType.replace(/\s+/g, '_') + '_Email.txt';
+            link.click();
+            showToast('TXT Downloaded!');
+        }
+
+        // Copy to Clipboard
+        function copyEmail() {
+            if (!lastEmailContent) return;
+            
+            navigator.clipboard.writeText(lastEmailContent).then(() => {
+                showToast('Email Copied!');
+            }).catch(() => {
+                // Fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = lastEmailContent;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('Email Copied!');
+            });
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = '✅ ' + message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
         }
     </script>
 </body>
