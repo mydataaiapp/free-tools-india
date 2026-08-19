@@ -85,10 +85,6 @@
             font-size: 14px;
         }
 
-        label .required {
-            color: #ef4444;
-        }
-
         input, textarea, select {
             width: 100%;
             padding: 12px 15px;
@@ -151,12 +147,11 @@
             cursor: pointer;
             width: 100%;
             margin: 20px 0;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
         }
 
         .btn:disabled {
@@ -198,20 +193,9 @@
             gap: 8px;
         }
 
-        .download-pdf {
-            background: #ef4444;
-            color: white;
-        }
-
-        .download-txt {
-            background: #6366f1;
-            color: white;
-        }
-
-        .copy-btn {
-            background: #10b981;
-            color: white;
-        }
+        .download-pdf { background: #ef4444; color: white; }
+        .download-txt { background: #6366f1; color: white; }
+        .copy-btn { background: #10b981; color: white; }
 
         .download-btn:hover {
             transform: translateY(-2px);
@@ -223,7 +207,6 @@
             color: #6366f1;
             display: none;
             margin: 20px 0;
-            font-size: 1.1rem;
         }
 
         .back-link {
@@ -233,10 +216,6 @@
             color: #6366f1;
             text-decoration: none;
             font-weight: 500;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
         }
 
         .toast {
@@ -250,18 +229,6 @@
             border-radius: 10px;
             font-weight: 600;
             z-index: 1000;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
         }
 
         .tips {
@@ -272,21 +239,14 @@
             font-size: 14px;
         }
 
-        .tips h3 {
-            color: #6366f1;
-            margin-bottom: 10px;
-        }
-
-        .tips ul {
-            list-style-position: inside;
-            color: #4b5563;
-            line-height: 1.8;
-        }
+        .tips h3 { color: #6366f1; margin-bottom: 10px; }
+        .tips ul { list-style-position: inside; color: #4b5563; line-height: 1.8; }
 
         .toggle-group {
             display: flex;
             gap: 20px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .toggle-item {
@@ -302,17 +262,9 @@
         }
 
         @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 1.5rem;
-            }
+            .container { padding: 15px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -323,7 +275,6 @@
             <p>Create Engaging Posts for 8+ Platforms</p>
         </div>
 
-        <!-- Platform Selection -->
         <div class="form-section">
             <h2>📋 Select Platform</h2>
             <div class="platform-grid" id="platformGrid">
@@ -338,7 +289,6 @@
             </div>
         </div>
 
-        <!-- Post Content -->
         <div class="form-section">
             <h2>✏️ Post Content</h2>
             <div class="form-group">
@@ -347,11 +297,10 @@
             </div>
             <div class="form-group">
                 <label>Additional Details</label>
-                <textarea id="details" rows="3" placeholder="e.g., 50% discount on all products, Valid till 31st August, Free shipping"></textarea>
+                <textarea id="details" rows="3" placeholder="e.g., 50% discount on all products, Valid till 31st August"></textarea>
             </div>
         </div>
 
-        <!-- Post Configuration -->
         <div class="form-section">
             <h2>⚙️ Post Configuration</h2>
             <div class="form-grid">
@@ -364,7 +313,6 @@
                         <option value="Announcement">Announcement</option>
                         <option value="Inspirational Quote">Inspirational Quote</option>
                         <option value="Behind the Scenes">Behind the Scenes</option>
-                        <option value="User Generated">User Generated</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -392,7 +340,7 @@
                         <option value="10" selected>10 Hashtags</option>
                         <option value="15">15 Hashtags</option>
                         <option value="20">20 Hashtags</option>
-                        <option value="30">30 Hashtags (Instagram max)</option>
+                        <option value="30">30 Hashtags</option>
                     </select>
                 </div>
             </div>
@@ -418,34 +366,25 @@
 
         <div id="result"></div>
 
-        <!-- Download Buttons -->
         <div class="download-btns" id="downloadBtns">
-            <button class="download-btn download-pdf" onclick="downloadPDF()">
-                📄 Download PDF
-            </button>
-            <button class="download-btn download-txt" onclick="downloadTXT()">
-                📝 Download TXT
-            </button>
-            <button class="download-btn copy-btn" onclick="copyPost()">
-                📋 Copy to Clipboard
-            </button>
+            <button class="download-btn download-pdf" onclick="downloadPDF()">📄 Download PDF</button>
+            <button class="download-btn download-txt" onclick="downloadTXT()">📝 Download TXT</button>
+            <button class="download-btn copy-btn" onclick="copyPost()">📋 Copy to Clipboard</button>
         </div>
 
         <div class="tips">
             <h3>💡 Platform-Specific Tips:</h3>
             <ul>
-                <li><strong>Instagram:</strong> Use 20-30 hashtags, emojis, and line breaks</li>
-                <li><strong>LinkedIn:</strong> Professional tone, 3-5 hashtags max</li>
+                <li><strong>Instagram:</strong> Use 20-30 hashtags, emojis</li>
+                <li><strong>LinkedIn:</strong> Professional tone, 3-5 hashtags</li>
                 <li><strong>Twitter/X:</strong> Keep under 280 characters</li>
                 <li><strong>Facebook:</strong> Engaging questions work best</li>
-                <li><strong>Pinterest:</strong> Use descriptive keywords</li>
             </ul>
         </div>
 
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
-    <!-- Toast Notification -->
     <div class="toast" id="toast">✅ Success!</div>
 
     <script src="config.js"></script>
@@ -456,23 +395,16 @@
 
         function selectPlatform(platform, element) {
             selectedPlatform = platform;
-            
             document.querySelectorAll('.platform-btn').forEach(btn => {
                 btn.classList.remove('selected');
             });
             element.classList.add('selected');
             
-            // Auto-adjust hashtag count based on platform
             const hashtagCount = document.getElementById('hashtagCount');
-            if (platform === 'Instagram') {
-                hashtagCount.value = '20';
-            } else if (platform === 'LinkedIn') {
-                hashtagCount.value = '5';
-            } else if (platform === 'Twitter/X') {
-                hashtagCount.value = '5';
-            } else {
-                hashtagCount.value = '10';
-            }
+            if (platform === 'Instagram') hashtagCount.value = '20';
+            else if (platform === 'LinkedIn') hashtagCount.value = '5';
+            else if (platform === 'Twitter/X') hashtagCount.value = '5';
+            else hashtagCount.value = '10';
         }
 
         async function generatePost() {
@@ -504,23 +436,7 @@
             result.style.display = 'none';
             downloadBtns.style.display = 'none';
 
-            try {
-                var response = await fetch(CONFIG.GROQ_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + CONFIG.GROQ_API_KEY
-                    },
-                    body: JSON.stringify({
-                        model: CONFIG.GROQ_MODEL,
-                        messages: [
-                            {
-                                role: 'system',
-                                content: 'You are a social media marketing expert. Create engaging, platform-optimized posts.'
-                            },
-                            {
-                                role: 'user',
-                                content: `Create a ${postData.postType} social media post for ${postData.platform}.
+            var prompt = `Create a ${postData.postType} social media post for ${postData.platform}.
 
 TOPIC: ${postData.topic}
 DETAILS: ${postData.details}
@@ -533,36 +449,29 @@ USE LINE BREAKS: ${postData.useLineBreaks ? 'Yes' : 'No'}
 
 Platform-specific requirements:
 ${postData.platform === 'Twitter/X' ? '- Keep under 280 characters\n- Use 2-3 hashtags max' : ''}
-${postData.platform === 'LinkedIn' ? '- Professional tone\n- Use 3-5 hashtags\n- Include business value' : ''}
-${postData.platform === 'Instagram' ? '- Use emojis\n- Include 20-30 hashtags\n- Add line breaks for readability' : ''}
-${postData.platform === 'Pinterest' ? '- Use descriptive text\n- Include keywords\n- Add 5-10 hashtags' : ''}
+${postData.platform === 'LinkedIn' ? '- Professional tone\n- Use 3-5 hashtags' : ''}
+${postData.platform === 'Instagram' ? '- Use emojis\n- Include 20-30 hashtags\n- Add line breaks' : ''}
+${postData.platform === 'Pinterest' ? '- Descriptive text\n- Include keywords' : ''}
 
 Format:
 1. HEADLINE/CAPTION
 2. MAIN CONTENT
 3. HASHTAGS
-4. CALL TO ACTION (if applicable)`
-                            }
-                        ],
-                        max_tokens: 1500,
-                        temperature: 0.8
-                    })
-                });
+4. CALL TO ACTION`;
 
-                var data = await response.json();
+            var systemPrompt = 'You are a social media marketing expert. Create engaging posts.';
 
-                if (data.choices && data.choices[0]) {
-                    lastPostContent = data.choices[0].message.content;
-                    result.innerHTML = '<strong>✅ Your ' + selectedPlatform + ' Post:</strong><br><br>' + 
-                        lastPostContent.replace(/\n/g, '<br>');
-                    result.style.display = 'block';
-                    downloadBtns.style.display = 'flex';
-                    
-                    result.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    result.innerHTML = '❌ Error: ' + JSON.stringify(data);
-                    result.style.display = 'block';
-                }
+            try {
+                // ✅ SECURE API CALL
+                var content = await callAI(prompt, systemPrompt, 1500);
+                
+                lastPostContent = content;
+                result.innerHTML = '<strong>✅ Your ' + selectedPlatform + ' Post:</strong><br><br>' + 
+                    content.replace(/\n/g, '<br>');
+                result.style.display = 'block';
+                downloadBtns.style.display = 'flex';
+                
+                result.scrollIntoView({ behavior: 'smooth' });
 
             } catch (error) {
                 result.innerHTML = '❌ Error: ' + error.message;
@@ -573,62 +482,42 @@ Format:
             }
         }
 
-        // Download as PDF
         function downloadPDF() {
             if (!lastPostContent) return;
-            
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            
-            // Header
             doc.setFillColor(99, 102, 241);
             doc.rect(0, 0, 210, 25, 'F');
-            
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(16);
             doc.setFont('helvetica', 'bold');
             doc.text('Social Media Post', 105, 12, { align: 'center' });
-            
             doc.setFontSize(10);
             doc.setFont('helvetica', 'normal');
             doc.text(`${selectedPlatform} | ${postData.postType}`, 105, 19, { align: 'center' });
-            
-            // Content
             doc.setTextColor(0, 0, 0);
             doc.setFontSize(11);
             const lines = doc.splitTextToSize(lastPostContent, 180);
             doc.text(lines, 15, 35);
-            
             const fileName = postData.topic.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 40);
-            doc.save(fileName + '_' + selectedPlatform.replace(/[^a-zA-Z0-9]/g, '_') + '_Post.pdf');
+            doc.save(fileName + '_Post.pdf');
             showToast('PDF Downloaded!');
         }
 
-        // Download as TXT
         function downloadTXT() {
             if (!lastPostContent) return;
-            
-            const txtContent = '='.repeat(60) + '\n' +
-                'SOCIAL MEDIA POST\n' +
-                'Platform: ' + selectedPlatform + '\n' +
-                'Topic: ' + postData.topic + '\n' +
-                '='.repeat(60) + '\n\n' +
-                lastPostContent;
-            
+            const txtContent = 'SOCIAL MEDIA POST\nPlatform: ' + selectedPlatform + '\nTopic: ' + postData.topic + '\n\n' + lastPostContent;
             const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            
             const fileName = postData.topic.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 40);
             link.download = fileName + '_Post.txt';
             link.click();
             showToast('TXT Downloaded!');
         }
 
-        // Copy to Clipboard
         function copyPost() {
             if (!lastPostContent) return;
-            
             navigator.clipboard.writeText(lastPostContent).then(() => {
                 showToast('Post Copied!');
             }).catch(() => {
@@ -642,7 +531,6 @@ Format:
             });
         }
 
-        // Show toast notification
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = '✅ ' + message;
