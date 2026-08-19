@@ -120,12 +120,11 @@
             cursor: pointer;
             width: 100%;
             margin: 20px 0;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
         }
 
         .btn:disabled {
@@ -165,20 +164,9 @@
             gap: 8px;
         }
 
-        .download-pdf {
-            background: #ef4444;
-            color: white;
-        }
-
-        .download-print {
-            background: #10b981;
-            color: white;
-        }
-
-        .download-txt {
-            background: #6366f1;
-            color: white;
-        }
+        .download-pdf { background: #ef4444; color: white; }
+        .download-print { background: #10b981; color: white; }
+        .download-txt { background: #6366f1; color: white; }
 
         .download-btn:hover {
             transform: translateY(-2px);
@@ -190,7 +178,6 @@
             color: #6366f1;
             display: none;
             margin: 20px 0;
-            font-size: 1.1rem;
         }
 
         .back-link {
@@ -200,10 +187,6 @@
             color: #6366f1;
             text-decoration: none;
             font-weight: 500;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
         }
 
         .toast {
@@ -217,18 +200,6 @@
             border-radius: 10px;
             font-weight: 600;
             z-index: 1000;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
         }
 
         .tips {
@@ -239,29 +210,13 @@
             font-size: 14px;
         }
 
-        .tips h3 {
-            color: #6366f1;
-            margin-bottom: 10px;
-        }
-
-        .tips ul {
-            list-style-position: inside;
-            color: #4b5563;
-            line-height: 1.8;
-        }
+        .tips h3 { color: #6366f1; margin-bottom: 10px; }
+        .tips ul { list-style-position: inside; color: #4b5563; line-height: 1.8; }
 
         @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 1.5rem;
-            }
+            .container { padding: 15px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -272,7 +227,6 @@
             <p>Create ATS-Friendly Professional Resume - Download PDF</p>
         </div>
 
-        <!-- Personal Information -->
         <div class="form-section">
             <h2>👤 Personal Information</h2>
             <div class="form-grid">
@@ -303,7 +257,6 @@
             </div>
         </div>
 
-        <!-- Professional Information -->
         <div class="form-section">
             <h2>💼 Professional Information</h2>
             <div class="form-grid">
@@ -336,12 +289,11 @@
             </div>
         </div>
 
-        <!-- Skills Section -->
         <div class="form-section">
             <h2>🎯 Skills</h2>
             <div class="form-group">
                 <label>Technical Skills (comma separated) <span class="required">*</span></label>
-                <textarea id="skills" placeholder="e.g., Excel, Typing 40 WPM, Data Management, MS Office, Google Sheets"></textarea>
+                <textarea id="skills" placeholder="e.g., Excel, Typing 40 WPM, Data Management, MS Office"></textarea>
             </div>
             <div class="form-group">
                 <label>Soft Skills (comma separated)</label>
@@ -353,7 +305,6 @@
             </div>
         </div>
 
-        <!-- Education Section -->
         <div class="form-section">
             <h2>🎓 Education</h2>
             <div class="form-grid">
@@ -371,7 +322,7 @@
                 </div>
                 <div class="form-group">
                     <label>Field of Study</label>
-                    <input type="text" id="fieldOfStudy" placeholder="e.g., Commerce, Science, Arts">
+                    <input type="text" id="fieldOfStudy" placeholder="e.g., Commerce, Science">
                 </div>
                 <div class="form-group">
                     <label>University/College</label>
@@ -384,7 +335,6 @@
             </div>
         </div>
 
-        <!-- Additional Information -->
         <div class="form-section">
             <h2>⭐ Additional Information</h2>
             <div class="form-group">
@@ -407,17 +357,10 @@
 
         <div id="result"></div>
 
-        <!-- Download Buttons -->
         <div class="download-btns" id="downloadBtns">
-            <button class="download-btn download-pdf" onclick="downloadPDF()">
-                📄 Download PDF
-            </button>
-            <button class="download-btn download-print" onclick="printResume()">
-                🖨️ Print Resume
-            </button>
-            <button class="download-btn download-txt" onclick="downloadTXT()">
-                📝 Download TXT
-            </button>
+            <button class="download-btn download-pdf" onclick="downloadPDF()">📄 Download PDF</button>
+            <button class="download-btn download-print" onclick="printResume()">🖨️ Print Resume</button>
+            <button class="download-btn download-txt" onclick="downloadTXT()">📝 Download TXT</button>
         </div>
 
         <div class="tips">
@@ -427,14 +370,12 @@
                 <li>Quantify achievements (e.g., "Increased efficiency by 30%")</li>
                 <li>Keep resume 1-2 pages maximum</li>
                 <li>Customize skills for each job application</li>
-                <li>Include relevant keywords from job description</li>
             </ul>
         </div>
 
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
-    <!-- Toast Notification -->
     <div class="toast" id="toast">✅ Downloaded Successfully!</div>
 
     <script src="config.js"></script>
@@ -443,7 +384,6 @@
         let resumeData = {};
 
         async function buildResume() {
-            // Collect all data
             resumeData = {
                 name: document.getElementById('name').value,
                 jobTitle: document.getElementById('jobTitle').value,
@@ -487,23 +427,7 @@
             result.style.display = 'none';
             downloadBtns.style.display = 'none';
 
-            try {
-                var response = await fetch(CONFIG.GROQ_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + CONFIG.GROQ_API_KEY
-                    },
-                    body: JSON.stringify({
-                        model: CONFIG.GROQ_MODEL,
-                        messages: [
-                            {
-                                role: 'system',
-                                content: 'You are a professional resume writer. Create ATS-friendly, professional resume content with proper formatting.'
-                            },
-                            {
-                                role: 'user',
-                                content: `Create a complete professional resume with these details:
+            var prompt = `Create a complete professional resume with these details:
 
 PERSONAL INFO:
 Name: ${resumeData.name}
@@ -535,35 +459,19 @@ Achievements: ${resumeData.achievements}
 Certifications: ${resumeData.certifications}
 Hobbies: ${resumeData.hobbies}
 
-Format the resume with these sections:
-1. PROFESSIONAL SUMMARY (3-4 lines)
-2. KEY SKILLS (bullet points)
-3. WORK EXPERIENCE (if applicable)
-4. EDUCATION
-5. ACHIEVEMENTS
-6. CERTIFICATIONS
-7. PERSONAL DETAILS
+Format: Professional Summary, Key Skills, Work Experience, Education, Achievements, Certifications, Personal Details. Make it ATS-friendly.`;
 
-Make it ATS-friendly with relevant keywords for ${resumeData.jobTitle} position.`
-                            }
-                        ],
-                        max_tokens: 2000,
-                        temperature: 0.7
-                    })
-                });
+            var systemPrompt = 'You are a professional resume writer. Create ATS-friendly resumes.';
 
-                var data = await response.json();
-
-                if (data.choices && data.choices[0]) {
-                    lastResumeContent = data.choices[0].message.content;
-                    result.innerHTML = '<strong>✅ Your Professional Resume:</strong><br><br>' + 
-                        lastResumeContent.replace(/\n/g, '<br>');
-                    result.style.display = 'block';
-                    downloadBtns.style.display = 'flex';
-                } else {
-                    result.innerHTML = '❌ Error: ' + JSON.stringify(data);
-                    result.style.display = 'block';
-                }
+            try {
+                // ✅ SECURE API CALL
+                var content = await callAI(prompt, systemPrompt, 2000);
+                
+                lastResumeContent = content;
+                result.innerHTML = '<strong>✅ Your Professional Resume:</strong><br><br>' + 
+                    content.replace(/\n/g, '<br>');
+                result.style.display = 'block';
+                downloadBtns.style.display = 'flex';
 
             } catch (error) {
                 result.innerHTML = '❌ Error: ' + error.message;
@@ -574,65 +482,41 @@ Make it ATS-friendly with relevant keywords for ${resumeData.jobTitle} position.
             }
         }
 
-        // Download as PDF
         function downloadPDF() {
             if (!lastResumeContent) return;
-            
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            
-            // Header
             doc.setFillColor(99, 102, 241);
             doc.rect(0, 0, 210, 30, 'F');
-            
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(20);
             doc.setFont('helvetica', 'bold');
             doc.text(resumeData.name || 'Resume', 105, 12, { align: 'center' });
-            
             doc.setFontSize(12);
             doc.setFont('helvetica', 'normal');
             doc.text(resumeData.jobTitle || '', 105, 20, { align: 'center' });
-            
-            // Contact Info
             doc.setTextColor(0, 0, 0);
             doc.setFontSize(10);
             const contactInfo = `${resumeData.email} | ${resumeData.phone} | ${resumeData.location}`;
             doc.text(contactInfo, 105, 27, { align: 'center' });
-            
-            // Content
             doc.setFontSize(11);
             const lines = doc.splitTextToSize(lastResumeContent, 180);
             doc.text(lines, 15, 40);
-            
             doc.save(resumeData.name.replace(/\s+/g, '_') + '_Resume.pdf');
             showToast();
         }
 
-        // Print Resume
         function printResume() {
             if (!lastResumeContent) return;
-            
             const printWindow = window.open('', '_blank');
             printWindow.document.write(`
                 <html>
                     <head>
                         <title>${resumeData.name} - Resume</title>
                         <style>
-                            body {
-                                font-family: Arial, sans-serif;
-                                margin: 40px;
-                                line-height: 1.6;
-                            }
-                            h1 {
-                                color: #333;
-                                border-bottom: 2px solid #6366f1;
-                                padding-bottom: 10px;
-                            }
-                            pre {
-                                white-space: pre-wrap;
-                                font-family: Arial, sans-serif;
-                            }
+                            body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+                            h1 { color: #333; border-bottom: 2px solid #6366f1; padding-bottom: 10px; }
+                            pre { white-space: pre-wrap; font-family: Arial, sans-serif; }
                         </style>
                     </head>
                     <body>
@@ -648,21 +532,9 @@ Make it ATS-friendly with relevant keywords for ${resumeData.jobTitle} position.
             printWindow.print();
         }
 
-        // Download as TXT
         function downloadTXT() {
             if (!lastResumeContent) return;
-            
-            const txtContent = '='.repeat(60) + '\n' +
-                'PROFESSIONAL RESUME\n' +
-                '='.repeat(60) + '\n\n' +
-                'Name: ' + resumeData.name + '\n' +
-                'Job Title: ' + resumeData.jobTitle + '\n' +
-                'Email: ' + resumeData.email + '\n' +
-                'Phone: ' + resumeData.phone + '\n' +
-                'Location: ' + resumeData.location + '\n' +
-                '='.repeat(60) + '\n\n' +
-                lastResumeContent;
-            
+            const txtContent = 'PROFESSIONAL RESUME\n\nName: ' + resumeData.name + '\nJob Title: ' + resumeData.jobTitle + '\nEmail: ' + resumeData.email + '\nPhone: ' + resumeData.phone + '\n\n' + lastResumeContent;
             const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -671,7 +543,6 @@ Make it ATS-friendly with relevant keywords for ${resumeData.jobTitle} position.
             showToast();
         }
 
-        // Show toast notification
         function showToast() {
             const toast = document.getElementById('toast');
             toast.style.display = 'block';
