@@ -18,7 +18,7 @@
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Free Tools India",
-        "url": "https://sprightly-paprenjak-ec7044.netlify.app/",
+        "url": "https://free-tools-india.vercel.app/",
         "description": "Free online AI tools for everyone"
     }
     </script>
@@ -198,16 +198,21 @@
         }
 
         footer {
-            background: var(--dark);
+            background: #1f2937;
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 30px 20px;
         }
 
         footer a {
             color: white;
             text-decoration: none;
             margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #6366f1;
         }
 
         @keyframes fadeInUp {
@@ -238,6 +243,7 @@
             <div class="nav-links">
                 <a href="#tools">All Tools</a>
                 <a href="#features">Why Us</a>
+                <a href="contact.html">Contact</a>
             </div>
         </nav>
     </header>
@@ -324,17 +330,16 @@
     </section>
 
     <footer>
-    <footer style="background: #1f2937; color: white; text-align: center; padding: 30px 20px;">
-    <p style="font-size: 1.2rem; margin-bottom: 15px;">🇮🇳 FreeToolsIndia</p>
-    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 15px;">
-        <a href="index.html" style="color: white; text-decoration: none;">Home</a>
-        <a href="privacy-policy.html" style="color: white; text-decoration: none;">Privacy Policy</a>
-        <a href="terms-of-service.html" style="color: white; text-decoration: none;">Terms of Service</a>
-        <a href="contact.html" style="color: white; text-decoration: none;">Contact Us</a>
-        <a href="feedback.html" style="color: #fbbf24; text-decoration: none;">⭐ Feedback</a>
-    </div>
-    <p style="font-size: 0.9rem; color: #9ca3af;">&copy; 2026 FreeToolsIndia - All Rights Reserved</p>
-    <p style="font-size: 0.8rem; color: #6b7280; margin-top: 10px;">Made with ❤️ in India</p>
-</footer>
+        <p style="font-size: 1.2rem; margin-bottom: 15px;">🇮🇳 FreeToolsIndia</p>
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 15px;">
+            <a href="index.html">Home</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-of-service.html">Terms of Service</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="feedback.html" style="color: #fbbf24;">⭐ Feedback</a>
+        </div>
+        <p style="font-size: 0.9rem; color: #9ca3af;">&copy; 2026 FreeToolsIndia - All Rights Reserved</p>
+        <p style="font-size: 0.8rem; color: #6b7280; margin-top: 10px;">Made with ❤️ in India</p>
+    </footer>
 </body>
 </html>
