@@ -233,10 +233,6 @@
             font-weight: 500;
         }
 
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
         .toast {
             display: none;
             position: fixed;
@@ -285,11 +281,9 @@
             .container {
                 padding: 15px;
             }
-            
             .form-grid {
                 grid-template-columns: 1fr;
             }
-            
             .header h1 {
                 font-size: 1.5rem;
             }
@@ -303,7 +297,6 @@
             <p>Generate Professional Emails - 10+ Types Available</p>
         </div>
 
-        <!-- Email Type Selection -->
         <div class="form-section">
             <h2>📋 Select Email Type</h2>
             <div class="email-type-grid" id="emailTypeGrid">
@@ -320,7 +313,6 @@
             </div>
         </div>
 
-        <!-- Email Details -->
         <div class="form-section">
             <h2>✉️ Email Details</h2>
             <div class="form-grid">
@@ -348,16 +340,15 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>Subject (Optional - AI will generate if empty)</label>
+                <label>Subject (Optional)</label>
                 <input type="text" id="subject" placeholder="e.g., Application for Data Entry Position">
             </div>
             <div class="form-group">
                 <label>Key Points to Include <span class="required">*</span></label>
-                <textarea id="keyPoints" placeholder="e.g., I have 2 years experience in data entry, Typing speed 40 WPM, Proficient in Excel and MS Office"></textarea>
+                <textarea id="keyPoints" placeholder="e.g., I have 2 years experience in data entry, Typing speed 40 WPM, Proficient in Excel"></textarea>
             </div>
         </div>
 
-        <!-- Additional Details -->
         <div class="form-section">
             <h2>📎 Additional Details (Optional)</h2>
             <div class="form-grid">
@@ -386,17 +377,10 @@
 
         <div id="result"></div>
 
-        <!-- Download Buttons -->
         <div class="download-btns" id="downloadBtns">
-            <button class="download-btn download-pdf" onclick="downloadPDF()">
-                📄 Download PDF
-            </button>
-            <button class="download-btn download-txt" onclick="downloadTXT()">
-                📝 Download TXT
-            </button>
-            <button class="download-btn copy-btn" onclick="copyEmail()">
-                📋 Copy to Clipboard
-            </button>
+            <button class="download-btn download-pdf" onclick="downloadPDF()">📄 Download PDF</button>
+            <button class="download-btn download-txt" onclick="downloadTXT()">📝 Download TXT</button>
+            <button class="download-btn copy-btn" onclick="copyEmail()">📋 Copy to Clipboard</button>
         </div>
 
         <div class="tips">
@@ -406,15 +390,12 @@
                 <li>Use professional greeting (Dear Mr./Ms.)</li>
                 <li>Be concise - 3-4 paragraphs maximum</li>
                 <li>Include call to action at the end</li>
-                <li>Proofread before sending</li>
-                <li>Use professional signature with contact details</li>
             </ul>
         </div>
 
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
-    <!-- Toast Notification -->
     <div class="toast" id="toast">✅ Success!</div>
 
     <script src="config.js"></script>
@@ -425,13 +406,11 @@
 
         function selectEmailType(type, element) {
             selectedEmailType = type;
-            
             document.querySelectorAll('.email-type-btn').forEach(btn => {
                 btn.classList.remove('selected');
             });
             element.classList.add('selected');
             
-            // Auto-fill example based on email type
             const examples = {
                 'Business': 'Discussing project timeline and deliverables',
                 'Job Application': 'Applying for the position with 2 years experience',
@@ -482,23 +461,8 @@
             result.style.display = 'none';
             downloadBtns.style.display = 'none';
 
-            try {
-                var response = await fetch(CONFIG.GROQ_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + CONFIG.GROQ_API_KEY
-                    },
-                    body: JSON.stringify({
-                        model: CONFIG.GROQ_MODEL,
-                        messages: [
-                            {
-                                role: 'system',
-                                content: 'You are a professional email writer. Create clear, concise, and effective emails.'
-                            },
-                            {
-                                role: 'user',
-                                content: `Write a ${selectedEmailType} email with ${emailData.tone} tone.
+            // ✅ SECURE API CALL (Using callAI from config.js)
+            var prompt = `Write a ${selectedEmailType} email with ${emailData.tone} tone.
 
 DETAILS:
 From: ${emailData.senderName}
@@ -518,28 +482,19 @@ Format:
 2. SALUTATION
 3. BODY (3-4 paragraphs)
 4. CALL TO ACTION
-5. PROFESSIONAL SIGNATURE
+5. PROFESSIONAL SIGNATURE`;
 
-Make it professional and ready to send.`
-                            }
-                        ],
-                        max_tokens: 1500,
-                        temperature: 0.7
-                    })
-                });
+            var systemPrompt = 'You are a professional email writer. Create clear, concise, and effective emails.';
 
-                var data = await response.json();
-
-                if (data.choices && data.choices[0]) {
-                    lastEmailContent = data.choices[0].message.content;
-                    result.innerHTML = '<strong>✅ Your Professional Email:</strong><br><br>' + 
-                        lastEmailContent.replace(/\n/g, '<br>');
-                    result.style.display = 'block';
-                    downloadBtns.style.display = 'flex';
-                } else {
-                    result.innerHTML = '❌ Error: ' + JSON.stringify(data);
-                    result.style.display = 'block';
-                }
+            try {
+                // ✅ NAYA SECURE TARIKA
+                var content = await callAI(prompt, systemPrompt, 1500);
+                
+                lastEmailContent = content;
+                result.innerHTML = '<strong>✅ Your Professional Email:</strong><br><br>' + 
+                    content.replace(/\n/g, '<br>');
+                result.style.display = 'block';
+                downloadBtns.style.display = 'flex';
 
             } catch (error) {
                 result.innerHTML = '❌ Error: ' + error.message;
@@ -553,29 +508,21 @@ Make it professional and ready to send.`
         // Download as PDF
         function downloadPDF() {
             if (!lastEmailContent) return;
-            
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            
-            // Header
             doc.setFillColor(99, 102, 241);
             doc.rect(0, 0, 210, 25, 'F');
-            
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(16);
             doc.setFont('helvetica', 'bold');
             doc.text('Professional Email', 105, 12, { align: 'center' });
-            
             doc.setFontSize(10);
             doc.setFont('helvetica', 'normal');
             doc.text(`${selectedEmailType} Email`, 105, 19, { align: 'center' });
-            
-            // Content
             doc.setTextColor(0, 0, 0);
             doc.setFontSize(11);
             const lines = doc.splitTextToSize(lastEmailContent, 180);
             doc.text(lines, 15, 35);
-            
             doc.save(selectedEmailType.replace(/\s+/g, '_') + '_Email.pdf');
             showToast('PDF Downloaded!');
         }
@@ -583,13 +530,10 @@ Make it professional and ready to send.`
         // Download as TXT
         function downloadTXT() {
             if (!lastEmailContent) return;
-            
             const txtContent = '='.repeat(60) + '\n' +
                 'PROFESSIONAL EMAIL\n' +
                 'Type: ' + selectedEmailType + '\n' +
-                '='.repeat(60) + '\n\n' +
-                lastEmailContent;
-            
+                '='.repeat(60) + '\n\n' + lastEmailContent;
             const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -601,11 +545,9 @@ Make it professional and ready to send.`
         // Copy to Clipboard
         function copyEmail() {
             if (!lastEmailContent) return;
-            
             navigator.clipboard.writeText(lastEmailContent).then(() => {
                 showToast('Email Copied!');
             }).catch(() => {
-                // Fallback
                 const textarea = document.createElement('textarea');
                 textarea.value = lastEmailContent;
                 document.body.appendChild(textarea);
@@ -616,7 +558,6 @@ Make it professional and ready to send.`
             });
         }
 
-        // Show toast notification
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = '✅ ' + message;
