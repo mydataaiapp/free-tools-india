@@ -1,14 +1,11 @@
-// API Configuration - Secure (No keys in browser)
+// API Configuration - Secure
 const CONFIG = {
-    // API ab proxy se call hogi
     API_URL: '/api/groq',
-    
-    // Settings
     MAX_TOKENS: 1500,
     TEMPERATURE: 0.7
 };
 
-// API Call Function (Updated)
+// AI Call Function
 async function callAI(prompt, systemPrompt = '', maxTokens = 1500) {
     try {
         const response = await fetch(CONFIG.API_URL, {
