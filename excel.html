@@ -12,8 +12,6 @@
     
     <!-- jsPDF for PDF download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <!-- html2canvas for PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
         * {
@@ -182,20 +180,9 @@
             gap: 8px;
         }
 
-        .download-pdf {
-            background: #ef4444;
-            color: white;
-        }
-
-        .download-csv {
-            background: #10b981;
-            color: white;
-        }
-
-        .download-txt {
-            background: #6366f1;
-            color: white;
-        }
+        .download-pdf { background: #ef4444; color: white; }
+        .download-csv { background: #10b981; color: white; }
+        .download-txt { background: #6366f1; color: white; }
 
         .download-btn:hover {
             transform: translateY(-2px);
@@ -272,18 +259,11 @@
             border-radius: 10px;
             font-weight: 600;
             z-index: 1000;
-            animation: slideIn 0.3s ease;
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            .header h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -294,7 +274,6 @@
             <p>Generate & Download Formulas - PDF, CSV, TXT</p>
         </div>
 
-        <!-- Tabs -->
         <div class="tabs">
             <button class="tab active" onclick="switchTab('basic', this)">Basic Functions</button>
             <button class="tab" onclick="switchTab('logical', this)">Logical</button>
@@ -303,10 +282,8 @@
             <button class="tab" onclick="switchTab('date', this)">Date & Time</button>
         </div>
 
-        <!-- Function Buttons -->
         <div class="function-grid" id="functionGrid"></div>
 
-        <!-- Input Section -->
         <div class="input-section">
             <label>Selected Function: <span id="selectedFunction">None</span></label>
             <textarea id="requirement" rows="4" placeholder="Describe your requirement... Example: Sum of sales in column A from row 1 to 10"></textarea>
@@ -320,22 +297,14 @@
 
         <div id="result"></div>
 
-        <!-- Download Buttons -->
         <div class="download-btns" id="downloadBtns">
-            <button class="download-btn download-pdf" onclick="downloadPDF()">
-                📄 Download PDF
-            </button>
-            <button class="download-btn download-csv" onclick="downloadCSV()">
-                📊 Download CSV
-            </button>
-            <button class="download-btn download-txt" onclick="downloadTXT()">
-                📝 Download TXT
-            </button>
+            <button class="download-btn download-pdf" onclick="downloadPDF()">📄 Download PDF</button>
+            <button class="download-btn download-csv" onclick="downloadCSV()">📊 Download CSV</button>
+            <button class="download-btn download-txt" onclick="downloadTXT()">📝 Download TXT</button>
         </div>
 
         <a href="index.html" class="back-link">← Back to All Tools</a>
 
-        <!-- Quick Examples -->
         <div class="quick-examples">
             <h3>💡 Quick Examples (Click to Use):</h3>
             <div class="example-grid">
@@ -349,12 +318,10 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
     <div class="toast" id="toast">✅ Downloaded Successfully!</div>
 
     <script src="config.js"></script>
     <script>
-        // All 20 Excel Functions Data
         const excelFunctions = {
             basic: [
                 { name: 'SUM', category: 'basic', icon: '➕' },
@@ -404,41 +371,29 @@
         let selectedFunction = null;
         let lastResult = '';
 
-        // Load functions
         function switchTab(category, element) {
             currentCategory = category;
-            
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             element.classList.add('active');
-            
             loadFunctions(category);
         }
 
         function loadFunctions(category) {
             const grid = document.getElementById('functionGrid');
             grid.innerHTML = '';
-            
             excelFunctions[category].forEach(func => {
                 const btn = document.createElement('button');
                 btn.className = 'function-btn';
                 btn.innerHTML = `${func.icon} ${func.name}`;
-                btn.onclick = function() {
-                    selectFunction(func.name, this);
-                };
+                btn.onclick = function() { selectFunction(func.name, this); };
                 grid.appendChild(btn);
             });
         }
 
         function selectFunction(name, element) {
             selectedFunction = name;
-            
-            document.querySelectorAll('.function-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
+            document.querySelectorAll('.function-btn').forEach(btn => btn.classList.remove('selected'));
             element.classList.add('selected');
-            
             document.getElementById('selectedFunction').textContent = name;
             document.getElementById('selectedFunction').style.color = '#6366f1';
             document.getElementById('selectedFunction').style.fontWeight = 'bold';
@@ -446,37 +401,13 @@
             const examples = {
                 'SUM': 'Total of values in range',
                 'AVERAGE': 'Average of values',
-                'COUNT': 'Count numbers in range',
-                'COUNTA': 'Count non-empty cells',
-                'MAX': 'Maximum value',
-                'MIN': 'Minimum value',
-                'IF': 'If condition true then value1 else value2',
-                'AND': 'Check multiple conditions',
-                'OR': 'Check if any condition is true',
-                'IFERROR': 'Handle errors in formula',
                 'VLOOKUP': 'Find value in table',
-                'XLOOKUP': 'Modern lookup function',
-                'CONCATENATE': 'Join text strings',
-                'TEXTJOIN': 'Join with delimiter',
-                'LEFT': 'Extract from left side',
-                'RIGHT': 'Extract from right side',
-                'MID': 'Extract from middle',
-                'UPPER': 'Convert to uppercase',
-                'LOWER': 'Convert to lowercase',
-                'PROPER': 'Capitalize first letter',
-                'TRIM': 'Remove extra spaces',
-                'LEN': 'Count characters',
+                'IF': 'If condition true then value1 else value2',
                 'TODAY': 'Current date',
-                'NOW': 'Current date and time',
-                'DAY': 'Extract day from date',
-                'MONTH': 'Extract month from date',
-                'YEAR': 'Extract year from date',
-                'DATEDIF': 'Difference between dates'
+                'CONCATENATE': 'Join text strings'
             };
             
-            document.getElementById('requirement').placeholder = 
-                `Example: ${examples[name] || 'Describe your requirement'}`;
-            
+            document.getElementById('requirement').placeholder = `Example: ${examples[name] || 'Describe your requirement'}`;
             showFormulaPreview(name);
         }
 
@@ -485,35 +416,11 @@
                 'SUM': '=SUM(number1, [number2], ...)',
                 'AVERAGE': '=AVERAGE(number1, [number2], ...)',
                 'COUNT': '=COUNT(value1, [value2], ...)',
-                'COUNTA': '=COUNTA(value1, [value2], ...)',
-                'MAX': '=MAX(number1, [number2], ...)',
-                'MIN': '=MIN(number1, [number2], ...)',
-                'IF': '=IF(logical_test, value_if_true, value_if_false)',
-                'AND': '=AND(logical1, [logical2], ...)',
-                'OR': '=OR(logical1, [logical2], ...)',
-                'IFERROR': '=IFERROR(value, value_if_error)',
-                'ISNUMBER': '=ISNUMBER(value)',
-                'ISTEXT': '=ISTEXT(value)',
                 'VLOOKUP': '=VLOOKUP(lookup_value, table_array, col_index, [range_lookup])',
-                'XLOOKUP': '=XLOOKUP(lookup_value, lookup_array, return_array)',
-                'INDEX': '=INDEX(array, row_num, [column_num])',
-                'MATCH': '=MATCH(lookup_value, lookup_array, [match_type])',
-                'LEFT': '=LEFT(text, [num_chars])',
-                'RIGHT': '=RIGHT(text, [num_chars])',
-                'MID': '=MID(text, start_num, num_chars)',
-                'UPPER': '=UPPER(text)',
-                'LOWER': '=LOWER(text)',
-                'PROPER': '=PROPER(text)',
-                'CONCATENATE': '=CONCATENATE(text1, [text2], ...)',
-                'TEXTJOIN': '=TEXTJOIN(delimiter, ignore_empty, text1, [text2], ...)',
-                'TRIM': '=TRIM(text)',
-                'LEN': '=LEN(text)',
+                'IF': '=IF(logical_test, value_if_true, value_if_false)',
                 'TODAY': '=TODAY()',
-                'NOW': '=NOW()',
-                'DAY': '=DAY(serial_number)',
-                'MONTH': '=MONTH(serial_number)',
-                'YEAR': '=YEAR(serial_number)',
-                'DATEDIF': '=DATEDIF(start_date, end_date, unit)'
+                'LEFT': '=LEFT(text, [num_chars])',
+                'CONCATENATE': '=CONCATENATE(text1, [text2], ...)'
             };
             
             const preview = document.getElementById('formulaPreview');
@@ -527,13 +434,9 @@
             selectedFunction = functionName;
             document.getElementById('selectedFunction').textContent = functionName;
             document.getElementById('requirement').value = description;
-            
             document.querySelectorAll('.function-btn').forEach(btn => {
-                if (btn.textContent.includes(functionName)) {
-                    btn.classList.add('selected');
-                }
+                if (btn.textContent.includes(functionName)) btn.classList.add('selected');
             });
-            
             showFormulaPreview(functionName);
         }
 
@@ -548,7 +451,6 @@
                 alert('Please select a function or describe your requirement.');
                 return;
             }
-
             if (!requirement) {
                 alert('Please describe what you want to calculate.');
                 return;
@@ -559,52 +461,19 @@
             result.style.display = 'none';
             downloadBtns.style.display = 'none';
 
-            var prompt = `Generate Excel formula using ${selectedFunction || 'appropriate'} function.
-            
-            User requirement: ${requirement}
-            
-            Provide in this format:
-            FORMULA: [complete formula]
-            EXPLANATION: [step-by-step explanation]
-            EXAMPLE: [practical example with sample data]
-            TIPS: [any useful tips]`;
+            var prompt = `Generate Excel formula using ${selectedFunction || 'appropriate'} function.\nUser requirement: ${requirement}\n\nFormat:\nFORMULA: [formula]\nEXPLANATION: [explanation]\nEXAMPLE: [example]\nTIPS: [tips]`;
+
+            var systemPrompt = 'You are an Excel expert. Provide accurate formulas with explanations.';
 
             try {
-                var response = await fetch(CONFIG.GROQ_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + CONFIG.GROQ_API_KEY
-                    },
-                    body: JSON.stringify({
-                        model: CONFIG.GROQ_MODEL,
-                        messages: [
-                            {
-                                role: 'system',
-                                content: 'You are an Excel expert. Provide accurate formulas with clear explanations.'
-                            },
-                            {
-                                role: 'user',
-                                content: prompt
-                            }
-                        ],
-                        max_tokens: CONFIG.MAX_TOKENS,
-                        temperature: CONFIG.TEMPERATURE
-                    })
-                });
-
-                var data = await response.json();
-
-                if (data.choices && data.choices[0]) {
-                    lastResult = data.choices[0].message.content;
-                    result.innerHTML = '<strong>✅ Generated Formula:</strong><br><br>' + 
-                        lastResult.replace(/\n/g, '<br>');
-                    result.style.display = 'block';
-                    downloadBtns.style.display = 'flex';
-                } else {
-                    result.innerHTML = '❌ Error: ' + JSON.stringify(data);
-                    result.style.display = 'block';
-                }
+                // ✅ SECURE API CALL
+                var content = await callAI(prompt, systemPrompt, 1000);
+                
+                lastResult = content;
+                result.innerHTML = '<strong>✅ Generated Formula:</strong><br><br>' + 
+                    content.replace(/\n/g, '<br>');
+                result.style.display = 'block';
+                downloadBtns.style.display = 'flex';
 
             } catch (error) {
                 result.innerHTML = '❌ Error: ' + error.message;
@@ -615,46 +484,31 @@
             }
         }
 
-        // Download as PDF
         function downloadPDF() {
             if (!lastResult) return;
-            
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            
             doc.setFontSize(18);
-            doc.text('Excel Formula Generator - Result', 105, 20, { align: 'center' });
-            
-            doc.setFontSize(10);
-            doc.text('Generated by FreeToolsIndia', 105, 28, { align: 'center' });
-            
+            doc.text('Excel Formula Generator', 105, 20, { align: 'center' });
             doc.setFontSize(12);
             doc.text('Function: ' + (selectedFunction || 'Custom'), 20, 40);
             doc.text('Date: ' + new Date().toLocaleString(), 20, 48);
-            
             doc.setDrawColor(99, 102, 241);
             doc.line(20, 52, 190, 52);
-            
             doc.setFontSize(11);
             const lines = doc.splitTextToSize(lastResult, 170);
             doc.text(lines, 20, 62);
-            
             doc.save('excel-formula.pdf');
             showToast();
         }
 
-        // Download as CSV
         function downloadCSV() {
             if (!lastResult) return;
-            
             let csv = 'Section,Content\n';
-            
             const lines = lastResult.split('\n');
             lines.forEach(line => {
-                const cleanLine = line.replace(/,/g, ';');
-                csv += `"${cleanLine}"\n`;
+                csv += `"${line.replace(/,/g, ';')}"\n`;
             });
-            
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -663,16 +517,9 @@
             showToast();
         }
 
-        // Download as TXT
         function downloadTXT() {
             if (!lastResult) return;
-            
-            const txt = 'EXCEL FORMULA GENERATOR - RESULT\n';
-            const txtContent = txt + '='.repeat(50) + '\n\n' + 
-                'Function: ' + (selectedFunction || 'Custom') + '\n' +
-                'Date: ' + new Date().toLocaleString() + '\n' +
-                '='.repeat(50) + '\n\n' + lastResult;
-            
+            const txtContent = 'EXCEL FORMULA\nFunction: ' + (selectedFunction || 'Custom') + '\nDate: ' + new Date().toLocaleString() + '\n\n' + lastResult;
             const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -681,16 +528,12 @@
             showToast();
         }
 
-        // Show toast notification
         function showToast() {
             const toast = document.getElementById('toast');
             toast.style.display = 'block';
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 2000);
+            setTimeout(() => { toast.style.display = 'none'; }, 2000);
         }
 
-        // Load basic functions on page load
         window.onload = function() {
             loadFunctions('basic');
         };
