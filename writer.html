@@ -310,11 +310,9 @@
             .container {
                 padding: 15px;
             }
-            
             .form-grid {
                 grid-template-columns: 1fr;
             }
-            
             .header h1 {
                 font-size: 1.5rem;
             }
@@ -328,7 +326,6 @@
             <p>Generate Professional Articles - Blog, SEO, Academic & More</p>
         </div>
 
-        <!-- Article Type Selection -->
         <div class="form-section">
             <h2>📋 Select Article Type</h2>
             <div class="article-type-grid" id="articleTypeGrid">
@@ -341,7 +338,6 @@
             </div>
         </div>
 
-        <!-- Article Details -->
         <div class="form-section">
             <h2>✏️ Article Details</h2>
             <div class="form-group">
@@ -358,7 +354,6 @@
             </div>
         </div>
 
-        <!-- Article Configuration -->
         <div class="form-section">
             <h2>⚙️ Article Configuration</h2>
             <div class="form-grid">
@@ -415,17 +410,10 @@
 
         <div id="result"></div>
 
-        <!-- Download Buttons -->
         <div class="download-btns" id="downloadBtns">
-            <button class="download-btn download-pdf" onclick="downloadPDF()">
-                📄 Download PDF
-            </button>
-            <button class="download-btn download-txt" onclick="downloadTXT()">
-                📝 Download TXT
-            </button>
-            <button class="download-btn copy-btn" onclick="copyArticle()">
-                📋 Copy to Clipboard
-            </button>
+            <button class="download-btn download-pdf" onclick="downloadPDF()">📄 Download PDF</button>
+            <button class="download-btn download-txt" onclick="downloadTXT()">📝 Download TXT</button>
+            <button class="download-btn copy-btn" onclick="copyArticle()">📋 Copy to Clipboard</button>
         </div>
 
         <div class="tips">
@@ -435,14 +423,12 @@
                 <li>Include SEO keywords for search engine visibility</li>
                 <li>Choose appropriate tone for your audience</li>
                 <li>Use Hinglish for Indian audience engagement</li>
-                <li>Review and customize the generated content</li>
             </ul>
         </div>
 
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
-    <!-- Toast Notification -->
     <div class="toast" id="toast">✅ Success!</div>
 
     <script src="config.js"></script>
@@ -453,7 +439,6 @@
 
         function selectArticleType(type, element) {
             selectedArticleType = type;
-            
             document.querySelectorAll('.article-type-btn').forEach(btn => {
                 btn.classList.remove('selected');
             });
@@ -489,23 +474,7 @@
             result.style.display = 'none';
             downloadBtns.style.display = 'none';
 
-            try {
-                var response = await fetch(CONFIG.GROQ_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + CONFIG.GROQ_API_KEY
-                    },
-                    body: JSON.stringify({
-                        model: CONFIG.GROQ_MODEL,
-                        messages: [
-                            {
-                                role: 'system',
-                                content: 'You are a professional content writer. Create engaging, well-structured, and informative articles.'
-                            },
-                            {
-                                role: 'user',
-                                content: `Write a ${selectedArticleType} article.
+            var prompt = `Write a ${selectedArticleType} article.
 
 TOPIC: ${articleData.topic}
 WORD COUNT: Approximately ${articleData.wordCount} words
@@ -521,29 +490,21 @@ Structure the article with:
 4. CONCLUSION (Summary + Call to Action)
 5. KEY TAKEAWAYS
 
-Make it engaging, informative, and ready to publish.`
-                            }
-                        ],
-                        max_tokens: 3000,
-                        temperature: 0.7
-                    })
-                });
+Make it engaging, informative, and ready to publish.`;
 
-                var data = await response.json();
+            var systemPrompt = 'You are a professional content writer. Create engaging, well-structured articles.';
 
-                if (data.choices && data.choices[0]) {
-                    lastArticleContent = data.choices[0].message.content;
-                    result.innerHTML = '<strong>✅ Your Article:</strong><br><br>' + 
-                        lastArticleContent.replace(/\n/g, '<br>');
-                    result.style.display = 'block';
-                    downloadBtns.style.display = 'flex';
-                    
-                    // Scroll to result
-                    result.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    result.innerHTML = '❌ Error: ' + JSON.stringify(data);
-                    result.style.display = 'block';
-                }
+            try {
+                // ✅ SECURE API CALL
+                var content = await callAI(prompt, systemPrompt, 3000);
+                
+                lastArticleContent = content;
+                result.innerHTML = '<strong>✅ Your Article:</strong><br><br>' + 
+                    content.replace(/\n/g, '<br>');
+                result.style.display = 'block';
+                downloadBtns.style.display = 'flex';
+                
+                result.scrollIntoView({ behavior: 'smooth' });
 
             } catch (error) {
                 result.innerHTML = '❌ Error: ' + error.message;
@@ -557,30 +518,21 @@ Make it engaging, informative, and ready to publish.`
         // Download as PDF
         function downloadPDF() {
             if (!lastArticleContent) return;
-            
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            
-            // Header
             doc.setFillColor(99, 102, 241);
             doc.rect(0, 0, 210, 25, 'F');
-            
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(16);
             doc.setFont('helvetica', 'bold');
             doc.text(articleData.topic || 'Article', 105, 12, { align: 'center' });
-            
             doc.setFontSize(10);
             doc.setFont('helvetica', 'normal');
             doc.text(`${selectedArticleType} | ${articleData.wordCount} words`, 105, 19, { align: 'center' });
-            
-            // Content
             doc.setTextColor(0, 0, 0);
             doc.setFontSize(11);
-            
             const lines = doc.splitTextToSize(lastArticleContent, 180);
             let y = 35;
-            
             lines.forEach(line => {
                 if (y > 280) {
                     doc.addPage();
@@ -589,7 +541,6 @@ Make it engaging, informative, and ready to publish.`
                 doc.text(line, 15, y);
                 y += 6;
             });
-            
             const fileName = articleData.topic.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50);
             doc.save(fileName + '_Article.pdf');
             showToast('PDF Downloaded!');
@@ -598,19 +549,10 @@ Make it engaging, informative, and ready to publish.`
         // Download as TXT
         function downloadTXT() {
             if (!lastArticleContent) return;
-            
-            const txtContent = '='.repeat(60) + '\n' +
-                'ARTICLE\n' +
-                'Topic: ' + articleData.topic + '\n' +
-                'Type: ' + selectedArticleType + '\n' +
-                'Word Count: ' + articleData.wordCount + '\n' +
-                '='.repeat(60) + '\n\n' +
-                lastArticleContent;
-            
+            const txtContent = 'ARTICLE\nTopic: ' + articleData.topic + '\nType: ' + selectedArticleType + '\n\n' + lastArticleContent;
             const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            
             const fileName = articleData.topic.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50);
             link.download = fileName + '_Article.txt';
             link.click();
@@ -620,7 +562,6 @@ Make it engaging, informative, and ready to publish.`
         // Copy to Clipboard
         function copyArticle() {
             if (!lastArticleContent) return;
-            
             navigator.clipboard.writeText(lastArticleContent).then(() => {
                 showToast('Article Copied!');
             }).catch(() => {
@@ -634,7 +575,6 @@ Make it engaging, informative, and ready to publish.`
             });
         }
 
-        // Show toast notification
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = '✅ ' + message;
