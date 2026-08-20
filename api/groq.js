@@ -21,17 +21,33 @@ export default async function handler(req, res) {
             return;
         }
         
-        // Try Groq first (if key works)
-        const groqResult = await tryGroq(prompt, systemPrompt, maxTokens);
-        if (groqResult) {
-            return res.status(200).json(groqResult);
-        }
+        // 1. Try Groq Key 1 (Original)
+        let result = await tryGroq(process.env.GROQ_API_KEY, prompt, systemPrompt, maxTokens);
+        if (result) return res.status(200).json(result);
         
-        // Try Gemini (working - model: gemini-2.5-flash)
-        const geminiResult = await tryGemini(prompt, systemPrompt, maxTokens);
-        if (geminiResult) {
-            return res.status(200).json(geminiResult);
-        }
+        // 2. Try Groq Key 2
+        result = await tryGroq(process.env.GROQ_API_KEY_1, prompt, systemPrompt, maxTokens);
+        if (result) return res.status(200).json(result);
+        
+        // 3. Try Groq Key 3
+        result = await tryGroq(process.env.GROQ_API_KEY_2, prompt, systemPrompt, maxTokens);
+        if (result) return res.status(200).json(result);
+        
+        // 4. Try Groq Key 4
+        result = await tryGroq(process.env.GROQ_API_KEY_3, prompt, systemPrompt, maxTokens);
+        if (result) return res.status(200).json(result);
+        
+        // 5. Try Gemini (Backup - Working)
+        result = await tryGemini(prompt, systemPrompt, maxTokens);
+        if (result) return res.status(200).json(result);
+        
+        // 6. Try OpenRouter
+        result = await tryOpenRouter(prompt, systemPrompt, maxTokens);
+        if (result) return res.status(200).json(result);
+        
+        // 7. Try Cerebras
+        result = await tryCerebras(prompt, systemPrompt, maxTokens);
+        if (result) return res.status(200).json(result);
         
         res.status(500).json({ error: 'All AI services unavailable' });
         
@@ -40,9 +56,9 @@ export default async function handler(req, res) {
     }
 }
 
-async function tryGroq(prompt, systemPrompt, maxTokens) {
+// Groq API
+async function tryGroq(key, prompt, systemPrompt, maxTokens) {
     try {
-        const key = process.env.GROQ_API_KEY;
         if (!key) return null;
         
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -73,6 +89,7 @@ async function tryGroq(prompt, systemPrompt, maxTokens) {
     }
 }
 
+// Gemini API (Working)
 async function tryGemini(prompt, systemPrompt, maxTokens) {
     try {
         const key = process.env.GEMINI_API_KEY;
@@ -80,7 +97,6 @@ async function tryGemini(prompt, systemPrompt, maxTokens) {
         
         const fullPrompt = systemPrompt ? `${systemPrompt}\n\n${prompt}` : prompt;
         
-        // ✅ SAHI MODEL: gemini-2.5-flash
         const response = await fetch(
             `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`,
             {
@@ -102,6 +118,72 @@ async function tryGemini(prompt, systemPrompt, maxTokens) {
                     }
                 }]
             };
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+}
+
+// OpenRouter API
+async function tryOpenRouter(prompt, systemPrompt, maxTokens) {
+    try {
+        const key = process.env.OPENROUTER_API_KEY;
+        if (!key) return null;
+        
+        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + key,
+            },
+            body: JSON.stringify({
+                model: 'meta-llama/llama-3.1-8b-instruct:free',
+                messages: [
+                    { role: 'system', content: systemPrompt || 'You are helpful.' },
+                    { role: 'user', content: prompt }
+                ],
+                max_tokens: maxTokens || 1000
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.choices && data.choices[0]) {
+            return data;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+}
+
+// Cerebras API
+async function tryCerebras(prompt, systemPrompt, maxTokens) {
+    try {
+        const key = process.env.CEREBRAS_API_KEY;
+        if (!key) return null;
+        
+        const response = await fetch('https://api.cerebras.ai/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + key,
+            },
+            body: JSON.stringify({
+                model: 'llama3.1-8b',
+                messages: [
+                    { role: 'system', content: systemPrompt || 'You are helpful.' },
+                    { role: 'user', content: prompt }
+                ],
+                max_tokens: maxTokens || 1000
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.choices && data.choices[0]) {
+            return data;
         }
         return null;
     } catch (error) {
