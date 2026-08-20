@@ -1,0 +1,12 @@
+# FreeToolsIndia Robots.txt
+# www.freetoolindia.com
+
+# Allow all search engines
+User-agent: *
+Allow: /
+
+# Block API routes (internal)
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://www.freetoolindia.com/sitemap.xml
