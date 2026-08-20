@@ -1,4 +1,3 @@
-// Multi-API Auto-Fallback System (4 APIs)
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -22,44 +21,38 @@ export default async function handler(req, res) {
             return;
         }
         
-        let result = null;
+        // Try Groq
+        const groqKey = process.env.GROQ_API_KEY;
+        if (groqKey) {
+            const result = await callGroq(groqKey, prompt, systemPrompt, maxTokens);
+            if (result) {
+                return res.status(200).json(result);
+            }
+        }
         
-        // 1️⃣ GROQ (Fastest - Primary)
-        result = await tryGroq(prompt, systemPrompt, maxTokens);
-        if (result) return res.status(200).json(result);
+        // Try Gemini
+        const geminiKey = process.env.GEMINI_API_KEY;
+        if (geminiKey) {
+            const result = await callGemini(geminiKey, prompt, systemPrompt, maxTokens);
+            if (result) {
+                return res.status(200).json(result);
+            }
+        }
         
-        // 2️⃣ GEMINI (Free - Backup 1)
-        result = await tryGemini(prompt, systemPrompt, maxTokens);
-        if (result) return res.status(200).json(result);
-        
-        // 3️⃣ OPENROUTER (Free - Backup 2)
-        result = await tryOpenRouter(prompt, systemPrompt, maxTokens);
-        if (result) return res.status(200).json(result);
-        
-        // 4️⃣ CEREBRAS (Free - Backup 3)
-        result = await tryCerebras(prompt, systemPrompt, maxTokens);
-        if (result) return res.status(200).json(result);
-        
-        // Sab fail
-        res.status(500).json({ 
-            error: 'All AI services are temporarily unavailable. Please try again later.' 
-        });
+        res.status(500).json({ error: 'All AI services unavailable' });
         
     } catch (error) {
-        console.error('API Error:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal error: ' + error.message });
     }
 }
 
-// 1️⃣ Groq API
-async function tryGroq(prompt, systemPrompt, maxTokens) {
+async function callGroq(key, prompt, systemPrompt, maxTokens) {
     try {
-        console.log('Trying Groq...');
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + process.env.GROQ_API_KEY,
+                'Authorization': 'Bearer ' + key,
             },
             body: JSON.stringify({
                 model: 'openai/gpt-oss-120b',
@@ -71,26 +64,20 @@ async function tryGroq(prompt, systemPrompt, maxTokens) {
                 temperature: 0.7
             })
         });
+        
         const data = await response.json();
+        
         if (data.choices && data.choices[0]) {
-            console.log('Groq Success!');
             return data;
         }
-        console.log('Groq Failed');
         return null;
     } catch (error) {
-        console.log('Groq Error:', error.message);
         return null;
     }
 }
 
-// 2️⃣ Gemini API
-async function tryGemini(prompt, systemPrompt, maxTokens) {
+async function callGemini(key, prompt, systemPrompt, maxTokens) {
     try {
-        console.log('Trying Gemini...');
-        const key = process.env.GEMINI_API_KEY;
-        if (!key) return null;
-        
         const fullPrompt = systemPrompt ? `${systemPrompt}\n\n${prompt}` : prompt;
         
         const response = await fetch(
@@ -103,87 +90,20 @@ async function tryGemini(prompt, systemPrompt, maxTokens) {
                 })
             }
         );
+        
         const data = await response.json();
+        
         if (data.candidates && data.candidates[0]) {
-            console.log('Gemini Success!');
             return {
-                choices: [{ message: { content: data.candidates[0].content.parts[0].text } }]
+                choices: [{
+                    message: {
+                        content: data.candidates[0].content.parts[0].text
+                    }
+                }]
             };
         }
-        console.log('Gemini Failed');
         return null;
     } catch (error) {
-        console.log('Gemini Error:', error.message);
-        return null;
-    }
-}
-
-// 3️⃣ OpenRouter API
-async function tryOpenRouter(prompt, systemPrompt, maxTokens) {
-    try {
-        console.log('Trying OpenRouter...');
-        const key = process.env.OPENROUTER_API_KEY;
-        if (!key) return null;
-        
-        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + key,
-            },
-            body: JSON.stringify({
-                model: 'meta-llama/llama-3.1-8b-instruct:free',
-                messages: [
-                    { role: 'system', content: systemPrompt || 'You are helpful.' },
-                    { role: 'user', content: prompt }
-                ],
-                max_tokens: maxTokens || 1000
-            })
-        });
-        const data = await response.json();
-        if (data.choices && data.choices[0]) {
-            console.log('OpenRouter Success!');
-            return data;
-        }
-        console.log('OpenRouter Failed');
-        return null;
-    } catch (error) {
-        console.log('OpenRouter Error:', error.message);
-        return null;
-    }
-}
-
-// 4️⃣ Cerebras API
-async function tryCerebras(prompt, systemPrompt, maxTokens) {
-    try {
-        console.log('Trying Cerebras...');
-        const key = process.env.CEREBRAS_API_KEY;
-        if (!key) return null;
-        
-        const response = await fetch('https://api.cerebras.ai/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + key,
-            },
-            body: JSON.stringify({
-                model: 'llama3.1-8b',
-                messages: [
-                    { role: 'system', content: systemPrompt || 'You are helpful.' },
-                    { role: 'user', content: prompt }
-                ],
-                max_tokens: maxTokens || 1000
-            })
-        });
-        const data = await response.json();
-        if (data.choices && data.choices[0]) {
-            console.log('Cerebras Success!');
-            return data;
-        }
-        console.log('Cerebras Failed');
-        return null;
-    } catch (error) {
-        console.log('Cerebras Error:', error.message);
         return null;
     }
 }
