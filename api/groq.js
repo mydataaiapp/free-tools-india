@@ -21,18 +21,73 @@ export default async function handler(req, res) {
             return;
         }
         
-        // Gemini API Call
+        // Try Groq first (if key works)
+        const groqResult = await tryGroq(prompt, systemPrompt, maxTokens);
+        if (groqResult) {
+            return res.status(200).json(groqResult);
+        }
+        
+        // Try Gemini (working - model: gemini-2.5-flash)
+        const geminiResult = await tryGemini(prompt, systemPrompt, maxTokens);
+        if (geminiResult) {
+            return res.status(200).json(geminiResult);
+        }
+        
+        res.status(500).json({ error: 'All AI services unavailable' });
+        
+    } catch (error) {
+        res.status(500).json({ error: 'Internal error: ' + error.message });
+    }
+}
+
+async function tryGroq(prompt, systemPrompt, maxTokens) {
+    try {
+        const key = process.env.GROQ_API_KEY;
+        if (!key) return null;
+        
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + key,
+            },
+            body: JSON.stringify({
+                model: 'openai/gpt-oss-120b',
+                messages: [
+                    { role: 'system', content: systemPrompt || 'You are helpful.' },
+                    { role: 'user', content: prompt }
+                ],
+                max_tokens: maxTokens || 1000,
+                temperature: 0.7
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.choices && data.choices[0]) {
+            return data;
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+}
+
+async function tryGemini(prompt, systemPrompt, maxTokens) {
+    try {
+        const key = process.env.GEMINI_API_KEY;
+        if (!key) return null;
+        
+        const fullPrompt = systemPrompt ? `${systemPrompt}\n\n${prompt}` : prompt;
+        
+        // ✅ SAHI MODEL: gemini-2.5-flash
         const response = await fetch(
-            'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + process.env.GEMINI_API_KEY,
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: systemPrompt ? systemPrompt + '\n\n' + prompt : prompt
-                        }]
-                    }]
+                    contents: [{ parts: [{ text: fullPrompt }] }]
                 })
             }
         );
@@ -40,20 +95,16 @@ export default async function handler(req, res) {
         const data = await response.json();
         
         if (data.candidates && data.candidates[0]) {
-            return res.status(200).json({
+            return {
                 choices: [{
                     message: {
                         content: data.candidates[0].content.parts[0].text
                     }
                 }]
-            });
+            };
         }
-        
-        return res.status(500).json({ 
-            error: 'Gemini Error: ' + JSON.stringify(data).substring(0, 300)
-        });
-        
+        return null;
     } catch (error) {
-        return res.status(500).json({ error: 'Error: ' + error.message });
+        return null;
     }
 }
