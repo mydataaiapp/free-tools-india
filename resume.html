@@ -8,6 +8,44 @@
     <meta name="keywords" content="resume builder, CV maker, free resume creator, ATS resume, professional resume, download resume PDF">
     <meta name="robots" content="index, follow">
     
+    <!-- Open Graph Tags (Social Media Sharing) -->
+    <meta property="og:title" content="Free Resume Builder - Download PDF Resume | FreeToolsIndia">
+    <meta property="og:description" content="Create professional ATS-friendly resume with AI. Download as PDF. Free resume builder with 20+ sections. Perfect for job seekers.">
+    <meta property="og:url" content="https://www.freetoolindia.com/resume.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.freetoolindia.com/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://www.freetoolindia.com/resume.html">
+    
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Resume Builder",
+        "url": "https://www.freetoolindia.com/resume.html",
+        "description": "Create professional ATS-friendly resumes with AI. Download as PDF. Free resume builder with 20+ sections including skills, experience, education, achievements, and certifications.",
+        "applicationCategory": "AI Tool",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "mainEntity": {
+            "@type": "Question",
+            "name": "How to build a professional resume with AI?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Fill in your personal details, skills, experience, and education. Our AI creates an ATS-friendly professional resume that you can download as PDF."
+            }
+        }
+    }
+    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <!-- jsPDF for PDF download -->
@@ -213,6 +251,67 @@
         .tips h3 { color: #6366f1; margin-bottom: 10px; }
         .tips ul { list-style-position: inside; color: #4b5563; line-height: 1.8; }
 
+        /* ✅ NEW: FAQ Section */
+        .faq-section {
+            margin: 40px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        .faq-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #6366f1;
+        }
+        .faq-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .faq-item h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .faq-item p {
+            margin: 0;
+            color: #555;
+        }
+
+        /* ✅ NEW: Related Tools Section */
+        .related-tools {
+            margin: 40px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .related-tools h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6366f1;
+        }
+        .related-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+        .related-tool-item {
+            text-decoration: none;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            color: #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .related-tool-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            color: #6366f1;
+        }
+
         @media (max-width: 600px) {
             .container { padding: 15px; }
             .form-grid { grid-template-columns: 1fr; }
@@ -373,6 +472,43 @@
             </ul>
         </div>
 
+        <!-- ✅ NEW: FAQ Section -->
+        <section class="faq-section">
+            <h2>❓ Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h4>1. Is this resume builder really free?</h4>
+                <p>Yes, our AI resume builder is completely free. No signup required, no hidden charges.</p>
+            </div>
+            <div class="faq-item">
+                <h4>2. Is my resume ATS-friendly?</h4>
+                <p>Yes, our AI generates resumes that are optimized for Applicant Tracking Systems (ATS). This means your resume has a better chance of being seen by recruiters.</p>
+            </div>
+            <div class="faq-item">
+                <h4>3. Can I download my resume?</h4>
+                <p>Yes, you can download your resume as PDF, TXT, or print it directly from your browser.</p>
+            </div>
+            <div class="faq-item">
+                <h4>4. What sections are included?</h4>
+                <p>Our resume includes Professional Summary, Key Skills, Work Experience, Education, Achievements, Certifications, and Personal Details.</p>
+            </div>
+            <div class="faq-item">
+                <h4>5. Is my data safe?</h4>
+                <p>We do not store any user data. All processing happens in real-time and nothing is saved on our servers.</p>
+            </div>
+        </section>
+
+        <!-- ✅ NEW: Related Tools Section -->
+        <section class="related-tools">
+            <h3>🛠️ Explore More Free AI Tools</h3>
+            <div class="related-tools-grid">
+                <a href="/summary.html" class="related-tool-item">📝 AI Summary Generator</a>
+                <a href="/email.html" class="related-tool-item">📧 AI Email Writer</a>
+                <a href="/excel.html" class="related-tool-item">📊 Excel Formula Generator</a>
+                <a href="/writer.html" class="related-tool-item">✍️ AI Article Writer</a>
+                <a href="/social.html" class="related-tool-item">📱 Social Media Post Generator</a>
+            </div>
+        </section>
+
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
@@ -464,8 +600,11 @@ Format: Professional Summary, Key Skills, Work Experience, Education, Achievemen
             var systemPrompt = 'You are a professional resume writer. Create ATS-friendly resumes.';
 
             try {
-                // ✅ SECURE API CALL
-                var content = await callAI(prompt, systemPrompt, 2000);
+                // ✅ PAID TOOL SUPPORT
+                const isPremium = checkIfPremiumUser();
+                const model = isPremium ? 'llama-3.3-70b-versatile' : 'llama-3.1-8b-instant';
+                
+                var content = await callAI(prompt, systemPrompt, 2000, model);
                 
                 lastResumeContent = content;
                 result.innerHTML = '<strong>✅ Your Professional Resume:</strong><br><br>' + 
@@ -480,6 +619,12 @@ Format: Professional Summary, Key Skills, Work Experience, Education, Achievemen
                 btn.disabled = false;
                 loading.style.display = 'none';
             }
+        }
+
+        // ✅ NEW: Premium User Check Function
+        function checkIfPremiumUser() {
+            // Implement your premium user check logic here
+            return false; // Default: free tier
         }
 
         function downloadPDF() {
