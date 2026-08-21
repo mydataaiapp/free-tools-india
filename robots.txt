@@ -1,12 +1,168 @@
+# ============================================
 # FreeToolsIndia Robots.txt
-# www.freetoolindia.com
+# Website: https://www.freetoolindia.com
+# ============================================
 
-# Allow all search engines
+# ============================================
+# 1. ALLOW ALL MAJOR SEARCH ENGINES
+# ============================================
+
 User-agent: *
 Allow: /
+
+# ============================================
+# 2. BLOCK INTERNAL & ADMIN PAGES
+# ============================================
 
 # Block API routes (internal)
 Disallow: /api/
 
-# Sitemap location
+# Block admin / private pages
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /backup/
+
+# Block dynamic/query parameters
+Disallow: /*?*
+Disallow: /*&*
+
+# Block sensitive files
+Disallow: /config.js$
+Disallow: /supabase-config.js$
+Disallow: /*.json$
+Disallow: /*.env$
+
+# ============================================
+# 3. BLOCK DUPLICATE / UNWANTED PAGES
+# ============================================
+
+# Block duplicate or printer-friendly versions
+Disallow: /print/
+Disallow: /*/print
+Disallow: /*?print=
+Disallow: /*?format=print
+
+# Block login/signup pages (if any)
+Disallow: /login
+Disallow: /signup
+Disallow: /register
+Disallow: /logout
+Disallow: /forgot-password
+
+# ============================================
+# 4. CRAWL DELAY (Be nice to servers)
+# ============================================
+
+# Recommended for heavy traffic sites
+Crawl-delay: 1
+
+# ============================================
+# 5. SPECIFIC SEARCH ENGINE RULES
+# ============================================
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /*?*
+Crawl-delay: 0.5
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /*?*
+Crawl-delay: 1
+
+# Yahoo Slurp
+User-agent: Yahoo! Slurp
+Allow: /
+Disallow: /api/
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /api/
+
+# Baidu (Chinese search)
+User-agent: Baiduspider
+Allow: /
+Disallow: /api/
+
+# Yandex
+User-agent: Yandex
+Allow: /
+Disallow: /api/
+
+# ============================================
+# 6. AI TRAINING BOTS (Optional Block)
+# ============================================
+
+# Block AI training crawlers (if you don't want content used for AI training)
+# Uncomment to block:
+
+# User-agent: GPTBot
+# Disallow: /
+
+# User-agent: ChatGPT-User
+# Disallow: /
+
+# User-agent: CCBot
+# Disallow: /
+
+# User-agent: ClaudeBot
+# Disallow: /
+
+# User-agent: Claude-Web
+# Disallow: /
+
+# ============================================
+# 7. SOCIAL MEDIA BOTS (Allow)
+# ============================================
+
+# Facebook
+User-agent: facebookexternalhit
+Allow: /
+Allow: /*.html$
+
+# Twitter/X
+User-agent: Twitterbot
+Allow: /
+Allow: /*.html$
+
+# LinkedIn
+User-agent: LinkedInBot
+Allow: /
+Allow: /*.html$
+
+# Pinterest
+User-agent: Pinterestbot
+Allow: /
+Allow: /*.html$
+
+# ============================================
+# 8. SITEMAP LOCATIONS
+# ============================================
+
 Sitemap: https://www.freetoolindia.com/sitemap.xml
+
+# ============================================
+# 9. CLEAN UP PARAMETERS FOR SEO
+# ============================================
+
+# Tell search engines to ignore tracking/utm parameters
+# This helps avoid duplicate content issues
+# Note: Googlebot automatically handles this, but it's good practice
+
+# ============================================
+# 10. ADDITIONAL SEO TIPS
+# ============================================
+
+# For Google's Perspective:
+# - robots.txt only blocks crawling, not indexing
+# - To block indexing, use meta robots "noindex"
+# - Or use X-Robots-Tag HTTP header
+
+# Example meta robots for specific pages:
+# <meta name="robots" content="noindex, nofollow">
