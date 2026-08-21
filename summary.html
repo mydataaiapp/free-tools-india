@@ -8,6 +8,44 @@
     <meta name="keywords" content="summary generator, AI summary, text summarizer, bullet points, executive summary, free summary tool">
     <meta name="robots" content="index, follow">
     
+    <!-- Open Graph Tags (Social Media Sharing) -->
+    <meta property="og:title" content="Free AI Summary Generator - 5 Formats | FreeToolsIndia">
+    <meta property="og:description" content="Free AI summary generator. Summarize any text into bullet points, paragraph, key takeaways, or executive summary. Download PDF. No signup required.">
+    <meta property="og:url" content="https://www.freetoolindia.com/summary.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.freetoolindia.com/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://www.freetoolindia.com/summary.html">
+    
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Summary Generator",
+        "url": "https://www.freetoolindia.com/summary.html",
+        "description": "Free AI summary generator that converts long text into bullet points, paragraphs, key takeaways, executive summaries, or one-liners. Download as PDF or TXT.",
+        "applicationCategory": "AI Tool",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "mainEntity": {
+            "@type": "Question",
+            "name": "How to summarize text with AI?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Paste your long text into the tool, choose your preferred format (Bullet Points, Paragraph, Key Takeaways, Executive Summary, or One-Liner), and click 'Generate Summary'. Our AI will create a concise summary instantly."
+            }
+        }
+    }
+    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <!-- jsPDF for PDF download -->
@@ -297,6 +335,67 @@
             transform: translateY(-2px);
         }
 
+        /* ✅ NEW: FAQ Section */
+        .faq-section {
+            margin: 40px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        .faq-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #6366f1;
+        }
+        .faq-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .faq-item h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .faq-item p {
+            margin: 0;
+            color: #555;
+        }
+
+        /* ✅ NEW: Related Tools Section */
+        .related-tools {
+            margin: 40px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .related-tools h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6366f1;
+        }
+        .related-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            text-align: center;
+        }
+        .related-tool-item {
+            text-decoration: none;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            color: #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .related-tool-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            color: #6366f1;
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 15px;
@@ -387,6 +486,43 @@
             <button class="download-btn copy-btn" onclick="copySummary()">📋 Copy to Clipboard</button>
         </div>
 
+        <!-- ✅ NEW: FAQ Section -->
+        <section class="faq-section">
+            <h2>❓ Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h4>1. Is this summary generator really free?</h4>
+                <p>Yes, our AI summary generator is completely free. No signup required, no hidden charges.</p>
+            </div>
+            <div class="faq-item">
+                <h4>2. What formats are available?</h4>
+                <p>We offer 5 formats: Bullet Points, Paragraph, Key Takeaways, Executive Summary, and One-Liner.</p>
+            </div>
+            <div class="faq-item">
+                <h4>3. Can I download the summary?</h4>
+                <p>Yes, you can download your summary as PDF or TXT, or copy it directly to your clipboard.</p>
+            </div>
+            <div class="faq-item">
+                <h4>4. How long can the text be?</h4>
+                <p>You can paste any length of text. Our AI is optimized to summarize long articles, documents, and even full chapters.</p>
+            </div>
+            <div class="faq-item">
+                <h4>5. Is my data safe?</h4>
+                <p>We do not store any user data. All processing happens in real-time and nothing is saved on our servers.</p>
+            </div>
+        </section>
+
+        <!-- ✅ NEW: Related Tools Section -->
+        <section class="related-tools">
+            <h3>🛠️ Explore More Free AI Tools</h3>
+            <div class="related-tools-grid">
+                <a href="/resume.html" class="related-tool-item">💼 Resume Builder</a>
+                <a href="/email.html" class="related-tool-item">📧 AI Email Writer</a>
+                <a href="/excel.html" class="related-tool-item">📊 Excel Formula Generator</a>
+                <a href="/writer.html" class="related-tool-item">✍️ AI Article Writer</a>
+                <a href="/social.html" class="related-tool-item">📱 Social Media Post Generator</a>
+            </div>
+        </section>
+
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
@@ -473,8 +609,11 @@ Provide the summary in ${language} language.`;
             var systemPrompt = 'You are a professional content summarizer. Create clear, accurate summaries.';
 
             try {
-                // ✅ SECURE API CALL
-                var content = await callAI(prompt, systemPrompt, 1500);
+                // ✅ PAID TOOL SUPPORT
+                const isPremium = checkIfPremiumUser();
+                const model = isPremium ? 'llama-3.3-70b-versatile' : 'llama-3.1-8b-instant';
+                
+                var content = await callAI(prompt, systemPrompt, 1500, model);
                 
                 lastSummaryContent = content;
                 result.innerHTML = '<strong>✅ Summary (' + format + '):</strong><br><br>' + 
@@ -491,6 +630,12 @@ Provide the summary in ${language} language.`;
                 btn.disabled = false;
                 loading.style.display = 'none';
             }
+        }
+
+        // ✅ NEW: Premium User Check Function
+        function checkIfPremiumUser() {
+            // Implement your premium user check logic here
+            return false; // Default: free tier
         }
 
         // Download as PDF
