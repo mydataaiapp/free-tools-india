@@ -8,18 +8,14 @@
     <meta name="keywords" content="summary generator, AI summary, text summarizer, bullet points, executive summary, free summary tool">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph Tags (Social Media Sharing) -->
     <meta property="og:title" content="Free AI Summary Generator - 5 Formats | FreeToolsIndia">
-    <meta property="og:description" content="Free AI summary generator. Summarize any text into bullet points, paragraph, key takeaways, or executive summary. Download PDF. No signup required.">
+    <meta property="og:description" content="Free AI summary generator. Summarize any text into bullet points, paragraph, key takeaways, or executive summary. Download PDF.">
     <meta property="og:url" content="https://www.freetoolindia.com/summary.html">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://www.freetoolindia.com/og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
     
-    <!-- Canonical Tag -->
     <link rel="canonical" href="https://www.freetoolindia.com/summary.html">
     
-    <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -29,26 +25,16 @@
         "description": "Free AI summary generator that converts long text into bullet points, paragraphs, key takeaways, executive summaries, or one-liners. Download as PDF or TXT.",
         "applicationCategory": "AI Tool",
         "operatingSystem": "All",
-        "browserRequirements": "Requires JavaScript",
         "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "USD"
-        },
-        "mainEntity": {
-            "@type": "Question",
-            "name": "How to summarize text with AI?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Paste your long text into the tool, choose your preferred format (Bullet Points, Paragraph, Key Takeaways, Executive Summary, or One-Liner), and click 'Generate Summary'. Our AI will create a concise summary instantly."
-            }
         }
     }
     </script>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- jsPDF for PDF download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
@@ -162,10 +148,6 @@
             margin-top: 5px;
         }
 
-        .file-upload {
-            margin-bottom: 15px;
-        }
-
         .file-upload input[type="file"] {
             display: none;
         }
@@ -180,7 +162,6 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
-            text-align: center;
         }
 
         .file-upload-label:hover {
@@ -199,12 +180,11 @@
             cursor: pointer;
             width: 100%;
             margin: 20px 0;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
         }
 
         .btn:disabled {
@@ -244,20 +224,9 @@
             gap: 8px;
         }
 
-        .download-pdf {
-            background: #ef4444;
-            color: white;
-        }
-
-        .download-txt {
-            background: #6366f1;
-            color: white;
-        }
-
-        .copy-btn {
-            background: #10b981;
-            color: white;
-        }
+        .download-pdf { background: #ef4444; color: white; }
+        .download-txt { background: #6366f1; color: white; }
+        .copy-btn { background: #10b981; color: white; }
 
         .download-btn:hover {
             transform: translateY(-2px);
@@ -281,10 +250,6 @@
             font-weight: 500;
         }
 
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
         .toast {
             display: none;
             position: fixed;
@@ -296,18 +261,6 @@
             border-radius: 10px;
             font-weight: 600;
             z-index: 1000;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
         }
 
         .sample-text {
@@ -335,7 +288,6 @@
             transform: translateY(-2px);
         }
 
-        /* ✅ NEW: FAQ Section */
         .faq-section {
             margin: 40px 0;
             padding: 20px;
@@ -343,44 +295,50 @@
             border-radius: 10px;
             border: 1px solid #e0e0e0;
         }
+
         .faq-section h2 {
             text-align: center;
             margin-bottom: 30px;
             color: #6366f1;
         }
+
         .faq-item {
             margin-bottom: 15px;
             padding: 15px;
             background: #f8f9fa;
             border-radius: 8px;
         }
+
         .faq-item h4 {
             margin: 0 0 10px 0;
             color: #333;
         }
+
         .faq-item p {
             margin: 0;
             color: #555;
         }
 
-        /* ✅ NEW: Related Tools Section */
         .related-tools {
             margin: 40px 0;
             padding: 20px;
             background: #f8f9fa;
             border-radius: 10px;
         }
+
         .related-tools h3 {
             text-align: center;
             margin-bottom: 20px;
             color: #6366f1;
         }
+
         .related-tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
             text-align: center;
         }
+
         .related-tool-item {
             text-decoration: none;
             padding: 12px;
@@ -388,24 +346,18 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             color: #333;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s;
         }
+
         .related-tool-item:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             color: #6366f1;
         }
 
         @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            .header h1 {
-                font-size: 1.5rem;
-            }
+            .container { padding: 15px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -416,7 +368,6 @@
             <p>Summarize Text in 5 Different Formats</p>
         </div>
 
-        <!-- Summary Configuration -->
         <div class="form-section">
             <h2>⚙️ Summary Configuration</h2>
             <div class="form-grid">
@@ -449,7 +400,6 @@
             </div>
         </div>
 
-        <!-- Text Input -->
         <div class="form-section">
             <h2>📄 Paste Your Text</h2>
             <textarea id="inputText" placeholder="Paste your article, document, or any long text here..." oninput="updateCharCount()"></textarea>
@@ -458,14 +408,11 @@
             </div>
             
             <div class="file-upload" style="margin-top: 15px;">
-                <label class="file-upload-label" for="fileInput">
-                    📁 Upload Text File (TXT)
-                </label>
+                <label class="file-upload-label" for="fileInput">📁 Upload Text File (TXT)</label>
                 <input type="file" id="fileInput" accept=".txt,.md,.csv" onchange="loadFile()">
             </div>
         </div>
 
-        <!-- Sample Text -->
         <div class="sample-text">
             <p><strong>Try Sample Text:</strong></p>
             <button class="sample-btn" onclick="loadSample('technology')">💻 Technology</button>
@@ -479,14 +426,12 @@
 
         <div id="result"></div>
 
-        <!-- Download Buttons -->
         <div class="download-btns" id="downloadBtns">
             <button class="download-btn download-pdf" onclick="downloadPDF()">📄 Download PDF</button>
             <button class="download-btn download-txt" onclick="downloadTXT()">📝 Download TXT</button>
             <button class="download-btn copy-btn" onclick="copySummary()">📋 Copy to Clipboard</button>
         </div>
 
-        <!-- ✅ NEW: FAQ Section -->
         <section class="faq-section">
             <h2>❓ Frequently Asked Questions</h2>
             <div class="faq-item">
@@ -503,30 +448,28 @@
             </div>
             <div class="faq-item">
                 <h4>4. How long can the text be?</h4>
-                <p>You can paste any length of text. Our AI is optimized to summarize long articles, documents, and even full chapters.</p>
+                <p>You can paste any length of text. Our AI is optimized to summarize long articles and documents.</p>
             </div>
             <div class="faq-item">
                 <h4>5. Is my data safe?</h4>
-                <p>We do not store any user data. All processing happens in real-time and nothing is saved on our servers.</p>
+                <p>We do not store any user data. All processing happens in real-time.</p>
             </div>
         </section>
 
-        <!-- ✅ NEW: Related Tools Section -->
         <section class="related-tools">
             <h3>🛠️ Explore More Free AI Tools</h3>
             <div class="related-tools-grid">
-                <a href="/resume.html" class="related-tool-item">💼 Resume Builder</a>
-                <a href="/email.html" class="related-tool-item">📧 AI Email Writer</a>
-                <a href="/excel.html" class="related-tool-item">📊 Excel Formula Generator</a>
-                <a href="/writer.html" class="related-tool-item">✍️ AI Article Writer</a>
-                <a href="/social.html" class="related-tool-item">📱 Social Media Post Generator</a>
+                <a href="resume.html" class="related-tool-item">💼 Resume Builder</a>
+                <a href="email.html" class="related-tool-item">📧 AI Email Writer</a>
+                <a href="excel.html" class="related-tool-item">📊 Excel Formula Generator</a>
+                <a href="writer.html" class="related-tool-item">✍️ AI Article Writer</a>
+                <a href="social.html" class="related-tool-item">📱 Social Media Post Generator</a>
             </div>
         </section>
 
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
-    <!-- Toast Notification -->
     <div class="toast" id="toast">✅ Success!</div>
 
     <script src="config.js"></script>
@@ -557,9 +500,7 @@
         function loadSample(type) {
             const samples = {
                 technology: `Artificial Intelligence (AI) is transforming the world at an unprecedented pace. From virtual assistants like Siri and Alexa to self-driving cars, AI has become an integral part of our daily lives. Machine learning algorithms can now diagnose diseases with accuracy comparable to human doctors. In the business world, AI-powered chatbots handle customer service queries 24/7, while predictive analytics helps companies make data-driven decisions. The education sector is also being revolutionized with personalized learning experiences. However, with great power comes great responsibility. There are concerns about job displacement, privacy issues, and the ethical use of AI. Governments worldwide are working on regulations to ensure AI is developed and deployed responsibly. Despite these challenges, the future of AI looks promising, with potential breakthroughs in healthcare, climate change, and space exploration on the horizon.`,
-                
                 health: `Regular exercise is one of the most important things you can do for your health. Physical activity can help prevent chronic diseases like heart disease, diabetes, and obesity. The World Health Organization recommends at least 150 minutes of moderate-intensity exercise per week for adults. Exercise not only improves physical health but also has significant mental health benefits. It releases endorphins, which are natural mood elevators, helping to reduce stress, anxiety, and depression. Regular physical activity also improves sleep quality, boosts energy levels, and enhances cognitive function. For best results, combine cardiovascular exercises like running or swimming with strength training exercises. Remember to start slowly and gradually increase intensity. Always consult with a healthcare provider before starting any new exercise program, especially if you have existing health conditions.`,
-                
                 business: `Digital marketing has become essential for businesses of all sizes in today's digital age. Unlike traditional marketing, digital marketing allows businesses to reach their target audience with precision and measure results in real-time. Social media platforms like Facebook, Instagram, and LinkedIn offer powerful advertising tools that can be customized based on demographics, interests, and behavior. Search engine optimization (SEO) helps businesses rank higher in Google search results, driving organic traffic to their websites. Content marketing establishes brand authority and builds trust with potential customers. Email marketing remains one of the highest ROI marketing channels, with an average return of $42 for every $1 spent. The key to successful digital marketing is understanding your audience and creating valuable content that addresses their needs. With the rise of mobile usage, businesses must ensure their websites are mobile-friendly and load quickly.`
             };
             
@@ -584,43 +525,25 @@
                 return;
             }
 
-            summaryData = {
-                format: format,
-                length: length,
-                language: language
-            };
+            summaryData = { format: format, length: length, language: language };
 
             btn.disabled = true;
             loading.style.display = 'block';
             result.style.display = 'none';
             downloadBtns.style.display = 'none';
 
-            var prompt = `Summarize the following text.
-
-FORMAT: ${format}
-LENGTH: ${length}
-LANGUAGE: ${language}
-
-TEXT TO SUMMARIZE:
-${text}
-
-Provide the summary in ${language} language.`;
+            var prompt = `Summarize the following text.\n\nFORMAT: ${format}\nLENGTH: ${length}\nLANGUAGE: ${language}\n\nTEXT TO SUMMARIZE:\n${text}\n\nProvide the summary in ${language} language.`;
 
             var systemPrompt = 'You are a professional content summarizer. Create clear, accurate summaries.';
 
             try {
-                // ✅ PAID TOOL SUPPORT
-                const isPremium = checkIfPremiumUser();
-                const model = isPremium ? 'llama-3.3-70b-versatile' : 'llama-3.1-8b-instant';
-                
-                var content = await callAI(prompt, systemPrompt, 1500, model);
+                // ✅ SIMPLE CALL - No model parameter
+                var content = await callAI(prompt, systemPrompt, 1500);
                 
                 lastSummaryContent = content;
-                result.innerHTML = '<strong>✅ Summary (' + format + '):</strong><br><br>' + 
-                    content.replace(/\n/g, '<br>');
+                result.innerHTML = '<strong>✅ Summary (' + format + '):</strong><br><br>' + content.replace(/\n/g, '<br>');
                 result.style.display = 'block';
                 downloadBtns.style.display = 'flex';
-                
                 result.scrollIntoView({ behavior: 'smooth' });
 
             } catch (error) {
@@ -632,13 +555,6 @@ Provide the summary in ${language} language.`;
             }
         }
 
-        // ✅ NEW: Premium User Check Function
-        function checkIfPremiumUser() {
-            // Implement your premium user check logic here
-            return false; // Default: free tier
-        }
-
-        // Download as PDF
         function downloadPDF() {
             if (!lastSummaryContent) return;
             const { jsPDF } = window.jspdf;
@@ -660,14 +576,9 @@ Provide the summary in ${language} language.`;
             showToast('PDF Downloaded!');
         }
 
-        // Download as TXT
         function downloadTXT() {
             if (!lastSummaryContent) return;
-            const txtContent = '='.repeat(60) + '\n' +
-                'TEXT SUMMARY\n' +
-                'Format: ' + summaryData.format + '\n' +
-                '='.repeat(60) + '\n\n' +
-                lastSummaryContent;
+            const txtContent = 'TEXT SUMMARY\nFormat: ' + summaryData.format + '\n\n' + lastSummaryContent;
             const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
@@ -676,7 +587,6 @@ Provide the summary in ${language} language.`;
             showToast('TXT Downloaded!');
         }
 
-        // Copy to Clipboard
         function copySummary() {
             if (!lastSummaryContent) return;
             navigator.clipboard.writeText(lastSummaryContent).then(() => {
@@ -696,9 +606,7 @@ Provide the summary in ${language} language.`;
             const toast = document.getElementById('toast');
             toast.textContent = '✅ ' + message;
             toast.style.display = 'block';
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 2000);
+            setTimeout(() => { toast.style.display = 'none'; }, 2000);
         }
 
         window.onload = function() {
