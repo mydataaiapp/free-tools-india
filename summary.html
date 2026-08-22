@@ -88,7 +88,6 @@
             var prompt = 'Summarize this text in ' + format + ' format in ' + language + ' language:\n\n' + text;
 
             try {
-                // ✅ DIRECT FETCH - No callAI needed
                 var response = await fetch('/api/groq', {
                     method: 'POST',
                     headers: {
@@ -102,7 +101,6 @@
                 });
                 
                 var data = await response.json();
-                console.log('API Response:', data);
                 
                 if (data.choices && data.choices[0]) {
                     var content = data.choices[0].message.content;
@@ -114,7 +112,6 @@
                 }
                 
             } catch (error) {
-                console.error('Error:', error);
                 result.innerHTML = '❌ Error: ' + error.message;
                 result.style.display = 'block';
             } finally {
