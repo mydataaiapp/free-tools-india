@@ -6,99 +6,23 @@
     <title>Free AI Summary Generator | FreeToolsIndia</title>
     <meta name="description" content="Free AI summary generator. Summarize text into bullet points instantly.">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .header h1 {
-            color: #6366f1;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        .header p {
-            color: #6b7280;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        select, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            font-size: 15px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-        }
-        textarea {
-            height: 200px;
-            resize: vertical;
-        }
-        .btn {
-            background: linear-gradient(45deg, #6366f1, #8b5cf6);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin: 20px 0;
-        }
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        #result {
-            padding: 25px;
-            background: #f9fafb;
-            border-radius: 10px;
-            white-space: pre-wrap;
-            line-height: 1.8;
-            display: none;
-            margin-top: 20px;
-        }
-        .loading {
-            text-align: center;
-            color: #6366f1;
-            display: none;
-            margin: 20px 0;
-        }
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #6366f1;
-            text-decoration: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #6366f1; font-size: 2rem; margin-bottom: 10px; }
+        .header p { color: #6b7280; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 14px; }
+        select, textarea { width: 100%; padding: 12px 15px; font-size: 15px; border: 2px solid #e5e7eb; border-radius: 8px; }
+        textarea { height: 200px; resize: vertical; }
+        .btn { background: linear-gradient(45deg, #6366f1, #8b5cf6); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; width: 100%; margin: 20px 0; }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        #result { padding: 25px; background: #f9fafb; border-radius: 10px; white-space: pre-wrap; line-height: 1.8; display: none; margin-top: 20px; }
+        .loading { text-align: center; color: #6366f1; display: none; margin: 20px 0; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #6366f1; text-decoration: none; }
     </style>
 </head>
 <body>
@@ -143,10 +67,6 @@
     </div>
 
     <script>
-        // ============================================
-        // SIMPLE AI CALL - DIRECTLY IN PAGE
-        // ============================================
-        
         async function generateSummary() {
             var text = document.getElementById('inputText').value;
             var format = document.getElementById('summaryFormat').value;
@@ -168,7 +88,7 @@
             var prompt = 'Summarize this text in ' + format + ' format in ' + language + ' language:\n\n' + text;
 
             try {
-                // ✅ DIRECT FETCH - No callAI function needed
+                // ✅ DIRECT FETCH - No callAI needed
                 var response = await fetch('/api/groq', {
                     method: 'POST',
                     headers: {
@@ -182,6 +102,7 @@
                 });
                 
                 var data = await response.json();
+                console.log('API Response:', data);
                 
                 if (data.choices && data.choices[0]) {
                     var content = data.choices[0].message.content;
@@ -193,6 +114,7 @@
                 }
                 
             } catch (error) {
+                console.error('Error:', error);
                 result.innerHTML = '❌ Error: ' + error.message;
                 result.style.display = 'block';
             } finally {
