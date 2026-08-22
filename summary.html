@@ -43,333 +43,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: #6366f1;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            color: #6b7280;
-            font-size: 1.1rem;
-        }
-
-        .form-section {
-            margin-bottom: 25px;
-            padding: 20px;
-            background: #f9fafb;
-            border-radius: 10px;
-        }
-
-        .form-section h2 {
-            color: #6366f1;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 10px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        select, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            font-size: 15px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            transition: border-color 0.3s;
-        }
-
-        select:focus, textarea:focus {
-            outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-        }
-
-        textarea {
-            height: 200px;
-            resize: vertical;
-            line-height: 1.6;
-        }
-
-        .char-counter {
-            text-align: right;
-            font-size: 12px;
-            color: #6b7280;
-            margin-top: 5px;
-        }
-
-        .file-upload input[type="file"] {
-            display: none;
-        }
-
-        .file-upload-label {
-            display: inline-block;
-            padding: 12px 20px;
-            background: #eef2ff;
-            color: #6366f1;
-            border: 2px dashed #6366f1;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .file-upload-label:hover {
-            background: #6366f1;
-            color: white;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #6366f1, #8b5cf6);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin: 20px 0;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        #result {
-            padding: 25px;
-            background: #ffffff;
-            border-radius: 10px;
-            white-space: pre-wrap;
-            line-height: 1.8;
-            display: none;
-            border: 2px solid #e5e7eb;
-            margin-top: 20px;
-        }
-
-        .download-btns {
-            display: none;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .download-btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 850px; margin: 0 auto; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #6366f1; font-size: 2.2rem; margin-bottom: 10px; }
+        .header p { color: #6b7280; font-size: 1.1rem; }
+        .form-section { margin-bottom: 25px; padding: 20px; background: #f9fafb; border-radius: 10px; }
+        .form-section h2 { color: #6366f1; font-size: 1.2rem; margin-bottom: 15px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 14px; }
+        select, textarea { width: 100%; padding: 12px 15px; font-size: 15px; border: 2px solid #e5e7eb; border-radius: 8px; transition: border-color 0.3s; }
+        select:focus, textarea:focus { outline: none; border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
+        textarea { height: 200px; resize: vertical; line-height: 1.6; }
+        .char-counter { text-align: right; font-size: 12px; color: #6b7280; margin-top: 5px; }
+        .file-upload input[type="file"] { display: none; }
+        .file-upload-label { display: inline-block; padding: 12px 20px; background: #eef2ff; color: #6366f1; border: 2px dashed #6366f1; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .file-upload-label:hover { background: #6366f1; color: white; }
+        .btn { background: linear-gradient(45deg, #6366f1, #8b5cf6); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; width: 100%; margin: 20px 0; transition: transform 0.3s, box-shadow 0.3s; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        #result { padding: 25px; background: #ffffff; border-radius: 10px; white-space: pre-wrap; line-height: 1.8; display: none; border: 2px solid #e5e7eb; margin-top: 20px; }
+        .download-btns { display: none; gap: 10px; margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+        .download-btn { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
         .download-pdf { background: #ef4444; color: white; }
         .download-txt { background: #6366f1; color: white; }
         .copy-btn { background: #10b981; color: white; }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .loading {
-            text-align: center;
-            color: #6366f1;
-            display: none;
-            margin: 20px 0;
-            font-size: 1.1rem;
-        }
-
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #6366f1;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .toast {
-            display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #10b981;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-weight: 600;
-            z-index: 1000;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .sample-text {
-            margin-top: 15px;
-            padding: 15px;
-            background: #f0f4ff;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .sample-btn {
-            padding: 8px 15px;
-            background: #6366f1;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 13px;
-            margin: 5px;
-            transition: all 0.3s;
-        }
-
-        .sample-btn:hover {
-            background: #4f46e5;
-            transform: translateY(-2px);
-        }
-
-        .faq-section {
-            margin: 40px 0;
-            padding: 20px;
-            background: #fff;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .faq-section h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #6366f1;
-        }
-
-        .faq-item {
-            margin-bottom: 15px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-
-        .faq-item h4 {
-            margin: 0 0 10px 0;
-            color: #333;
-        }
-
-        .faq-item p {
-            margin: 0;
-            color: #555;
-        }
-
-        .related-tools {
-            margin: 40px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-
-        .related-tools h3 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #6366f1;
-        }
-
-        .related-tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            text-align: center;
-        }
-
-        .related-tool-item {
-            text-decoration: none;
-            padding: 12px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            color: #333;
-            transition: transform 0.3s;
-        }
-
-        .related-tool-item:hover {
-            transform: translateY(-3px);
-            color: #6366f1;
-        }
-
-        @media (max-width: 600px) {
-            .container { padding: 15px; }
-            .form-grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.5rem; }
-        }
+        .download-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .loading { text-align: center; color: #6366f1; display: none; margin: 20px 0; font-size: 1.1rem; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #6366f1; text-decoration: none; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+        .toast { display: none; position: fixed; top: 20px; right: 20px; background: #10b981; color: white; padding: 15px 25px; border-radius: 10px; font-weight: 600; z-index: 1000; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .sample-text { margin-top: 15px; padding: 15px; background: #f0f4ff; border-radius: 10px; text-align: center; }
+        .sample-btn { padding: 8px 15px; background: #6366f1; color: white; border: none; border-radius: 20px; cursor: pointer; font-size: 13px; margin: 5px; transition: all 0.3s; }
+        .sample-btn:hover { background: #4f46e5; transform: translateY(-2px); }
+        .faq-section { margin: 40px 0; padding: 20px; background: #fff; border-radius: 10px; border: 1px solid #e0e0e0; }
+        .faq-section h2 { text-align: center; margin-bottom: 30px; color: #6366f1; }
+        .faq-item { margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; }
+        .faq-item h4 { margin: 0 0 10px 0; color: #333; }
+        .faq-item p { margin: 0; color: #555; }
+        .related-tools { margin: 40px 0; padding: 20px; background: #f8f9fa; border-radius: 10px; }
+        .related-tools h3 { text-align: center; margin-bottom: 20px; color: #6366f1; }
+        .related-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; text-align: center; }
+        .related-tool-item { text-decoration: none; padding: 12px; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color: #333; transition: transform 0.3s; }
+        .related-tool-item:hover { transform: translateY(-3px); color: #6366f1; }
+        @media (max-width: 600px) { .container { padding: 15px; } .form-grid { grid-template-columns: 1fr; } .header h1 { font-size: 1.5rem; } }
     </style>
 </head>
 <body>
@@ -498,32 +218,29 @@
     <div class="toast" id="toast">✅ Success!</div>
 
     <!-- ============================================ -->
-    <!-- ✅ JAVASCRIPT - COMPLETE CODE (Direct)        -->
+    <!-- ✅ JAVASCRIPT - Load config.js FIRST           -->
     <!-- ============================================ -->
 
+    <!-- ✅ 1. CONFIG.JS LOAD KAREIN (Pehle) -->
+    <script src="/config.js"></script>
+
+    <!-- ✅ 2. Aapka Main Script -->
     <script>
         // ============================================
-        // 1. callAI FUNCTION (Direct API Call - No External Dependency)
+        // 1. callAI FUNCTION (config.js se use karega)
         // ============================================
-        async function callAI(prompt, systemPrompt = '', maxTokens = 1500) {
+        // NOTE: callAI function ab config.js se aayega
+        // Agar config.js load nahi ho raha toh ye fallback hai:
+        
+        async function callAIFallback(prompt, systemPrompt = '', maxTokens = 1500) {
             try {
-                console.log('🚀 Calling AI API...');
-
+                console.log('🚀 Calling AI API (Fallback)...');
                 const response = await fetch('/api/groq', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        prompt: prompt,
-                        systemPrompt: systemPrompt,
-                        maxTokens: maxTokens
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt, systemPrompt, maxTokens })
                 });
-
                 const data = await response.json();
-                console.log('📦 API Response:', data);
-
                 if (data.choices && data.choices[0]) {
                     return data.choices[0].message.content;
                 } else {
@@ -535,6 +252,12 @@
             }
         }
 
+        // Agar config.js load nahi hua toh fallback use karein
+        if (typeof window.callAI === 'undefined') {
+            console.warn('⚠️ config.js not loaded, using fallback');
+            window.callAI = callAIFallback;
+        }
+
         // ============================================
         // 2. TOOL FUNCTIONS
         // ============================================
@@ -542,7 +265,6 @@
         let lastSummaryContent = '';
         let summaryData = {};
 
-        // Character Counter
         function updateCharCount() {
             const text = document.getElementById('inputText').value;
             document.getElementById('charCount').textContent = text.length;
@@ -550,7 +272,6 @@
             document.getElementById('wordCount').textContent = words;
         }
 
-        // File Upload
         function loadFile() {
             const fileInput = document.getElementById('fileInput');
             const file = fileInput.files[0];
@@ -564,7 +285,6 @@
             reader.readAsText(file);
         }
 
-        // Sample Texts
         function loadSample(type) {
             const samples = {
                 technology: `Artificial Intelligence (AI) is transforming the world at an unprecedented pace. From virtual assistants like Siri and Alexa to self-driving cars, AI has become an integral part of our daily lives. Machine learning algorithms can now diagnose diseases with accuracy comparable to human doctors. In the business world, AI-powered chatbots handle customer service queries 24/7, while predictive analytics helps companies make data-driven decisions. The education sector is also being revolutionized with personalized learning experiences. However, with great power comes great responsibility. There are concerns about job displacement, privacy issues, and the ethical use of AI. Governments worldwide are working on regulations to ensure AI is developed and deployed responsibly. Despite these challenges, the future of AI looks promising, with potential breakthroughs in healthcare, climate change, and space exploration on the horizon.`,
@@ -579,7 +299,6 @@
             showToast('Sample Loaded!');
         }
 
-        // Generate Summary
         async function generateSummary() {
             const text = document.getElementById('inputText').value;
             const format = document.getElementById('summaryFormat').value;
@@ -607,7 +326,8 @@
             const systemPrompt = 'You are a professional content summarizer. Create clear, accurate summaries.';
 
             try {
-                const content = await callAI(prompt, systemPrompt, 1500);
+                // ✅ config.js se callAI use karein (ya fallback)
+                const content = await window.callAI(prompt, systemPrompt, 1500);
                 
                 lastSummaryContent = content;
                 result.innerHTML = `<strong>✅ Summary (${format}):</strong><br><br>${content.replace(/\n/g, '<br>')}`;
@@ -624,7 +344,6 @@
             }
         }
 
-        // Download PDF
         function downloadPDF() {
             if (!lastSummaryContent) return;
             const { jsPDF } = window.jspdf;
@@ -646,7 +365,6 @@
             showToast('PDF Downloaded!');
         }
 
-        // Download TXT
         function downloadTXT() {
             if (!lastSummaryContent) return;
             const txtContent = 'TEXT SUMMARY\nFormat: ' + summaryData.format + '\n\n' + lastSummaryContent;
@@ -658,7 +376,6 @@
             showToast('TXT Downloaded!');
         }
 
-        // Copy to Clipboard
         function copySummary() {
             if (!lastSummaryContent) return;
             navigator.clipboard.writeText(lastSummaryContent).then(() => {
@@ -674,7 +391,6 @@
             });
         }
 
-        // Toast Notification
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = '✅ ' + message;
@@ -682,9 +398,14 @@
             setTimeout(() => { toast.style.display = 'none'; }, 2000);
         }
 
-        // Initialize
         window.onload = function() {
             updateCharCount();
+            console.log('✅ Summary page loaded!');
+            if (typeof window.callAI !== 'undefined') {
+                console.log('✅ callAI function available from config.js');
+            } else {
+                console.warn('⚠️ Using fallback callAI');
+            }
         };
     </script>
 
