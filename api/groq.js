@@ -24,13 +24,13 @@ export default async function handler(req, res) {
         const geminiKey = process.env.GEMINI_API_KEY;
         
         if (!geminiKey) {
-            res.status(500).json({ error: 'Gemini API key not configured' });
+            res.status(500).json({ error: 'Gemini API key not configured in Vercel' });
             return;
         }
         
         const fullPrompt = systemPrompt ? systemPrompt + '\n\n' + prompt : prompt;
         
-        // ✅ NAYA MODEL: gemini-3.6-flash
+        // ✅ Gemini 3.6 Flash (Working)
         const response = await fetch(
             'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=' + geminiKey,
             {
