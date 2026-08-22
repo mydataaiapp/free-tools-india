@@ -8,17 +8,14 @@
     <meta name="keywords" content="summary generator, AI summary, text summarizer, bullet points, executive summary, free summary tool">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph Tags -->
     <meta property="og:title" content="Free AI Summary Generator - 5 Formats | FreeToolsIndia">
     <meta property="og:description" content="Free AI summary generator. Summarize any text into bullet points, paragraph, key takeaways, or executive summary. Download PDF.">
     <meta property="og:url" content="https://www.freetoolindia.com/summary.html">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     
-    <!-- Canonical Tag -->
     <link rel="canonical" href="https://www.freetoolindia.com/summary.html">
     
-    <!-- Schema Markup -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -36,10 +33,7 @@
     }
     </script>
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- jsPDF for PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
@@ -61,8 +55,8 @@
         .file-upload input[type="file"] { display: none; }
         .file-upload-label { display: inline-block; padding: 12px 20px; background: #eef2ff; color: #6366f1; border: 2px dashed #6366f1; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
         .file-upload-label:hover { background: #6366f1; color: white; }
-        .btn { background: linear-gradient(45deg, #6366f1, #8b5cf6); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; width: 100%; margin: 20px 0; transition: transform 0.3s, box-shadow 0.3s; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); }
+        .btn { background: linear-gradient(45deg, #6366f1, #8b5cf6); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; width: 100%; margin: 20px 0; transition: transform 0.3s; }
+        .btn:hover { transform: translateY(-2px); }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
         #result { padding: 25px; background: #ffffff; border-radius: 10px; white-space: pre-wrap; line-height: 1.8; display: none; border: 2px solid #e5e7eb; margin-top: 20px; }
         .download-btns { display: none; gap: 10px; margin-top: 15px; flex-wrap: wrap; justify-content: center; }
@@ -95,14 +89,11 @@
 <body>
 
     <div class="container">
-
-        <!-- Header -->
         <div class="header">
             <h1>📝 Free AI Summary Generator</h1>
             <p>Summarize Text in 5 Different Formats</p>
         </div>
 
-        <!-- Configuration -->
         <div class="form-section">
             <h2>⚙️ Summary Configuration</h2>
             <div class="form-grid">
@@ -135,7 +126,6 @@
             </div>
         </div>
 
-        <!-- Input -->
         <div class="form-section">
             <h2>📄 Paste Your Text</h2>
             <textarea id="inputText" placeholder="Paste your article, document, or any long text here..." oninput="updateCharCount()"></textarea>
@@ -148,7 +138,6 @@
             </div>
         </div>
 
-        <!-- Samples -->
         <div class="sample-text">
             <p><strong>Try Sample Text:</strong></p>
             <button class="sample-btn" onclick="loadSample('technology')">💻 Technology</button>
@@ -156,23 +145,18 @@
             <button class="sample-btn" onclick="loadSample('business')">💼 Business</button>
         </div>
 
-        <!-- Generate -->
         <button class="btn" id="generateBtn" onclick="generateSummary()">🚀 Generate Summary</button>
 
-        <!-- Loading -->
         <div class="loading" id="loading">⏳ Generating summary with AI...</div>
 
-        <!-- Result -->
         <div id="result"></div>
 
-        <!-- Download Buttons -->
         <div class="download-btns" id="downloadBtns">
             <button class="download-btn download-pdf" onclick="downloadPDF()">📄 Download PDF</button>
             <button class="download-btn download-txt" onclick="downloadTXT()">📝 Download TXT</button>
             <button class="download-btn copy-btn" onclick="copySummary()">📋 Copy to Clipboard</button>
         </div>
 
-        <!-- FAQ -->
         <section class="faq-section">
             <h2>❓ Frequently Asked Questions</h2>
             <div class="faq-item">
@@ -197,7 +181,6 @@
             </div>
         </section>
 
-        <!-- Related Tools -->
         <section class="related-tools">
             <h3>🛠️ Explore More Free AI Tools</h3>
             <div class="related-tools-grid">
@@ -209,38 +192,38 @@
             </div>
         </section>
 
-        <!-- Back Link -->
         <a href="/index.html" class="back-link">← Back to All Tools</a>
-
     </div>
 
-    <!-- Toast -->
     <div class="toast" id="toast">✅ Success!</div>
 
     <!-- ============================================ -->
-    <!-- ✅ JAVASCRIPT - Load config.js FIRST           -->
+    <!-- ✅ JAVASCRIPT - DIRECT callAI (No config.js) -->
     <!-- ============================================ -->
 
-    <!-- ✅ 1. CONFIG.JS LOAD KAREIN (Pehle) -->
-    <script src="/config.js"></script>
-
-    <!-- ✅ 2. Aapka Main Script -->
     <script>
         // ============================================
-        // 1. callAI FUNCTION (config.js se use karega)
+        // ✅ DIRECT callAI FUNCTION (No external dependency)
         // ============================================
-        // NOTE: callAI function ab config.js se aayega
-        // Agar config.js load nahi ho raha toh ye fallback hai:
-        
-        async function callAIFallback(prompt, systemPrompt = '', maxTokens = 1500) {
+        async function callAI(prompt, systemPrompt = '', maxTokens = 1500) {
             try {
-                console.log('🚀 Calling AI API (Fallback)...');
+                console.log('🚀 Calling API directly...');
+
                 const response = await fetch('/api/groq', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt, systemPrompt, maxTokens })
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prompt: prompt,
+                        systemPrompt: systemPrompt,
+                        maxTokens: maxTokens
+                    })
                 });
+
                 const data = await response.json();
+                console.log('📦 API Response:', data);
+
                 if (data.choices && data.choices[0]) {
                     return data.choices[0].message.content;
                 } else {
@@ -252,14 +235,8 @@
             }
         }
 
-        // Agar config.js load nahi hua toh fallback use karein
-        if (typeof window.callAI === 'undefined') {
-            console.warn('⚠️ config.js not loaded, using fallback');
-            window.callAI = callAIFallback;
-        }
-
         // ============================================
-        // 2. TOOL FUNCTIONS
+        // TOOL FUNCTIONS
         // ============================================
 
         let lastSummaryContent = '';
@@ -326,8 +303,8 @@
             const systemPrompt = 'You are a professional content summarizer. Create clear, accurate summaries.';
 
             try {
-                // ✅ config.js se callAI use karein (ya fallback)
-                const content = await window.callAI(prompt, systemPrompt, 1500);
+                // ✅ DIRECT callAI use (No config.js needed)
+                const content = await callAI(prompt, systemPrompt, 1500);
                 
                 lastSummaryContent = content;
                 result.innerHTML = `<strong>✅ Summary (${format}):</strong><br><br>${content.replace(/\n/g, '<br>')}`;
@@ -400,12 +377,7 @@
 
         window.onload = function() {
             updateCharCount();
-            console.log('✅ Summary page loaded!');
-            if (typeof window.callAI !== 'undefined') {
-                console.log('✅ callAI function available from config.js');
-            } else {
-                console.warn('⚠️ Using fallback callAI');
-            }
+            console.log('✅ Summary page loaded! callAI is available.');
         };
     </script>
 
