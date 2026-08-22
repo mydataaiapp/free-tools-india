@@ -198,12 +198,12 @@
     <div class="toast" id="toast">✅ Success!</div>
 
     <!-- ============================================ -->
-    <!-- ✅ JAVASCRIPT - DIRECT callAI (No config.js) -->
+    <!-- ✅ DIRECT API CALL (No config.js needed)      -->
     <!-- ============================================ -->
 
     <script>
         // ============================================
-        // ✅ DIRECT callAI FUNCTION (No external dependency)
+        // 1. DIRECT callAI FUNCTION (No external dependency)
         // ============================================
         async function callAI(prompt, systemPrompt = '', maxTokens = 1500) {
             try {
@@ -236,7 +236,7 @@
         }
 
         // ============================================
-        // TOOL FUNCTIONS
+        // 2. TOOL FUNCTIONS
         // ============================================
 
         let lastSummaryContent = '';
@@ -303,7 +303,6 @@
             const systemPrompt = 'You are a professional content summarizer. Create clear, accurate summaries.';
 
             try {
-                // ✅ DIRECT callAI use (No config.js needed)
                 const content = await callAI(prompt, systemPrompt, 1500);
                 
                 lastSummaryContent = content;
@@ -377,7 +376,7 @@
 
         window.onload = function() {
             updateCharCount();
-            console.log('✅ Summary page loaded! callAI is available.');
+            console.log('✅ Summary page loaded! callAI is available directly.');
         };
     </script>
 
