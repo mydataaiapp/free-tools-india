@@ -56,7 +56,7 @@
         .file-upload-label { display: inline-block; padding: 12px 20px; background: #eef2ff; color: #6366f1; border: 2px dashed #6366f1; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
         .file-upload-label:hover { background: #6366f1; color: white; }
         .btn { background: linear-gradient(45deg, #6366f1, #8b5cf6); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; width: 100%; margin: 20px 0; transition: transform 0.3s; }
-        .btn:hover { transform: translateY(-2px); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
         #result { padding: 25px; background: #ffffff; border-radius: 10px; white-space: pre-wrap; line-height: 1.8; display: none; border: 2px solid #e5e7eb; margin-top: 20px; }
         .download-btns { display: none; gap: 10px; margin-top: 15px; flex-wrap: wrap; justify-content: center; }
@@ -198,17 +198,18 @@
     <div class="toast" id="toast">✅ Success!</div>
 
     <!-- ============================================ -->
-    <!-- ✅ DIRECT API CALL (No config.js needed)      -->
+    <!-- ✅ ✅ ✅ DIRECT callAI DEFINITION ✅ ✅ ✅       -->
     <!-- ============================================ -->
 
     <script>
         // ============================================
-        // 1. DIRECT callAI FUNCTION (No external dependency)
+        // ✅ ✅ ✅ callAI FUNCTION (Directly Defined) ✅ ✅ ✅
         // ============================================
         async function callAI(prompt, systemPrompt = '', maxTokens = 1500) {
+            console.log('🚀 callAI function called!');
+            console.log('Prompt length:', prompt.length);
+            
             try {
-                console.log('🚀 Calling API directly...');
-
                 const response = await fetch('/api/groq', {
                     method: 'POST',
                     headers: {
@@ -221,8 +222,9 @@
                     })
                 });
 
+                console.log('📦 Response status:', response.status);
                 const data = await response.json();
-                console.log('📦 API Response:', data);
+                console.log('📦 Data received:', data);
 
                 if (data.choices && data.choices[0]) {
                     return data.choices[0].message.content;
@@ -236,7 +238,7 @@
         }
 
         // ============================================
-        // 2. TOOL FUNCTIONS
+        // TOOL FUNCTIONS
         // ============================================
 
         let lastSummaryContent = '';
@@ -277,6 +279,8 @@
         }
 
         async function generateSummary() {
+            console.log('🚀 generateSummary called!');
+            
             const text = document.getElementById('inputText').value;
             const format = document.getElementById('summaryFormat').value;
             const length = document.getElementById('summaryLength').value;
@@ -303,6 +307,7 @@
             const systemPrompt = 'You are a professional content summarizer. Create clear, accurate summaries.';
 
             try {
+                // ✅ ✅ ✅ DIRECT callAI USE ✅ ✅ ✅
                 const content = await callAI(prompt, systemPrompt, 1500);
                 
                 lastSummaryContent = content;
@@ -375,8 +380,10 @@
         }
 
         window.onload = function() {
+            console.log('✅ Summary page loaded!');
+            console.log('✅ callAI type:', typeof callAI);
+            console.log('✅ callAI function:', callAI);
             updateCharCount();
-            console.log('✅ Summary page loaded! callAI is available directly.');
         };
     </script>
 
