@@ -3,146 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free AI Summary Generator - 5 Formats | FreeToolsIndia</title>
-    <meta name="description" content="Free AI summary generator. Summarize any text into bullet points, paragraph, key takeaways, or executive summary. Download PDF. No signup required.">
-    <meta name="keywords" content="summary generator, AI summary, text summarizer, bullet points, executive summary, free summary tool">
-    <meta name="robots" content="index, follow">
-    
-    <meta property="og:title" content="Free AI Summary Generator - 5 Formats | FreeToolsIndia">
-    <meta property="og:description" content="Free AI summary generator. Summarize any text into bullet points, paragraph, key takeaways, or executive summary. Download PDF.">
-    <meta property="og:url" content="https://www.freetoolindia.com/summary.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    
-    <link rel="canonical" href="https://www.freetoolindia.com/summary.html">
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "AI Summary Generator",
-        "url": "https://www.freetoolindia.com/summary.html",
-        "description": "Free AI summary generator that converts long text into bullet points, paragraphs, key takeaways, executive summaries, or one-liners. Download as PDF or TXT.",
-        "applicationCategory": "AI Tool",
-        "operatingSystem": "All",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        }
-    }
-    </script>
-    
+    <title>Free AI Summary Generator | FreeToolsIndia</title>
+    <meta name="description" content="Free AI summary generator. Summarize text into bullet points instantly.">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 850px; margin: 0 auto; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .header { text-align: center; margin-bottom: 30px; }
-        .header h1 { color: #6366f1; font-size: 2.2rem; margin-bottom: 10px; }
-        .header p { color: #6b7280; font-size: 1.1rem; }
-        .form-section { margin-bottom: 25px; padding: 20px; background: #f9fafb; border-radius: 10px; }
-        .form-section h2 { color: #6366f1; font-size: 1.2rem; margin-bottom: 15px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px; }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 14px; }
-        select, textarea { width: 100%; padding: 12px 15px; font-size: 15px; border: 2px solid #e5e7eb; border-radius: 8px; transition: border-color 0.3s; }
-        select:focus, textarea:focus { outline: none; border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
-        textarea { height: 200px; resize: vertical; line-height: 1.6; }
-        .char-counter { text-align: right; font-size: 12px; color: #6b7280; margin-top: 5px; }
-        .file-upload input[type="file"] { display: none; }
-        .file-upload-label { display: inline-block; padding: 12px 20px; background: #eef2ff; color: #6366f1; border: 2px dashed #6366f1; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
-        .file-upload-label:hover { background: #6366f1; color: white; }
-        .btn { background: linear-gradient(45deg, #6366f1, #8b5cf6); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; width: 100%; margin: 20px 0; transition: transform 0.3s; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        #result { padding: 25px; background: #ffffff; border-radius: 10px; white-space: pre-wrap; line-height: 1.8; display: none; border: 2px solid #e5e7eb; margin-top: 20px; }
-        .download-btns { display: none; gap: 10px; margin-top: 15px; flex-wrap: wrap; justify-content: center; }
-        .download-btn { padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
-        .download-pdf { background: #ef4444; color: white; }
-        .download-txt { background: #6366f1; color: white; }
-        .copy-btn { background: #10b981; color: white; }
-        .download-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .loading { text-align: center; color: #6366f1; display: none; margin: 20px 0; font-size: 1.1rem; }
-        .back-link { display: block; text-align: center; margin-top: 20px; color: #6366f1; text-decoration: none; font-weight: 500; }
-        .back-link:hover { text-decoration: underline; }
-        .toast { display: none; position: fixed; top: 20px; right: 20px; background: #10b981; color: white; padding: 15px 25px; border-radius: 10px; font-weight: 600; z-index: 1000; animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        .sample-text { margin-top: 15px; padding: 15px; background: #f0f4ff; border-radius: 10px; text-align: center; }
-        .sample-btn { padding: 8px 15px; background: #6366f1; color: white; border: none; border-radius: 20px; cursor: pointer; font-size: 13px; margin: 5px; transition: all 0.3s; }
-        .sample-btn:hover { background: #4f46e5; transform: translateY(-2px); }
-        .faq-section { margin: 40px 0; padding: 20px; background: #fff; border-radius: 10px; border: 1px solid #e0e0e0; }
-        .faq-section h2 { text-align: center; margin-bottom: 30px; color: #6366f1; }
-        .faq-item { margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; }
-        .faq-item h4 { margin: 0 0 10px 0; color: #333; }
-        .faq-item p { margin: 0; color: #555; }
-        .related-tools { margin: 40px 0; padding: 20px; background: #f8f9fa; border-radius: 10px; }
-        .related-tools h3 { text-align: center; margin-bottom: 20px; color: #6366f1; }
-        .related-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; text-align: center; }
-        .related-tool-item { text-decoration: none; padding: 12px; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); color: #333; transition: transform 0.3s; }
-        .related-tool-item:hover { transform: translateY(-3px); color: #6366f1; }
-        @media (max-width: 600px) { .container { padding: 15px; } .form-grid { grid-template-columns: 1fr; } .header h1 { font-size: 1.5rem; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #6b7280;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+        }
+        textarea {
+            height: 200px;
+            resize: vertical;
+        }
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin: 20px 0;
+        }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        #result {
+            padding: 25px;
+            background: #f9fafb;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            line-height: 1.8;
+            display: none;
+            margin-top: 20px;
+        }
+        .loading {
+            text-align: center;
+            color: #6366f1;
+            display: none;
+            margin: 20px 0;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
         <div class="header">
             <h1>📝 Free AI Summary Generator</h1>
             <p>Summarize Text in 5 Different Formats</p>
         </div>
 
-        <div class="form-section">
-            <h2>⚙️ Summary Configuration</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Summary Format</label>
-                    <select id="summaryFormat">
-                        <option value="Bullet Points">📌 Bullet Points</option>
-                        <option value="Paragraph">📄 Paragraph</option>
-                        <option value="Key Takeaways">🔑 Key Takeaways</option>
-                        <option value="Executive Summary">📊 Executive Summary</option>
-                        <option value="One-Liner">✏️ One-Liner</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Summary Length</label>
-                    <select id="summaryLength">
-                        <option value="Short">Short (1-3 points)</option>
-                        <option value="Medium" selected>Medium (5 points)</option>
-                        <option value="Detailed">Detailed (10 points)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Language</label>
-                    <select id="language">
-                        <option value="English">English</option>
-                        <option value="Hindi">Hindi</option>
-                        <option value="Hinglish">Hinglish</option>
-                    </select>
-                </div>
-            </div>
+        <div class="form-group">
+            <label>Summary Format</label>
+            <select id="summaryFormat">
+                <option value="Bullet Points">📌 Bullet Points</option>
+                <option value="Paragraph">📄 Paragraph</option>
+                <option value="Key Takeaways">🔑 Key Takeaways</option>
+                <option value="Executive Summary">📊 Executive Summary</option>
+                <option value="One-Liner">✏️ One-Liner</option>
+            </select>
         </div>
 
-        <div class="form-section">
-            <h2>📄 Paste Your Text</h2>
-            <textarea id="inputText" placeholder="Paste your article, document, or any long text here..." oninput="updateCharCount()"></textarea>
-            <div class="char-counter">
-                Characters: <span id="charCount">0</span> | Words: <span id="wordCount">0</span>
-            </div>
-            <div class="file-upload" style="margin-top: 15px;">
-                <label class="file-upload-label" for="fileInput">📁 Upload Text File (TXT)</label>
-                <input type="file" id="fileInput" accept=".txt,.md,.csv" onchange="loadFile()">
-            </div>
+        <div class="form-group">
+            <label>Language</label>
+            <select id="language">
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Hinglish">Hinglish</option>
+            </select>
         </div>
 
-        <div class="sample-text">
-            <p><strong>Try Sample Text:</strong></p>
-            <button class="sample-btn" onclick="loadSample('technology')">💻 Technology</button>
-            <button class="sample-btn" onclick="loadSample('health')">🏥 Health</button>
-            <button class="sample-btn" onclick="loadSample('business')">💼 Business</button>
+        <div class="form-group">
+            <label>Paste Your Text</label>
+            <textarea id="inputText" placeholder="Paste your article, document, or any long text here..."></textarea>
         </div>
 
         <button class="btn" id="generateBtn" onclick="generateSummary()">🚀 Generate Summary</button>
@@ -151,241 +139,67 @@
 
         <div id="result"></div>
 
-        <div class="download-btns" id="downloadBtns">
-            <button class="download-btn download-pdf" onclick="downloadPDF()">📄 Download PDF</button>
-            <button class="download-btn download-txt" onclick="downloadTXT()">📝 Download TXT</button>
-            <button class="download-btn copy-btn" onclick="copySummary()">📋 Copy to Clipboard</button>
-        </div>
-
-        <section class="faq-section">
-            <h2>❓ Frequently Asked Questions</h2>
-            <div class="faq-item">
-                <h4>1. Is this summary generator really free?</h4>
-                <p>Yes, our AI summary generator is completely free. No signup required, no hidden charges.</p>
-            </div>
-            <div class="faq-item">
-                <h4>2. What formats are available?</h4>
-                <p>We offer 5 formats: Bullet Points, Paragraph, Key Takeaways, Executive Summary, and One-Liner.</p>
-            </div>
-            <div class="faq-item">
-                <h4>3. Can I download the summary?</h4>
-                <p>Yes, you can download your summary as PDF or TXT, or copy it directly to your clipboard.</p>
-            </div>
-            <div class="faq-item">
-                <h4>4. How long can the text be?</h4>
-                <p>You can paste any length of text. Our AI is optimized to summarize long articles and documents.</p>
-            </div>
-            <div class="faq-item">
-                <h4>5. Is my data safe?</h4>
-                <p>We do not store any user data. All processing happens in real-time.</p>
-            </div>
-        </section>
-
-        <section class="related-tools">
-            <h3>🛠️ Explore More Free AI Tools</h3>
-            <div class="related-tools-grid">
-                <a href="/resume.html" class="related-tool-item">💼 Resume Builder</a>
-                <a href="/email.html" class="related-tool-item">📧 AI Email Writer</a>
-                <a href="/excel.html" class="related-tool-item">📊 Excel Formula Generator</a>
-                <a href="/writer.html" class="related-tool-item">✍️ AI Article Writer</a>
-                <a href="/social.html" class="related-tool-item">📱 Social Media Post Generator</a>
-            </div>
-        </section>
-
-        <a href="/index.html" class="back-link">← Back to All Tools</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
     </div>
-
-    <div class="toast" id="toast">✅ Success!</div>
-
-    <!-- ============================================ -->
-    <!-- ✅ ✅ ✅ DIRECT callAI DEFINITION ✅ ✅ ✅       -->
-    <!-- ============================================ -->
 
     <script>
         // ============================================
-        // ✅ ✅ ✅ callAI FUNCTION (Directly Defined) ✅ ✅ ✅
+        // SIMPLE AI CALL - DIRECTLY IN PAGE
         // ============================================
-        async function callAI(prompt, systemPrompt = '', maxTokens = 1500) {
-            console.log('🚀 callAI function called!');
-            console.log('Prompt length:', prompt.length);
-            
-            try {
-                const response = await fetch('/api/groq', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        prompt: prompt,
-                        systemPrompt: systemPrompt,
-                        maxTokens: maxTokens
-                    })
-                });
-
-                console.log('📦 Response status:', response.status);
-                const data = await response.json();
-                console.log('📦 Data received:', data);
-
-                if (data.choices && data.choices[0]) {
-                    return data.choices[0].message.content;
-                } else {
-                    throw new Error(data.error || 'No response from AI');
-                }
-            } catch (error) {
-                console.error('❌ API Error:', error);
-                throw new Error(error.message || 'Failed to generate response. Please try again.');
-            }
-        }
-
-        // ============================================
-        // TOOL FUNCTIONS
-        // ============================================
-
-        let lastSummaryContent = '';
-        let summaryData = {};
-
-        function updateCharCount() {
-            const text = document.getElementById('inputText').value;
-            document.getElementById('charCount').textContent = text.length;
-            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-            document.getElementById('wordCount').textContent = words;
-        }
-
-        function loadFile() {
-            const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('inputText').value = e.target.result;
-                updateCharCount();
-                showToast('File Loaded!');
-            };
-            reader.readAsText(file);
-        }
-
-        function loadSample(type) {
-            const samples = {
-                technology: `Artificial Intelligence (AI) is transforming the world at an unprecedented pace. From virtual assistants like Siri and Alexa to self-driving cars, AI has become an integral part of our daily lives. Machine learning algorithms can now diagnose diseases with accuracy comparable to human doctors. In the business world, AI-powered chatbots handle customer service queries 24/7, while predictive analytics helps companies make data-driven decisions. The education sector is also being revolutionized with personalized learning experiences. However, with great power comes great responsibility. There are concerns about job displacement, privacy issues, and the ethical use of AI. Governments worldwide are working on regulations to ensure AI is developed and deployed responsibly. Despite these challenges, the future of AI looks promising, with potential breakthroughs in healthcare, climate change, and space exploration on the horizon.`,
-                
-                health: `Regular exercise is one of the most important things you can do for your health. Physical activity can help prevent chronic diseases like heart disease, diabetes, and obesity. The World Health Organization recommends at least 150 minutes of moderate-intensity exercise per week for adults. Exercise not only improves physical health but also has significant mental health benefits. It releases endorphins, which are natural mood elevators, helping to reduce stress, anxiety, and depression. Regular physical activity also improves sleep quality, boosts energy levels, and enhances cognitive function. For best results, combine cardiovascular exercises like running or swimming with strength training exercises. Remember to start slowly and gradually increase intensity. Always consult with a healthcare provider before starting any new exercise program, especially if you have existing health conditions.`,
-                
-                business: `Digital marketing has become essential for businesses of all sizes in today's digital age. Unlike traditional marketing, digital marketing allows businesses to reach their target audience with precision and measure results in real-time. Social media platforms like Facebook, Instagram, and LinkedIn offer powerful advertising tools that can be customized based on demographics, interests, and behavior. Search engine optimization (SEO) helps businesses rank higher in Google search results, driving organic traffic to their websites. Content marketing establishes brand authority and builds trust with potential customers. Email marketing remains one of the highest ROI marketing channels, with an average return of $42 for every $1 spent. The key to successful digital marketing is understanding your audience and creating valuable content that addresses their needs. With the rise of mobile usage, businesses must ensure their websites are mobile-friendly and load quickly.`
-            };
-            
-            document.getElementById('inputText').value = samples[type];
-            updateCharCount();
-            showToast('Sample Loaded!');
-        }
-
+        
         async function generateSummary() {
-            console.log('🚀 generateSummary called!');
+            var text = document.getElementById('inputText').value;
+            var format = document.getElementById('summaryFormat').value;
+            var language = document.getElementById('language').value;
             
-            const text = document.getElementById('inputText').value;
-            const format = document.getElementById('summaryFormat').value;
-            const length = document.getElementById('summaryLength').value;
-            const language = document.getElementById('language').value;
-            
-            const result = document.getElementById('result');
-            const loading = document.getElementById('loading');
-            const btn = document.getElementById('generateBtn');
-            const downloadBtns = document.getElementById('downloadBtns');
+            var result = document.getElementById('result');
+            var loading = document.getElementById('loading');
+            var btn = document.getElementById('generateBtn');
 
             if (!text || text.length < 50) {
                 alert('Please paste at least 50 characters of text.');
                 return;
             }
 
-            summaryData = { format, length, language };
-
             btn.disabled = true;
             loading.style.display = 'block';
             result.style.display = 'none';
-            downloadBtns.style.display = 'none';
 
-            const prompt = `Summarize the following text.\n\nFORMAT: ${format}\nLENGTH: ${length}\nLANGUAGE: ${language}\n\nTEXT TO SUMMARIZE:\n${text}\n\nProvide the summary in ${language} language.`;
-            const systemPrompt = 'You are a professional content summarizer. Create clear, accurate summaries.';
+            var prompt = 'Summarize this text in ' + format + ' format in ' + language + ' language:\n\n' + text;
 
             try {
-                // ✅ ✅ ✅ DIRECT callAI USE ✅ ✅ ✅
-                const content = await callAI(prompt, systemPrompt, 1500);
+                // ✅ DIRECT FETCH - No callAI function needed
+                var response = await fetch('/api/groq', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prompt: prompt,
+                        systemPrompt: 'You are a professional content summarizer.',
+                        maxTokens: 1500
+                    })
+                });
                 
-                lastSummaryContent = content;
-                result.innerHTML = `<strong>✅ Summary (${format}):</strong><br><br>${content.replace(/\n/g, '<br>')}`;
-                result.style.display = 'block';
-                downloadBtns.style.display = 'flex';
-                result.scrollIntoView({ behavior: 'smooth' });
-
+                var data = await response.json();
+                
+                if (data.choices && data.choices[0]) {
+                    var content = data.choices[0].message.content;
+                    result.innerHTML = '<strong>✅ Summary:</strong><br><br>' + content.replace(/\n/g, '<br>');
+                    result.style.display = 'block';
+                } else {
+                    result.innerHTML = '❌ Error: ' + JSON.stringify(data);
+                    result.style.display = 'block';
+                }
+                
             } catch (error) {
-                result.innerHTML = `❌ Error: ${error.message}`;
+                result.innerHTML = '❌ Error: ' + error.message;
                 result.style.display = 'block';
             } finally {
                 btn.disabled = false;
                 loading.style.display = 'none';
             }
         }
-
-        function downloadPDF() {
-            if (!lastSummaryContent) return;
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            doc.setFillColor(99, 102, 241);
-            doc.rect(0, 0, 210, 25, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFontSize(16);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Text Summary', 105, 12, { align: 'center' });
-            doc.setFontSize(10);
-            doc.setFont('helvetica', 'normal');
-            doc.text(`${summaryData.format} | ${summaryData.length}`, 105, 19, { align: 'center' });
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(11);
-            const lines = doc.splitTextToSize(lastSummaryContent, 180);
-            doc.text(lines, 15, 35);
-            doc.save('Summary_' + Date.now() + '.pdf');
-            showToast('PDF Downloaded!');
-        }
-
-        function downloadTXT() {
-            if (!lastSummaryContent) return;
-            const txtContent = 'TEXT SUMMARY\nFormat: ' + summaryData.format + '\n\n' + lastSummaryContent;
-            const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'Summary_' + Date.now() + '.txt';
-            link.click();
-            showToast('TXT Downloaded!');
-        }
-
-        function copySummary() {
-            if (!lastSummaryContent) return;
-            navigator.clipboard.writeText(lastSummaryContent).then(() => {
-                showToast('Summary Copied!');
-            }).catch(() => {
-                const textarea = document.createElement('textarea');
-                textarea.value = lastSummaryContent;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                showToast('Summary Copied!');
-            });
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = '✅ ' + message;
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 2000);
-        }
-
-        window.onload = function() {
-            console.log('✅ Summary page loaded!');
-            console.log('✅ callAI type:', typeof callAI);
-            console.log('✅ callAI function:', callAI);
-            updateCharCount();
-        };
     </script>
-
 </body>
 </html>
