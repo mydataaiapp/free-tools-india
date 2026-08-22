@@ -498,16 +498,16 @@
     <div class="toast" id="toast">✅ Success!</div>
 
     <!-- ============================================ -->
-    <!-- ✅ JAVASCRIPT - COMPLETE CODE                 -->
+    <!-- ✅ JAVASCRIPT - COMPLETE CODE (Direct)        -->
     <!-- ============================================ -->
 
     <script>
         // ============================================
-        // 1. callAI FUNCTION (Direct API Call)
+        // 1. callAI FUNCTION (Direct API Call - No External Dependency)
         // ============================================
         async function callAI(prompt, systemPrompt = '', maxTokens = 1500) {
             try {
-                console.log('🚀 Calling API...');
+                console.log('🚀 Calling AI API...');
 
                 const response = await fetch('/api/groq', {
                     method: 'POST',
@@ -522,6 +522,7 @@
                 });
 
                 const data = await response.json();
+                console.log('📦 API Response:', data);
 
                 if (data.choices && data.choices[0]) {
                     return data.choices[0].message.content;
