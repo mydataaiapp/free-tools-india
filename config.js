@@ -1,5 +1,5 @@
 // ============================================
-// API Configuration - Secure
+// API Configuration - Secure (Browser Version)
 // ============================================
 
 const CONFIG = {
@@ -105,6 +105,12 @@ async function callAI(prompt, systemPrompt = '', maxTokens = 1500, model = null,
     try {
         console.log('🚀 Calling AI API...');
         
+        // ✅ Check daily limit
+        const limitCheck = checkDailyLimit();
+        if (!limitCheck.allowed) {
+            throw new Error(limitCheck.message);
+        }
+        
         const response = await fetch(CONFIG.API_URL, {
             method: 'POST',
             headers: {
@@ -119,6 +125,9 @@ async function callAI(prompt, systemPrompt = '', maxTokens = 1500, model = null,
         });
         
         const data = await response.json();
+        
+        // ✅ Increment request count
+        incrementRequestCount();
         
         if (data.choices && data.choices[0]) {
             return data.choices[0].message.content;
@@ -136,6 +145,10 @@ async function callAI(prompt, systemPrompt = '', maxTokens = 1500, model = null,
 // ============================================
 
 function selectModel(prompt, maxTokens) {
+    const isPremium = checkIfPremiumUser();
+    if (isPremium && maxTokens > 1500) {
+        return CONFIG.PREMIUM_MODEL;
+    }
     return CONFIG.DEFAULT_MODEL;
 }
 
@@ -158,10 +171,12 @@ function getDailyUsageStats() {
 }
 
 // ============================================
-// Browser Global Scope (IMPORTANT - No export!)
+// ✅ BROWSER GLOBAL SCOPE (No export!)
 // ============================================
 
-// Simple global assignment - no export keyword
+// ❌ REMOVE: export { ... }
+// ✅ USE: window assignments
+
 window.CONFIG = CONFIG;
 window.callAI = callAI;
 window.checkIfPremiumUser = checkIfPremiumUser;
@@ -170,3 +185,5 @@ window.checkDailyLimit = checkDailyLimit;
 window.getDailyUsageStats = getDailyUsageStats;
 window.selectModel = selectModel;
 window.getModelPricing = getModelPricing;
+
+console.log('✅ config.js loaded successfully!');
