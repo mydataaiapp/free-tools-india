@@ -1,4 +1,11 @@
-.DS_Store
-node_modules
+# Never commit these files
 .env
-*.log
+.env.local
+.env.production
+config.js
+supabase-config.js
+*.pem
+*.key
+*.secret
+.DS_Store
+node_modules/
