@@ -393,8 +393,47 @@
     <!-- Toast Notification -->
     <div class="toast" id="toast">✅ Success!</div>
 
-    <script src="config.js"></script>
     <script>
+        // ✅ YE HAIN callAI FUNCTION - YAHAN DEFINE KAREIN
+        async function callAI(prompt, systemPrompt, maxTokens) {
+            console.log('callAI called');
+            
+            try {
+                const response = await fetch('/api/groq', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        prompt: prompt,
+                        systemPrompt: systemPrompt || '',
+                        maxTokens: maxTokens || 1000
+                    })
+                });
+
+                console.log('API Response status:', response.status);
+
+                if (!response.ok) {
+                    throw new Error('Server error: ' + response.status);
+                }
+
+                const data = await response.json();
+                console.log('API Data:', data);
+
+                if (data.choices && data.choices[0] && data.choices[0].message) {
+                    return data.choices[0].message.content;
+                } else if (data.error) {
+                    return 'Error: ' + data.error;
+                } else {
+                    return 'Unexpected response format';
+                }
+
+            } catch (error) {
+                console.error('Fetch error:', error);
+                return 'Error: ' + error.message;
+            }
+        }
+
         let lastSummaryContent = '';
         let summaryData = {};
 
@@ -473,7 +512,6 @@ Provide the summary in ${language} language.`;
             var systemPrompt = 'You are a professional content summarizer. Create clear, accurate summaries.';
 
             try {
-                // ✅ SECURE API CALL
                 var content = await callAI(prompt, systemPrompt, 1500);
                 
                 lastSummaryContent = content;
@@ -493,7 +531,6 @@ Provide the summary in ${language} language.`;
             }
         }
 
-        // Download as PDF
         function downloadPDF() {
             if (!lastSummaryContent) return;
             const { jsPDF } = window.jspdf;
@@ -515,7 +552,6 @@ Provide the summary in ${language} language.`;
             showToast('PDF Downloaded!');
         }
 
-        // Download as TXT
         function downloadTXT() {
             if (!lastSummaryContent) return;
             const txtContent = '='.repeat(60) + '\n' +
@@ -531,7 +567,6 @@ Provide the summary in ${language} language.`;
             showToast('TXT Downloaded!');
         }
 
-        // Copy to Clipboard
         function copySummary() {
             if (!lastSummaryContent) return;
             navigator.clipboard.writeText(lastSummaryContent).then(() => {
