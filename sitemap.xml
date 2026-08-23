@@ -1,101 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     
-    <!-- ========================================== -->
-    <!-- MAIN PAGES (Priority: 1.0) -->
-    <!-- ========================================== -->
-    
+    <!-- Homepage -->
     <url>
         <loc>https://www.freetoolindia.com/</loc>
-        <lastmod>2026-08-21</lastmod>
+        <lastmod>2026-08-20</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
-        <xhtml:link rel="alternate" hreflang="en" href="https://www.freetoolindia.com/" />
-        <xhtml:link rel="alternate" hreflang="hi" href="https://www.freetoolindia.com/hi/" />
     </url>
     
-    <!-- ========================================== -->
-    <!-- TOOLS PAGES (Priority: 0.9) -->
-    <!-- ========================================== -->
-    
+    <!-- AI Tools -->
     <url>
         <loc>https://www.freetoolindia.com/summary.html</loc>
-        <lastmod>2026-08-21</lastmod>
+        <lastmod>2026-08-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <image:image>
-            <image:loc>https://www.freetoolindia.com/og-image.jpg</image:loc>
-            <image:title>AI Summary Generator</image:title>
-        </image:image>
     </url>
     
     <url>
         <loc>https://www.freetoolindia.com/resume.html</loc>
-        <lastmod>2026-08-21</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    
-    <url>
-        <loc>https://www.freetoolindia.com/email.html</loc>
-        <lastmod>2026-08-21</lastmod>
+        <lastmod>2026-08-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     
     <url>
         <loc>https://www.freetoolindia.com/excel.html</loc>
-        <lastmod>2026-08-21</lastmod>
+        <lastmod>2026-08-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     
     <url>
         <loc>https://www.freetoolindia.com/writer.html</loc>
-        <lastmod>2026-08-21</lastmod>
+        <lastmod>2026-08-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.freetoolindia.com/email.html</loc>
+        <lastmod>2026-08-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     
     <url>
         <loc>https://www.freetoolindia.com/social.html</loc>
-        <lastmod>2026-08-21</lastmod>
+        <lastmod>2026-08-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     
-    <!-- ========================================== -->
-    <!-- SUPPORTING PAGES (Priority: 0.7) -->
-    <!-- ========================================== -->
-    
+    <!-- Support Pages -->
     <url>
-        <loc>https://www.freetoolindia.com/contact.html</loc>
-        <lastmod>2026-08-21</lastmod>
+        <loc>https://www.freetoolindia.com/feedback.html</loc>
+        <lastmod>2026-08-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
     <url>
-        <loc>https://www.freetoolindia.com/feedback.html</loc>
-        <lastmod>2026-08-21</lastmod>
+        <loc>https://www.freetoolindia.com/contact.html</loc>
+        <lastmod>2026-08-20</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
     
+    <!-- Legal Pages -->
     <url>
         <loc>https://www.freetoolindia.com/privacy-policy.html</loc>
-        <lastmod>2026-08-21</lastmod>
-        <changefreq>monthly</changefreq>
+        <lastmod>2026-08-20</lastmod>
+        <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     
     <url>
         <loc>https://www.freetoolindia.com/terms-of-service.html</loc>
-        <lastmod>2026-08-21</lastmod>
-        <changefreq>monthly</changefreq>
+        <lastmod>2026-08-20</lastmod>
+        <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     
