@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Social Media Post Generator - Viral Posts | FreeToolsIndia</title>
+    <meta name="description" content="Generate engaging social media posts for Facebook, Instagram, Twitter, LinkedIn. Free AI social media content generator with hashtags.">
+    <meta name="keywords" content="social media post generator, Instagram captions, Facebook posts, Twitter tweets, LinkedIn posts, free AI social media tool">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.freetoolindia.com/social.html">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6366f1;
+            display: none;
+            margin: 15px 0;
+        }
+
+        #result {
+            padding: 25px;
+            background: #f9fafb;
+            border-radius: 10px;
+            display: none;
+            line-height: 1.8;
+            margin-top: 15px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: #ef4444;
+            background: #fef2f2;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .btn-copy {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 Free AI Social Media Post Generator</h1>
+            <p>Viral Posts - Ek Click Mein!</p>
+        </div>
+
+        <div class="form-group">
+            <label>Platform:</label>
+            <select id="platform">
+                <option value="Instagram">📸 Instagram</option>
+                <option value="Facebook">👍 Facebook</option>
+                <option value="Twitter">🐦 Twitter/X</option>
+                <option value="LinkedIn">💼 LinkedIn</option>
+                <option value="YouTube">🎥 YouTube</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Post Type:</label>
+            <select id="postType">
+                <option value="Promotional">📢 Promotional</option>
+                <option value="Educational">📚 Educational</option>
+                <option value="Engagement">💬 Engagement</option>
+                <option value="Announcement">📣 Announcement</option>
+                <option value="Behind the Scenes">🎬 Behind the Scenes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Topic/Subject:</label>
+            <input type="text" id="topic" placeholder="e.g., New product launch, Health tips, Festival wishes">
+        </div>
+
+        <div class="form-group">
+            <label>Language:</label>
+            <select id="language">
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Hinglish">Hinglish</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Tone:</label>
+            <select id="tone">
+                <option value="Fun">Fun</option>
+                <option value="Professional">Professional</option>
+                <option value="Inspirational">Inspirational</option>
+                <option value="Casual">Casual</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Key Points (Optional):</label>
+            <textarea id="keyPoints" placeholder="Any specific points or hashtags to include..."></textarea>
+        </div>
+
+        <button class="btn" id="generateBtn" onclick="generatePost()">🚀 Generate Post</button>
+
+        <div class="loading" id="loading">⏳ Creating post... Please wait...</div>
+
+        <div id="result"></div>
+
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+    </div>
+
+    <script>
+    async function generatePost() {
+        var platform = document.getElementById('platform').value;
+        var postType = document.getElementById('postType').value;
+        var topic = document.getElementById('topic').value;
+        var language = document.getElementById('language').value;
+        var tone = document.getElementById('tone').value;
+        var keyPoints = document.getElementById('keyPoints').value;
+        var result = document.getElementById('result');
+        var loading = document.getElementById('loading');
+        var btn = document.getElementById('generateBtn');
+
+        if (!topic || topic.length < 3) {
+            alert('Please enter a topic/subject.');
+            return;
+        }
+
+        btn.disabled = true;
+        loading.style.display = 'block';
+        result.style.display = 'none';
+
+        var prompt = 'Create a ' + postType + ' post for ' + platform + '.\n' +
+                     'Topic: ' + topic + '\n' +
+                     'Language: ' + language + '\n' +
+                     'Tone: ' + tone + '\n';
+
+        if (keyPoints) {
+            prompt += 'Key Points:\n' + keyPoints + '\n';
+        }
+
+        prompt += '\nInclude relevant hashtags and emojis. Make it engaging and shareable.';
+
+        console.log('Generating social media post...');
+
+        try {
+            var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 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'
+                },
+                body: JSON.stringify({
+                    model: 'openai/gpt-oss-120b',
+                    messages: [
+                        { 
+                            role: 'system', 
+                            content: 'You are a social media expert. Create viral, engaging posts with proper hashtags.' 
+                        },
+                        { 
+                            role: 'user', 
+                            content: prompt 
+                        }
+                    ],
+                    max_tokens: 800,
+                    temperature: 0.8
+                })
+            });
+
+            if (!response.ok) {
+                var errorText = await response.text();
+                throw new Error('HTTP ' + response.status + ': ' + errorText);
+            }
+
+            var data = await response.json();
+
+            var content = '';
+            if (data.choices && data.choices[0] && data.choices[0].message) {
+                content = data.choices[0].message.content;
+            } else {
+                throw new Error('Invalid response format');
+            }
+
+            result.innerHTML = '<h3 style="color: #6366f1;">✅ Your Post:</h3><br>' + 
+                              content.replace(/\n/g, '<br>') + 
+                              '<br><br><button class="btn-copy" onclick="copyPost()">📋 Copy Post</button>';
+            result.style.display = 'block';
+
+        } catch (error) {
+            console.error('Error:', error);
+            result.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
+            result.style.display = 'block';
+        } finally {
+            btn.disabled = false;
+            loading.style.display = 'none';
+        }
+    }
+
+    function copyPost() {
+        var content = document.getElementById('result').innerText;
+        navigator.clipboard.writeText(content).then(function() {
+            alert('Post Copied!');
+        });
+    }
+    </script>
+</body>
+</html>
