@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Summary Generator - Free Tools India</title>
-    <meta name="description" content="Free AI summary generator. Summarize any text instantly. No signup required.">
     
     <style>
         * {
@@ -189,56 +188,75 @@
         var loading = document.getElementById('loading');
         var btn = document.getElementById('generateBtn');
 
-        // Validation
         if (!text || text.length < 50) {
             alert('Please paste at least 50 characters of text.');
             return;
         }
 
-        // Show loading
         btn.disabled = true;
         loading.style.display = 'block';
         result.style.display = 'none';
 
-        // Create prompt
         var prompt = 'Summarize the following text in ' + format + ' format.\n' +
                      'Language: ' + language + '\n\n' +
                      'Text to summarize:\n' + text;
 
-        console.log('Sending request to API...');
-        console.log('Prompt length:', prompt.length);
+        console.log('Generating summary...');
 
         try {
-            // DIRECT API CALL
-            var response = await fetch('/api/groq', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    prompt: prompt,
-                    systemPrompt: 'You are a professional content summarizer. Create clear and accurate summaries.',
-                    maxTokens: 1000
-                })
-            });
+            // Try local API first
+            var content = '';
+            
+            try {
+                var response = await fetch('/api/groq', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prompt: prompt,
+                        systemPrompt: 'You are a professional content summarizer.',
+                        maxTokens: 1000
+                    })
+                });
 
-            console.log('Response status:', response.status);
-
-            if (!response.ok) {
-                throw new Error('Server error: ' + response.status);
+                if (response.ok) {
+                    var data = await response.json();
+                    if (data.choices && data.choices[0]) {
+                        content = data.choices[0].message.content;
+                    }
+                }
+            } catch (e) {
+                console.log('Local API failed, trying direct...');
             }
 
-            var data = await response.json();
-            console.log('API Response:', data);
+            // Agar local API fail ho to direct Groq API
+            if (!content) {
+                console.log('Using direct Groq API...');
+                
+                var groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer gsk_YOUR_GROQ_API_KEY_HERE'
+                    },
+                    body: JSON.stringify({
+                        model: 'mixtral-8x7b-32768',
+                        messages: [
+                            { role: 'system', content: 'You are a professional content summarizer.' },
+                            { role: 'user', content: prompt }
+                        ],
+                        max_tokens: 1000
+                    })
+                });
 
-            // Extract content
-            var content = '';
-            if (data.choices && data.choices[0] && data.choices[0].message) {
-                content = data.choices[0].message.content;
-            } else if (data.error) {
-                throw new Error(data.error);
-            } else {
-                throw new Error('Invalid response format');
+                var groqData = await groqResponse.json();
+                
+                if (groqData.choices && groqData.choices[0]) {
+                    content = groqData.choices[0].message.content;
+                } else {
+                    throw new Error(JSON.stringify(groqData));
+                }
             }
 
             // Show result
