@@ -4,155 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free AI Resume Builder - Professional Resume Generator | FreeToolsIndia</title>
-    <meta name="description" content="Create professional resumes with AI. Free resume builder with multiple formats. Generate ATS-friendly resumes instantly.">
-    <meta name="keywords" content="resume builder, CV maker, AI resume generator, professional resume, free resume tool">
+    <meta name="description" content="Create professional ATS-friendly resumes with AI. Download as PDF or CSV. Free resume builder with multiple formats. No signup required.">
+    <meta name="keywords" content="resume builder, CV maker, AI resume generator, professional resume, free resume tool, ATS resume">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.freetoolindia.com/resume.html">
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Free AI Resume Builder",
+        "url": "https://www.freetoolindia.com/resume.html",
+        "description": "Create professional ATS-friendly resumes with AI.",
+        "applicationCategory": "UtilityApplication",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}
+    }
+    </script>
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: #6366f1;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            color: #6b7280;
-            font-size: 1.1rem;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        select, input, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            font-size: 15px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            transition: border-color 0.3s;
-        }
-
-        select:focus, input:focus, textarea:focus {
-            outline: none;
-            border-color: #6366f1;
-        }
-
-        textarea {
-            height: 100px;
-            resize: vertical;
-            line-height: 1.6;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #6366f1, #8b5cf6);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin: 10px 0;
-            transition: transform 0.3s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .loading {
-            text-align: center;
-            color: #6366f1;
-            display: none;
-            margin: 15px 0;
-        }
-
-        #result {
-            padding: 25px;
-            background: #f9fafb;
-            border-radius: 10px;
-            display: none;
-            line-height: 1.8;
-            margin-top: 15px;
-            border: 2px solid #e5e7eb;
-        }
-
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #6366f1;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .error {
-            color: #ef4444;
-            background: #fef2f2;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .btn-copy {
-            background: #10b981;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-weight: 600;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .breadcrumb { max-width: 800px; margin: 0 auto 20px; padding: 10px 20px; background: white; border-radius: 8px; font-size: 14px; }
+        .breadcrumb a { color: #6366f1; text-decoration: none; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #6366f1; font-size: 2rem; margin-bottom: 10px; }
+        .header p { color: #6b7280; font-size: 1.1rem; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 14px; }
+        select, input, textarea { width: 100%; padding: 12px 15px; font-size: 15px; border: 2px solid #e5e7eb; border-radius: 8px; }
+        select:focus, input:focus, textarea:focus { outline: none; border-color: #6366f1; }
+        textarea { height: 80px; resize: vertical; }
+        .btn { background: linear-gradient(45deg, #6366f1, #8b5cf6); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; width: 100%; margin: 10px 0; }
+        .btn:hover { transform: translateY(-2px); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .loading { text-align: center; color: #6366f1; display: none; margin: 15px 0; }
+        #result { padding: 25px; background: #f9fafb; border-radius: 10px; display: none; line-height: 1.8; margin-top: 15px; border: 2px solid #e5e7eb; }
+        .download-btns { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+        .download-btn { padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; }
+        .btn-pdf { background: #ef4444; color: white; }
+        .btn-csv { background: #10b981; color: white; }
+        .btn-copy { background: #6366f1; color: white; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #6366f1; text-decoration: none; font-weight: 600; }
+        .error { color: #ef4444; background: #fef2f2; padding: 10px; border-radius: 5px; }
+        .faq-section, .related-tools { margin-top: 40px; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .faq-section h2, .related-tools h2 { text-align: center; color: #6366f1; margin-bottom: 25px; font-size: 1.8rem; }
+        .faq-item { margin-bottom: 15px; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; }
+        .faq-question { padding: 15px 20px; background: #f9fafb; font-weight: 600; color: #374151; cursor: pointer; }
+        .faq-answer { padding: 15px 20px; color: #6b7280; line-height: 1.6; display: none; }
+        .faq-answer.show { display: block; }
+        .tools-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        .tool-link { padding: 15px; background: #f9fafb; border-radius: 8px; text-align: center; text-decoration: none; color: #374151; transition: all 0.3s; }
+        .tool-link:hover { background: #6366f1; color: white; transform: translateY(-3px); }
+        .tool-link-icon { font-size: 30px; display: block; margin-bottom: 8px; }
     </style>
 </head>
 <body>
+    <div class="breadcrumb">
+        <a href="index.html">🏠 Home</a> → <span>📄 Resume Builder</span>
+    </div>
+
     <div class="container">
         <div class="header">
             <h1>📄 Free AI Resume Builder</h1>
@@ -166,7 +79,7 @@
 
         <div class="form-group">
             <label>Job Title/Position:</label>
-            <input type="text" id="jobTitle" placeholder="e.g., Software Developer, Marketing Manager">
+            <input type="text" id="jobTitle" placeholder="e.g., Software Developer">
         </div>
 
         <div class="form-group">
@@ -176,7 +89,7 @@
 
         <div class="form-group">
             <label>Skills (comma separated):</label>
-            <textarea id="skills" placeholder="e.g., JavaScript, Python, Team Management, Communication"></textarea>
+            <textarea id="skills" placeholder="e.g., JavaScript, Python, Communication"></textarea>
         </div>
 
         <div class="form-group">
@@ -184,55 +97,62 @@
             <input type="text" id="education" placeholder="e.g., B.Tech in Computer Science">
         </div>
 
-        <div class="form-group">
-            <label>Resume Type:</label>
-            <select id="resumeType">
-                <option value="Professional">Professional</option>
-                <option value="Creative">Creative</option>
-                <option value="Entry Level">Entry Level/Fresher</option>
-                <option value="Executive">Executive</option>
-            </select>
-        </div>
-
         <button class="btn" id="generateBtn" onclick="generateResume()">🚀 Generate Resume</button>
-
         <div class="loading" id="loading">⏳ Building resume... Please wait...</div>
-
         <div id="result"></div>
-
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
+    <div class="faq-section">
+        <h2>❓ Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(1)">Is Resume Builder free? <span>+</span></div>
+            <div class="faq-answer" id="faq1">Yes! 100% free, no signup required.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(2)">Is my resume ATS-friendly? <span>+</span></div>
+            <div class="faq-answer" id="faq2">Yes! Our AI creates ATS-friendly resumes that pass automated screening.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(3)">Can I download my resume? <span>+</span></div>
+            <div class="faq-answer" id="faq3">Yes! Download as PDF or CSV file.</div>
+        </div>
+    </div>
+
+    <div class="related-tools">
+        <h2>🔗 Try Our Other Free Tools</h2>
+        <div class="tools-links">
+            <a href="summary.html" class="tool-link"><span class="tool-link-icon">📝</span>Summary Generator</a>
+            <a href="writer.html" class="tool-link"><span class="tool-link-icon">✍️</span>AI Writer</a>
+            <a href="email.html" class="tool-link"><span class="tool-link-icon">📧</span>Email Generator</a>
+            <a href="social.html" class="tool-link"><span class="tool-link-icon">📱</span>Social Media</a>
+            <a href="excel.html" class="tool-link"><span class="tool-link-icon">📊</span>Excel Formula</a>
+        </div>
+    </div>
+
     <script>
+    var lastResume = '';
+    var lastResumeData = {};
+
     async function generateResume() {
         var fullName = document.getElementById('fullName').value;
         var jobTitle = document.getElementById('jobTitle').value;
         var experience = document.getElementById('experience').value;
         var skills = document.getElementById('skills').value;
         var education = document.getElementById('education').value;
-        var resumeType = document.getElementById('resumeType').value;
         var result = document.getElementById('result');
         var loading = document.getElementById('loading');
         var btn = document.getElementById('generateBtn');
 
-        if (!fullName || !jobTitle) {
-            alert('Please enter your name and job title.');
-            return;
-        }
+        if (!fullName || !jobTitle) { alert('Please enter name and job title.'); return; }
 
         btn.disabled = true;
         loading.style.display = 'block';
         result.style.display = 'none';
 
-        var prompt = 'Create a ' + resumeType + ' resume for:\n' +
-                     'Name: ' + fullName + '\n' +
-                     'Job Title: ' + jobTitle + '\n' +
-                     'Experience: ' + experience + '\n' +
-                     'Skills: ' + skills + '\n' +
-                     'Education: ' + education + '\n\n' +
-                     'Make it ATS-friendly with clear sections.';
+        var prompt = 'Create a professional resume for:\nName: ' + fullName + '\nJob Title: ' + jobTitle + '\nExperience: ' + experience + '\nSkills: ' + skills + '\nEducation: ' + education + '\nMake it ATS-friendly.';
 
-        console.log('Generating resume...');
+        lastResumeData = { fullName: fullName, jobTitle: jobTitle };
 
         try {
             var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -244,41 +164,28 @@
                 body: JSON.stringify({
                     model: 'openai/gpt-oss-120b',
                     messages: [
-                        { 
-                            role: 'system', 
-                            content: 'You are a professional resume writer. Create ATS-friendly, impactful resumes.' 
-                        },
-                        { 
-                            role: 'user', 
-                            content: prompt 
-                        }
+                        { role: 'system', content: 'You are a professional resume writer.' },
+                        { role: 'user', content: prompt }
                     ],
                     max_tokens: 1500,
                     temperature: 0.7
                 })
             });
 
-            if (!response.ok) {
-                var errorText = await response.text();
-                throw new Error('HTTP ' + response.status + ': ' + errorText);
-            }
-
+            if (!response.ok) throw new Error('HTTP ' + response.status);
             var data = await response.json();
-
-            var content = '';
-            if (data.choices && data.choices[0] && data.choices[0].message) {
-                content = data.choices[0].message.content;
-            } else {
-                throw new Error('Invalid response format');
-            }
+            var content = data.choices[0].message.content;
+            lastResume = content;
 
             result.innerHTML = '<h3 style="color: #6366f1;">✅ Your Resume:</h3><br>' + 
-                              content.replace(/\n/g, '<br>') + 
-                              '<br><br><button class="btn-copy" onclick="copyResume()">📋 Copy Resume</button>';
+                              content.replace(/\n/g, '<br>') +
+                              '<div class="download-btns">' +
+                              '<button class="download-btn btn-pdf" onclick="downloadPDF()">📄 PDF</button>' +
+                              '<button class="download-btn btn-csv" onclick="downloadCSV()">📊 CSV</button>' +
+                              '<button class="download-btn btn-copy" onclick="copyResume()">📋 Copy</button>' +
+                              '</div>';
             result.style.display = 'block';
-
         } catch (error) {
-            console.error('Error:', error);
             result.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
             result.style.display = 'block';
         } finally {
@@ -287,11 +194,33 @@
         }
     }
 
+    function downloadPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.setFontSize(16);
+        doc.text('Resume - ' + lastResumeData.fullName, 15, 20);
+        doc.setFontSize(11);
+        const lines = doc.splitTextToSize(lastResume, 180);
+        doc.text(lines, 15, 35);
+        doc.save('Resume_' + Date.now() + '.pdf');
+    }
+
+    function downloadCSV() {
+        var csv = 'Name,Job Title,Resume\n';
+        csv += '"' + lastResumeData.fullName + '","' + lastResumeData.jobTitle + '","' + lastResume.replace(/"/g, '""') + '"\n';
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'Resume_' + Date.now() + '.csv';
+        link.click();
+    }
+
     function copyResume() {
-        var content = document.getElementById('result').innerText;
-        navigator.clipboard.writeText(content).then(function() {
-            alert('Resume Copied!');
-        });
+        navigator.clipboard.writeText(lastResume).then(function() { alert('Resume copied!'); });
+    }
+
+    function toggleFAQ(id) {
+        document.getElementById('faq' + id).classList.toggle('show');
     }
     </script>
 </body>
