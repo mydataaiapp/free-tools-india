@@ -6,272 +6,147 @@
     <title>AI Summary Generator - Free Tools India</title>
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0;
             padding: 20px;
+            min-height: 100vh;
         }
-
         .container {
             max-width: 700px;
             margin: 0 auto;
             background: white;
-            border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 15px;
         }
-
-        .header {
+        h1 {
             text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .header h1 {
             color: #6366f1;
-            font-size: 2rem;
-            margin-bottom: 5px;
         }
-
-        .header p {
-            color: #6b7280;
-            font-size: 1rem;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            color: #374151;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        select, textarea {
+        select, textarea, button {
             width: 100%;
-            padding: 12px 15px;
-            font-size: 15px;
+            padding: 12px;
+            margin: 10px 0;
             border: 2px solid #e5e7eb;
             border-radius: 8px;
-            transition: border-color 0.3s;
+            font-size: 15px;
+            box-sizing: border-box;
         }
-
-        select:focus, textarea:focus {
-            outline: none;
-            border-color: #6366f1;
-        }
-
         textarea {
-            height: 200px;
-            resize: vertical;
-            line-height: 1.6;
+            height: 150px;
         }
-
-        .btn {
-            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+        button {
+            background: #6366f1;
             color: white;
-            padding: 15px 40px;
             border: none;
-            border-radius: 10px;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            width: 100%;
-            margin: 10px 0;
-            transition: transform 0.3s;
         }
-
-        .btn:hover {
-            transform: translateY(-2px);
+        button:disabled {
+            background: #9ca3af;
         }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .loading {
-            text-align: center;
-            color: #6366f1;
-            display: none;
-            margin: 15px 0;
-            font-size: 1.1rem;
-        }
-
         #result {
-            padding: 20px;
-            background: #f9fafb;
-            border-radius: 10px;
-            display: none;
-            line-height: 1.8;
-            margin-top: 15px;
-            border: 2px solid #e5e7eb;
-        }
-
-        .back-link {
-            display: block;
-            text-align: center;
             margin-top: 20px;
-            color: #6366f1;
-            text-decoration: none;
-            font-weight: bold;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+            display: none;
+            line-height: 1.6;
         }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .error {
-            color: #ef4444;
-            background: #fef2f2;
-            padding: 10px;
-            border-radius: 5px;
+        #loading {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>📝 AI Summary Generator</h1>
-            <p>Lambi baat ka short cut!</p>
-        </div>
-
-        <div class="form-group">
-            <label>Summary Format:</label>
-            <select id="format">
-                <option value="Bullet Points">📌 Bullet Points</option>
-                <option value="Paragraph">📄 Paragraph</option>
-                <option value="Key Takeaways">🔑 Key Takeaways</option>
-                <option value="Executive Summary">📊 Executive Summary</option>
-                <option value="One-Liner">✏️ One-Liner</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Language:</label>
-            <select id="language">
-                <option value="English">English</option>
-                <option value="Hindi">Hindi</option>
-                <option value="Hinglish">Hinglish</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Paste Your Text:</label>
-            <textarea id="inputText" placeholder="Paste your article, document, or any long text here... (minimum 50 characters)"></textarea>
-        </div>
-
-        <button class="btn" id="generateBtn" onclick="generateSummary()">🚀 Generate Summary</button>
-
-        <div class="loading" id="loading">⏳ Generating... Please wait...</div>
-
+        <h1>📝 AI Summary Generator</h1>
+        
+        <label>Format:</label>
+        <select id="format">
+            <option>Bullet Points</option>
+            <option>Paragraph</option>
+            <option>Key Takeaways</option>
+            <option>Executive Summary</option>
+        </select>
+        
+        <label>Language:</label>
+        <select id="language">
+            <option>English</option>
+            <option>Hindi</option>
+            <option>Hinglish</option>
+        </select>
+        
+        <label>Paste Text:</label>
+        <textarea id="inputText" placeholder="Paste your text here (minimum 50 characters)..."></textarea>
+        
+        <button id="btn" onclick="generate()">🚀 Generate Summary</button>
+        
+        <div id="loading">⏳ Generating...</div>
         <div id="result"></div>
-
-        <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
     <script>
-    async function generateSummary() {
+    async function generate() {
         var text = document.getElementById('inputText').value;
         var format = document.getElementById('format').value;
         var language = document.getElementById('language').value;
-        var result = document.getElementById('result');
+        var btn = document.getElementById('btn');
         var loading = document.getElementById('loading');
-        var btn = document.getElementById('generateBtn');
-
-        if (!text || text.length < 50) {
-            alert('Please paste at least 50 characters of text.');
+        var result = document.getElementById('result');
+        
+        if (text.length < 50) {
+            alert('Please paste at least 50 characters');
             return;
         }
-
+        
         btn.disabled = true;
         loading.style.display = 'block';
         result.style.display = 'none';
-
-        var prompt = 'Summarize the following text in ' + format + ' format.\n' +
-                     'Language: ' + language + '\n\n' +
-                     'Text to summarize:\n' + text;
-
-        console.log('Generating summary...');
-
+        
+        var prompt = 'Summarize in ' + format + ' format, language: ' + language + '\n\nText: ' + text;
+        
         try {
-            // Try local API first
-            var content = '';
+            // DIRECT GROQ API CALL - No Vercel API needed
+            var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer gsk_REPLACE_WITH_YOUR_API_KEY'
+                },
+                body: JSON.stringify({
+                    model: 'mixtral-8x7b-32768',
+                    messages: [
+                        { role: 'system', content: 'You are a professional summarizer.' },
+                        { role: 'user', content: prompt }
+                    ],
+                    max_tokens: 1000
+                })
+            });
             
-            try {
-                var response = await fetch('/api/groq', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        prompt: prompt,
-                        systemPrompt: 'You are a professional content summarizer.',
-                        maxTokens: 1000
-                    })
-                });
-
-                if (response.ok) {
-                    var data = await response.json();
-                    if (data.choices && data.choices[0]) {
-                        content = data.choices[0].message.content;
-                    }
-                }
-            } catch (e) {
-                console.log('Local API failed, trying direct...');
+            var data = await response.json();
+            console.log('API Response:', data);
+            
+            if (data.choices && data.choices[0]) {
+                result.innerHTML = '<h3>✅ Summary:</h3>' + 
+                                  data.choices[0].message.content.replace(/\n/g, '<br>');
+                result.style.display = 'block';
+            } else {
+                result.innerHTML = 'Error: ' + JSON.stringify(data);
+                result.style.display = 'block';
             }
-
-            // Agar local API fail ho to direct Groq API
-            if (!content) {
-                console.log('Using direct Groq API...');
-                
-                var groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer gsk_YOUR_GROQ_API_KEY_HERE'
-                    },
-                    body: JSON.stringify({
-                        model: 'mixtral-8x7b-32768',
-                        messages: [
-                            { role: 'system', content: 'You are a professional content summarizer.' },
-                            { role: 'user', content: prompt }
-                        ],
-                        max_tokens: 1000
-                    })
-                });
-
-                var groqData = await groqResponse.json();
-                
-                if (groqData.choices && groqData.choices[0]) {
-                    content = groqData.choices[0].message.content;
-                } else {
-                    throw new Error(JSON.stringify(groqData));
-                }
-            }
-
-            // Show result
-            result.innerHTML = '<h3>✅ Summary (' + format + '):</h3><br>' + 
-                              content.replace(/\n/g, '<br>');
+            
+        } catch (e) {
+            result.innerHTML = 'Error: ' + e.message;
             result.style.display = 'block';
-
-        } catch (error) {
-            console.error('Error:', error);
-            result.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
-            result.style.display = 'block';
-        } finally {
-            btn.disabled = false;
-            loading.style.display = 'none';
         }
+        
+        btn.disabled = false;
+        loading.style.display = 'none';
     }
     </script>
 </body>
