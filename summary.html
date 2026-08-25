@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Summary Generator - Free Tools India</title>
-    <meta name="description" content="Free AI summary generator. Summarize any text instantly. No signup required.">
     
     <style>
         * {
@@ -209,7 +208,7 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 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'
+                    'Authorization': 'Bearer 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'
                 },
                 body: JSON.stringify({
                     model: 'llama-3.3-70b-versatile',
@@ -236,13 +235,11 @@
             }
 
             var data = await response.json();
-            console.log('API Response:', data);
+            console.log('Success!');
 
             var content = '';
             if (data.choices && data.choices[0] && data.choices[0].message) {
                 content = data.choices[0].message.content;
-            } else if (data.error) {
-                throw new Error(data.error.message || JSON.stringify(data.error));
             } else {
                 throw new Error('Invalid response format');
             }
