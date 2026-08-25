@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Writer - Article, Blog & Essay Generator | FreeToolsIndia</title>
+    <meta name="description" content="Free AI writer tool to generate articles, blogs, essays, stories, and more. Write in English, Hindi, or Hinglish. No signup required. Powered by AI.">
+    <meta name="keywords" content="AI writer, article generator, blog writer, essay generator, content writer, free writing tool, AI content creator">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free AI Writer - Generate Content Instantly">
+    <meta property="og:description" content="Write articles, blogs, essays with AI. 100% Free.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://www.freetoolindia.com/writer.html">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6366f1;
+            display: none;
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+
+        #result {
+            padding: 25px;
+            background: #f9fafb;
+            border-radius: 10px;
+            display: none;
+            line-height: 1.8;
+            margin-top: 15px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: #ef4444;
+            background: #fef2f2;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .btn-copy {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .btn-copy:hover {
+            background: #059669;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✍️ Free AI Writer</h1>
+            <p>Articles, Blogs, Essays - Sab Kuch Likho Seconds Mein!</p>
+        </div>
+
+        <div class="form-group">
+            <label>Content Type:</label>
+            <select id="contentType">
+                <option value="Article">📄 Article</option>
+                <option value="Blog Post">📝 Blog Post</option>
+                <option value="Essay">📚 Essay</option>
+                <option value="Story">📖 Story</option>
+                <option value="Product Description">🛍️ Product Description</option>
+                <option value="Speech">🎤 Speech</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Topic/Title:</label>
+            <input type="text" id="topic" placeholder="e.g., Benefits of Yoga, Digital Marketing Trends 2025, etc.">
+        </div>
+
+        <div class="form-group">
+            <label>Language:</label>
+            <select id="language">
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Hinglish">Hinglish</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Tone:</label>
+            <select id="tone">
+                <option value="Professional">Professional</option>
+                <option value="Casual">Casual</option>
+                <option value="Funny">Funny</option>
+                <option value="Inspirational">Inspirational</option>
+                <option value="Formal">Formal</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Word Count:</label>
+            <select id="wordCount">
+                <option value="300">Short (300 words)</option>
+                <option value="500" selected>Medium (500 words)</option>
+                <option value="1000">Long (1000 words)</option>
+                <option value="1500">Very Long (1500 words)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Additional Details (Optional):</label>
+            <textarea id="details" placeholder="Any specific points to include, target audience, etc."></textarea>
+        </div>
+
+        <button class="btn" id="generateBtn" onclick="generateContent()">🚀 Generate Content</button>
+
+        <div class="loading" id="loading">⏳ Writing... Please wait...</div>
+
+        <div id="result"></div>
+
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+    </div>
+
+    <script>
+    async function generateContent() {
+        var contentType = document.getElementById('contentType').value;
+        var topic = document.getElementById('topic').value;
+        var language = document.getElementById('language').value;
+        var tone = document.getElementById('tone').value;
+        var wordCount = document.getElementById('wordCount').value;
+        var details = document.getElementById('details').value;
+        var result = document.getElementById('result');
+        var loading = document.getElementById('loading');
+        var btn = document.getElementById('generateBtn');
+
+        if (!topic || topic.length < 3) {
+            alert('Please enter a topic/title.');
+            return;
+        }
+
+        btn.disabled = true;
+        loading.style.display = 'block';
+        result.style.display = 'none';
+
+        var prompt = 'Write a ' + contentType + ' about "' + topic + '".\n' +
+                     'Language: ' + language + '\n' +
+                     'Tone: ' + tone + '\n' +
+                     'Word Count: Approximately ' + wordCount + ' words\n';
+
+        if (details) {
+            prompt += 'Additional Requirements:\n' + details + '\n';
+        }
+
+        prompt += '\nMake it engaging, well-structured, and SEO-friendly with headings and bullet points where appropriate.';
+
+        console.log('Generating content...');
+
+        try {
+            var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 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'
+                },
+                body: JSON.stringify({
+                    model: 'openai/gpt-oss-120b',
+                    messages: [
+                        { 
+                            role: 'system', 
+                            content: 'You are a professional content writer. Create high-quality, engaging, and SEO-optimized content.' 
+                        },
+                        { 
+                            role: 'user', 
+                            content: prompt 
+                        }
+                    ],
+                    max_tokens: 2000,
+                    temperature: 0.7
+                })
+            });
+
+            if (!response.ok) {
+                var errorText = await response.text();
+                throw new Error('HTTP ' + response.status + ': ' + errorText);
+            }
+
+            var data = await response.json();
+
+            var content = '';
+            if (data.choices && data.choices[0] && data.choices[0].message) {
+                content = data.choices[0].message.content;
+            } else {
+                throw new Error('Invalid response format');
+            }
+
+            result.innerHTML = '<h3 style="color: #6366f1;">✅ Generated Content:</h3><br>' + 
+                              content.replace(/\n/g, '<br>') + 
+                              '<br><br><button class="btn-copy" onclick="copyContent()">📋 Copy Content</button>';
+            result.style.display = 'block';
+
+        } catch (error) {
+            console.error('Error:', error);
+            result.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
+            result.style.display = 'block';
+        } finally {
+            btn.disabled = false;
+            loading.style.display = 'none';
+        }
+    }
+
+    function copyContent() {
+        var content = document.getElementById('result').innerText;
+        navigator.clipboard.writeText(content).then(function() {
+            alert('Content Copied!');
+        });
+    }
+    </script>
+</body>
+</html>
