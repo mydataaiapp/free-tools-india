@@ -137,13 +137,6 @@
             padding: 10px;
             border-radius: 5px;
         }
-
-        .success {
-            color: #10b981;
-            background: #f0fdf4;
-            padding: 10px;
-            border-radius: 5px;
-        }
     </style>
 </head>
 <body>
@@ -196,28 +189,22 @@
         var loading = document.getElementById('loading');
         var btn = document.getElementById('generateBtn');
 
-        // Validation
         if (!text || text.length < 50) {
             alert('Please paste at least 50 characters of text.');
             return;
         }
 
-        // Show loading
         btn.disabled = true;
         loading.style.display = 'block';
         result.style.display = 'none';
 
-        // Create prompt
         var prompt = 'Summarize the following text in ' + format + ' format.\n' +
                      'Language: ' + language + '\n\n' +
                      'Text to summarize:\n' + text;
 
         console.log('Generating summary...');
-        console.log('Format:', format);
-        console.log('Language:', language);
 
         try {
-            // DIRECT GROQ API CALL
             var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: {
@@ -244,23 +231,22 @@
             console.log('Response status:', response.status);
 
             if (!response.ok) {
-                throw new Error('HTTP Error: ' + response.status);
+                var errorText = await response.text();
+                throw new Error('HTTP ' + response.status + ': ' + errorText);
             }
 
             var data = await response.json();
             console.log('API Response:', data);
 
-            // Extract content
             var content = '';
             if (data.choices && data.choices[0] && data.choices[0].message) {
                 content = data.choices[0].message.content;
             } else if (data.error) {
-                throw new Error(data.error.message || data.error);
+                throw new Error(data.error.message || JSON.stringify(data.error));
             } else {
                 throw new Error('Invalid response format');
             }
 
-            // Show result
             result.innerHTML = '<h3 style="color: #6366f1;">✅ Summary (' + format + '):</h3><br>' + 
                               content.replace(/\n/g, '<br>');
             result.style.display = 'block';
