@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Excel Formula Generator - Complex Formulas Made Easy | FreeToolsIndia</title>
+    <meta name="description" content="Generate Excel formulas with AI. Free tool for VLOOKUP, IF statements, pivot tables, and more. Describe what you need, get the formula instantly.">
+    <meta name="keywords" content="excel formula generator, AI excel helper, VLOOKUP generator, excel functions, free excel tool">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.freetoolindia.com/excel.html">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6366f1;
+            display: none;
+            margin: 15px 0;
+        }
+
+        #result {
+            padding: 25px;
+            background: #f9fafb;
+            border-radius: 10px;
+            display: none;
+            line-height: 1.8;
+            margin-top: 15px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: #ef4444;
+            background: #fef2f2;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .btn-copy {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Free AI Excel Formula Generator</h1>
+            <p>Excel Ka Expert - Bina Seekhe!</p>
+        </div>
+
+        <div class="form-group">
+            <label>Describe What You Need:</label>
+            <textarea id="description" placeholder="e.g., Calculate total sales for products above 100 units in column B, sum with condition, find duplicate values, etc."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Excel Version:</label>
+            <select id="excelVersion">
+                <option value="Microsoft 365">Microsoft 365</option>
+                <option value="Excel 2021">Excel 2021</option>
+                <option value="Excel 2019">Excel 2019</option>
+                <option value="Google Sheets">Google Sheets</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Formula Type:</label>
+            <select id="formulaType">
+                <option value="Any">Any</option>
+                <option value="LOOKUP">LOOKUP (VLOOKUP, HLOOKUP, XLOOKUP)</option>
+                <option value="Conditional">Conditional (IF, SUMIF, COUNTIF)</option>
+                <option value="Mathematical">Mathematical (SUM, AVERAGE, ROUND)</option>
+                <option value="Text">Text (CONCATENATE, LEFT, RIGHT)</option>
+                <option value="Date">Date & Time</option>
+            </select>
+        </div>
+
+        <button class="btn" id="generateBtn" onclick="generateFormula()">🚀 Generate Formula</button>
+
+        <div class="loading" id="loading">⏳ Creating formula... Please wait...</div>
+
+        <div id="result"></div>
+
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+    </div>
+
+    <script>
+    async function generateFormula() {
+        var description = document.getElementById('description').value;
+        var excelVersion = document.getElementById('excelVersion').value;
+        var formulaType = document.getElementById('formulaType').value;
+        var result = document.getElementById('result');
+        var loading = document.getElementById('loading');
+        var btn = document.getElementById('generateBtn');
+
+        if (!description || description.length < 10) {
+            alert('Please describe what you need.');
+            return;
+        }
+
+        btn.disabled = true;
+        loading.style.display = 'block';
+        result.style.display = 'none';
+
+        var prompt = 'Generate an Excel formula for:\n' +
+                     'Description: ' + description + '\n' +
+                     'Excel Version: ' + excelVersion + '\n' +
+                     'Formula Type: ' + formulaType + '\n\n' +
+                     'Provide the formula with explanation.';
+
+        console.log('Generating Excel formula...');
+
+        try {
+            var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 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'
+                },
+                body: JSON.stringify({
+                    model: 'openai/gpt-oss-120b',
+                    messages: [
+                        { 
+                            role: 'system', 
+                            content: 'You are an Excel expert. Generate accurate formulas with clear explanations.' 
+                        },
+                        { 
+                            role: 'user', 
+                            content: prompt 
+                        }
+                    ],
+                    max_tokens: 800,
+                    temperature: 0.5
+                })
+            });
+
+            if (!response.ok) {
+                var errorText = await response.text();
+                throw new Error('HTTP ' + response.status + ': ' + errorText);
+            }
+
+            var data = await response.json();
+
+            var content = '';
+            if (data.choices && data.choices[0] && data.choices[0].message) {
+                content = data.choices[0].message.content;
+            } else {
+                throw new Error('Invalid response format');
+            }
+
+            result.innerHTML = '<h3 style="color: #6366f1;">✅ Excel Formula:</h3><br>' + 
+                              content.replace(/\n/g, '<br>') + 
+                              '<br><br><button class="btn-copy" onclick="copyFormula()">📋 Copy Formula</button>';
+            result.style.display = 'block';
+
+        } catch (error) {
+            console.error('Error:', error);
+            result.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
+            result.style.display = 'block';
+        } finally {
+            btn.disabled = false;
+            loading.style.display = 'none';
+        }
+    }
+
+    function copyFormula() {
+        var content = document.getElementById('result').innerText;
+        navigator.clipboard.writeText(content).then(function() {
+            alert('Formula Copied!');
+        });
+    }
+    </script>
+</body>
+</html>
