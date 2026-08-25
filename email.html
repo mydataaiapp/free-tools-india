@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Email Generator - Professional Emails in Seconds | FreeToolsIndia</title>
+    <meta name="description" content="Generate professional emails instantly. Business emails, job applications, follow-ups, and more. Free AI email writer in English, Hindi, Hinglish.">
+    <meta name="keywords" content="email generator, AI email writer, professional email, business email, free email tool">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.freetoolindia.com/email.html">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6366f1;
+            display: none;
+            margin: 15px 0;
+        }
+
+        #result {
+            padding: 25px;
+            background: #f9fafb;
+            border-radius: 10px;
+            display: none;
+            line-height: 1.8;
+            margin-top: 15px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: #ef4444;
+            background: #fef2f2;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .btn-copy {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Free AI Email Generator</h1>
+            <p>Professional Emails - Seconds Mein!</p>
+        </div>
+
+        <div class="form-group">
+            <label>Email Type:</label>
+            <select id="emailType">
+                <option value="Business">💼 Business</option>
+                <option value="Job Application">📋 Job Application</option>
+                <option value="Follow-up">🔄 Follow-up</option>
+                <option value="Thank You">🙏 Thank You</option>
+                <option value="Complaint">⚠️ Complaint</option>
+                <option value="Invitation">🎉 Invitation</option>
+                <option value="Resignation">👋 Resignation</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Recipient Name (Optional):</label>
+            <input type="text" id="recipient" placeholder="e.g., Mr. Sharma, Team, etc.">
+        </div>
+
+        <div class="form-group">
+            <label>Subject/Purpose:</label>
+            <input type="text" id="subject" placeholder="e.g., Meeting request, Job application for developer position">
+        </div>
+
+        <div class="form-group">
+            <label>Key Points (Optional):</label>
+            <textarea id="keyPoints" placeholder="Any specific points to mention..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Language:</label>
+            <select id="language">
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Hinglish">Hinglish</option>
+            </select>
+        </div>
+
+        <button class="btn" id="generateBtn" onclick="generateEmail()">🚀 Generate Email</button>
+
+        <div class="loading" id="loading">⏳ Writing email... Please wait...</div>
+
+        <div id="result"></div>
+
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+    </div>
+
+    <script>
+    async function generateEmail() {
+        var emailType = document.getElementById('emailType').value;
+        var recipient = document.getElementById('recipient').value;
+        var subject = document.getElementById('subject').value;
+        var keyPoints = document.getElementById('keyPoints').value;
+        var language = document.getElementById('language').value;
+        var result = document.getElementById('result');
+        var loading = document.getElementById('loading');
+        var btn = document.getElementById('generateBtn');
+
+        if (!subject || subject.length < 3) {
+            alert('Please enter the subject/purpose of email.');
+            return;
+        }
+
+        btn.disabled = true;
+        loading.style.display = 'block';
+        result.style.display = 'none';
+
+        var prompt = 'Write a ' + emailType + ' email.\n' +
+                     'Subject: ' + subject + '\n' +
+                     'Language: ' + language + '\n';
+
+        if (recipient) {
+            prompt += 'Recipient: ' + recipient + '\n';
+        }
+
+        if (keyPoints) {
+            prompt += 'Key Points to Include:\n' + keyPoints + '\n';
+        }
+
+        prompt += '\nMake it professional, polite, and well-formatted.';
+
+        console.log('Generating email...');
+
+        try {
+            var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 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'
+                },
+                body: JSON.stringify({
+                    model: 'openai/gpt-oss-120b',
+                    messages: [
+                        { 
+                            role: 'system', 
+                            content: 'You are a professional email writer. Create clear, concise, and effective emails.' 
+                        },
+                        { 
+                            role: 'user', 
+                            content: prompt 
+                        }
+                    ],
+                    max_tokens: 800,
+                    temperature: 0.7
+                })
+            });
+
+            if (!response.ok) {
+                var errorText = await response.text();
+                throw new Error('HTTP ' + response.status + ': ' + errorText);
+            }
+
+            var data = await response.json();
+
+            var content = '';
+            if (data.choices && data.choices[0] && data.choices[0].message) {
+                content = data.choices[0].message.content;
+            } else {
+                throw new Error('Invalid response format');
+            }
+
+            result.innerHTML = '<h3 style="color: #6366f1;">✅ Your Email:</h3><br>' + 
+                              content.replace(/\n/g, '<br>') + 
+                              '<br><br><button class="btn-copy" onclick="copyEmail()">📋 Copy Email</button>';
+            result.style.display = 'block';
+
+        } catch (error) {
+            console.error('Error:', error);
+            result.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
+            result.style.display = 'block';
+        } finally {
+            btn.disabled = false;
+            loading.style.display = 'none';
+        }
+    }
+
+    function copyEmail() {
+        var content = document.getElementById('result').innerText;
+        navigator.clipboard.writeText(content).then(function() {
+            alert('Email Copied!');
+        });
+    }
+    </script>
+</body>
+</html>
