@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Summary Generator - Free Tools India</title>
+    <meta name="description" content="Free AI summary generator. Summarize any text instantly. No signup required.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        textarea {
+            height: 200px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            color: #6366f1;
+            display: none;
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+
+        #result {
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+            display: none;
+            line-height: 1.8;
+            margin-top: 15px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: #ef4444;
+            background: #fef2f2;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 AI Summary Generator</h1>
+            <p>Lambi baat ka short cut!</p>
+        </div>
+
+        <div class="form-group">
+            <label>Summary Format:</label>
+            <select id="format">
+                <option value="Bullet Points">📌 Bullet Points</option>
+                <option value="Paragraph">📄 Paragraph</option>
+                <option value="Key Takeaways">🔑 Key Takeaways</option>
+                <option value="Executive Summary">📊 Executive Summary</option>
+                <option value="One-Liner">✏️ One-Liner</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Language:</label>
+            <select id="language">
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Hinglish">Hinglish</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Paste Your Text:</label>
+            <textarea id="inputText" placeholder="Paste your article, document, or any long text here... (minimum 50 characters)"></textarea>
+        </div>
+
+        <button class="btn" id="generateBtn" onclick="generateSummary()">🚀 Generate Summary</button>
+
+        <div class="loading" id="loading">⏳ Generating... Please wait...</div>
+
+        <div id="result"></div>
+
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+    </div>
+
+    <script>
+    async function generateSummary() {
+        var text = document.getElementById('inputText').value;
+        var format = document.getElementById('format').value;
+        var language = document.getElementById('language').value;
+        var result = document.getElementById('result');
+        var loading = document.getElementById('loading');
+        var btn = document.getElementById('generateBtn');
+
+        // Validation
+        if (!text || text.length < 50) {
+            alert('Please paste at least 50 characters of text.');
+            return;
+        }
+
+        // Show loading
+        btn.disabled = true;
+        loading.style.display = 'block';
+        result.style.display = 'none';
+
+        // Create prompt
+        var prompt = 'Summarize the following text in ' + format + ' format.\n' +
+                     'Language: ' + language + '\n\n' +
+                     'Text to summarize:\n' + text;
+
+        console.log('Sending request to API...');
+        console.log('Prompt length:', prompt.length);
+
+        try {
+            // DIRECT API CALL
+            var response = await fetch('/api/groq', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    prompt: prompt,
+                    systemPrompt: 'You are a professional content summarizer. Create clear and accurate summaries.',
+                    maxTokens: 1000
+                })
+            });
+
+            console.log('Response status:', response.status);
+
+            if (!response.ok) {
+                throw new Error('Server error: ' + response.status);
+            }
+
+            var data = await response.json();
+            console.log('API Response:', data);
+
+            // Extract content
+            var content = '';
+            if (data.choices && data.choices[0] && data.choices[0].message) {
+                content = data.choices[0].message.content;
+            } else if (data.error) {
+                throw new Error(data.error);
+            } else {
+                throw new Error('Invalid response format');
+            }
+
+            // Show result
+            result.innerHTML = '<h3>✅ Summary (' + format + '):</h3><br>' + 
+                              content.replace(/\n/g, '<br>');
+            result.style.display = 'block';
+
+        } catch (error) {
+            console.error('Error:', error);
+            result.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
+            result.style.display = 'block';
+        } finally {
+            btn.disabled = false;
+            loading.style.display = 'none';
+        }
+    }
+    </script>
+</body>
+</html>
