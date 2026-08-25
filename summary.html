@@ -3,14 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Summary Generator - Free Tools India</title>
+    <title>Free AI Summary Generator - Summarize Text Instantly | FreeToolsIndia</title>
+    <meta name="description" content="Free AI summary generator tool. Summarize any text into bullet points, paragraphs, key takeaways. Download summary as PDF or CSV. Supports English, Hindi, Hinglish.">
+    <meta name="keywords" content="summary generator, text summarizer, AI summary tool, free summary generator, summarize text online, paragraph summarizer">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free AI Summary Generator - Instant Text Summarizer">
+    <meta property="og:description" content="Summarize any text in 5 formats. Download PDF/CSV. Free AI summary tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.freetoolindia.com/summary.html">
+    <link rel="canonical" href="https://www.freetoolindia.com/summary.html">
+    
+    <!-- jsPDF for PDF download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Free AI Summary Generator",
+        "url": "https://www.freetoolindia.com/summary.html",
+        "description": "Free AI-powered summary generator. Summarize text into bullet points, paragraphs, key takeaways, and executive summaries.",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+        }
+    }
+    </script>
     
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
         body {
@@ -19,8 +48,26 @@
             padding: 20px;
         }
 
+        .breadcrumb {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            padding: 10px 20px;
+            background: white;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -30,18 +77,18 @@
 
         .header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .header h1 {
             color: #6366f1;
             font-size: 2rem;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .header p {
             color: #6b7280;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         .form-group {
@@ -50,7 +97,7 @@
 
         label {
             display: block;
-            font-weight: bold;
+            font-weight: 600;
             color: #374151;
             margin-bottom: 8px;
             font-size: 14px;
@@ -83,7 +130,7 @@
             border: none;
             border-radius: 10px;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             width: 100%;
             margin: 10px 0;
@@ -104,11 +151,10 @@
             color: #6366f1;
             display: none;
             margin: 15px 0;
-            font-size: 1.1rem;
         }
 
         #result {
-            padding: 20px;
+            padding: 25px;
             background: #f9fafb;
             border-radius: 10px;
             display: none;
@@ -117,17 +163,48 @@
             border: 2px solid #e5e7eb;
         }
 
+        .download-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .download-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-pdf {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-csv {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-copy {
+            background: #6366f1;
+            color: white;
+        }
+
         .back-link {
             display: block;
             text-align: center;
             margin-top: 20px;
             color: #6366f1;
             text-decoration: none;
-            font-weight: bold;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
+            font-weight: 600;
         }
 
         .error {
@@ -136,13 +213,111 @@
             padding: 10px;
             border-radius: 5px;
         }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            color: #6366f1;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 15px 20px;
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background: #f0f4ff;
+        }
+
+        .faq-answer {
+            padding: 15px 20px;
+            color: #6b7280;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        /* Interlinking Section */
+        .related-tools {
+            margin-top: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .related-tools h2 {
+            text-align: center;
+            color: #6366f1;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .tools-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .tool-link {
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: #374151;
+            transition: all 0.3s;
+        }
+
+        .tool-link:hover {
+            background: #6366f1;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .tool-link-icon {
+            font-size: 30px;
+            display: block;
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
+    <div class="breadcrumb">
+        <a href="index.html">🏠 Home</a> → 
+        <span>📝 Summary Generator</span>
+    </div>
+
     <div class="container">
         <div class="header">
-            <h1>📝 AI Summary Generator</h1>
-            <p>Lambi baat ka short cut!</p>
+            <h1>📝 Free AI Summary Generator</h1>
+            <p>Lambi baat ka short cut! Summarize any text instantly.</p>
         </div>
 
         <div class="form-group">
@@ -179,7 +354,87 @@
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
+    <!-- FAQ Section -->
+    <div class="faq-section">
+        <h2>❓ Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(1)">
+                Is the Summary Generator free to use? <span>+</span>
+            </div>
+            <div class="faq-answer" id="faq1">
+                Yes! Our Summary Generator is 100% free. No signup required, no hidden charges.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(2)">
+                What formats can I summarize text into? <span>+</span>
+            </div>
+            <div class="faq-answer" id="faq2">
+                You can summarize text into Bullet Points, Paragraph, Key Takeaways, Executive Summary, or One-Liner format.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(3)">
+                Can I download the summary as PDF or CSV? <span>+</span>
+            </div>
+            <div class="faq-answer" id="faq3">
+                Yes! After generating the summary, you can download it as PDF or CSV file using the download buttons.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(4)">
+                Which languages are supported? <span>+</span>
+            </div>
+            <div class="faq-answer" id="faq4">
+                We support English, Hindi, and Hinglish languages for summary generation.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(5)">
+                Is my text stored anywhere? <span>+</span>
+            </div>
+            <div class="faq-answer" id="faq5">
+                No! We do not store your text. It is processed in real-time and immediately discarded.
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Tools -->
+    <div class="related-tools">
+        <h2>🔗 Try Our Other Free Tools</h2>
+        <div class="tools-links">
+            <a href="writer.html" class="tool-link">
+                <span class="tool-link-icon">✍️</span>
+                AI Writer
+            </a>
+            <a href="email.html" class="tool-link">
+                <span class="tool-link-icon">📧</span>
+                Email Generator
+            </a>
+            <a href="social.html" class="tool-link">
+                <span class="tool-link-icon">📱</span>
+                Social Media Posts
+            </a>
+            <a href="resume.html" class="tool-link">
+                <span class="tool-link-icon">📄</span>
+                Resume Builder
+            </a>
+            <a href="excel.html" class="tool-link">
+                <span class="tool-link-icon">📊</span>
+                Excel Formula
+            </a>
+        </div>
+    </div>
+
     <script>
+    var lastSummaryContent = '';
+    var lastSummaryData = {};
+
     async function generateSummary() {
         var text = document.getElementById('inputText').value;
         var format = document.getElementById('format').value;
@@ -201,10 +456,9 @@
                      'Language: ' + language + '\n\n' +
                      'Text to summarize:\n' + text;
 
-        console.log('Generating summary with Groq...');
+        lastSummaryData = { format: format, language: language };
 
         try {
-            // GROQ API CALL
             var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
                 headers: {
@@ -214,21 +468,13 @@
                 body: JSON.stringify({
                     model: 'openai/gpt-oss-120b',
                     messages: [
-                        { 
-                            role: 'system', 
-                            content: 'You are a professional content summarizer. Create clear, accurate, and concise summaries.' 
-                        },
-                        { 
-                            role: 'user', 
-                            content: prompt 
-                        }
+                        { role: 'system', content: 'You are a professional content summarizer.' },
+                        { role: 'user', content: prompt }
                     ],
                     max_tokens: 1000,
                     temperature: 0.7
                 })
             });
-
-            console.log('Response status:', response.status);
 
             if (!response.ok) {
                 var errorText = await response.text();
@@ -236,29 +482,67 @@
             }
 
             var data = await response.json();
-            console.log('Success!');
-
-            var content = '';
-            if (data.choices && data.choices[0] && data.choices[0].message) {
-                content = data.choices[0].message.content;
-            } else if (data.error) {
-                throw new Error(data.error.message || JSON.stringify(data.error));
-            } else {
-                throw new Error('Invalid response format');
-            }
+            var content = data.choices[0].message.content;
+            lastSummaryContent = content;
 
             result.innerHTML = '<h3 style="color: #6366f1;">✅ Summary (' + format + '):</h3><br>' + 
-                              content.replace(/\n/g, '<br>');
+                              content.replace(/\n/g, '<br>') +
+                              '<div class="download-btns">' +
+                              '<button class="download-btn btn-pdf" onclick="downloadPDF()">📄 Download PDF</button>' +
+                              '<button class="download-btn btn-csv" onclick="downloadCSV()">📊 Download CSV</button>' +
+                              '<button class="download-btn btn-copy" onclick="copySummary()">📋 Copy</button>' +
+                              '</div>';
             result.style.display = 'block';
 
         } catch (error) {
-            console.error('Error:', error);
             result.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
             result.style.display = 'block';
         } finally {
             btn.disabled = false;
             loading.style.display = 'none';
         }
+    }
+
+    function downloadPDF() {
+        if (!lastSummaryContent) return;
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.setFillColor(99, 102, 241);
+        doc.rect(0, 0, 210, 25, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(16);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Text Summary', 105, 12, { align: 'center' });
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'normal');
+        doc.text(lastSummaryData.format + ' | ' + lastSummaryData.language, 105, 19, { align: 'center' });
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(11);
+        const lines = doc.splitTextToSize(lastSummaryContent, 180);
+        doc.text(lines, 15, 35);
+        doc.save('Summary_' + Date.now() + '.pdf');
+    }
+
+    function downloadCSV() {
+        if (!lastSummaryContent) return;
+        var csv = 'Format,Language,Summary\n';
+        csv += '"' + lastSummaryData.format + '","' + lastSummaryData.language + '","' + lastSummaryContent.replace(/"/g, '""') + '"\n';
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'Summary_' + Date.now() + '.csv';
+        link.click();
+    }
+
+    function copySummary() {
+        navigator.clipboard.writeText(lastSummaryContent).then(function() {
+            alert('Summary copied to clipboard!');
+        });
+    }
+
+    function toggleFAQ(id) {
+        var answer = document.getElementById('faq' + id);
+        answer.classList.toggle('show');
     }
     </script>
 </body>
