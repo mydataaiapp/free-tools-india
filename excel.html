@@ -4,155 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free AI Excel Formula Generator - Complex Formulas Made Easy | FreeToolsIndia</title>
-    <meta name="description" content="Generate Excel formulas with AI. Free tool for VLOOKUP, IF statements, pivot tables, and more. Describe what you need, get the formula instantly.">
+    <meta name="description" content="Generate Excel formulas with AI. VLOOKUP, IF statements, SUMIF, and more. Download as PDF/CSV. Free Excel formula generator tool.">
     <meta name="keywords" content="excel formula generator, AI excel helper, VLOOKUP generator, excel functions, free excel tool">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.freetoolindia.com/excel.html">
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Free AI Excel Formula Generator",
+        "url": "https://www.freetoolindia.com/excel.html",
+        "description": "Generate Excel formulas with AI. VLOOKUP, IF, SUMIF and more.",
+        "applicationCategory": "UtilityApplication",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}
+    }
+    </script>
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: #6366f1;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            color: #6b7280;
-            font-size: 1.1rem;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        select, input, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            font-size: 15px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            transition: border-color 0.3s;
-        }
-
-        select:focus, input:focus, textarea:focus {
-            outline: none;
-            border-color: #6366f1;
-        }
-
-        textarea {
-            height: 150px;
-            resize: vertical;
-            line-height: 1.6;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #6366f1, #8b5cf6);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin: 10px 0;
-            transition: transform 0.3s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .loading {
-            text-align: center;
-            color: #6366f1;
-            display: none;
-            margin: 15px 0;
-        }
-
-        #result {
-            padding: 25px;
-            background: #f9fafb;
-            border-radius: 10px;
-            display: none;
-            line-height: 1.8;
-            margin-top: 15px;
-            border: 2px solid #e5e7eb;
-        }
-
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #6366f1;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        .error {
-            color: #ef4444;
-            background: #fef2f2;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .btn-copy {
-            background: #10b981;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-weight: 600;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .breadcrumb { max-width: 800px; margin: 0 auto 20px; padding: 10px 20px; background: white; border-radius: 8px; font-size: 14px; }
+        .breadcrumb a { color: #6366f1; text-decoration: none; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #6366f1; font-size: 2rem; margin-bottom: 10px; }
+        .header p { color: #6b7280; font-size: 1.1rem; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 14px; }
+        select, textarea { width: 100%; padding: 12px 15px; font-size: 15px; border: 2px solid #e5e7eb; border-radius: 8px; }
+        select:focus, textarea:focus { outline: none; border-color: #6366f1; }
+        textarea { height: 120px; resize: vertical; }
+        .btn { background: linear-gradient(45deg, #6366f1, #8b5cf6); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer; width: 100%; margin: 10px 0; }
+        .btn:hover { transform: translateY(-2px); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .loading { text-align: center; color: #6366f1; display: none; margin: 15px 0; }
+        #result { padding: 25px; background: #f9fafb; border-radius: 10px; display: none; line-height: 1.8; margin-top: 15px; border: 2px solid #e5e7eb; }
+        .download-btns { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+        .download-btn { padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; }
+        .btn-pdf { background: #ef4444; color: white; }
+        .btn-csv { background: #10b981; color: white; }
+        .btn-copy { background: #6366f1; color: white; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #6366f1; text-decoration: none; font-weight: 600; }
+        .error { color: #ef4444; background: #fef2f2; padding: 10px; border-radius: 5px; }
+        .faq-section, .related-tools { margin-top: 40px; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .faq-section h2, .related-tools h2 { text-align: center; color: #6366f1; margin-bottom: 25px; font-size: 1.8rem; }
+        .faq-item { margin-bottom: 15px; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; }
+        .faq-question { padding: 15px 20px; background: #f9fafb; font-weight: 600; color: #374151; cursor: pointer; }
+        .faq-answer { padding: 15px 20px; color: #6b7280; line-height: 1.6; display: none; }
+        .faq-answer.show { display: block; }
+        .tools-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        .tool-link { padding: 15px; background: #f9fafb; border-radius: 8px; text-align: center; text-decoration: none; color: #374151; transition: all 0.3s; }
+        .tool-link:hover { background: #6366f1; color: white; transform: translateY(-3px); }
+        .tool-link-icon { font-size: 30px; display: block; margin-bottom: 8px; }
     </style>
 </head>
 <body>
+    <div class="breadcrumb">
+        <a href="index.html">🏠 Home</a> → <span>📊 Excel Formula Generator</span>
+    </div>
+
     <div class="container">
         <div class="header">
             <h1>📊 Free AI Excel Formula Generator</h1>
@@ -161,7 +74,7 @@
 
         <div class="form-group">
             <label>Describe What You Need:</label>
-            <textarea id="description" placeholder="e.g., Calculate total sales for products above 100 units in column B, sum with condition, find duplicate values, etc."></textarea>
+            <textarea id="description" placeholder="e.g., Calculate total sales above 100 units, find duplicate values, sum with condition"></textarea>
         </div>
 
         <div class="form-group">
@@ -174,52 +87,59 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label>Formula Type:</label>
-            <select id="formulaType">
-                <option value="Any">Any</option>
-                <option value="LOOKUP">LOOKUP (VLOOKUP, HLOOKUP, XLOOKUP)</option>
-                <option value="Conditional">Conditional (IF, SUMIF, COUNTIF)</option>
-                <option value="Mathematical">Mathematical (SUM, AVERAGE, ROUND)</option>
-                <option value="Text">Text (CONCATENATE, LEFT, RIGHT)</option>
-                <option value="Date">Date & Time</option>
-            </select>
-        </div>
-
         <button class="btn" id="generateBtn" onclick="generateFormula()">🚀 Generate Formula</button>
-
         <div class="loading" id="loading">⏳ Creating formula... Please wait...</div>
-
         <div id="result"></div>
-
         <a href="index.html" class="back-link">← Back to All Tools</a>
     </div>
 
+    <div class="faq-section">
+        <h2>❓ Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(1)">Is Excel Formula Generator free? <span>+</span></div>
+            <div class="faq-answer" id="faq1">Yes! 100% free to use.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(2)">What formulas can I generate? <span>+</span></div>
+            <div class="faq-answer" id="faq2">VLOOKUP, IF, SUMIF, COUNTIF, and many more Excel formulas.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(3)">Can I download formulas? <span>+</span></div>
+            <div class="faq-answer" id="faq3">Yes! Download as PDF or CSV file.</div>
+        </div>
+    </div>
+
+    <div class="related-tools">
+        <h2>🔗 Try Our Other Free Tools</h2>
+        <div class="tools-links">
+            <a href="summary.html" class="tool-link"><span class="tool-link-icon">📝</span>Summary Generator</a>
+            <a href="writer.html" class="tool-link"><span class="tool-link-icon">✍️</span>AI Writer</a>
+            <a href="email.html" class="tool-link"><span class="tool-link-icon">📧</span>Email Generator</a>
+            <a href="social.html" class="tool-link"><span class="tool-link-icon">📱</span>Social Media</a>
+            <a href="resume.html" class="tool-link"><span class="tool-link-icon">📄</span>Resume Builder</a>
+        </div>
+    </div>
+
     <script>
+    var lastFormula = '';
+    var lastFormulaData = {};
+
     async function generateFormula() {
         var description = document.getElementById('description').value;
         var excelVersion = document.getElementById('excelVersion').value;
-        var formulaType = document.getElementById('formulaType').value;
         var result = document.getElementById('result');
         var loading = document.getElementById('loading');
         var btn = document.getElementById('generateBtn');
 
-        if (!description || description.length < 10) {
-            alert('Please describe what you need.');
-            return;
-        }
+        if (!description || description.length < 10) { alert('Please describe what you need.'); return; }
 
         btn.disabled = true;
         loading.style.display = 'block';
         result.style.display = 'none';
 
-        var prompt = 'Generate an Excel formula for:\n' +
-                     'Description: ' + description + '\n' +
-                     'Excel Version: ' + excelVersion + '\n' +
-                     'Formula Type: ' + formulaType + '\n\n' +
-                     'Provide the formula with explanation.';
+        var prompt = 'Generate an Excel formula for:\n' + description + '\nExcel Version: ' + excelVersion + '\nProvide formula with explanation.';
 
-        console.log('Generating Excel formula...');
+        lastFormulaData = { description: description, excelVersion: excelVersion };
 
         try {
             var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -231,41 +151,28 @@
                 body: JSON.stringify({
                     model: 'openai/gpt-oss-120b',
                     messages: [
-                        { 
-                            role: 'system', 
-                            content: 'You are an Excel expert. Generate accurate formulas with clear explanations.' 
-                        },
-                        { 
-                            role: 'user', 
-                            content: prompt 
-                        }
+                        { role: 'system', content: 'You are an Excel expert. Generate accurate formulas.' },
+                        { role: 'user', content: prompt }
                     ],
                     max_tokens: 800,
                     temperature: 0.5
                 })
             });
 
-            if (!response.ok) {
-                var errorText = await response.text();
-                throw new Error('HTTP ' + response.status + ': ' + errorText);
-            }
-
+            if (!response.ok) throw new Error('HTTP ' + response.status);
             var data = await response.json();
-
-            var content = '';
-            if (data.choices && data.choices[0] && data.choices[0].message) {
-                content = data.choices[0].message.content;
-            } else {
-                throw new Error('Invalid response format');
-            }
+            var content = data.choices[0].message.content;
+            lastFormula = content;
 
             result.innerHTML = '<h3 style="color: #6366f1;">✅ Excel Formula:</h3><br>' + 
-                              content.replace(/\n/g, '<br>') + 
-                              '<br><br><button class="btn-copy" onclick="copyFormula()">📋 Copy Formula</button>';
+                              content.replace(/\n/g, '<br>') +
+                              '<div class="download-btns">' +
+                              '<button class="download-btn btn-pdf" onclick="downloadPDF()">📄 PDF</button>' +
+                              '<button class="download-btn btn-csv" onclick="downloadCSV()">📊 CSV</button>' +
+                              '<button class="download-btn btn-copy" onclick="copyFormula()">📋 Copy</button>' +
+                              '</div>';
             result.style.display = 'block';
-
         } catch (error) {
-            console.error('Error:', error);
             result.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
             result.style.display = 'block';
         } finally {
@@ -274,11 +181,33 @@
         }
     }
 
+    function downloadPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.setFontSize(16);
+        doc.text('Excel Formula', 15, 20);
+        doc.setFontSize(11);
+        const lines = doc.splitTextToSize(lastFormula, 180);
+        doc.text(lines, 15, 35);
+        doc.save('Formula_' + Date.now() + '.pdf');
+    }
+
+    function downloadCSV() {
+        var csv = 'Description,Formula\n';
+        csv += '"' + lastFormulaData.description + '","' + lastFormula.replace(/"/g, '""') + '"\n';
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'Formula_' + Date.now() + '.csv';
+        link.click();
+    }
+
     function copyFormula() {
-        var content = document.getElementById('result').innerText;
-        navigator.clipboard.writeText(content).then(function() {
-            alert('Formula Copied!');
-        });
+        navigator.clipboard.writeText(lastFormula).then(function() { alert('Formula copied!'); });
+    }
+
+    function toggleFAQ(id) {
+        document.getElementById('faq' + id).classList.toggle('show');
     }
     </script>
 </body>
