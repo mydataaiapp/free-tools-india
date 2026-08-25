@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Free Tools India | Rate Your Experience</title>
+    <meta name="description" content="Share your feedback about FreeToolsIndia. Help us improve our free AI tools.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.freetoolindia.com/feedback.html">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #6b7280;
+        }
+
+        .star-rating {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 40px;
+        }
+
+        .star {
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus, select:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⭐ Feedback</h1>
+            <p>Aapka feedback hamare liye important hai!</p>
+        </div>
+
+        <div class="star-rating" id="starRating">
+            <span class="star" onclick="rateStar(1)">⭐</span>
+            <span class="star" onclick="rateStar(2)">⭐</span>
+            <span class="star" onclick="rateStar(3)">⭐</span>
+            <span class="star" onclick="rateStar(4)">⭐</span>
+            <span class="star" onclick="rateStar(5)">⭐</span>
+        </div>
+        <p style="text-align:center; margin-bottom:20px;" id="ratingText">Tap to rate</p>
+
+        <div class="form-group">
+            <label>Kaunsa tool use kiya?</label>
+            <select id="toolUsed">
+                <option value="Summary Generator">Summary Generator</option>
+                <option value="AI Writer">AI Writer</option>
+                <option value="Email Generator">Email Generator</option>
+                <option value="Social Media Posts">Social Media Posts</option>
+                <option value="Resume Builder">Resume Builder</option>
+                <option value="Excel Formula Generator">Excel Formula Generator</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Aapka feedback:</label>
+            <textarea id="feedbackText" placeholder="Kya accha laga? Kya improve karein?"></textarea>
+        </div>
+
+        <button class="btn" onclick="submitFeedback()">📤 Submit Feedback</button>
+
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </div>
+
+    <script>
+    var selectedRating = 0;
+
+    function rateStar(rating) {
+        selectedRating = rating;
+        var stars = document.querySelectorAll('.star');
+        stars.forEach(function(star, index) {
+            if (index < rating) {
+                star.style.opacity = '1';
+            } else {
+                star.style.opacity = '0.3';
+            }
+        });
+        
+        var messages = ['', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent!'];
+        document.getElementById('ratingText').textContent = rating + ' Star - ' + messages[rating];
+    }
+
+    function submitFeedback() {
+        var toolUsed = document.getElementById('toolUsed').value;
+        var feedbackText = document.getElementById('feedbackText').value;
+        
+        if (selectedRating === 0) {
+            alert('Please rate us first!');
+            return;
+        }
+        
+        var mailtoLink = 'mailto:support@freetoolindia.com' +
+                         '?subject=' + encodeURIComponent('Feedback: ' + selectedRating + ' Stars') +
+                         '&body=' + encodeURIComponent('Rating: ' + selectedRating + ' Stars\nTool: ' + toolUsed + '\n\nFeedback:\n' + feedbackText);
+        
+        window.location.href = mailtoLink;
+        alert('Thank you for your feedback! 🙏');
+    }
+    </script>
+</body>
+</html>
