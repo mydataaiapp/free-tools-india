@@ -180,82 +180,86 @@
     </div>
 
     <script>
-   async function generateSummary() {
-    var text = document.getElementById('inputText').value;
-    var format = document.getElementById('format').value;
-    var language = document.getElementById('language').value;
-    var result = document.getElementById('result');
-    var loading = document.getElementById('loading');
-    var btn = document.getElementById('generateBtn');
+    async function generateSummary() {
+        var text = document.getElementById('inputText').value;
+        var format = document.getElementById('format').value;
+        var language = document.getElementById('language').value;
+        var result = document.getElementById('result');
+        var loading = document.getElementById('loading');
+        var btn = document.getElementById('generateBtn');
 
-    if (!text || text.length < 50) {
-        alert('Please paste at least 50 characters of text.');
-        return;
-    }
-
-    btn.disabled = true;
-    loading.style.display = 'block';
-    result.style.display = 'none';
-
-    var prompt = 'Summarize the following text in ' + format + ' format.\n' +
-                 'Language: ' + language + '\n\n' +
-                 'Text to summarize:\n' + text;
-
-    console.log('Generating summary with Gemini 3.6 Flash...');
-
-    try {
-        var API_KEY = 'AQ.Ab8RN6LwG0gmUqp_pWwn8cj6VlgcErMy2yoFaLXbN7Mpc1r8Cg';
-        
-        var response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=' + API_KEY, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                contents: [{
-                    parts: [{
-                        text: 'You are a professional content summarizer. Create clear and accurate summaries.\n\n' + prompt
-                    }]
-                }],
-                generationConfig: {
-                    temperature: 0.7,
-                    maxOutputTokens: 1000
-                }
-            })
-        });
-
-        console.log('Response status:', response.status);
-
-        if (!response.ok) {
-            var errorText = await response.text();
-            throw new Error('HTTP ' + response.status + ': ' + errorText);
+        if (!text || text.length < 50) {
+            alert('Please paste at least 50 characters of text.');
+            return;
         }
 
-        var data = await response.json();
-        console.log('API Response:', data);
+        btn.disabled = true;
+        loading.style.display = 'block';
+        result.style.display = 'none';
 
-        var content = '';
-        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-            content = data.candidates[0].content.parts[0].text;
-        } else if (data.error) {
-            throw new Error(data.error.message || JSON.stringify(data.error));
-        } else {
-            throw new Error('Invalid response format');
+        var prompt = 'Summarize the following text in ' + format + ' format.\n' +
+                     'Language: ' + language + '\n\n' +
+                     'Text to summarize:\n' + text;
+
+        console.log('Generating summary with Groq...');
+
+        try {
+            // GROQ API CALL
+            var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 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'
+                },
+                body: JSON.stringify({
+                    model: 'openai/gpt-oss-120b',
+                    messages: [
+                        { 
+                            role: 'system', 
+                            content: 'You are a professional content summarizer. Create clear, accurate, and concise summaries.' 
+                        },
+                        { 
+                            role: 'user', 
+                            content: prompt 
+                        }
+                    ],
+                    max_tokens: 1000,
+                    temperature: 0.7
+                })
+            });
+
+            console.log('Response status:', response.status);
+
+            if (!response.ok) {
+                var errorText = await response.text();
+                throw new Error('HTTP ' + response.status + ': ' + errorText);
+            }
+
+            var data = await response.json();
+            console.log('Success!');
+
+            var content = '';
+            if (data.choices && data.choices[0] && data.choices[0].message) {
+                content = data.choices[0].message.content;
+            } else if (data.error) {
+                throw new Error(data.error.message || JSON.stringify(data.error));
+            } else {
+                throw new Error('Invalid response format');
+            }
+
+            result.innerHTML = '<h3 style="color: #6366f1;">✅ Summary (' + format + '):</h3><br>' + 
+                              content.replace(/\n/g, '<br>');
+            result.style.display = 'block';
+
+        } catch (error) {
+            console.error('Error:', error);
+            result.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
+            result.style.display = 'block';
+        } finally {
+            btn.disabled = false;
+            loading.style.display = 'none';
         }
-
-        result.innerHTML = '<h3 style="color: #6366f1;">✅ Summary (' + format + '):</h3><br>' + 
-                          content.replace(/\n/g, '<br>');
-        result.style.display = 'block';
-
-    } catch (error) {
-        console.error('Error:', error);
-        result.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
-        result.style.display = 'block';
-    } finally {
-        btn.disabled = false;
-        loading.style.display = 'none';
     }
-}
     </script>
 </body>
 </html>
