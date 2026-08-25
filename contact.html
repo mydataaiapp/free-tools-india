@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Free Tools India | Get in Touch</title>
+    <meta name="description" content="Contact FreeToolsIndia for support, suggestions, or business inquiries. We're here to help!">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.freetoolindia.com/contact.html">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #6366f1;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #6b7280;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📞 Contact Us</h1>
+            <p>Koi bhi sawaal? Hum yahan hain!</p>
+        </div>
+
+        <form id="contactForm" onsubmit="handleContact(event)">
+            <div class="form-group">
+                <label>Your Name:</label>
+                <input type="text" id="name" required placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label>Your Email:</label>
+                <input type="email" id="email" required placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label>Subject:</label>
+                <select id="subject">
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Bug Report">Bug Report</option>
+                    <option value="Feature Request">Feature Request</option>
+                    <option value="Business">Business</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Message:</label>
+                <textarea id="message" required placeholder="Type your message here..."></textarea>
+            </div>
+
+            <button type="submit" class="btn">📨 Send Message</button>
+        </form>
+
+        <div class="contact-info">
+            <p>📧 Email: support@freetoolindia.com</p>
+            <p>⏰ Response Time: 24-48 hours</p>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </div>
+
+    <script>
+    function handleContact(event) {
+        event.preventDefault();
+        
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var subject = document.getElementById('subject').value;
+        var message = document.getElementById('message').value;
+        
+        // Yahan aap email service integrate kar sakte hain
+        // Abhi ke liye mailto use karte hain
+        
+        var mailtoLink = 'mailto:support@freetoolindia.com' +
+                         '?subject=' + encodeURIComponent(subject + ' - ' + name) +
+                         '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message);
+        
+        window.location.href = mailtoLink;
+        
+        alert('Thank you! Your email client will open to send the message.');
+    }
+    </script>
+</body>
+</html>
