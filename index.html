@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free AI Tools India - 6 Powerful Tools | FreeToolsIndia</title>
     <meta name="description" content="Free AI tools - Summary Generator, AI Writer, Email Generator, Social Media Posts, Resume Builder, Excel Formula Generator. 100% free!">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <style>
         * {
             margin: 0;
@@ -135,6 +136,7 @@
             transform: scale(1.02);
         }
 
+        /* Footer Styles */
         .footer {
             text-align: center;
             padding: 32px 16px 20px;
@@ -175,6 +177,43 @@
             margin-top: 12px;
         }
 
+        .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .footer-links a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        .footer .email-link {
+            color: #d9d0ff;
+            text-decoration: underline;
+            font-weight: 400;
+        }
+
+        .footer .email-link:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer .badge {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .footer .badge span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* Responsive */
         @media (max-width: 480px) {
             .header h1 {
                 font-size: 2rem;
@@ -186,16 +225,59 @@
             .tool-card {
                 padding: 20px 12px;
             }
+            .footer-links {
+                gap: 8px;
+            }
+            .footer a {
+                margin: 0 6px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .tools-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 16px;
+            }
+        }
+
+        /* Scroll animation */
+        .tool-card {
+            opacity: 1;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .tool-card:nth-child(1) { animation-delay: 0.1s; }
+        .tool-card:nth-child(2) { animation-delay: 0.2s; }
+        .tool-card:nth-child(3) { animation-delay: 0.3s; }
+        .tool-card:nth-child(4) { animation-delay: 0.4s; }
+        .tool-card:nth-child(5) { animation-delay: 0.5s; }
+        .tool-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <div class="header">
             <h1>🚀 Free AI Tools <span>India</span></h1>
             <p>Think less, write more — with AI, totally FREE!</p>
         </div>
 
+        <!-- Tools Grid -->
         <div class="tools-grid">
             <!-- Summary Generator -->
             <a href="summary.html" class="tool-card">
@@ -246,16 +328,21 @@
             </a>
         </div>
 
+        <!-- Footer -->
         <div class="footer">
             <p>© 2025 FreeToolsIndia.com — All Rights Reserved</p>
-            <p style="margin: 10px 0;">📧 <a href="mailto:support@freetoolindia.com" style="color:#d9d0ff; text-decoration:underline;">support@freetoolindia.com</a></p>
+            <p style="margin: 10px 0;">
+                📧 <a href="mailto:support@freetoolindia.com" class="email-link">support@freetoolindia.com</a>
+            </p>
             <div class="footer-links">
                 <a href="contact.html">📞 Contact</a>
                 <a href="feedback.html">💬 Feedback</a>
                 <a href="privacy-policy.html">🔒 Privacy Policy</a>
                 <a href="terms-of-service.html">⚖️ Terms of Service</a>
             </div>
-            <p style="margin-top: 18px; font-size:0.9rem; opacity:0.7;">✨ All tools & footer pages are fully clickable ✨</p>
+            <div class="badge">
+                <span>✨ All tools & footer pages are fully clickable ✨</span>
+            </div>
         </div>
     </div>
 </body>
