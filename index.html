@@ -19,57 +19,7 @@
         "@type": "WebSite",
         "name": "FreeToolsIndia",
         "url": "https://www.freetoolindia.com/",
-        "description": "Free AI tools for everyone - Summary Generator, AI Writer, Email Generator, Social Media Posts, Resume Builder, Excel Formula Generator.",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://www.freetoolindia.com/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-    </script>
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Summary Generator",
-                "url": "https://www.freetoolindia.com/summary.html"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "AI Writer",
-                "url": "https://www.freetoolindia.com/writer.html"
-            },
-            {
-                "@type": "ListItem",
-                "position": 3,
-                "name": "Email Generator",
-                "url": "https://www.freetoolindia.com/email.html"
-            },
-            {
-                "@type": "ListItem",
-                "position": 4,
-                "name": "Social Media Posts",
-                "url": "https://www.freetoolindia.com/social.html"
-            },
-            {
-                "@type": "ListItem",
-                "position": 5,
-                "name": "Resume Builder",
-                "url": "https://www.freetoolindia.com/resume.html"
-            },
-            {
-                "@type": "ListItem",
-                "position": 6,
-                "name": "Excel Formula Generator",
-                "url": "https://www.freetoolindia.com/excel.html"
-            }
-        ]
+        "description": "Free AI tools for everyone - Summary Generator, AI Writer, Email Generator, Social Media Posts, Resume Builder, Excel Formula Generator."
     }
     </script>
     
@@ -109,6 +59,12 @@
             font-size: 1.2rem;
         }
 
+        .header .tagline {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #c7d2fe;
+        }
+
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -125,6 +81,7 @@
             color: #333;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s;
+            display: block;
         }
 
         .tool-card:hover {
@@ -225,6 +182,9 @@
             font-weight: 600;
             color: #374151;
             cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .faq-question:hover {
@@ -270,6 +230,9 @@
             .features, .faq-section {
                 padding: 20px;
             }
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -277,8 +240,8 @@
     <div class="container">
         <div class="header">
             <h1>🚀 Free AI Tools India</h1>
-            <p>Don't hesitate—get it written—absolutely free</p>
-            <p style="margin-top: 10px; font-size: 1rem;">6 Powerful AI Tools | PDF/CSV Download | Hindi Support</p>
+            <p>Socho Mat, AI Se Likhao - Bilkul FREE!</p>
+            <p class="tagline">6 Powerful AI Tools | PDF/CSV Download | Hindi Support | No Signup</p>
         </div>
 
         <div class="tools-grid">
@@ -386,6 +349,7 @@
 
         <div class="footer">
             <p>© 2025 FreeToolsIndia.com - All Rights Reserved</p>
+            <p style="margin-top: 10px;">📧 support@freetoolindia.com</p>
             <div class="footer-links">
                 <a href="contact.html">Contact</a>
                 <a href="feedback.html">Feedback</a>
