@@ -23,12 +23,13 @@ export default async function handler(req, res) {
 
         console.log('🎨 Generating image with prompt:', prompt);
 
-        // ============================================
-        // STEP 1: Try Replicate API (Primary)
-        // ============================================
         let imageUrl = null;
         let usedApi = null;
+        let errors = [];
 
+        // ============================================
+        // API 1: Replicate (FLUX-2 Pro)
+        // ============================================
         if (process.env.REPLICATE_API_TOKEN) {
             try {
                 console.log('🔄 Trying Replicate API...');
@@ -57,19 +58,17 @@ export default async function handler(req, res) {
                     console.log('✅ Image generated via Replicate!');
                 }
             } catch (replicateError) {
-                console.log('⚠️ Replicate API failed:', replicateError.message);
+                console.log('⚠️ Replicate failed:', replicateError.message);
+                errors.push(`Replicate: ${replicateError.message}`);
             }
-        } else {
-            console.log('⚠️ REPLICATE_API_TOKEN not set, skipping Replicate');
         }
 
         // ============================================
-        // STEP 2: Try Stability AI (Backup)
+        // API 2: Stability AI (Backup)
         // ============================================
         if (!imageUrl && process.env.STABILITY_API_KEY) {
             try {
                 console.log('🔄 Trying Stability AI...');
-                
                 const response = await fetch(
                     'https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image',
                     {
@@ -79,12 +78,7 @@ export default async function handler(req, res) {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            text_prompts: [
-                                {
-                                    text: prompt,
-                                    weight: 1
-                                }
-                            ],
+                            text_prompts: [{ text: prompt, weight: 1 }],
                             cfg_scale: 7,
                             height: 1024,
                             width: 1024,
@@ -105,37 +99,44 @@ export default async function handler(req, res) {
                 } else {
                     const errorText = await response.text();
                     console.log('⚠️ Stability AI error:', errorText);
+                    errors.push(`Stability AI: ${response.status}`);
                 }
             } catch (stabilityError) {
                 console.log('⚠️ Stability AI failed:', stabilityError.message);
+                errors.push(`Stability AI: ${stabilityError.message}`);
             }
-        } else {
-            console.log('⚠️ STABILITY_API_KEY not set, skipping Stability AI');
         }
 
         // ============================================
-        // STEP 3: Try Pollinations AI (Last Resort - Completely Free)
+        // API 3: Pollinations AI (Last Resort)
         // ============================================
         if (!imageUrl) {
             try {
                 console.log('🔄 Trying Pollinations AI (Free)...');
                 const encodedPrompt = encodeURIComponent(prompt);
-                imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1024&height=1024&nologo=true`;
-                usedApi = 'Pollinations AI (Free)';
-                console.log('✅ Image generated via Pollinations!');
+                // Test if Pollinations is working
+                const testResponse = await fetch(`https://image.pollinations.ai/prompt/${encodedPrompt}?width=512&height=512&nologo=true`);
+                if (testResponse.ok) {
+                    imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1024&height=1024&nologo=true`;
+                    usedApi = 'Pollinations AI (Free)';
+                    console.log('✅ Image generated via Pollinations!');
+                } else {
+                    errors.push('Pollinations: Service unavailable');
+                }
             } catch (pollinationsError) {
                 console.log('⚠️ Pollinations failed:', pollinationsError.message);
+                errors.push(`Pollinations: ${pollinationsError.message}`);
             }
         }
 
         // ============================================
-        // FINAL CHECK
+        // FINAL RESPONSE
         // ============================================
         if (!imageUrl) {
             return res.status(500).json({
                 success: false,
                 error: 'All APIs failed. Please try again later.',
-                details: 'Replicate, Stability AI, and Pollinations all failed.'
+                details: errors.join(' | ')
             });
         }
 
@@ -144,7 +145,7 @@ export default async function handler(req, res) {
             image: imageUrl,
             prompt: prompt,
             api: usedApi,
-            message: `✅ Image generated using ${usedApi}`
+            message: `✅ Generated using ${usedApi}`
         });
 
     } catch (error) {
