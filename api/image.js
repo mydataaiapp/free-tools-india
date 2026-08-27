@@ -1,3 +1,5 @@
+import Replicate from 'replicate';
+
 export default async function handler(req, res) {
     // CORS Headers
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,80 +21,137 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'Please enter a valid description (minimum 3 characters)' });
         }
 
-        // ============================================
-        // OPTION 1: Pollinations AI (Completely FREE, No API Key)
-        // ============================================
-        const encodedPrompt = encodeURIComponent(prompt);
-        const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1024&height=1024&nologo=true`;
-
-        return res.status(200).json({
-            success: true,
-            image: imageUrl,
-            prompt: prompt
-        });
+        console.log('🎨 Generating image with prompt:', prompt);
 
         // ============================================
-        // OPTION 2: Replicate (Stable Diffusion) - Need API Key
-        // Uncomment this section and comment the above to use Replicate
+        // STEP 1: Try Replicate API (Primary)
         // ============================================
-        /*
-        const response = await fetch('https://api.replicate.com/v1/predictions', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Token ${process.env.REPLICATE_API_KEY}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                version: 'stability-ai/stable-diffusion:db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf',
-                input: {
-                    prompt: prompt,
-                    negative_prompt: 'ugly, blurry, low quality, deformed',
-                    width: 768,
-                    height: 768,
-                    num_outputs: 1,
-                }
-            })
-        });
-
-        const prediction = await response.json();
-
-        if (prediction.error) {
-            return res.status(500).json({ error: prediction.error });
-        }
-
-        // Poll for result
         let imageUrl = null;
-        let attempts = 0;
-        while (attempts < 30) {
-            const statusResponse = await fetch(`https://api.replicate.com/v1/predictions/${prediction.id}`, {
-                headers: { 'Authorization': `Token ${process.env.REPLICATE_API_KEY}` }
-            });
-            const status = await statusResponse.json();
+        let usedApi = null;
 
-            if (status.status === 'succeeded') {
-                imageUrl = status.output[0];
-                break;
-            } else if (status.status === 'failed') {
-                return res.status(500).json({ error: 'Image generation failed' });
+        if (process.env.REPLICATE_API_TOKEN) {
+            try {
+                console.log('🔄 Trying Replicate API...');
+                const replicate = new Replicate({
+                    auth: process.env.REPLICATE_API_TOKEN,
+                });
+
+                const output = await replicate.run(
+                    "black-forest-labs/flux-2-pro",
+                    {
+                        input: {
+                            prompt: prompt,
+                            resolution: "1 MP",
+                            aspect_ratio: "1:1",
+                            input_images: [],
+                            output_format: "webp",
+                            output_quality: 85,
+                            safety_tolerance: 2
+                        }
+                    }
+                );
+
+                if (Array.isArray(output) && output.length > 0) {
+                    imageUrl = output[0];
+                    usedApi = 'Replicate (FLUX-2 Pro)';
+                    console.log('✅ Image generated via Replicate!');
+                }
+            } catch (replicateError) {
+                console.log('⚠️ Replicate API failed:', replicateError.message);
             }
-
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            attempts++;
+        } else {
+            console.log('⚠️ REPLICATE_API_TOKEN not set, skipping Replicate');
         }
 
+        // ============================================
+        // STEP 2: Try Stability AI (Backup)
+        // ============================================
+        if (!imageUrl && process.env.STABILITY_API_KEY) {
+            try {
+                console.log('🔄 Trying Stability AI...');
+                
+                const response = await fetch(
+                    'https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${process.env.STABILITY_API_KEY}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            text_prompts: [
+                                {
+                                    text: prompt,
+                                    weight: 1
+                                }
+                            ],
+                            cfg_scale: 7,
+                            height: 1024,
+                            width: 1024,
+                            samples: 1,
+                            steps: 30,
+                        })
+                    }
+                );
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.artifacts && data.artifacts.length > 0) {
+                        const base64Image = data.artifacts[0].base64;
+                        imageUrl = `data:image/png;base64,${base64Image}`;
+                        usedApi = 'Stability AI (Stable Diffusion XL)';
+                        console.log('✅ Image generated via Stability AI!');
+                    }
+                } else {
+                    const errorText = await response.text();
+                    console.log('⚠️ Stability AI error:', errorText);
+                }
+            } catch (stabilityError) {
+                console.log('⚠️ Stability AI failed:', stabilityError.message);
+            }
+        } else {
+            console.log('⚠️ STABILITY_API_KEY not set, skipping Stability AI');
+        }
+
+        // ============================================
+        // STEP 3: Try Pollinations AI (Last Resort - Completely Free)
+        // ============================================
         if (!imageUrl) {
-            return res.status(500).json({ error: 'Timeout: Generation took too long' });
+            try {
+                console.log('🔄 Trying Pollinations AI (Free)...');
+                const encodedPrompt = encodeURIComponent(prompt);
+                imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1024&height=1024&nologo=true`;
+                usedApi = 'Pollinations AI (Free)';
+                console.log('✅ Image generated via Pollinations!');
+            } catch (pollinationsError) {
+                console.log('⚠️ Pollinations failed:', pollinationsError.message);
+            }
+        }
+
+        // ============================================
+        // FINAL CHECK
+        // ============================================
+        if (!imageUrl) {
+            return res.status(500).json({
+                success: false,
+                error: 'All APIs failed. Please try again later.',
+                details: 'Replicate, Stability AI, and Pollinations all failed.'
+            });
         }
 
         return res.status(200).json({
             success: true,
             image: imageUrl,
-            prompt: prompt
+            prompt: prompt,
+            api: usedApi,
+            message: `✅ Image generated using ${usedApi}`
         });
-        */
 
     } catch (error) {
-        console.error('Image Generation Error:', error);
-        return res.status(500).json({ error: error.message || 'Internal server error' });
+        console.error('❌ Image Generation Error:', error);
+        return res.status(500).json({
+            success: false,
+            error: error.message || 'Internal server error. Please try again.'
+        });
     }
 }
