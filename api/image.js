@@ -1,5 +1,5 @@
 // ============================================
-// FIXED: Seed value now within limit
+// FORCE FRESH IMAGE - ALWAYS NEW
 // ============================================
 
 export default function handler(req, res) {
@@ -8,12 +8,10 @@ export default function handler(req, res) {
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    // Handle OPTIONS
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
     }
 
-    // Only POST
     if (req.method !== 'POST') {
         return res.status(405).json({ 
             success: false, 
@@ -32,17 +30,23 @@ export default function handler(req, res) {
         }
 
         // ============================================
-        // FIX: Seed value now within 2147483647 limit
+        // MULTIPLE RANDOM PARAMETERS - FORCE FRESH IMAGE
         // ============================================
         const seed = Math.floor(Math.random() * 2147483647);
+        const timestamp = Date.now();
+        const random = Math.random().toString(36).substring(7);
         
-        const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt.trim())}?width=1024&height=1024&nologo=true&seed=${seed}`;
+        // Different parameters every time
+        const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt.trim())}?width=1024&height=1024&nologo=true&seed=${seed}&ts=${timestamp}&r=${random}`;
+
+        console.log('🎨 Generated Image URL:', imageUrl);
 
         return res.status(200).json({
             success: true,
             image: imageUrl,
             prompt: prompt.trim(),
-            api: 'Pollinations AI'
+            seed: seed,
+            api: 'Pollinations AI (Fresh)'
         });
 
     } catch (error) {
