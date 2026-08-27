@@ -670,66 +670,60 @@
             arrow.classList.toggle('open');
         }
 
-        async function generateImage() {
-            const prompt = document.getElementById('prompt').value.trim();
-            const btn = document.getElementById('generateBtn');
-            const loading = document.getElementById('loading');
-            const result = document.getElementById('result');
+  async function generateImage() {
+    const prompt = document.getElementById('prompt').value.trim();
+    const btn = document.getElementById('generateBtn');
+    const loading = document.getElementById('loading');
+    const result = document.getElementById('result');
 
-            if (!prompt || prompt.length < 3) {
-                alert('Please describe the image you want to create!');
-                return;
-            }
+    if (!prompt || prompt.length < 3) {
+        alert('Please describe the image you want to create!');
+        return;
+    }
 
-            btn.disabled = true;
-            btn.innerHTML = '⏳ Generating...';
-            loading.style.display = 'block';
-            result.innerHTML = '';
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Generating...';
+    loading.style.display = 'block';
+    result.innerHTML = '';
 
-            try {
-                const response = await fetch('/api/image', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt })
-                });
-
-                const data = await response.json();
-
-                if (data.success && data.image) {
-                    const apiBadge = data.api ? `<div class="api-badge success">✅ Generated via: ${data.api}</div>` : '';
-                    result.innerHTML = `
-                        <img src="${data.image}" alt="AI Generated Image: ${prompt}" loading="lazy">
-                        <div class="action-buttons">
-                            <a href="${data.image}" download="ai-image-${Date.now()}.png" class="btn-download">⬇️ Download Image</a>
-                            <button onclick="regenerateImage()" class="btn-regenerate">🔄 Generate Again</button>
-                        </div>
-                        <p style="color:#888;font-size:0.85rem;margin-top:12px;">
-                            🎨 Prompt: "${prompt}"
-                        </p>
-                        ${apiBadge}
-                    `;
-                } else {
-                    result.innerHTML = `<div class="error-msg">❌ ${data.error || 'Something went wrong. Please try again.'}</div>`;
-                }
-            } catch (error) {
-                result.innerHTML = `<div class="error-msg">❌ Network error: ${error.message}</div>`;
-            }
-
-            btn.disabled = false;
-            btn.innerHTML = '🎨 Generate';
-            loading.style.display = 'none';
-        }
-
-        function regenerateImage() {
-            generateImage();
-        }
-
-        document.getElementById('prompt').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
-                e.preventDefault();
-                generateImage();
-            }
+    try {
+        const response = await fetch('/api/image', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ prompt })
         });
+
+        // Check if response is OK
+        if (!response.ok) {
+            const text = await response.text();
+            throw new Error(`Server error: ${response.status} - ${text}`);
+        }
+
+        const data = await response.json();
+
+        if (data.success && data.image) {
+            result.innerHTML = `
+                <img src="${data.image}" alt="AI Generated Image" loading="lazy" style="max-width:100%;border-radius:15px;">
+                <div style="margin-top:15px;">
+                    <a href="${data.image}" download="ai-image-${Date.now()}.png" class="btn-download">⬇️ Download</a>
+                    <button onclick="regenerateImage()" class="btn-regenerate">🔄 Generate Again</button>
+                </div>
+                <p style="color:#888;font-size:0.85rem;margin-top:10px;">✅ ${data.api || 'AI Generated'}</p>
+            `;
+        } else {
+            result.innerHTML = `<div class="error-msg">❌ ${data.error || 'Something went wrong'}</div>`;
+        }
+    } catch (error) {
+        console.error('Fetch Error:', error);
+        result.innerHTML = `<div class="error-msg">❌ ${error.message}</div>`;
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = '🎨 Generate';
+    loading.style.display = 'none';
+}
     </script>
 
 </body>
