@@ -1,6 +1,5 @@
 // ============================================
-// SUPER SIMPLE - 100% WORKING
-// No External Dependencies
+// 100% WORKING - NO REPLICATE NEEDED
 // ============================================
 
 export default function handler(req, res) {
@@ -9,12 +8,12 @@ export default function handler(req, res) {
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    // Handle OPTIONS (preflight)
+    // Handle OPTIONS
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
     }
 
-    // Only POST requests
+    // Only POST
     if (req.method !== 'POST') {
         return res.status(405).json({ 
             success: false, 
@@ -32,14 +31,17 @@ export default function handler(req, res) {
             });
         }
 
-        // Generate image URL
+        // ============================================
+        // POLLINATIONS AI - COMPLETELY FREE
+        // No API Key, No Dependencies
+        // ============================================
         const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt.trim())}?width=1024&height=1024&nologo=true&seed=${Date.now()}`;
 
-        // Success Response
         return res.status(200).json({
             success: true,
             image: imageUrl,
-            prompt: prompt.trim()
+            prompt: prompt.trim(),
+            api: 'Pollinations AI'
         });
 
     } catch (error) {
