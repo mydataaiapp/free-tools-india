@@ -3,20 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free AI Image Generator - Create Stunning Images with AI | FreeToolsIndia</title>
-    <meta name="description" content="Free AI Image Generator - Create stunning images from text descriptions. Generate AI art, photos, and designs instantly. 100% free, no signup required.">
-    <meta name="keywords" content="ai image generator, free ai image generator, ai art generator, text to image, ai photo generator">
+    <title>Free AI Image Generator - Multi-API | FreeToolsIndia</title>
+    <meta name="description" content="Free AI Image Generator with multiple APIs - Replicate, Stability AI, Pollinations. 100% free, no signup required.">
     <link rel="canonical" href="https://www.freetoolindia.com/image.html">
     
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="Free AI Image Generator - Create Stunning Images with AI">
-    <meta property="og:description" content="Generate beautiful images from text using AI. Free, fast, and no signup required.">
-    <meta property="og:image" content="https://www.freetoolindia.com/og-image.jpg">
+    <meta property="og:title" content="Free AI Image Generator - Multi-API">
+    <meta property="og:description" content="Generate images with multiple AI models. Free and instant!">
     <meta property="og:url" content="https://www.freetoolindia.com/image.html">
     <meta name="twitter:card" content="summary_large_image">
 
     <style>
-        /* === RESET & BASE === */
         * {
             margin: 0;
             padding: 0;
@@ -25,7 +21,7 @@
         }
 
         body {
-            background: linear-gradient(145deg, #1a103c 0%, #0d0826 100%);
+            background: linear-gradient(145deg, #0a0618 0%, #1a103c 50%, #0d0826 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -35,28 +31,40 @@
             margin: 0 auto;
         }
 
-        /* === HEADER === */
         .header {
             text-align: center;
             margin-bottom: 35px;
             padding: 35px 20px 25px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .header .badge {
             display: inline-block;
             background: linear-gradient(135deg, #f9d976, #f39b7b);
-            color: #1a103c;
+            color: #0a0618;
             padding: 4px 18px;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             margin-bottom: 12px;
+        }
+
+        .header .badge-pro {
+            display: inline-block;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: #fff;
+            padding: 3px 16px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 8px;
         }
 
         .header h1 {
@@ -93,17 +101,12 @@
         .header .stats span {
             color: #8a80b3;
             font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .header .stats span strong {
             color: #fff;
-            font-weight: 700;
         }
 
-        /* === MAIN CARD === */
         .card {
             background: rgba(255, 255, 255, 0.97);
             border-radius: 28px;
@@ -130,7 +133,7 @@
         }
 
         .card-header .free-tag {
-            background: #27ae60;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
             color: #fff;
             padding: 4px 16px;
             border-radius: 20px;
@@ -140,7 +143,15 @@
             letter-spacing: 0.5px;
         }
 
-        /* === PROMPT SUGGESTIONS === */
+        .card-header .model-tag {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: #fff;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
         .prompt-suggestions {
             display: flex;
             flex-wrap: wrap;
@@ -168,7 +179,6 @@
             box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
         }
 
-        /* === INPUT AREA === */
         .input-group {
             display: flex;
             gap: 14px;
@@ -182,7 +192,6 @@
             border: 2px solid #e8e4f0;
             border-radius: 16px;
             font-size: 1rem;
-            font-weight: 400;
             resize: vertical;
             min-height: 85px;
             transition: border-color 0.3s;
@@ -195,10 +204,6 @@
             outline: none;
             background: #fff;
             box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
-        }
-
-        .input-group textarea::placeholder {
-            color: #aaa;
         }
 
         .btn-generate {
@@ -230,7 +235,6 @@
             transform: none;
         }
 
-        /* === LOADING === */
         .loading {
             display: none;
             text-align: center;
@@ -248,9 +252,7 @@
         }
 
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
 
         .loading p {
@@ -265,7 +267,6 @@
             margin-top: 8px;
         }
 
-        /* === RESULT === */
         .result {
             margin-top: 25px;
             text-align: center;
@@ -282,7 +283,7 @@
 
         .result img {
             max-width: 100%;
-            max-height: 600px;
+            max-height: 700px;
             border-radius: 18px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
         }
@@ -333,7 +334,6 @@
             transform: translateY(-2px);
         }
 
-        /* === ERROR === */
         .error-msg {
             color: #e74c3c;
             background: #fef0ef;
@@ -344,7 +344,22 @@
             font-weight: 500;
         }
 
-        /* === FAQ SECTION === */
+        .api-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 10px;
+            background: #f0edff;
+            color: #3d2a7a;
+        }
+
+        .api-badge.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
         .faq-section {
             background: rgba(255, 255, 255, 0.97);
             border-radius: 28px;
@@ -407,7 +422,6 @@
             padding-top: 12px;
         }
 
-        /* === TOOL LINKS (Internal Linking) === */
         .tool-links {
             display: flex;
             flex-wrap: wrap;
@@ -435,11 +449,6 @@
             transform: translateY(-2px);
         }
 
-        .tool-links a .emoji {
-            margin-right: 4px;
-        }
-
-        /* === BACK BUTTON === */
         .back-btn {
             display: inline-block;
             padding: 12px 30px;
@@ -458,7 +467,6 @@
             color: #fff;
         }
 
-        /* === FOOTER === */
         .footer {
             text-align: center;
             padding: 20px 16px;
@@ -477,7 +485,6 @@
             color: #fff;
         }
 
-        /* === RESPONSIVE === */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -498,10 +505,6 @@
             .header .stats {
                 gap: 15px;
             }
-            .prompt-suggestions button {
-                font-size: 0.75rem;
-                padding: 6px 14px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -521,50 +524,50 @@
 
     <div class="container">
 
-        <!-- ===== HEADER ===== -->
         <div class="header">
-            <div class="badge">⭐ Free Tool</div>
+            <div>
+                <span class="badge">⭐ Free Tool</span>
+                <span class="badge-pro">Multi-API</span>
+            </div>
             <h1>AI Image <span>Generator</span></h1>
-            <p>Describe your vision and watch AI bring it to life in seconds</p>
+            <p>Powered by Replicate + Stability AI + Pollinations — Always Working!</p>
             <div class="stats">
                 <span>⚡ <strong>Free</strong> — No signup</span>
-                <span>🎨 <strong>AI</strong> — Powered by Groq</span>
+                <span>🔄 <strong>3 APIs</strong> — Always available</span>
                 <span>🚀 <strong>Instant</strong> — Results in seconds</span>
             </div>
         </div>
 
-        <!-- ===== MAIN TOOL ===== -->
         <div class="card">
             <div class="card-header">
-                <h2>✏️ Create Your Image</h2>
+                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                    <h2>✏️ Create Your Image</h2>
+                    <span class="model-tag">FLUX-2 Pro + SDXL</span>
+                </div>
                 <span class="free-tag">100% Free</span>
             </div>
 
-            <!-- Prompt Suggestions -->
             <div class="prompt-suggestions">
-                <button onclick="setPrompt('A majestic lion with glowing eyes in a futuristic city')">🦁 Cyber Lion</button>
-                <button onclick="setPrompt('A serene lake reflecting a starry night sky with mountains')">🌌 Starry Lake</button>
-                <button onclick="setPrompt('An astronaut riding a neon dragon through space')">🐉 Space Dragon</button>
-                <button onclick="setPrompt('A cozy cottage in a magical forest with glowing flowers')">🏡 Magic Cottage</button>
-                <button onclick="setPrompt('Abstract digital art with vibrant colors and geometric shapes')">🎨 Abstract Art</button>
+                <button onclick="setPrompt('A majestic lion with glowing eyes in a futuristic cyberpunk city, neon lights, rain, highly detailed, photorealistic')">🦁 Cyber Lion</button>
+                <button onclick="setPrompt('A serene lake reflecting a starry night sky with mountains, aurora borealis, photorealistic, 8k')">🌌 Starry Lake</button>
+                <button onclick="setPrompt('An astronaut riding a neon dragon through space, vibrant colors, digital art, highly detailed')">🐉 Space Dragon</button>
+                <button onclick="setPrompt('A cozy cottage in a magical forest with glowing flowers, fireflies, moonlight, fantasy art')">🏡 Magic Cottage</button>
+                <button onclick="setPrompt('Abstract digital art with vibrant colors, geometric shapes, 3D render, modern art')">🎨 Abstract Art</button>
             </div>
 
-            <!-- Input -->
             <div class="input-group">
-                <textarea id="prompt" placeholder="Describe the image you want to create... (e.g., A futuristic city with neon lights and flying cars)"></textarea>
+                <textarea id="prompt" placeholder="Describe the image you want to create... (e.g., A futuristic city with neon lights and flying cars, photorealistic, 8k)"></textarea>
                 <button class="btn-generate" id="generateBtn" onclick="generateImage()">
                     🎨 Generate
                 </button>
             </div>
 
-            <!-- Loading -->
             <div class="loading" id="loading">
                 <div class="spinner"></div>
                 <p>🖌️ AI is creating your image...</p>
-                <p class="tip">This usually takes 5-15 seconds</p>
+                <p class="tip">Trying multiple APIs — This takes 5-20 seconds</p>
             </div>
 
-            <!-- Result -->
             <div class="result" id="result">
                 <div class="placeholder">
                     ✨ Your generated image will appear here<br>
@@ -573,50 +576,48 @@
             </div>
         </div>
 
-        <!-- ===== TOOL LINKS (Internal Linking) ===== -->
         <div style="text-align:center;margin-bottom:25px;">
             <p style="color:#8a80b3;font-size:0.9rem;margin-bottom:10px;">🚀 Try Our Other Free AI Tools</p>
             <div class="tool-links">
-                <a href="summary.html"><span class="emoji">📝</span> Summary Generator</a>
-                <a href="writer.html"><span class="emoji">✍️</span> AI Writer</a>
-                <a href="email.html"><span class="emoji">📧</span> Email Generator</a>
-                <a href="social.html"><span class="emoji">📱</span> Social Media Posts</a>
-                <a href="resume.html"><span class="emoji">📄</span> Resume Builder</a>
-                <a href="excel.html"><span class="emoji">📊</span> Excel Formula</a>
+                <a href="summary.html">📝 Summary Generator</a>
+                <a href="writer.html">✍️ AI Writer</a>
+                <a href="email.html">📧 Email Generator</a>
+                <a href="social.html">📱 Social Media Posts</a>
+                <a href="resume.html">📄 Resume Builder</a>
+                <a href="excel.html">📊 Excel Formula</a>
             </div>
         </div>
 
-        <!-- ===== FAQ SECTION ===== -->
         <div class="faq-section">
             <h2>❓ Frequently Asked Questions</h2>
 
             <div class="faq-item">
                 <div class="question" onclick="toggleFAQ(this)">
-                    What is an AI Image Generator?
+                    How does the Multi-API system work?
                     <span class="arrow">▼</span>
                 </div>
                 <div class="answer">
-                    An AI Image Generator is a tool that uses artificial intelligence to create images from text descriptions. Simply describe what you want to see, and the AI generates a unique image based on your prompt.
+                    The tool tries Replicate (FLUX-2 Pro) first. If that fails, it automatically switches to Stability AI (Stable Diffusion XL). If both fail, it uses Pollinations AI as a free backup. This ensures you always get an image!
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="question" onclick="toggleFAQ(this)">
-                    Is this AI Image Generator really free?
+                    Is this really free?
                     <span class="arrow">▼</span>
                 </div>
                 <div class="answer">
-                    Yes! This tool is 100% free to use. No signup, no credit card, no hidden charges. You can generate as many images as you want without any limitations.
+                    Yes! This tool is 100% free. No signup, no credit card, no hidden charges. Generate as many images as you want.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="question" onclick="toggleFAQ(this)">
-                    How do I get better results?
+                    How do I get the best results?
                     <span class="arrow">▼</span>
                 </div>
                 <div class="answer">
-                    For best results, be descriptive and specific in your prompts. Include details about style (e.g., "realistic," "cartoon," "oil painting"), colors, lighting, composition, and mood. Example: "A realistic sunset over a calm ocean with golden light reflecting on the water."
+                    Be descriptive! Include details like style (photorealistic, digital art, oil painting), colors, lighting, mood, and composition. Example: "A photorealistic sunset over a calm ocean with golden light reflecting on the water, 8k, highly detailed."
                 </div>
             </div>
 
@@ -626,29 +627,27 @@
                     <span class="arrow">▼</span>
                 </div>
                 <div class="answer">
-                    Yes, you can use the images generated for personal and commercial projects. However, we recommend reviewing the specific terms of the underlying AI model. All images are generated for you to use freely.
+                    Yes! You can use generated images for personal and commercial projects. All images are yours to use freely.
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="question" onclick="toggleFAQ(this)">
-                    What makes this tool different from others?
+                    What happens if one API fails?
                     <span class="arrow">▼</span>
                 </div>
                 <div class="answer">
-                    This tool is completely free, requires no registration, and is powered by advanced AI models. It's designed for Indian users and beyond, with fast performance and a simple, intuitive interface.
+                    The system automatically falls back to the next available API. You won't even notice — the image will still be generated using a different AI model!
                 </div>
             </div>
         </div>
 
-        <!-- ===== BACK BUTTON ===== -->
         <div style="text-align:center;">
             <a href="index.html" class="back-btn">← Back to Home</a>
         </div>
 
-        <!-- ===== FOOTER ===== -->
         <div class="footer">
-            <p>© 2025 FreeToolsIndia.com — Free AI Image Generator</p>
+            <p>© 2025 FreeToolsIndia.com — Free AI Image Generator with Multi-API Support</p>
             <p style="margin-top:6px;">
                 <a href="contact.html">Contact</a> |
                 <a href="feedback.html">Feedback</a> |
@@ -659,41 +658,29 @@
 
     </div>
 
-    <!-- ===== JAVASCRIPT ===== -->
     <script>
-        // Set prompt from suggestion buttons
         function setPrompt(text) {
             document.getElementById('prompt').value = text;
         }
 
-        // Toggle FAQ answers
         function toggleFAQ(element) {
             const answer = element.nextElementSibling;
             const arrow = element.querySelector('.arrow');
-
             answer.classList.toggle('open');
             arrow.classList.toggle('open');
         }
 
-        // Generate Image
         async function generateImage() {
             const prompt = document.getElementById('prompt').value.trim();
             const btn = document.getElementById('generateBtn');
             const loading = document.getElementById('loading');
             const result = document.getElementById('result');
 
-            // Validate prompt
-            if (!prompt) {
+            if (!prompt || prompt.length < 3) {
                 alert('Please describe the image you want to create!');
                 return;
             }
 
-            if (prompt.length < 3) {
-                alert('Please enter a longer description (minimum 3 characters)');
-                return;
-            }
-
-            // Disable button and show loading
             btn.disabled = true;
             btn.innerHTML = '⏳ Generating...';
             loading.style.display = 'block';
@@ -709,13 +696,17 @@
                 const data = await response.json();
 
                 if (data.success && data.image) {
+                    const apiBadge = data.api ? `<div class="api-badge success">✅ Generated via: ${data.api}</div>` : '';
                     result.innerHTML = `
                         <img src="${data.image}" alt="AI Generated Image: ${prompt}" loading="lazy">
                         <div class="action-buttons">
                             <a href="${data.image}" download="ai-image-${Date.now()}.png" class="btn-download">⬇️ Download Image</a>
                             <button onclick="regenerateImage()" class="btn-regenerate">🔄 Generate Again</button>
                         </div>
-                        <p style="color:#888;font-size:0.85rem;margin-top:12px;">Prompt: "${prompt}"</p>
+                        <p style="color:#888;font-size:0.85rem;margin-top:12px;">
+                            🎨 Prompt: "${prompt}"
+                        </p>
+                        ${apiBadge}
                     `;
                 } else {
                     result.innerHTML = `<div class="error-msg">❌ ${data.error || 'Something went wrong. Please try again.'}</div>`;
@@ -724,18 +715,15 @@
                 result.innerHTML = `<div class="error-msg">❌ Network error: ${error.message}</div>`;
             }
 
-            // Reset button
             btn.disabled = false;
             btn.innerHTML = '🎨 Generate';
             loading.style.display = 'none';
         }
 
-        // Regenerate with same prompt
         function regenerateImage() {
             generateImage();
         }
 
-        // Enter key support (Ctrl+Enter to generate)
         document.getElementById('prompt').addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
                 e.preventDefault();
