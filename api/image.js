@@ -1,5 +1,5 @@
 // ============================================
-// 100% WORKING - NO REPLICATE NEEDED
+// FIXED: Seed value now within limit
 // ============================================
 
 export default function handler(req, res) {
@@ -32,10 +32,11 @@ export default function handler(req, res) {
         }
 
         // ============================================
-        // POLLINATIONS AI - COMPLETELY FREE
-        // No API Key, No Dependencies
+        // FIX: Seed value now within 2147483647 limit
         // ============================================
-        const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt.trim())}?width=1024&height=1024&nologo=true&seed=${Date.now()}`;
+        const seed = Math.floor(Math.random() * 2147483647);
+        
+        const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt.trim())}?width=1024&height=1024&nologo=true&seed=${seed}`;
 
         return res.status(200).json({
             success: true,
