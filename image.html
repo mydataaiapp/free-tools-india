@@ -3,547 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free AI Image Generator - Multi-API | FreeToolsIndia</title>
-    <meta name="description" content="Free AI Image Generator with multiple APIs - Replicate, Stability AI, Pollinations. 100% free, no signup required.">
-    <link rel="canonical" href="https://www.freetoolindia.com/image.html">
-    
-    <meta property="og:title" content="Free AI Image Generator - Multi-API">
-    <meta property="og:description" content="Generate images with multiple AI models. Free and instant!">
-    <meta property="og:url" content="https://www.freetoolindia.com/image.html">
-    <meta name="twitter:card" content="summary_large_image">
-
+    <title>Free AI Image Generator | FreeToolsIndia</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(145deg, #0a0618 0%, #1a103c 50%, #0d0826 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 35px;
-            padding: 35px 20px 25px;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(12px);
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .header .badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #f9d976, #f39b7b);
-            color: #0a0618;
-            padding: 4px 18px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 12px;
-        }
-
-        .header .badge-pro {
-            display: inline-block;
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
-            color: #fff;
-            padding: 3px 16px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-left: 8px;
-        }
-
-        .header h1 {
-            color: #fff;
-            font-size: 2.8rem;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-
-        .header h1 span {
-            background: linear-gradient(135deg, #f9d976, #f39b7b, #e67e22);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header p {
-            color: #b8b0d9;
-            font-size: 1.15rem;
-            margin-top: 12px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .header .stats {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 18px;
-            flex-wrap: wrap;
-        }
-
-        .header .stats span {
-            color: #8a80b3;
-            font-size: 0.85rem;
-        }
-
-        .header .stats span strong {
-            color: #fff;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 28px;
-            padding: 35px 30px 30px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-            margin-bottom: 30px;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0edff;
-        }
-
-        .card-header h2 {
-            color: #1a103c;
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .card-header .free-tag {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
-            color: #fff;
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .card-header .model-tag {
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-            color: #fff;
-            padding: 4px 16px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        .prompt-suggestions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 18px;
-        }
-
-        .prompt-suggestions button {
-            padding: 8px 18px;
-            background: #f4f2ff;
-            border: 1.5px solid #e0d9ff;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.82rem;
-            color: #3d2a7a;
-            transition: all 0.25s ease;
-            font-weight: 500;
-        }
-
-        .prompt-suggestions button:hover {
-            background: #6c5ce7;
-            border-color: #6c5ce7;
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
-        }
-
-        .input-group {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .input-group textarea {
-            flex: 1;
-            min-width: 200px;
-            padding: 16px 18px;
-            border: 2px solid #e8e4f0;
-            border-radius: 16px;
-            font-size: 1rem;
-            resize: vertical;
-            min-height: 85px;
-            transition: border-color 0.3s;
-            background: #faf9ff;
-            color: #1a103c;
-        }
-
-        .input-group textarea:focus {
-            border-color: #6c5ce7;
-            outline: none;
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
-        }
-
-        .btn-generate {
-            padding: 16px 40px;
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-            color: #fff;
-            border: none;
-            border-radius: 16px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-
-        .btn-generate:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.4);
-        }
-
-        .btn-generate:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .loading .spinner {
-            width: 55px;
-            height: 55px;
-            border: 5px solid #e8e4f0;
-            border-top-color: #6c5ce7;
-            border-radius: 50%;
-            animation: spin 0.9s linear infinite;
-            margin: 0 auto 15px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .loading p {
-            color: #555;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .loading .tip {
-            color: #999;
-            font-size: 0.85rem;
-            margin-top: 8px;
-        }
-
-        .result {
-            margin-top: 25px;
-            text-align: center;
-        }
-
-        .result .placeholder {
-            color: #aaa;
-            font-size: 1.05rem;
-            padding: 40px 20px;
-            background: #faf9ff;
-            border-radius: 16px;
-            border: 2px dashed #ddd;
-        }
-
-        .result img {
-            max-width: 100%;
-            max-height: 700px;
-            border-radius: 18px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .result .action-buttons {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 16px;
-        }
-
-        .btn-download {
-            padding: 10px 28px;
-            background: #27ae60;
-            color: #fff;
-            border: none;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-download:hover {
-            background: #219a52;
-            transform: translateY(-2px);
-        }
-
-        .btn-regenerate {
-            padding: 10px 28px;
-            background: #6c5ce7;
-            color: #fff;
-            border: none;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-regenerate:hover {
-            background: #5a4bd1;
-            transform: translateY(-2px);
-        }
-
-        .error-msg {
-            color: #e74c3c;
-            background: #fef0ef;
-            padding: 15px 20px;
-            border-radius: 12px;
-            border-left: 4px solid #e74c3c;
-            text-align: left;
-            font-weight: 500;
-        }
-
-        .api-badge {
-            display: inline-block;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-top: 10px;
-            background: #f0edff;
-            color: #3d2a7a;
-        }
-
-        .api-badge.success {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .faq-section {
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 28px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .faq-section h2 {
-            color: #1a103c;
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid #f0edff;
-            padding: 16px 0;
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-        }
-
-        .faq-item .question {
-            font-weight: 700;
-            color: #1a103c;
-            font-size: 1.05rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-        }
-
-        .faq-item .question:hover {
-            color: #6c5ce7;
-        }
-
-        .faq-item .question .arrow {
-            transition: transform 0.3s;
-            color: #6c5ce7;
-        }
-
-        .faq-item .question .arrow.open {
-            transform: rotate(180deg);
-        }
-
-        .faq-item .answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-            color: #555;
-            line-height: 1.7;
-        }
-
-        .faq-item .answer.open {
-            max-height: 300px;
-            padding-top: 12px;
-        }
-
-        .tool-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin: 25px 0 10px;
-        }
-
-        .tool-links a {
-            padding: 8px 20px;
-            background: rgba(108, 92, 231, 0.1);
-            border: 1px solid rgba(108, 92, 231, 0.2);
-            border-radius: 25px;
-            color: #3d2a7a;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .tool-links a:hover {
-            background: #6c5ce7;
-            color: #fff;
-            border-color: #6c5ce7;
-            transform: translateY(-2px);
-        }
-
-        .back-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: rgba(255, 255, 255, 0.08);
-            color: #b8b0d9;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: 0.3s;
-        }
-
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 20px 16px;
-            color: #6a6099;
-            font-size: 0.85rem;
-            margin-top: 20px;
-        }
-
-        .footer a {
-            color: #8a80b3;
-            text-decoration: none;
-            margin: 0 8px;
-        }
-
-        .footer a:hover {
-            color: #fff;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: linear-gradient(145deg, #0a0618 0%, #1a103c 50%, #0d0826 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 35px; padding: 35px 20px 25px; background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border-radius: 30px; border: 1px solid rgba(255,255,255,0.06); }
+        .header h1 { color: #fff; font-size: 2.8rem; font-weight: 800; }
+        .header h1 span { background: linear-gradient(135deg, #f9d976, #f39b7b, #e67e22); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .header p { color: #b8b0d9; font-size: 1.15rem; margin-top: 12px; }
+        .header .stats { display: flex; justify-content: center; gap: 30px; margin-top: 18px; flex-wrap: wrap; }
+        .header .stats span { color: #8a80b3; font-size: 0.85rem; }
+        .header .stats span strong { color: #fff; }
+        .card { background: rgba(255,255,255,0.97); border-radius: 28px; padding: 35px 30px 30px; box-shadow: 0 25px 60px rgba(0,0,0,0.5); margin-bottom: 30px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #f0edff; }
+        .card-header h2 { color: #1a103c; font-size: 1.3rem; font-weight: 700; }
+        .card-header .free-tag { background: linear-gradient(135deg, #27ae60, #2ecc71); color: #fff; padding: 4px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+        .prompt-suggestions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+        .prompt-suggestions button { padding: 8px 18px; background: #f4f2ff; border: 1.5px solid #e0d9ff; border-radius: 25px; cursor: pointer; font-size: 0.82rem; color: #3d2a7a; transition: all 0.25s ease; font-weight: 500; }
+        .prompt-suggestions button:hover { background: #6c5ce7; border-color: #6c5ce7; color: #fff; transform: translateY(-2px); }
+        .input-group { display: flex; gap: 14px; flex-wrap: wrap; }
+        .input-group textarea { flex: 1; min-width: 200px; padding: 16px 18px; border: 2px solid #e8e4f0; border-radius: 16px; font-size: 1rem; resize: vertical; min-height: 85px; background: #faf9ff; color: #1a103c; }
+        .input-group textarea:focus { border-color: #6c5ce7; outline: none; background: #fff; }
+        .btn-generate { padding: 16px 40px; background: linear-gradient(135deg, #6c5ce7, #a29bfe); color: #fff; border: none; border-radius: 16px; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; min-width: 160px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-generate:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(108,92,231,0.4); }
+        .btn-generate:disabled { opacity: 0.6; cursor: not-allowed; }
+        .loading { display: none; text-align: center; padding: 40px 20px; }
+        .loading .spinner { width: 55px; height: 55px; border: 5px solid #e8e4f0; border-top-color: #6c5ce7; border-radius: 50%; animation: spin 0.9s linear infinite; margin: 0 auto 15px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading p { color: #555; font-size: 1rem; font-weight: 500; }
+        .result { margin-top: 25px; text-align: center; }
+        .result .placeholder { color: #aaa; font-size: 1.05rem; padding: 40px 20px; background: #faf9ff; border-radius: 16px; border: 2px dashed #ddd; }
+        .result img { max-width: 100%; max-height: 700px; border-radius: 18px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
+        .result .action-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+        .btn-download { padding: 10px 28px; background: #27ae60; color: #fff; border: none; border-radius: 30px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-download:hover { background: #219a52; transform: translateY(-2px); }
+        .btn-regenerate { padding: 10px 28px; background: #6c5ce7; color: #fff; border: none; border-radius: 30px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-regenerate:hover { background: #5a4bd1; transform: translateY(-2px); }
+        .error-msg { color: #e74c3c; background: #fef0ef; padding: 15px 20px; border-radius: 12px; border-left: 4px solid #e74c3c; text-align: left; font-weight: 500; }
+        .tool-links { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 25px 0 10px; }
+        .tool-links a { padding: 8px 20px; background: rgba(108,92,231,0.1); border: 1px solid rgba(108,92,231,0.2); border-radius: 25px; color: #3d2a7a; text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: 0.3s; }
+        .tool-links a:hover { background: #6c5ce7; color: #fff; border-color: #6c5ce7; }
+        .back-btn { display: inline-block; padding: 12px 30px; background: rgba(255,255,255,0.08); color: #b8b0d9; border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .back-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+        .footer { text-align: center; padding: 20px 16px; color: #6a6099; font-size: 0.85rem; margin-top: 20px; }
+        .footer a { color: #8a80b3; text-decoration: none; margin: 0 8px; }
+        .footer a:hover { color: #fff; }
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-            .header p {
-                font-size: 1rem;
-            }
-            .card {
-                padding: 20px 16px;
-            }
-            .input-group {
-                flex-direction: column;
-            }
-            .btn-generate {
-                width: 100%;
-                min-width: unset;
-            }
-            .header .stats {
-                gap: 15px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.6rem;
-            }
-            .card-header h2 {
-                font-size: 1rem;
-            }
-            .faq-section {
-                padding: 18px 14px;
-            }
+            .header h1 { font-size: 2rem; }
+            .card { padding: 20px 16px; }
+            .input-group { flex-direction: column; }
+            .btn-generate { width: 100%; }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-
         <div class="header">
-            <div>
-                <span class="badge">⭐ Free Tool</span>
-                <span class="badge-pro">Multi-API</span>
-            </div>
             <h1>AI Image <span>Generator</span></h1>
-            <p>Powered by Replicate + Stability AI + Pollinations — Always Working!</p>
+            <p>Create stunning images from text — Always Fresh!</p>
             <div class="stats">
                 <span>⚡ <strong>Free</strong> — No signup</span>
-                <span>🔄 <strong>3 APIs</strong> — Always available</span>
+                <span>🔄 <strong>Fresh</strong> — New image every time</span>
                 <span>🚀 <strong>Instant</strong> — Results in seconds</span>
             </div>
         </div>
 
         <div class="card">
             <div class="card-header">
-                <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-                    <h2>✏️ Create Your Image</h2>
-                    <span class="model-tag">FLUX-2 Pro + SDXL</span>
-                </div>
+                <h2>✏️ Create Your Image</h2>
                 <span class="free-tag">100% Free</span>
             </div>
 
@@ -565,7 +93,7 @@
             <div class="loading" id="loading">
                 <div class="spinner"></div>
                 <p>🖌️ AI is creating your image...</p>
-                <p class="tip">Trying multiple APIs — This takes 5-20 seconds</p>
+                <p class="tip">This takes 5-15 seconds</p>
             </div>
 
             <div class="result" id="result">
@@ -588,66 +116,12 @@
             </div>
         </div>
 
-        <div class="faq-section">
-            <h2>❓ Frequently Asked Questions</h2>
-
-            <div class="faq-item">
-                <div class="question" onclick="toggleFAQ(this)">
-                    How does the Multi-API system work?
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="answer">
-                    The tool tries Replicate (FLUX-2 Pro) first. If that fails, it automatically switches to Stability AI (Stable Diffusion XL). If both fail, it uses Pollinations AI as a free backup. This ensures you always get an image!
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="question" onclick="toggleFAQ(this)">
-                    Is this really free?
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="answer">
-                    Yes! This tool is 100% free. No signup, no credit card, no hidden charges. Generate as many images as you want.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="question" onclick="toggleFAQ(this)">
-                    How do I get the best results?
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="answer">
-                    Be descriptive! Include details like style (photorealistic, digital art, oil painting), colors, lighting, mood, and composition. Example: "A photorealistic sunset over a calm ocean with golden light reflecting on the water, 8k, highly detailed."
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="question" onclick="toggleFAQ(this)">
-                    Can I use the images commercially?
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="answer">
-                    Yes! You can use generated images for personal and commercial projects. All images are yours to use freely.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="question" onclick="toggleFAQ(this)">
-                    What happens if one API fails?
-                    <span class="arrow">▼</span>
-                </div>
-                <div class="answer">
-                    The system automatically falls back to the next available API. You won't even notice — the image will still be generated using a different AI model!
-                </div>
-            </div>
-        </div>
-
         <div style="text-align:center;">
             <a href="index.html" class="back-btn">← Back to Home</a>
         </div>
 
         <div class="footer">
-            <p>© 2025 FreeToolsIndia.com — Free AI Image Generator with Multi-API Support</p>
+            <p>© 2025 FreeToolsIndia.com — Free AI Image Generator</p>
             <p style="margin-top:6px;">
                 <a href="contact.html">Contact</a> |
                 <a href="feedback.html">Feedback</a> |
@@ -655,7 +129,6 @@
                 <a href="terms-of-service.html">Terms of Service</a>
             </p>
         </div>
-
     </div>
 
     <script>
@@ -663,68 +136,62 @@
             document.getElementById('prompt').value = text;
         }
 
-        function toggleFAQ(element) {
-            const answer = element.nextElementSibling;
-            const arrow = element.querySelector('.arrow');
-            answer.classList.toggle('open');
-            arrow.classList.toggle('open');
+        async function generateImage() {
+            const prompt = document.getElementById('prompt').value.trim();
+            const btn = document.getElementById('generateBtn');
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('result');
+
+            if (!prompt || prompt.length < 3) {
+                alert('Please describe the image you want to create!');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Generating...';
+            loading.style.display = 'block';
+            result.innerHTML = '';
+
+            try {
+                const response = await fetch('/api/image', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.image) {
+                    // Force image reload - add timestamp to prevent caching
+                    const imageWithCache = `${data.image}&_=${Date.now()}`;
+                    
+                    result.innerHTML = `
+                        <img src="${imageWithCache}" alt="AI Generated Image" loading="lazy" style="max-width:100%;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+                        <div class="action-buttons">
+                            <a href="${data.image}" download="ai-image-${Date.now()}.png" class="btn-download">⬇️ Download Image</a>
+                            <button onclick="generateImage()" class="btn-regenerate">🔄 Generate New</button>
+                        </div>
+                        <p style="color:#888;font-size:0.85rem;margin-top:10px;">✅ ${data.api || 'AI Generated'}</p>
+                    `;
+                } else {
+                    result.innerHTML = `<div class="error-msg">❌ ${data.error || 'Something went wrong'}</div>`;
+                }
+            } catch (error) {
+                result.innerHTML = `<div class="error-msg">❌ ${error.message}</div>`;
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '🎨 Generate';
+            loading.style.display = 'none';
         }
 
-  async function generateImage() {
-    const prompt = document.getElementById('prompt').value.trim();
-    const btn = document.getElementById('generateBtn');
-    const loading = document.getElementById('loading');
-    const result = document.getElementById('result');
-
-    if (!prompt || prompt.length < 3) {
-        alert('Please describe the image you want to create!');
-        return;
-    }
-
-    btn.disabled = true;
-    btn.innerHTML = '⏳ Generating...';
-    loading.style.display = 'block';
-    result.innerHTML = '';
-
-    try {
-        const response = await fetch('/api/image', {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ prompt })
+        // Enter key support
+        document.getElementById('prompt').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                generateImage();
+            }
         });
-
-        // Check if response is OK
-        if (!response.ok) {
-            const text = await response.text();
-            throw new Error(`Server error: ${response.status} - ${text}`);
-        }
-
-        const data = await response.json();
-
-        if (data.success && data.image) {
-            result.innerHTML = `
-                <img src="${data.image}" alt="AI Generated Image" loading="lazy" style="max-width:100%;border-radius:15px;">
-                <div style="margin-top:15px;">
-                    <a href="${data.image}" download="ai-image-${Date.now()}.png" class="btn-download">⬇️ Download</a>
-                    <button onclick="regenerateImage()" class="btn-regenerate">🔄 Generate Again</button>
-                </div>
-                <p style="color:#888;font-size:0.85rem;margin-top:10px;">✅ ${data.api || 'AI Generated'}</p>
-            `;
-        } else {
-            result.innerHTML = `<div class="error-msg">❌ ${data.error || 'Something went wrong'}</div>`;
-        }
-    } catch (error) {
-        console.error('Fetch Error:', error);
-        result.innerHTML = `<div class="error-msg">❌ ${error.message}</div>`;
-    }
-
-    btn.disabled = false;
-    btn.innerHTML = '🎨 Generate';
-    loading.style.display = 'none';
-}
     </script>
-
 </body>
 </html>
