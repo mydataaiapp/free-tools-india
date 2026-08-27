@@ -1,5 +1,8 @@
 {
   "name": "free-tools-india",
   "version": "1.0.0",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "replicate": "^0.29.0"
+  }
 }
