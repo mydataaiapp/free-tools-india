@@ -1,50 +1,5 @@
 {
   "name": "free-tools-india",
   "version": "1.0.0",
-  "description": "Free AI Tools India - 6 Powerful AI Tools - Summary Generator, AI Writer, Email Generator, Social Media Posts, Resume Builder, Excel Formula Generator",
-  "type": "module",
-  "scripts": {
-    "dev": "echo 'No dev script needed'",
-    "build": "echo 'No build needed'",
-    "start": "echo 'No start script needed'",
-    "test": "echo 'No tests configured'"
-  },
-  "dependencies": {
-    "replicate": "^0.29.0",
-    "groq-sdk": "^0.3.0"
-  },
-  "devDependencies": {},
-  "engines": {
-    "node": ">=18.x"
-  },
-  "author": {
-    "name": "FreeToolsIndia",
-    "email": "support@freetoolindia.com",
-    "url": "https://www.freetoolindia.com"
-  },
-  "license": "MIT",
-  "keywords": [
-    "ai",
-    "artificial-intelligence",
-    "image-generator",
-    "ai-tools",
-    "free-ai",
-    "summary-generator",
-    "ai-writer",
-    "email-generator",
-    "resume-builder",
-    "excel-formula",
-    "social-media-posts",
-    "free-tools-india"
-  ],
-  "homepage": "https://www.freetoolindia.com",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mydataaiapp/free-tools-india"
-  },
-  "bugs": {
-    "url": "https://github.com/mydataaiapp/free-tools-india/issues",
-    "email": "support@freetoolindia.com"
-  },
-  "private": false
+  "type": "module"
 }
