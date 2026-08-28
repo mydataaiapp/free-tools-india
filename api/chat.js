@@ -1,5 +1,5 @@
 // ============================================
-// AI CHATBOT API - ChatGPT + Groq + Free Backup
+// AI CHATBOT - FIXED VERSION
 // ============================================
 
 import OpenAI from 'openai';
@@ -19,17 +19,23 @@ export default async function handler(req, res) {
     }
 
     if (req.method !== 'POST') {
-        return res.status(405).json({ success: false, error: 'Method not allowed' });
+        return res.status(405).json({ 
+            success: false, 
+            error: 'Method not allowed' 
+        });
     }
 
     try {
         const { message, history } = req.body;
 
         if (!message || message.trim().length < 1) {
-            return res.status(400).json({ success: false, error: 'Please enter a message' });
+            return res.status(400).json({ 
+                success: false, 
+                error: 'Please enter a message' 
+            });
         }
 
-        console.log('💬 Chat message:', message);
+        console.log('💬 Received message:', message);
 
         let reply = null;
         let usedApi = null;
@@ -42,16 +48,16 @@ export default async function handler(req, res) {
             try {
                 console.log('🔄 Trying ChatGPT...');
                 
-                const messages = [];
-                
-                // Add history if available
+                const messages = [
+                    { role: 'system', content: 'You are a helpful AI assistant. Provide clear, accurate, and helpful responses.' }
+                ];
+
                 if (history && Array.isArray(history)) {
                     for (const h of history) {
                         messages.push({ role: h.role, content: h.content });
                     }
                 }
-                
-                // Add current message
+
                 messages.push({ role: 'user', content: message.trim() });
 
                 const response = await openai.chat.completions.create({
@@ -65,9 +71,11 @@ export default async function handler(req, res) {
                 usedApi = 'ChatGPT (GPT-4o-mini)';
                 console.log('✅ Reply from ChatGPT!');
             } catch (error) {
-                console.log('⚠️ ChatGPT failed:', error.message);
+                console.error('❌ ChatGPT Error:', error.message);
                 errors.push(`ChatGPT: ${error.message}`);
             }
+        } else {
+            console.log('⚠️ OPENAI_API_KEY not set');
         }
 
         // ============================================
@@ -86,7 +94,7 @@ export default async function handler(req, res) {
                     body: JSON.stringify({
                         model: 'mixtral-8x7b-32768',
                         messages: [
-                            { role: 'system', content: 'You are a helpful AI assistant. Provide clear, concise, and accurate responses.' },
+                            { role: 'system', content: 'You are a helpful AI assistant. Provide clear, accurate responses.' },
                             { role: 'user', content: message.trim() }
                         ],
                         temperature: 0.7,
@@ -102,35 +110,33 @@ export default async function handler(req, res) {
                         console.log('✅ Reply from Groq!');
                     }
                 } else {
+                    const errorText = await response.text();
+                    console.error('❌ Groq Error:', errorText);
                     errors.push(`Groq: ${response.status}`);
                 }
             } catch (error) {
-                console.log('⚠️ Groq failed:', error.message);
+                console.error('❌ Groq Error:', error.message);
                 errors.push(`Groq: ${error.message}`);
             }
+        } else if (!reply) {
+            console.log('⚠️ GROQ_API_KEY not set');
         }
 
         // ============================================
-        // API 3: Free Fallback (Simple Response)
+        // API 3: Fallback (Always Works)
         // ============================================
         if (!reply) {
-            try {
-                console.log('🔄 Using Fallback...');
-                reply = `I'm an AI assistant. I received your message: "${message.trim()}". 
-
-💡 Here are some ways I can help:
-- Answer questions on any topic
-- Provide explanations and summaries
-- Help with writing and editing
-- Give advice and suggestions
-- Chat about anything you like
-
-What would you like to know more about? 😊`;
-                usedApi = 'AI Assistant (Fallback)';
-                console.log('✅ Using fallback response!');
-            } catch (error) {
-                errors.push(`Fallback: ${error.message}`);
-            }
+            console.log('🔄 Using Fallback...');
+            const responses = [
+                `I'm your AI assistant! I received your message: "${message.trim()}". I can help you with questions, explanations, writing, advice, and more. What would you like to know? 😊`,
+                
+                `Hello! 👋 I understand you asked: "${message.trim()}". I'm here to help with anything - from answering questions to creative writing. Feel free to ask me anything!`,
+                
+                `Great question! 😊 Here's what I can help with: answering questions, explaining topics, writing content, giving advice, brainstorming ideas, and much more. Just let me know what you need!`
+            ];
+            reply = responses[Math.floor(Math.random() * responses.length)];
+            usedApi = 'AI Assistant (Fallback)';
+            console.log('✅ Using fallback response!');
         }
 
         // ============================================
