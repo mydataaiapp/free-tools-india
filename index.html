@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free AI Tools India - 6 Powerful Tools | FreeToolsIndia</title>
-    <meta name="description" content="Free AI tools - Summary Generator, AI Writer, Email Generator, Social Media Posts, Resume Builder, Excel Formula Generator. 100% free!">
+    <title>Free AI Tools India - 8 Powerful AI Tools | FreeToolsIndia</title>
+    <meta name="description" content="Free AI tools - Summary Generator, AI Writer, Email Generator, Social Media Posts, Resume Builder, Excel Formula Generator, AI Image Generator, AI Chatbot. 100% free!">
+    <meta name="keywords" content="free ai tools, ai image generator, ai chatbot, summary generator, ai writer, email generator, social media posts, resume builder, excel formula">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="canonical" href="https://www.freetoolindia.com/">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Free AI Tools India - 8 Powerful AI Tools">
+    <meta property="og:description" content="Free AI tools - Summary Generator, AI Writer, Email Generator, Social Media Posts, Resume Builder, Excel Formula Generator, AI Image Generator, AI Chatbot. 100% free!">
+    <meta property="og:url" content="https://www.freetoolindia.com/">
+    <meta name="twitter:card" content="summary_large_image">
+
     <style>
         * {
             margin: 0;
@@ -35,12 +44,25 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
         }
 
+        .header .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f9d976, #f39b7b);
+            color: #1a103c;
+            padding: 4px 18px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
         .header h1 {
             color: #fef9ff;
             font-size: 2.6rem;
             font-weight: 700;
             letter-spacing: -0.5px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .header h1 span {
@@ -55,16 +77,34 @@
             font-size: 1.3rem;
             font-weight: 400;
             margin-top: 8px;
-            background: rgba(0,0,0,0.15);
+            background: rgba(0, 0, 0, 0.15);
             display: inline-block;
             padding: 6px 28px;
             border-radius: 40px;
             backdrop-filter: blur(2px);
         }
 
+        .header .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        .header .stats span {
+            color: #b8b0d9;
+            font-size: 0.85rem;
+        }
+
+        .header .stats span strong {
+            color: #fff;
+            font-weight: 700;
+        }
+
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 24px;
             margin-bottom: 40px;
         }
@@ -96,11 +136,11 @@
         .tool-icon {
             font-size: 52px;
             margin-bottom: 12px;
-            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.1));
         }
 
         .tool-name {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 8px;
             color: #3d2a7a;
@@ -108,11 +148,12 @@
         }
 
         .tool-desc {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #4a3f5e;
             margin-bottom: 16px;
             font-weight: 450;
             padding: 0 4px;
+            min-height: 42px;
         }
 
         .tool-btn {
@@ -136,7 +177,19 @@
             transform: scale(1.02);
         }
 
-        /* Footer Styles */
+        .tool-card .new-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: #fff;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 8px;
+        }
+
         .footer {
             text-align: center;
             padding: 32px 16px 20px;
@@ -213,7 +266,6 @@
             display: inline-block;
         }
 
-        /* Responsive */
         @media (max-width: 480px) {
             .header h1 {
                 font-size: 2rem;
@@ -232,6 +284,17 @@
                 margin: 0 6px;
                 font-size: 0.9rem;
             }
+            .tools-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 16px;
+            }
+            .tool-name {
+                font-size: 1.1rem;
+            }
+            .tool-desc {
+                font-size: 0.8rem;
+                min-height: 36px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -239,12 +302,14 @@
                 font-size: 2.2rem;
             }
             .tools-grid {
-                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 16px;
+            }
+            .header .stats {
+                gap: 15px;
             }
         }
 
-        /* Scroll animation */
         .tool-card {
             opacity: 1;
             animation: fadeInUp 0.6s ease forwards;
@@ -256,6 +321,8 @@
         .tool-card:nth-child(4) { animation-delay: 0.4s; }
         .tool-card:nth-child(5) { animation-delay: 0.5s; }
         .tool-card:nth-child(6) { animation-delay: 0.6s; }
+        .tool-card:nth-child(7) { animation-delay: 0.7s; }
+        .tool-card:nth-child(8) { animation-delay: 0.8s; }
 
         @keyframes fadeInUp {
             from {
@@ -271,19 +338,27 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
+
+        <!-- ===== HEADER ===== -->
         <div class="header">
+            <div class="badge">⭐ Free Tools</div>
             <h1>🚀 Free AI Tools <span>India</span></h1>
-            <p>Think less, write more — with AI, totally FREE!</p>
+            <p>Think less, create more — with AI, totally FREE!</p>
+            <div class="stats">
+                <span>⚡ <strong>8 Tools</strong> — All Free</span>
+                <span>🤖 <strong>AI Powered</strong> — ChatGPT + Groq</span>
+                <span>🌍 <strong>Global</strong> — No signup needed</span>
+            </div>
         </div>
 
-        <!-- Tools Grid -->
+        <!-- ===== TOOLS GRID ===== -->
         <div class="tools-grid">
+
             <!-- Summary Generator -->
             <a href="summary.html" class="tool-card">
                 <div class="tool-icon">📝</div>
                 <div class="tool-name">Summary Generator</div>
-                <div class="tool-desc">Cut the long story short!</div>
+                <div class="tool-desc">Cut long text into short summaries</div>
                 <span class="tool-btn">Try Now →</span>
             </a>
 
@@ -307,7 +382,7 @@
             <a href="social.html" class="tool-card">
                 <div class="tool-icon">📱</div>
                 <div class="tool-name">Social Media Posts</div>
-                <div class="tool-desc">Go viral in one click!</div>
+                <div class="tool-desc">Create viral posts in one click</div>
                 <span class="tool-btn">Try Now →</span>
             </a>
 
@@ -315,7 +390,7 @@
             <a href="resume.html" class="tool-card">
                 <div class="tool-icon">📄</div>
                 <div class="tool-name">Resume Builder</div>
-                <div class="tool-desc">Dream job? Perfect resume!</div>
+                <div class="tool-desc">Build your dream job resume</div>
                 <span class="tool-btn">Try Now →</span>
             </a>
 
@@ -323,7 +398,7 @@
             <a href="excel.html" class="tool-card">
                 <div class="tool-icon">📊</div>
                 <div class="tool-name">Excel Formula</div>
-                <div class="tool-desc">Excel expert, no learning needed!</div>
+                <div class="tool-desc">Excel expert, no learning needed</div>
                 <span class="tool-btn">Try Now →</span>
             </a>
 
@@ -333,19 +408,21 @@
                 <div class="tool-name">AI Image Generator</div>
                 <div class="tool-desc">Create stunning images from text</div>
                 <span class="tool-btn">Try Now →</span>
-           </a>
+                <span class="new-badge">✨ New</span>
+            </a>
 
             <!-- AI Chatbot -->
-           <a href="chat.html" class="tool-card">
-               <div class="tool-icon">🤖</div>
-               <div class="tool-name">AI Chatbot</div>
-               <div class="tool-desc">Ask anything, get instant answers</div>
-               <span class="tool-btn">Try Now →</span>
-          </a>
-            
+            <a href="chat.html" class="tool-card">
+                <div class="tool-icon">🤖</div>
+                <div class="tool-name">AI Chatbot</div>
+                <div class="tool-desc">Ask anything, get instant answers</div>
+                <span class="tool-btn">Try Now →</span>
+                <span class="new-badge">✨ New</span>
+            </a>
+
         </div>
 
-        <!-- Footer -->
+        <!-- ===== FOOTER ===== -->
         <div class="footer">
             <p>© 2025 FreeToolsIndia.com — All Rights Reserved</p>
             <p style="margin: 10px 0;">
@@ -358,9 +435,10 @@
                 <a href="terms-of-service.html">⚖️ Terms of Service</a>
             </div>
             <div class="badge">
-                <span>✨ All tools & footer pages are fully clickable ✨</span>
+                <span>✨ All 8 tools & footer pages are fully clickable ✨</span>
             </div>
         </div>
+
     </div>
 </body>
 </html>
