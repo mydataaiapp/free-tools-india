@@ -265,7 +265,7 @@
             background: #fff;
         }
 
-        .chat-input button {
+        .chat-input .send-btn {
             padding: 12px 30px;
             background: linear-gradient(135deg, #6c5ce7, #a29bfe);
             color: #fff;
@@ -281,25 +281,32 @@
             gap: 8px;
         }
 
-        .chat-input button:hover {
+        .chat-input .send-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(108, 92, 231, 0.3);
         }
 
-        .chat-input button:disabled {
+        .chat-input .send-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
 
         .chat-input .clear-btn {
-            background: #e74c3c;
             padding: 12px 16px;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
         .chat-input .clear-btn:hover {
             background: #c0392b;
-            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+            transform: scale(1.05);
         }
 
         /* Quick Suggestions */
@@ -400,7 +407,8 @@
             .chat-container { height: 500px; }
             .message { max-width: 95%; }
             .chat-input { flex-wrap: wrap; }
-            .chat-input button { width: 100%; }
+            .chat-input .send-btn { width: 100%; }
+            .chat-input .clear-btn { flex: 1; }
             .quick-suggestions { justify-content: center; }
         }
     </style>
@@ -444,8 +452,8 @@
 
             <div class="chat-input">
                 <textarea id="chatInput" placeholder="Type your message here..." rows="1"></textarea>
-                <button onclick="sendMessage()">➤ Send</button>
-                <button class="clear-btn" onclick="clearChat()">✕</button>
+                <button id="sendBtn" class="send-btn">➤ Send</button>
+                <button id="clearBtn" class="clear-btn">✕</button>
             </div>
         </div>
 
@@ -481,62 +489,147 @@
         let chatHistory = [];
         let isTyping = false;
 
-        // Quick message
+        // ============================================
+        // EVENT LISTENERS - FIXED
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Send Button
+            document.getElementById('sendBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                sendMessage();
+            });
+
+            // Clear Button
+            document.getElementById('clearBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                clearChat();
+            });
+
+            // Enter Key
+            document.getElementById('chatInput').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // Auto-resize
+            document.getElementById('chatInput').addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+            });
+
+            scrollToBottom();
+        });
+
+        // ============================================
+        // FUNCTIONS
+        // ============================================
         function sendQuickMessage(text) {
             document.getElementById('chatInput').value = text;
             sendMessage();
         }
 
-        // Send messageasync function sendMessage() {
-    const input = document.getElementById('chatInput');
-    const message = input.value.trim();
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
 
-    if (!message || isTyping) return;
+            if (!message || isTyping) return;
 
-    input.value = '';
-    input.style.height = 'auto';
+            input.value = '';
+            input.style.height = 'auto';
 
-    addMessage(message, 'user');
-    showTyping();
-    isTyping = true;
+            addMessage(message, 'user');
+            showTyping();
+            isTyping = true;
 
-    try {
-        console.log('📤 Sending:', message);
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: message,
+                        history: chatHistory.slice(-10)
+                    })
+                });
 
-        const response = await fetch('/api/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                message: message,
-                history: chatHistory.slice(-10) // Last 10 messages
-            })
-        });
+                const data = await response.json();
 
-        console.log('📥 Response Status:', response.status);
+                hideTyping();
 
-        const data = await response.json();
-        console.log('📦 Response Data:', data);
+                if (data.success && data.reply) {
+                    const apiInfo = data.api ? `🤖 ${data.api}` : '';
+                    addMessage(data.reply, 'bot', apiInfo);
+                    chatHistory.push({ role: 'user', content: message });
+                    chatHistory.push({ role: 'assistant', content: data.reply });
 
-        hideTyping();
+                    if (data.api) {
+                        document.getElementById('apiStatus').textContent = `✅ ${data.api}`;
+                    }
+                } else {
+                    addMessage('❌ Sorry, I encountered an error. Please try again.', 'bot');
+                    console.error('API Error:', data.error);
+                }
+            } catch (error) {
+                hideTyping();
+                addMessage('❌ Network error. Please check your connection.', 'bot');
+                console.error('❌ Fetch Error:', error);
+            }
 
-        if (data.success && data.reply) {
-            const apiInfo = data.api ? `🤖 ${data.api}` : '';
-            addMessage(data.reply, 'bot', apiInfo);
-            chatHistory.push({ role: 'user', content: message });
-            chatHistory.push({ role: 'assistant', content: data.reply });
-        } else {
-            addMessage('❌ Sorry, I encountered an error. Please try again.', 'bot');
-            console.error('API Error:', data.error);
+            isTyping = false;
+            scrollToBottom();
         }
-    } catch (error) {
-        hideTyping();
-        addMessage('❌ Network error. Please check your connection.', 'bot');
-        console.error('❌ Fetch Error:', error);
-    }
 
-    isTyping = false;
-    scrollToBottom();
-}
+        function addMessage(text, type, apiInfo = '') {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `message ${type}`;
+
+            const now = new Date();
+            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            div.innerHTML = `
+                ${text}
+                ${apiInfo ? `<div class="api-badge">${apiInfo}</div>` : ''}
+                <span class="time">${time}</span>
+            `;
+
+            container.appendChild(div);
+            scrollToBottom();
+        }
+
+        function showTyping() {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = 'typing-indicator';
+            div.id = 'typingIndicator';
+            div.innerHTML = `<span></span><span></span><span></span>`;
+            container.appendChild(div);
+            scrollToBottom();
+        }
+
+        function hideTyping() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) indicator.remove();
+        }
+
+        function clearChat() {
+            const container = document.getElementById('chatMessages');
+            container.innerHTML = `
+                <div class="message bot">
+                    👋 Chat cleared! Feel free to ask me anything.
+                    <span class="time">Just now</span>
+                </div>
+            `;
+            chatHistory = [];
+            document.getElementById('apiStatus').textContent = '🟢 Online';
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            const container = document.getElementById('chatMessages');
+            container.scrollTop = container.scrollHeight;
+        }
     </script>
 </body>
 </html>
