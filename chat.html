@@ -487,142 +487,56 @@
             sendMessage();
         }
 
-        // Send message
-        async function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
+        // Send messageasync function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
 
-            if (!message || isTyping) return;
+    if (!message || isTyping) return;
 
-            input.value = '';
-            input.style.height = 'auto';
+    input.value = '';
+    input.style.height = 'auto';
 
-            // Add user message
-            addMessage(message, 'user');
+    addMessage(message, 'user');
+    showTyping();
+    isTyping = true;
 
-            // Show typing indicator
-            showTyping();
+    try {
+        console.log('📤 Sending:', message);
 
-            isTyping = true;
-
-            try {
-                const response = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        message: message,
-                        history: chatHistory
-                    })
-                });
-
-                const data = await response.json();
-
-                // Hide typing indicator
-                hideTyping();
-
-                if (data.success && data.reply) {
-                    // Add bot message with API info
-                    const apiInfo = data.api ? `🤖 ${data.api}` : '';
-                    addMessage(data.reply, 'bot', apiInfo);
-
-                    // Add to history
-                    chatHistory.push({ role: 'user', content: message });
-                    chatHistory.push({ role: 'assistant', content: data.reply });
-
-                    // Update API status
-                    if (data.api) {
-                        document.getElementById('apiStatus').textContent = `✅ ${data.api}`;
-                    }
-                } else {
-                    addMessage('❌ Sorry, I encountered an error. Please try again.', 'bot');
-                }
-            } catch (error) {
-                hideTyping();
-                addMessage('❌ Network error. Please check your connection.', 'bot');
-                console.error('Error:', error);
-            }
-
-            isTyping = false;
-            scrollToBottom();
-        }
-
-        // Add message to chat
-        function addMessage(text, type, apiInfo = '') {
-            const container = document.getElementById('chatMessages');
-            const div = document.createElement('div');
-            div.className = `message ${type}`;
-
-            const now = new Date();
-            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-            div.innerHTML = `
-                ${text}
-                ${apiInfo ? `<div class="api-badge">${apiInfo}</div>` : ''}
-                <span class="time">${time}</span>
-            `;
-
-            container.appendChild(div);
-            scrollToBottom();
-        }
-
-        // Show typing indicator
-        function showTyping() {
-            const container = document.getElementById('chatMessages');
-            const div = document.createElement('div');
-            div.className = 'typing-indicator';
-            div.id = 'typingIndicator';
-            div.innerHTML = `
-                <span></span>
-                <span></span>
-                <span></span>
-            `;
-            container.appendChild(div);
-            scrollToBottom();
-        }
-
-        // Hide typing indicator
-        function hideTyping() {
-            const indicator = document.getElementById('typingIndicator');
-            if (indicator) {
-                indicator.remove();
-            }
-        }
-
-        // Clear chat
-        function clearChat() {
-            const container = document.getElementById('chatMessages');
-            container.innerHTML = `
-                <div class="message bot">
-                    👋 Chat cleared! Feel free to ask me anything.
-                    <span class="time">Just now</span>
-                </div>
-            `;
-            chatHistory = [];
-            document.getElementById('apiStatus').textContent = '🟢 Online';
-        }
-
-        // Scroll to bottom
-        function scrollToBottom() {
-            const container = document.getElementById('chatMessages');
-            container.scrollTop = container.scrollHeight;
-        }
-
-        // Auto-resize textarea
-        document.getElementById('chatInput').addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                message: message,
+                history: chatHistory.slice(-10) // Last 10 messages
+            })
         });
 
-        // Enter key support
-        document.getElementById('chatInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
+        console.log('📥 Response Status:', response.status);
 
-        // Initial scroll
-        scrollToBottom();
+        const data = await response.json();
+        console.log('📦 Response Data:', data);
+
+        hideTyping();
+
+        if (data.success && data.reply) {
+            const apiInfo = data.api ? `🤖 ${data.api}` : '';
+            addMessage(data.reply, 'bot', apiInfo);
+            chatHistory.push({ role: 'user', content: message });
+            chatHistory.push({ role: 'assistant', content: data.reply });
+        } else {
+            addMessage('❌ Sorry, I encountered an error. Please try again.', 'bot');
+            console.error('API Error:', data.error);
+        }
+    } catch (error) {
+        hideTyping();
+        addMessage('❌ Network error. Please check your connection.', 'bot');
+        console.error('❌ Fetch Error:', error);
+    }
+
+    isTyping = false;
+    scrollToBottom();
+}
     </script>
 </body>
 </html>
