@@ -448,6 +448,8 @@
                 <button onclick="sendQuickMessage('Explain quantum physics simply')">🔬 Quantum physics</button>
                 <button onclick="sendQuickMessage('Give me a recipe for pasta')">🍝 Recipe</button>
                 <button onclick="sendQuickMessage('How to learn coding fast?')">💻 Learn coding</button>
+                <button onclick="sendQuickMessage('My best friend lied to me')">💕 Friend advice</button>
+                <button onclick="sendQuickMessage('Give me a healthy breakfast recipe')">🥗 Healthy recipe</button>
             </div>
 
             <div class="chat-input">
@@ -489,23 +491,17 @@
         let chatHistory = [];
         let isTyping = false;
 
-        // ============================================
-        // EVENT LISTENERS - FIXED
-        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Send Button
             document.getElementById('sendBtn').addEventListener('click', function(e) {
                 e.preventDefault();
                 sendMessage();
             });
 
-            // Clear Button
             document.getElementById('clearBtn').addEventListener('click', function(e) {
                 e.preventDefault();
                 clearChat();
             });
 
-            // Enter Key
             document.getElementById('chatInput').addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' && !e.shiftKey) {
                     e.preventDefault();
@@ -513,7 +509,6 @@
                 }
             });
 
-            // Auto-resize
             document.getElementById('chatInput').addEventListener('input', function() {
                 this.style.height = 'auto';
                 this.style.height = Math.min(this.scrollHeight, 120) + 'px';
@@ -522,9 +517,6 @@
             scrollToBottom();
         });
 
-        // ============================================
-        // FUNCTIONS
-        // ============================================
         function sendQuickMessage(text) {
             document.getElementById('chatInput').value = text;
             sendMessage();
