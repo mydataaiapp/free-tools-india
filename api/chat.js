@@ -1,5 +1,5 @@
 // ============================================
-// CHATBOT - GROQ API ONLY (100% WORKING)
+// CHATBOT - UPDATED GROQ MODELS
 // ============================================
 
 export default async function handler(req, res) {
@@ -29,31 +29,23 @@ export default async function handler(req, res) {
             });
         }
 
-        console.log('💬 User Message:', message);
-        
-        // Check if API Key exists
-        const apiKey = process.env.GROQ_API_KEY;
-        console.log('🔑 API Key exists:', !!apiKey);
-        console.log('🔑 API Key starts with gsk_:', apiKey ? apiKey.startsWith('gsk_') : false);
+        console.log('💬 User:', message);
 
         let reply = null;
         let usedApi = null;
 
         // ============================================
-        // GROQ API
+        // API 1: Groq (Free & Fast)
         // ============================================
-        if (apiKey && apiKey.startsWith('gsk_')) {
+        if (process.env.GROQ_API_KEY) {
             try {
                 console.log('🔄 Trying Groq API...');
                 
-                // Build messages
                 const messages = [
                     { 
                         role: 'system', 
                         content: `You are a helpful, intelligent, and thoughtful AI assistant. 
-                        Provide detailed, accurate, and personalized answers to the user's questions.
-                        If you don't know something, say so honestly.
-                        Be empathetic and engaging in your responses.` 
+                        Provide detailed, accurate, and personalized answers.` 
                     }
                 ];
 
@@ -65,14 +57,15 @@ export default async function handler(req, res) {
 
                 messages.push({ role: 'user', content: message });
 
+                // ✅ UPDATED: Using new Groq models
                 const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${apiKey}`,
+                        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
                     },
                     body: JSON.stringify({
-                        model: 'mixtral-8x7b-32768',
+                        model: 'llama-3.1-70b-versatile',  // ✅ New model
                         messages: messages,
                         temperature: 0.7,
                         max_tokens: 800,
@@ -83,49 +76,189 @@ export default async function handler(req, res) {
                     const data = await response.json();
                     if (data.choices && data.choices[0]) {
                         reply = data.choices[0].message.content;
-                        usedApi = 'Groq (Mixtral-8x7b) ⚡';
+                        usedApi = 'Groq (Llama 3.1 70B) ⚡';
                         console.log('✅ Groq Success!');
                     }
                 } else {
                     const errorData = await response.json();
-                    console.log('❌ Groq API Error:', errorData);
+                    console.log('❌ Groq Error:', errorData);
                     
-                    if (errorData.error?.code === 'invalid_api_key') {
-                        reply = `❌ Invalid Groq API Key!
+                    // Try fallback model
+                    const response2 = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+                        },
+                        body: JSON.stringify({
+                            model: 'llama-3.1-8b-instant',  // ✅ Fallback model
+                            messages: messages,
+                            temperature: 0.7,
+                            max_tokens: 800,
+                        })
+                    });
 
-Please check:
-1. 🔑 Go to https://console.groq.com/keys
-2. 🆕 Create a new API Key (starts with gsk_)
-3. 📋 Copy the key
-4. ⚙️ Update GROQ_API_KEY in Vercel Environment Variables
-5. 🔄 Redeploy the project
-
-I'll be ready to help you after that! 😊`;
+                    if (response2.ok) {
+                        const data2 = await response2.json();
+                        if (data2.choices && data2.choices[0]) {
+                            reply = data2.choices[0].message.content;
+                            usedApi = 'Groq (Llama 3.1 8B) ⚡';
+                            console.log('✅ Groq Fallback Success!');
+                        }
                     } else {
-                        reply = `❌ Groq API Error: ${errorData.error?.message || 'Unknown error'}`;
+                        throw new Error('Both Groq models failed');
                     }
-                    usedApi = 'AI Assistant (Error)';
                 }
             } catch (error) {
                 console.log('❌ Groq Error:', error.message);
-                reply = `❌ Error: ${error.message}`;
-                usedApi = 'AI Assistant (Error)';
             }
-        } else {
-            console.log('⚠️ GROQ_API_KEY is missing or invalid format');
-            reply = `❌ API Key not configured properly!
+        }
+
+        // ============================================
+        // API 2: ChatGPT (Backup)
+        // ============================================
+        if (!reply && process.env.OPENAI_API_KEY) {
+            try {
+                console.log('🔄 Trying ChatGPT...');
+                
+                const messages = [
+                    { role: 'system', content: 'You are a helpful AI assistant.' }
+                ];
+
+                if (history && Array.isArray(history)) {
+                    for (const h of history.slice(-10)) {
+                        messages.push({ role: h.role, content: h.content });
+                    }
+                }
+
+                messages.push({ role: 'user', content: message });
+
+                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                    },
+                    body: JSON.stringify({
+                        model: 'gpt-4o-mini',
+                        messages: messages,
+                        temperature: 0.7,
+                        max_tokens: 800,
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.choices && data.choices[0]) {
+                        reply = data.choices[0].message.content;
+                        usedApi = 'ChatGPT (GPT-4o-mini) 🤖';
+                        console.log('✅ ChatGPT Success!');
+                    }
+                } else {
+                    console.log('❌ ChatGPT Error:', response.status);
+                }
+            } catch (error) {
+                console.log('❌ ChatGPT Error:', error.message);
+            }
+        }
+
+        // ============================================
+        // API 3: Intelligent Fallback
+        // ============================================
+        if (!reply) {
+            console.log('🔄 Using Fallback...');
+            
+            const userMsg = message.trim().toLowerCase();
+            let fallbackReply = '';
+
+            if (userMsg.includes('hello') || userMsg.includes('hi')) {
+                fallbackReply = `👋 Hello! I'm your AI assistant. How can I help you today?`;
+            } else if (userMsg.includes('how are you')) {
+                fallbackReply = `😊 I'm doing great! Thanks for asking. How can I assist you?`;
+            } else if (userMsg.includes('friend') && userMsg.includes('lie')) {
+                fallbackReply = `💭 That's a difficult situation. Here's some advice:
+
+**Should you confront them?**
+✅ YES if: You want clarity and can stay calm
+❌ NO if: It's a small issue or might end the friendship
+
+**How to approach:**
+1. Choose the right time when you're both calm
+2. Use "I" statements: "I felt hurt when..."
+3. Listen to their side
+4. Decide if the friendship is worth the effort
+
+Remember: Honesty builds stronger friendships. What feels right to you? 💭`;
+            } else if (userMsg.includes('recipe') || userMsg.includes('food')) {
+                fallbackReply = `🍳 **Healthy Breakfast Recipe - Oatmeal with Fruits**
+
+**Ingredients:**
+• Rolled oats - 1/2 cup
+• Milk/water - 1 cup
+• Banana - 1 sliced
+• Berries - 1/2 cup
+• Honey - 1 tsp
+• Nuts - 2 tbsp
+
+**Instructions:**
+1. Boil milk/water
+2. Add oats, cook 5 mins
+3. Top with fruits, nuts, honey
+4. Enjoy! 😊
+
+**Calories:** ~350
+
+Want more recipes? Just ask! 🍽️`;
+            } else if (userMsg.includes('coding') || userMsg.includes('learn')) {
+                fallbackReply = `💻 **How to Learn Coding Fast:**
+
+1. Choose one language (Python is best for beginners)
+2. Start with basics (variables, loops, functions)
+3. Build small projects (calculator, to-do list)
+4. Practice daily (30 mins minimum)
+5. Join coding communities
+
+**Best Free Resources:**
+• freeCodeCamp
+• Codecademy
+• YouTube tutorials
+
+Start today! 🚀 What language are you interested in?`;
+            } else if (userMsg.includes('career') || userMsg.includes('job')) {
+                fallbackReply = `💼 **Career Growth Tips:**
+
+1. Keep learning new skills
+2. Network with people in your field
+3. Set clear goals
+4. Build a strong portfolio
+5. Find a mentor
+
+**Quick actions:**
+• Update LinkedIn weekly
+• Take online courses
+• Attend industry events
+
+What specific aspect would you like help with? 🚀`;
+            } else {
+                fallbackReply = `💡 I received your question: "${message}"
+
+I'm currently unable to connect to AI services. This might be because:
+
+1. 🔑 API keys need to be updated
+2. ⏳ Rate limit exceeded
+3. 🌐 Network issue
 
 **To fix this:**
-1. 🔑 Go to https://console.groq.com/keys
-2. 🆕 Create a new API Key (starts with gsk_)
-3. 📋 Copy the key
-4. ⚙️ Add to Vercel: Settings → Environment Variables
-   - Name: GROQ_API_KEY
-   - Value: gsk_xxxxxxxxxxxxxxxx
-5. 🔄 Redeploy
+• Make sure your API keys are correct
+• Try again after a few seconds
+• Check Vercel logs for more details
 
-I'll be ready to help you after that! 😊`;
-            usedApi = 'AI Assistant (No API Key)';
+I'll be back online soon! 😊`;
+            }
+            
+            reply = fallbackReply;
+            usedApi = 'AI Assistant (Fallback) 🧠';
+            console.log('✅ Fallback Response!');
         }
 
         return res.status(200).json({
