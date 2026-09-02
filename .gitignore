@@ -1,11 +1,143 @@
-# Never commit these files
+# ============================================
+# 🚀 ENVIRONMENT FILES (CRITICAL - NEVER COMMIT)
+# ============================================
 .env
 .env.local
 .env.production
+.env.development
+.env.test
+.env.staging
+.env.*.local
+*.env
+*.env.local
+
+# ============================================
+# 🔐 CONFIG & SECRET FILES
+# ============================================
 config.js
+config.json
 supabase-config.js
+supabase-config.json
+firebase-config.js
+firebase-config.json
+api-config.js
+api-config.json
 *.pem
 *.key
 *.secret
-.DS_Store
+*.cert
+*.crt
+
+# ============================================
+# 📦 DEPENDENCIES
+# ============================================
 node_modules/
+node_modules.*/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
+# ============================================
+# 🏗️ BUILD OUTPUTS
+# ============================================
+dist/
+build/
+.next/
+out/
+.nuxt/
+.cache/
+.vercel/
+.output/
+
+# ============================================
+# 🖥️ OS FILES
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ============================================
+# 🛠️ IDE & EDITOR FILES
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.workspace
+.code-workspace
+*.sublime-*
+*.iml
+.project
+.classpath
+.settings/
+
+# ============================================
+# 📊 LOGS & DATABASE
+# ============================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.sqlite
+*.sqlite3
+*.db
+
+# ============================================
+# 🧪 TESTING
+# ============================================
+coverage/
+.nyc_output/
+*.test.js
+*.spec.js
+__tests__/
+__mocks__/
+
+# ============================================
+# 🔧 MISC
+# ============================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.min.js
+*.min.css
+*.map
+.env.*.local
+.vercel
+
+# ============================================
+# 📝 NEXT.JS SPECIFIC
+# ============================================
+.next/
+out/
+.vercel
+*.tsbuildinfo
+.next-build
+
+# ============================================
+# 🐍 PYTHON (अगर use कर रहे हैं)
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# ============================================
+# 🔥 REACT/VITE SPECIFIC
+# ============================================
+*.local
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
