@@ -1,5 +1,5 @@
 // ============================================
-// GROQ API - SIMPLIFIED WORKING VERSION
+// GROQ API - SIMPLIFIED & WORKING
 // ============================================
 export default async function handler(req, res) {
     // CORS Headers
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
             return res.status(500).json({ error: 'API key not configured' });
         }
         
-        // ✅ ONLY WORKING MODEL - NO FALLBACK
+        // ✅ LATEST WORKING MODEL - DIRECT CALL
         const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
             method: 'POST',
             headers: {
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
                 'Authorization': `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
-                model: 'llama-3.3-70b-versatile',  // ✅ 100% WORKING
+                model: 'llama-3.3-70b-versatile',  // ✅ WORKING
                 messages: [
                     { 
                         role: 'system', 
