@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free ATS Resume Builder - No Sign-Up | FreeToolIndia</title>
+<meta name="description" content="Build ATS-friendly resume free. No login, auto-save, PDF download instantly. Your data never leaves your browser.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, Arial, sans-serif; background: #f5f7fa; color: #1a1a1a; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { color: #667eea; margin-bottom: 5px; }
+.subtitle { color: #666; margin-bottom: 25px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+@media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+.card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+input, textarea { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 0.95rem; }
+textarea { min-height: 80px; resize: vertical; }
+label { font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; display: block; }
+button { background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 0.95rem; margin: 5px 5px 5px 0; }
+button:hover { background: #5568d3; }
+.btn-green { background: #10b981; }
+.btn-green:hover { background: #059669; }
+.btn-red { background: #ef4444; }
+.preview { background: white; padding: 30px; border-radius: 12px; }
+.preview h2 { color: #667eea; border-bottom: 2px solid #667eea; padding-bottom: 5px; margin: 15px 0 10px; font-size: 1.1rem; }
+.preview .name { font-size: 1.8rem; font-weight: bold; color: #1a1a1a; }
+.preview .contact { color: #666; margin-bottom: 15px; }
+.entry { margin-bottom: 12px; }
+.entry strong { display: block; }
+.hint { font-size: 0.85rem; color: #999; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>📄 ATS Resume Builder</h1>
+    <p class="subtitle">100% Free • No Sign-Up • Auto-Save • Your Data Stays Private</p>
+    
+    <div class="grid">
+        <div class="card">
+            <h3 style="margin-bottom: 15px;">Enter Your Details</h3>
+            
+            <label>Full Name</label>
+            <input type="text" id="fullName" placeholder="Rahul Sharma" oninput="update()">
+            
+            <label>Email</label>
+            <input type="email" id="email" placeholder="rahul@email.com" oninput="update()">
+            
+            <label>Phone</label>
+            <input type="tel" id="phone" placeholder="+91 98765 43210" oninput="update()">
+            
+            <label>Location</label>
+            <input type="text" id="location" placeholder="Mumbai, India" oninput="update()">
+            
+            <label>Professional Summary</label>
+            <textarea id="summary" placeholder="Experienced software developer with 5+ years..." oninput="update()"></textarea>
+            
+            <label>Work Experience</label>
+            <textarea id="experience" placeholder="Company Name | Role | Year&#10;• Achievement 1&#10;• Achievement 2" oninput="update()"></textarea>
+            
+            <label>Education</label>
+            <textarea id="education" placeholder="Degree | College | Year" oninput="update()"></textarea>
+            
+            <label>Skills (comma separated)</label>
+            <textarea id="skills" placeholder="JavaScript, React, Node.js, SQL" oninput="update()"></textarea>
+            
+            <button class="btn-green" onclick="downloadPDF()">⬇ Download PDF</button>
+            <button class="btn-red" onclick="clearAll()">🗑 Clear All</button>
+        </div>
+        
+        <div class="card preview" id="preview">
+            <div class="name" id="pName">Your Name</div>
+            <div class="contact" id="pContact">email • phone • location</div>
+            
+            <h2>Summary</h2>
+            <p id="pSummary">Your summary will appear here...</p>
+            
+            <h2>Experience</h2>
+            <div id="pExperience">Your experience...</div>
+            
+            <h2>Education</h2>
+            <div id="pEducation">Your education...</div>
+            
+            <h2>Skills</h2>
+            <div id="pSkills">Your skills...</div>
+        </div>
+    </div>
+</div>
+
+<script>
+const fields = ['fullName','email','phone','location','summary','experience','education','skills'];
+
+// Load saved data
+window.onload = function() {
+    fields.forEach(f => {
+        const saved = localStorage.getItem('resume_' + f);
+        if (saved) document.getElementById(f).value = saved;
+    });
+    update();
+};
+
+function update() {
+    // Save
+    fields.forEach(f => {
+        localStorage.setItem('resume_' + f, document.getElementById(f).value);
+    });
+    
+    // Update preview
+    const name = document.getElementById('fullName').value || 'Your Name';
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const loc = document.getElementById('location').value;
+    
+    document.getElementById('pName').textContent = name;
+    document.getElementById('pContact').textContent = [email, phone, loc].filter(x => x).join(' • ') || 'email • phone • location';
+    
+    const summary = document.getElementById('summary').value;
+    document.getElementById('pSummary').textContent = summary || 'Your summary will appear here...';
+    
+    document.getElementById('pExperience').innerHTML = formatMultiline(document.getElementById('experience').value, 'Your experience...');
+    document.getElementById('pEducation').innerHTML = formatMultiline(document.getElementById('education').value, 'Your education...');
+    
+    const skills = document.getElementById('skills').value;
+    document.getElementById('pSkills').innerHTML = skills ? skills.split(',').map(s => `<span style="background:#eef2ff;color:#667eea;padding:4px 10px;border-radius:4px;margin:3px;display:inline-block;font-size:0.85rem;">${s.trim()}</span>`).join('') : 'Your skills...';
+}
+
+function formatMultiline(text, placeholder) {
+    if (!text) return placeholder;
+    return text.split('\n').map(line => line.trim() ? `<div class="entry">${line}</div>` : '').join('');
+}
+
+function downloadPDF() {
+    const printWindow = window.open('', '', 'height=800,width=800');
+    const previewHTML = document.getElementById('preview').innerHTML;
+    printWindow.document.write('<html><head><title>Resume</title><style>body{font-family:Arial;padding:40px;line-height:1.6;}h2{color:#333;border-bottom:2px solid #667eea;padding-bottom:5px;margin:15px 0 10px;font-size:16px;}.name{font-size:28px;font-weight:bold;}.contact{color:#666;margin-bottom:15px;}.entry{margin-bottom:10px;}</style></head><body>');
+    printWindow.document.write(previewHTML);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+}
+
+function clearAll() {
+    if (!confirm('Delete all resume data? This cannot be undone.')) return;
+    fields.forEach(f => {
+        document.getElementById(f).value = '';
+        localStorage.removeItem('resume_' + f);
+    });
+    update();
+}
+</script>
+</body>
+</html>
