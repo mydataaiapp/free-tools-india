@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Background Remover - No Upload, 100% Private | FreeToolIndia</title>
+<meta name="description" content="Remove image backgrounds instantly. No upload to server, works in browser. 100% private and free.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, Arial, sans-serif; background: #f5f7fa; padding: 20px; }
+.container { max-width: 800px; margin: 0 auto; }
+h1 { color: #667eea; margin-bottom: 5px; }
+.subtitle { color: #666; margin-bottom: 25px; }
+.card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); text-align: center; }
+.upload-area { border: 3px dashed #667eea; border-radius: 12px; padding: 50px 20px; cursor: pointer; transition: background 0.3s; margin-bottom: 20px; }
+.upload-area:hover { background: #f0f4ff; }
+.upload-area .icon { font-size: 3rem; margin-bottom: 10px; }
+.upload-area p { color: #666; }
+input[type="file"] { display: none; }
+button { background: #667eea; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 1rem; margin: 5px; }
+button:hover { background: #5568d3; }
+.btn-green { background: #10b981; }
+.image-container { margin-top: 20px; }
+.image-container img { max-width: 100%; border-radius: 8px; }
+.hidden { display: none; }
+.loading { color: #667eea; font-size: 1.1rem; margin: 20px 0; }
+.privacy-note { background: #eef2ff; padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 0.85rem; color: #667eea; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>🖼️ Background Remover</h1>
+    <p class="subtitle">No Upload • No Watermark • 100% Private • Free Forever</p>
+    
+    <div class="card">
+        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+            <div class="icon">📤</div>
+            <p><strong>Click to upload</strong> or drag & drop</p>
+            <p style="font-size: 0.85rem; margin-top: 5px;">PNG, JPG, JPEG supported</p>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" onchange="processImage(event)">
+        
+        <div id="loading" class="loading hidden">⏳ Processing... Please wait (first time may take 30-60 seconds to download AI model)</div>
+        
+        <div id="result" class="image-container hidden">
+            <h3 style="margin-bottom: 15px;">✅ Background Removed</h3>
+            <img id="resultImg" alt="Result">
+            <div style="margin-top: 15px;">
+                <button class="btn-green" onclick="downloadResult()">⬇ Download PNG</button>
+                <button onclick="reset()">🔄 Try Another</button>
+            </div>
+        </div>
+        
+        <div class="privacy-note">
+            🔒 <strong>100% Private:</strong> Your image is processed entirely in your browser using AI. Nothing is uploaded to any server. No watermark. No sign-up.
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/dist/browser.js"></script>
+<script>
+let resultBlob = null;
+
+async function processImage(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    document.getElementById('loading').classList.remove('hidden');
+    document.getElementById('result').classList.add('hidden');
+    
+    try {
+        const { removeBackground } = window.imgly || {};
+        if (!removeBackground) {
+            throw new Error('Library not loaded');
+        }
+        
+        resultBlob = await removeBackground(file);
+        const url = URL.createObjectURL(resultBlob);
+        document.getElementById('resultImg').src = url;
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('result').classList.remove('hidden');
+    } catch (e) {
+        document.getElementById('loading').textContent = '❌ Error: ' + e.message + '. Try a smaller image or refresh the page.';
+        console.error(e);
+    }
+}
+
+function downloadResult() {
+    if (!resultBlob) return;
+    const url = URL.createObjectURL(resultBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'no-background-' + Date.now() + '.png';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function reset() {
+    document.getElementById('fileInput').value = '';
+    document.getElementById('result').classList.add('hidden');
+    document.getElementById('loading').classList.add('hidden');
+    resultBlob = null;
+}
+</script>
+</body>
+</html>
