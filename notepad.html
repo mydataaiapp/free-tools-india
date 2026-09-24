@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Online Notepad with Auto-Save - No Login | FreeToolIndia</title>
+<meta name="description" content="Simple online notepad that auto-saves. Works offline, no sign-up. Your notes stay private in your browser.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, Arial, sans-serif; background: #f5f7fa; padding: 20px; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { color: #667eea; margin-bottom: 5px; }
+.subtitle { color: #666; margin-bottom: 20px; }
+.toolbar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; align-items: center; }
+button { background: #667eea; color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+button:hover { background: #5568d3; }
+.btn-green { background: #10b981; }
+.btn-red { background: #ef4444; }
+.status { color: #10b981; font-size: 0.85rem; margin-left: auto; }
+textarea { width: 100%; min-height: 500px; padding: 20px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Courier New', monospace; font-size: 1rem; line-height: 1.6; resize: vertical; background: white; }
+.stats { display: flex; gap: 20px; margin-top: 10px; font-size: 0.85rem; color: #666; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>📝 Online Notepad</h1>
+    <p class="subtitle">Auto-Saves as You Type • Works Offline • 100% Private</p>
+    
+    <div class="toolbar">
+        <button class="btn-green" onclick="exportNotes()">⬇ Export .txt</button>
+        <button onclick="copyAll()">📋 Copy All</button>
+        <button class="btn-red" onclick="clearAll()">🗑 Clear</button>
+        <span class="status" id="status">✓ Saved</span>
+    </div>
+    
+    <textarea id="notepad" placeholder="Start typing your notes here... Everything auto-saves in your browser."></textarea>
+    
+    <div class="stats">
+        <span>Characters: <strong id="charCount">0</strong></span>
+        <span>Words: <strong id="wordCount">0</strong></span>
+        <span>Lines: <strong id="lineCount">0</strong></span>
+    </div>
+</div>
+
+<script>
+const notepad = document.getElementById('notepad');
+let saveTimer;
+
+// Load saved content
+notepad.value = localStorage.getItem('freetool_notepad') || '';
+updateStats();
+
+// Auto-save with debounce
+notepad.addEventListener('input', function() {
+    document.getElementById('status').textContent = '⏳ Saving...';
+    document.getElementById('status').style.color = '#f59e0b';
+    
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+        localStorage.setItem('freetool_notepad', notepad.value);
+        document.getElementById('status').textContent = '✓ Saved';
+        document.getElementById('status').style.color = '#10b981';
+    }, 500);
+    
+    updateStats();
+});
+
+function updateStats() {
+    const text = notepad.value;
+    document.getElementById('charCount').textContent = text.length;
+    document.getElementById('wordCount').textContent = text.trim() ? text.trim().split(/\s+/).length : 0;
+    document.getElementById('lineCount').textContent = text ? text.split('\n').length : 0;
+}
+
+function exportNotes() {
+    const blob = new Blob([notepad.value], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'notes-' + new Date().toISOString().slice(0,10) + '.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function copyAll() {
+    navigator.clipboard.writeText(notepad.value).then(() => {
+        document.getElementById('status').textContent = '✓ Copied!';
+        setTimeout(() => document.getElementById('status').textContent = '✓ Saved', 1500);
+    });
+}
+
+function clearAll() {
+    if (!confirm('Delete all notes? This cannot be undone.')) return;
+    notepad.value = '';
+    localStorage.removeItem('freetool_notepad');
+    updateStats();
+    document.getElementById('status').textContent = '✓ Cleared';
+}
+</script>
+</body>
+</html>
