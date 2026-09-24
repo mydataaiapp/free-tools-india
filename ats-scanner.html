@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free ATS Resume Score Scanner - Paid Tools Charge ₹1500 | FreeToolIndia</title>
+<meta name="description" content="Scan your resume for ATS compatibility free. Paid tools charge ₹1500/month. Get score, issues, and fix suggestions instantly.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, Arial, sans-serif; background: #f5f7fa; padding: 20px; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { color: #667eea; margin-bottom: 5px; }
+.subtitle { color: #666; margin-bottom: 25px; }
+.badge { background: #10b981; color: white; padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; margin-left: 10px; }
+.card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 20px; }
+textarea { width: 100%; min-height: 200px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 0.95rem; resize: vertical; }
+label { font-weight: 600; margin-bottom: 8px; display: block; }
+button { background: #667eea; color: white; border: none; padding: 14px 30px; border-radius: 8px; cursor: pointer; font-size: 1rem; width: 100%; margin-top: 15px; font-weight: 600; }
+button:hover { background: #5568d3; }
+.score-circle { width: 150px; height: 150px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2.5rem; font-weight: bold; color: white; }
+.score-label { text-align: center; font-size: 1.2rem; font-weight: 600; margin-bottom: 25px; }
+.issues { background: #fef2f2; border-left: 4px solid #ef4444; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+.issues h3 { color: #ef4444; margin-bottom: 10px; font-size: 1rem; }
+.issues ul { padding-left: 20px; }
+.issues li { margin-bottom: 6px; color: #333; }
+.good-msg { background: #d1fae5; border-left: 4px solid #10b981; padding: 15px; border-radius: 8px; color: #065f46; }
+.section-score { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+.section-score .name { font-weight: 600; }
+.hint { font-size: 0.85rem; color: #999; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>🎯 ATS Resume Score Scanner <span class="badge">100% FREE</span></h1>
+    <p class="subtitle">Paid tools charge ₹1500/month for this. Get your score free with fix suggestions.</p>
+    
+    <div class="card">
+        <label>📄 Paste Your Resume Text</label>
+        <textarea id="resumeText" placeholder="Paste your complete resume text here...&#10;&#10;Example:&#10;RAHUL SHARMA&#10;Email: rahul@email.com | Phone: +91 98765 43210&#10;&#10;SUMMARY&#10;Software developer with 5 years experience...&#10;&#10;EXPERIENCE&#10;Company Name | Role | 2020-2023&#10;• Achievement 1&#10;• Achievement 2&#10;&#10;EDUCATION&#10;Degree | College | Year&#10;&#10;SKILLS&#10;JavaScript, React, Node.js"></textarea>
+        <p class="hint">💡 Your text is analyzed in your browser. Nothing is uploaded.</p>
+        
+        <label style="margin-top: 20px;">🎯 Job Description (Optional — for keyword matching)</label>
+        <textarea id="jobDesc" placeholder="Paste the job description here to check keyword match..." style="min-height: 100px;"></textarea>
+        
+        <button onclick="scanResume()">🔍 Scan My Resume</button>
+    </div>
+    
+    <div id="output"></div>
+</div>
+
+<script>
+function scanResume() {
+    const text = document.getElementById('resumeText').value.trim();
+    const jd = document.getElementById('jobDesc').value.trim();
+    
+    if (!text) {
+        alert('Please paste your resume text first.');
+        return;
+    }
+    
+    let score = 100;
+    const issues = [];
+    const sectionScores = [];
+    
+    // 1. Length check
+    const words = text.split(/\s+/).length;
+    if (words < 150) { score -= 15; issues.push('Resume is too short (' + words + ' words). Aim for 300-700 words.'); }
+    else if (words > 1000) { score -= 10; issues.push('Resume is too long (' + words + ' words). Keep it under 800 words.'); }
+    sectionScores.push({name: 'Length', score: words >= 150 && words <= 1000 ? 100 : 60});
+    
+    // 2. Section presence
+    const sections = {
+        'Summary/Objective': /summary|objective|profile/i,
+        'Experience': /experience|work history|employment/i,
+        'Education': /education|academic|qualification/i,
+        'Skills': /skills|technical skills|competencies/i,
+        'Contact': /email|phone|mobile|contact/i
+    };
+    
+    for (const [name, regex] of Object.entries(sections)) {
+        if (!regex.test(text)) {
+            score -= 8;
+            issues.push('Missing "' + name + '" section. ATS systems look for this.');
+        }
+    }
+    const presentSections = Object.values(sections).filter(r => r.test(text)).length;
+    sectionScores.push({name: 'Sections', score: Math.round(presentSections / 5 * 100)});
+    
+    // 3. Contact info
+    const hasEmail = /[\w.-]+@[\w.-]+\.\w+/.test(text);
+    const hasPhone = /(\+?\d[\d\s-]{8,})/.test(text);
+    if (!hasEmail) { score -= 10; issues.push('No email address found. Add a professional email.'); }
+    if (!hasPhone) { score -= 5; issues.push('No phone number found. Add your mobile number.'); }
+    sectionScores.push({name: 'Contact Info', score: (hasEmail ? 50 : 0) + (hasPhone ? 50 : 0)});
+    
+    // 4. ATS-breaking elements
+    if (text.includes('\t')) { score -= 8; issues.push('Tabs detected. Use spaces instead — ATS may misread tabs.'); }
+    if (/[│┃┆┇┊┋╎╏]/.test(text)) { score -= 10; issues.push('Special line characters detected. Use simple hyphens instead.'); }
+    
+    // 5. Action verbs
+    const actionVerbs = ['managed', 'developed', 'created', 'led', 'improved', 'increased', 'reduced', 'built', 'designed', 'implemented', 'achieved', 'delivered', 'launched'];
+    const verbCount = actionVerbs.filter(v => text.toLowerCase().includes(v)).length;
+    if (verbCount < 3) { score -= 8; issues.push('Use more action verbs (managed, developed, led, improved...).'); }
+    sectionScores.push({name: 'Action Verbs', score: Math.min(100, verbCount * 20)});
+    
+    // 6. Numbers/metrics
+    const hasNumbers = /\d+%|\d+\s*(million|billion|lakh|crore|k\b)|\$\d+|₹\d+/.test(text);
+    if (!hasNumbers) { score -= 8; issues.push('Add quantifiable achievements (e.g., "Increased sales by 25%").'); }
+    sectionScores.push({name: 'Quantified Results', score: hasNumbers ? 100 : 40});
+    
+    // 7. Keyword match with JD
+    let keywordScore = 100;
+    if (jd) {
+        const stopWords = ['the','and','for','with','you','are','will','have','this','that','from','they','been','were','their','what','when','your','which','more','about','into','than','them','these','some','would','make','like','time','just','know','take','people','year','good','some','could','them','see','him','two','how','its','our','out','day','get','use','man','new','now','way','may','say','each','she','does','did','her','his','had','has','was','one','all','but','not','can','are','for','you','any','out','own','our','get','use','who','why','how','its','let','put','say','she','too','use','way','who','boy','did','its','let','put','say','she','too','use','way','who'];
+        const jdWords = jd.toLowerCase().split(/\W+/).filter(w => w.length > 3 && !stopWords.includes(w));
+        const resumeLower = text.toLowerCase();
+        const uniqueJdWords = [...new Set(jdWords)];
+        const matched = uniqueJdWords.filter(w => resumeLower.includes(w));
+        keywordScore = Math.round(matched.length / uniqueJdWords.length * 100);
+        
+        if (keywordScore < 50) {
+            score -= 15;
+            issues.push('Only ' + keywordScore + '% keyword match with job description. Add relevant keywords.');
+        }
+    }
+    sectionScores.push({name: 'Keyword Match', score: keywordScore});
+    
+    // Final score
+    score = Math.max(0, Math.min(100, Math.round(score)));
+    
+    // Color
+    let color, label;
+    if (score >= 80) { color = '#10b981'; label = 'Excellent — ATS Ready!'; }
+    else if (score >= 60) { color = '#3b82f6'; label = 'Good — Minor fixes needed'; }
+    else if (score >= 40) { color = '#f59e0b'; label = 'Needs Improvement'; }
+    else { color = '#ef4444'; label = 'Poor — Major fixes needed'; }
+    
+    // Output HTML
+    let html = '<div class="card">';
+    html += '<div class="score-circle" style="background:' + color + '">' + score + '</div>';
+    html += '<div class="score-label" style="color:' + color + '">' + label + '</div>';
+    
+    html += '<h3 style="margin-bottom: 15px;">📊 Section Breakdown</h3>';
+    sectionScores.forEach(s => {
+        const c = s.score >= 80 ? '#10b981' : s.score >= 50 ? '#f59e0b' : '#ef4444';
+        html += '<div class="section-score"><span class="name">' + s.name + '</span><span style="color:' + c + ';font-weight:600;">' + s.score + '/100</span></div>';
+    });
+    
+    html += '</div>';
+    
+    if (issues.length > 0) {
+        html += '<div class="card issues"><h3>⚠️ Issues Found (' + issues.length + ')</h3><ul>';
+        issues.forEach(i => html += '<li>' + i + '</li>');
+        html += '</ul></div>';
+    } else {
+        html += '<div class="card good-msg">✅ <strong>Great job!</strong> No major issues found. Your resume is ATS-ready.</div>';
+    }
+    
+    // Tips
+    html += '<div class="card"><h3 style="margin-bottom: 15px;">💡 Pro Tips</h3><ul style="padding-left: 20px; line-height: 2;">';
+    html += '<li>Use standard section headings: Summary, Experience, Education, Skills</li>';
+    html += '<li>Save as .docx or simple PDF (not image-based PDF)</li>';
+    html += '<li>Avoid tables, columns, headers, and footers</li>';
+    html += '<li>Use standard fonts: Arial, Calibri, Times New Roman</li>';
+    html += '<li>Include keywords from the job description naturally</li>';
+    html += '<li>Quantify achievements with numbers and percentages</li>';
+    html += '</ul></div>';
+    
+    document.getElementById('output').innerHTML = html;
+    document.getElementById('output').scrollIntoView({behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
