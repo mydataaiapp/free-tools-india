@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Salary Tax Calculator 2025-26 - Old vs New Regime | FreeToolIndia</title>
+<meta name="description" content="Calculate income tax under old and new regime for FY 2025-26. Instant comparison, no sign-up. See which saves more.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, Arial, sans-serif; background: #f5f7fa; padding: 20px; }
+.container { max-width: 800px; margin: 0 auto; }
+h1 { color: #667eea; margin-bottom: 5px; }
+.subtitle { color: #666; margin-bottom: 25px; }
+.card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 20px; }
+label { font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; display: block; margin-top: 12px; }
+input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; }
+button { background: #667eea; color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-size: 1rem; width: 100%; margin-top: 20px; }
+button:hover { background: #5568d3; }
+.results { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 600px) { .results { grid-template-columns: 1fr; } }
+.result-box { padding: 20px; border-radius: 10px; text-align: center; }
+.old { background: #fff3cd; }
+.new { background: #d1fae5; }
+.result-box h3 { font-size: 1rem; margin-bottom: 10px; color: #333; }
+.result-box .amount { font-size: 1.8rem; font-weight: bold; color: #1a1a1a; }
+.result-box .label { font-size: 0.85rem; color: #666; margin-top: 5px; }
+.savings { background: #667eea; color: white; padding: 20px; border-radius: 10px; text-align: center; margin-top: 20px; }
+.savings h3 { margin-bottom: 8px; }
+.savings .big { font-size: 1.5rem; font-weight: bold; }
+.note { font-size: 0.85rem; color: #999; margin-top: 15px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>💰 Salary Tax Calculator 2025-26</h1>
+    <p class="subtitle">Old vs New Regime Comparison • 100% Free • No Sign-Up</p>
+    
+    <div class="card">
+        <label>Annual Gross Salary (₹)</label>
+        <input type="number" id="income" placeholder="1200000" value="1200000" oninput="calculate()">
+        
+        <label>80C Investments (₹) — PF, ELSS, LIC, etc. (Old Regime only)</label>
+        <input type="number" id="inv80c" placeholder="150000" value="150000" oninput="calculate()">
+        
+        <label>80D Health Insurance (₹) — Old Regime only</label>
+        <input type="number" id="inv80d" placeholder="25000" value="25000" oninput="calculate()">
+        
+        <label>HRA Exemption (₹) — Old Regime only</label>
+        <input type="number" id="hra" placeholder="0" value="0" oninput="calculate()">
+        
+        <button onclick="calculate()">Calculate Tax</button>
+    </div>
+    
+    <div class="results" id="results" style="display:none;">
+        <div class="result-box old">
+            <h3>🏛️ Old Regime</h3>
+            <div class="amount" id="oldTax">₹0</div>
+            <div class="label">Total Tax Payable</div>
+        </div>
+        <div class="result-box new">
+            <h3>✨ New Regime</h3>
+            <div class="amount" id="newTax">₹0</div>
+            <div class="label">Total Tax Payable</div>
+        </div>
+    </div>
+    
+    <div class="savings" id="savings" style="display:none;">
+        <h3>💡 Best Option for You</h3>
+        <div class="big" id="savingsText">—</div>
+    </div>
+    
+    <p class="note">* Calculations based on FY 2025-26 slabs. Includes 4% cess. For informational purposes only.</p>
+</div>
+
+<script>
+function fmt(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
+
+function calcOld(income, c80, d80, hra) {
+    let taxable = Math.max(0, income - 50000 - c80 - d80 - hra);
+    let tax = 0;
+    if (taxable <= 250000) tax = 0;
+    else if (taxable <= 500000) tax = (taxable - 250000) * 0.05;
+    else if (taxable <= 1000000) tax = 12500 + (taxable - 500000) * 0.20;
+    else tax = 112500 + (taxable - 1000000) * 0.30;
+    if (taxable <= 500000) tax = Math.max(0, tax - 12500);
+    return tax * 1.04;
+}
+
+function calcNew(income) {
+    let taxable = Math.max(0, income - 75000);
+    let tax = 0;
+    if (taxable <= 400000) tax = 0;
+    else if (taxable <= 800000) tax = (taxable - 400000) * 0.05;
+    else if (taxable <= 1200000) tax = 20000 + (taxable - 800000) * 0.10;
+    else if (taxable <= 1600000) tax = 60000 + (taxable - 1200000) * 0.15;
+    else if (taxable <= 2000000) tax = 120000 + (taxable - 1600000) * 0.20;
+    else if (taxable <= 2400000) tax = 200000 + (taxable - 2000000) * 0.25;
+    else tax = 300000 + (taxable - 2400000) * 0.30;
+    if (taxable <= 1200000) tax = Math.max(0, tax - 60000);
+    return tax * 1.04;
+}
+
+function calculate() {
+    const income = parseFloat(document.getElementById('income').value) || 0;
+    const c80 = parseFloat(document.getElementById('inv80c').value) || 0;
+    const d80 = parseFloat(document.getElementById('inv80d').value) || 0;
+    const hra = parseFloat(document.getElementById('hra').value) || 0;
+    
+    const oldT = calcOld(income, c80, d80, hra);
+    const newT = calcNew(income);
+    
+    document.getElementById('oldTax').textContent = fmt(oldT);
+    document.getElementById('newTax').textContent = fmt(newT);
+    document.getElementById('results').style.display = 'grid';
+    document.getElementById('savings').style.display = 'block';
+    
+    const diff = Math.abs(oldT - newT);
+    if (oldT < newT) {
+        document.getElementById('savingsText').textContent = '✅ Old Regime saves you ' + fmt(diff);
+    } else if (newT < oldT) {
+        document.getElementById('savingsText').textContent = '✅ New Regime saves you ' + fmt(diff);
+    } else {
+        document.getElementById('savingsText').textContent = 'Both regimes are equal for you';
+    }
+}
+
+calculate();
+</script>
+</body>
+</html>
