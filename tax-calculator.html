@@ -4,77 +4,103 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Free Salary Tax Calculator 2025-26 - Old vs New Regime | FreeToolIndia</title>
-<meta name="description" content="Calculate income tax under old and new regime for FY 2025-26. Instant comparison, no sign-up. See which saves more.">
+<meta name="description" content="Calculate income tax under old and new regime for FY 2025-26. Instant comparison, no sign-up. See which regime saves you more.">
+<meta name="keywords" content="tax calculator 2025-26, income tax calculator, old vs new regime, salary tax india">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.freetoolindia.com/tax-calculator.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, Arial, sans-serif; background: #f5f7fa; padding: 20px; }
-.container { max-width: 800px; margin: 0 auto; }
-h1 { color: #667eea; margin-bottom: 5px; }
-.subtitle { color: #666; margin-bottom: 25px; }
-.card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 20px; }
-label { font-weight: 600; font-size: 0.9rem; margin-bottom: 5px; display: block; margin-top: 12px; }
-input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; }
-button { background: #667eea; color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-size: 1rem; width: 100%; margin-top: 20px; }
-button:hover { background: #5568d3; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #ecfdf5; background-image: radial-gradient(at 0% 0%, rgba(16,185,129,0.15) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(5,150,105,0.15) 0px, transparent 50%); background-attachment: fixed; color: #0f172a; line-height: 1.6; min-height: 100vh; }
+.topbar { background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); padding: 16px 24px; box-shadow: 0 2px 10px rgba(16,185,129,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(16,185,129,0.15); }
+.topbar a { color: #059669; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; }
+.topbar a:hover { color: #047857; transform: translateX(-3px); display: inline-block; }
+.container { max-width: 850px; margin: 0 auto; padding: 30px 20px 60px; }
+h1 { font-size: 2.2rem; font-weight: 800; color: #059669; margin-bottom: 8px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 12px; }
+h1 .emoji { font-size: 2.2rem; }
+.subtitle { color: #64748b; font-size: 1rem; margin-bottom: 30px; font-weight: 500; }
+.card { background: #fff; padding: 30px; border-radius: 16px; box-shadow: 0 10px 40px rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.1); margin-bottom: 20px; }
+label { font-weight: 700; font-size: 0.88rem; color: #0f172a; margin-bottom: 6px; display: block; margin-top: 14px; }
+label:first-child { margin-top: 0; }
+input { width: 100%; padding: 12px 16px; border: 2px solid #a7f3d0; border-radius: 10px; font-size: 1rem; transition: all 0.2s; outline: none; }
+input:focus { border-color: #10b981; box-shadow: 0 0 0 4px rgba(16,185,129,0.15); }
+button { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; padding: 14px 26px; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 700; font-family: inherit; width: 100%; margin-top: 20px; transition: all 0.25s; box-shadow: 0 4px 14px rgba(16,185,129,0.35); }
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(16,185,129,0.45); }
 .results { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 @media (max-width: 600px) { .results { grid-template-columns: 1fr; } }
-.result-box { padding: 20px; border-radius: 10px; text-align: center; }
-.old { background: #fff3cd; }
-.new { background: #d1fae5; }
-.result-box h3 { font-size: 1rem; margin-bottom: 10px; color: #333; }
-.result-box .amount { font-size: 1.8rem; font-weight: bold; color: #1a1a1a; }
-.result-box .label { font-size: 0.85rem; color: #666; margin-top: 5px; }
-.savings { background: #667eea; color: white; padding: 20px; border-radius: 10px; text-align: center; margin-top: 20px; }
-.savings h3 { margin-bottom: 8px; }
-.savings .big { font-size: 1.5rem; font-weight: bold; }
-.note { font-size: 0.85rem; color: #999; margin-top: 15px; }
+.result-box { padding: 28px 20px; border-radius: 14px; text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.old { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; }
+.new { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border: 2px solid #10b981; }
+.result-box h3 { font-size: 1rem; margin-bottom: 12px; color: #333; font-weight: 700; }
+.result-box .amount { font-size: 1.9rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; }
+.result-box .label { font-size: 0.82rem; color: #64748b; margin-top: 6px; font-weight: 600; }
+.savings { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 26px; border-radius: 14px; text-align: center; margin-top: 20px; box-shadow: 0 12px 30px rgba(16,185,129,0.35); }
+.savings h3 { font-size: 1rem; margin-bottom: 10px; opacity: 0.95; }
+.savings .big { font-size: 1.6rem; font-weight: 800; }
+.note { font-size: 0.85rem; color: #64748b; margin-top: 15px; text-align: center; }
+.faq-section { margin-top: 60px; }
+.faq-section h2 { text-align: center; font-size: 1.9rem; margin-bottom: 30px; color: #0f172a; font-weight: 800; }
+.faq-item { background: #fff; border-radius: 14px; padding: 22px 26px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(16,185,129,0.08); border-left: 4px solid #10b981; transition: all 0.25s; }
+.faq-item:hover { box-shadow: 0 10px 30px rgba(16,185,129,0.18); transform: translateX(6px); border-left-color: #047857; }
+.faq-item h3 { color: #059669; margin-bottom: 8px; font-size: 1.05rem; font-weight: 700; }
+.faq-item p { color: #475569; font-size: 0.93rem; line-height: 1.7; }
+.interlink { margin-top: 60px; background: #fff; padding: 36px 30px; border-radius: 16px; box-shadow: 0 10px 40px rgba(16,185,129,0.12); }
+.interlink h2 { text-align: center; margin-bottom: 28px; font-size: 1.7rem; font-weight: 800; color: #0f172a; }
+.interlink-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.interlink-grid a { display: block; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); padding: 16px 20px; border-radius: 12px; text-decoration: none; color: #0f172a; font-weight: 700; font-size: 0.93rem; transition: all 0.25s; border-left: 4px solid #10b981; }
+.interlink-grid a:hover { background: linear-gradient(135deg, #a7f3d0 0%, #6ee7b7 100%); transform: translateX(6px); border-left-color: #047857; box-shadow: 0 8px 22px rgba(16,185,129,0.25); }
+footer { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #94a3b8; text-align: center; padding: 36px 20px 28px; margin-top: 60px; font-size: 0.9rem; }
+footer a { color: #6ee7b7; text-decoration: none; font-weight: 600; }
+footer a:hover { color: #fff; }
+@media (max-width: 600px) { h1 { font-size: 1.6rem; } h1 .emoji { font-size: 1.6rem; } .container { padding: 20px 15px 40px; } .card { padding: 22px 18px; } }
 </style>
 </head>
 <body>
+<div class="topbar"><a href="index.html">← Back to All Tools</a></div>
 <div class="container">
-    <h1>💰 Salary Tax Calculator 2025-26</h1>
+    <h1><span class="emoji">💰</span> Salary Tax Calculator 2025-26</h1>
     <p class="subtitle">Old vs New Regime Comparison • 100% Free • No Sign-Up</p>
-    
     <div class="card">
         <label>Annual Gross Salary (₹)</label>
-        <input type="number" id="income" placeholder="1200000" value="1200000" oninput="calculate()">
-        
-        <label>80C Investments (₹) — PF, ELSS, LIC, etc. (Old Regime only)</label>
-        <input type="number" id="inv80c" placeholder="150000" value="150000" oninput="calculate()">
-        
+        <input type="number" id="income" value="1200000" oninput="calculate()">
+        <label>80C Investments (₹) — Old Regime only</label>
+        <input type="number" id="inv80c" value="150000" oninput="calculate()">
         <label>80D Health Insurance (₹) — Old Regime only</label>
-        <input type="number" id="inv80d" placeholder="25000" value="25000" oninput="calculate()">
-        
+        <input type="number" id="inv80d" value="25000" oninput="calculate()">
         <label>HRA Exemption (₹) — Old Regime only</label>
-        <input type="number" id="hra" placeholder="0" value="0" oninput="calculate()">
-        
+        <input type="number" id="hra" value="0" oninput="calculate()">
         <button onclick="calculate()">Calculate Tax</button>
     </div>
-    
-    <div class="results" id="results" style="display:none;">
-        <div class="result-box old">
-            <h3>🏛️ Old Regime</h3>
-            <div class="amount" id="oldTax">₹0</div>
-            <div class="label">Total Tax Payable</div>
-        </div>
-        <div class="result-box new">
-            <h3>✨ New Regime</h3>
-            <div class="amount" id="newTax">₹0</div>
-            <div class="label">Total Tax Payable</div>
+    <div class="results">
+        <div class="result-box old"><h3>🏛️ Old Regime</h3><div class="amount" id="oldTax">₹0</div><div class="label">Total Tax Payable</div></div>
+        <div class="result-box new"><h3>✨ New Regime</h3><div class="amount" id="newTax">₹0</div><div class="label">Total Tax Payable</div></div>
+    </div>
+    <div class="savings"><h3>💡 Best Option for You</h3><div class="big" id="savingsText">—</div></div>
+    <p class="note">* Based on FY 2025-26 slabs. Includes 4% cess. For informational purposes only.</p>
+    <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item"><h3>Is this tax calculator updated for 2025-26?</h3><p>Yes, it uses the latest FY 2025-26 slabs for both Old and New regimes, including standard deduction and 87A rebate.</p></div>
+        <div class="faq-item"><h3>Which regime is better for me?</h3><p>It depends on your deductions. If you claim 80C, 80D, HRA, the Old Regime may save more. Otherwise, New Regime is usually better.</p></div>
+        <div class="faq-item"><h3>What is the standard deduction?</h3><p>₹50,000 under Old Regime and ₹75,000 under New Regime for FY 2025-26.</p></div>
+        <div class="faq-item"><h3>Is my salary data stored?</h3><p>No. All calculations happen in your browser. Nothing is uploaded or saved.</p></div>
+        <div class="faq-item"><h3>Does it include cess?</h3><p>Yes, 4% health and education cess is included in the final tax amount.</p></div>
+        <div class="faq-item"><h3>Can I use it for freelance income?</h3><p>It's designed for salaried individuals. For business income, consult a CA.</p></div>
+    </div>
+    <div class="interlink">
+        <h2>🔗 Explore More Free Tools</h2>
+        <div class="interlink-grid">
+            <a href="resume-builder.html">📄 ATS Resume Builder</a>
+            <a href="notepad.html">📝 Online Auto-Save Notepad</a>
+            <a href="password-checker.html">🔐 Password Strength Checker</a>
+            <a href="ats-scanner.html">🎯 ATS Resume Score Scanner</a>
+            <a href="bg-remover.html">🖼️ Background Remover</a>
+            <a href="index.html">🏠 All Tools Homepage</a>
         </div>
     </div>
-    
-    <div class="savings" id="savings" style="display:none;">
-        <h3>💡 Best Option for You</h3>
-        <div class="big" id="savingsText">—</div>
-    </div>
-    
-    <p class="note">* Calculations based on FY 2025-26 slabs. Includes 4% cess. For informational purposes only.</p>
 </div>
-
+<footer><p>© 2025 FreeToolIndia.com — <a href="index.html">Home</a> • All tools free forever.</p></footer>
 <script>
 function fmt(n) { return '₹' + Math.round(n).toLocaleString('en-IN'); }
-
 function calcOld(income, c80, d80, hra) {
     let taxable = Math.max(0, income - 50000 - c80 - d80 - hra);
     let tax = 0;
@@ -85,7 +111,6 @@ function calcOld(income, c80, d80, hra) {
     if (taxable <= 500000) tax = Math.max(0, tax - 12500);
     return tax * 1.04;
 }
-
 function calcNew(income) {
     let taxable = Math.max(0, income - 75000);
     let tax = 0;
@@ -99,32 +124,24 @@ function calcNew(income) {
     if (taxable <= 1200000) tax = Math.max(0, tax - 60000);
     return tax * 1.04;
 }
-
 function calculate() {
     const income = parseFloat(document.getElementById('income').value) || 0;
     const c80 = parseFloat(document.getElementById('inv80c').value) || 0;
     const d80 = parseFloat(document.getElementById('inv80d').value) || 0;
     const hra = parseFloat(document.getElementById('hra').value) || 0;
-    
     const oldT = calcOld(income, c80, d80, hra);
     const newT = calcNew(income);
-    
     document.getElementById('oldTax').textContent = fmt(oldT);
     document.getElementById('newTax').textContent = fmt(newT);
-    document.getElementById('results').style.display = 'grid';
-    document.getElementById('savings').style.display = 'block';
-    
     const diff = Math.abs(oldT - newT);
-    if (oldT < newT) {
-        document.getElementById('savingsText').textContent = '✅ Old Regime saves you ' + fmt(diff);
-    } else if (newT < oldT) {
-        document.getElementById('savingsText').textContent = '✅ New Regime saves you ' + fmt(diff);
-    } else {
-        document.getElementById('savingsText').textContent = 'Both regimes are equal for you';
-    }
+    if (oldT < newT) document.getElementById('savingsText').textContent = '✅ Old Regime saves you ' + fmt(diff);
+    else if (newT < oldT) document.getElementById('savingsText').textContent = '✅ New Regime saves you ' + fmt(diff);
+    else document.getElementById('savingsText').textContent = 'Both regimes are equal for you';
 }
-
 calculate();
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this tax calculator updated for 2025-26?","acceptedAnswer":{"@type":"Answer","text":"Yes, latest FY 2025-26 slabs."}},{"@type":"Question","name":"Which regime is better?","acceptedAnswer":{"@type":"Answer","text":"Depends on your deductions."}},{"@type":"Question","name":"Is my data stored?","acceptedAnswer":{"@type":"Answer","text":"No, all in browser."}}]}
 </script>
 </body>
 </html>
