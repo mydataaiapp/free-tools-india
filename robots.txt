@@ -1,0 +1,26 @@
+# ============================================
+# robots.txt for FreeToolIndia.com
+# ============================================
+
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Block common spam bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://www.freetoolindia.com/sitemap.xml
+
+# Crawl delay (be gentle)
+Crawl-delay: 1
