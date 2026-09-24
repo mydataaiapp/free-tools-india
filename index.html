@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeToolIndia - 100% Free Online Tools | No Sign-Up Required</title>
+<meta name="description" content="Free online tools for India. ATS Resume Builder, Tax Calculator 2025-26, Online Notepad, Password Checker, ATS Resume Scanner, Background Remover. No login, no tracking, 100% free forever.">
+<meta name="keywords" content="free tools india, ats resume builder, tax calculator 2025-26, online notepad, password strength checker, ats resume scanner, background remover, free online tools">
+<meta name="author" content="FreeToolIndia">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph for Social Media -->
+<meta property="og:title" content="FreeToolIndia - 100% Free Online Tools">
+<meta property="og:description" content="6 powerful free tools. No sign-up, no tracking, your data stays private.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.freetoolindia.com/">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://www.freetoolindia.com/">
+
+<!-- Favicon (emoji based, no file needed) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #1a1a1a; line-height: 1.6; }
+
+/* Header */
+header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 70px 20px 60px; text-align: center; position: relative; overflow: hidden; }
+header::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 30px 30px; opacity: 0.3; }
+header h1 { font-size: 2.8rem; margin-bottom: 12px; position: relative; z-index: 1; }
+header p { font-size: 1.15rem; opacity: 0.95; position: relative; z-index: 1; margin-bottom: 20px; }
+.tagline { display: inline-block; background: rgba(255,255,255,0.2); padding: 8px 18px; border-radius: 20px; font-size: 0.9rem; position: relative; z-index: 1; }
+
+/* Container */
+.container { max-width: 1150px; margin: 0 auto; padding: 50px 20px; }
+
+/* Section Titles */
+.section-title { text-align: center; font-size: 1.8rem; margin-bottom: 10px; color: #1a1a1a; }
+.section-sub { text-align: center; color: #666; margin-bottom: 40px; font-size: 1rem; }
+
+/* Tools Grid */
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 60px; }
+
+.tool-card { background: white; border-radius: 14px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.07); transition: all 0.3s ease; text-decoration: none; color: inherit; display: block; position: relative; border: 2px solid transparent; }
+.tool-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(102,126,234,0.2); border-color: #667eea; }
+.tool-card .icon { font-size: 2.8rem; margin-bottom: 15px; display: block; }
+.tool-card h3 { font-size: 1.25rem; margin-bottom: 10px; color: #667eea; }
+.tool-card p { color: #666; font-size: 0.95rem; line-height: 1.5; }
+.tool-card .arrow { position: absolute; top: 30px; right: 30px; color: #667eea; font-size: 1.3rem; opacity: 0; transition: opacity 0.3s, transform 0.3s; }
+.tool-card:hover .arrow { opacity: 1; transform: translateX(5px); }
+
+.badge { display: inline-block; background: #10b981; color: white; font-size: 0.7rem; padding: 3px 9px; border-radius: 20px; margin-left: 8px; vertical-align: middle; font-weight: 600; letter-spacing: 0.3px; }
+.badge-hot { background: #ef4444; }
+
+/* Why Choose Us */
+.why-section { background: white; border-radius: 14px; padding: 40px 30px; margin-bottom: 60px; box-shadow: 0 4px 15px rgba(0,0,0,0.07); }
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 30px; }
+.why-item { text-align: center; padding: 15px; }
+.why-item .why-icon { font-size: 2.2rem; margin-bottom: 12px; }
+.why-item h4 { color: #667eea; margin-bottom: 8px; font-size: 1.05rem; }
+.why-item p { color: #666; font-size: 0.9rem; }
+
+/* FAQ */
+.faq-section { margin-bottom: 60px; }
+.faq-item { background: white; border-radius: 10px; padding: 20px 25px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.faq-item h4 { color: #1a1a1a; margin-bottom: 8px; font-size: 1.05rem; }
+.faq-item p { color: #666; font-size: 0.92rem; }
+
+/* Footer */
+footer { background: #1a1a1a; color: #999; text-align: center; padding: 40px 20px 30px; margin-top: 40px; }
+footer p { margin-bottom: 8px; font-size: 0.9rem; }
+footer a { color: #667eea; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+.footer-links { margin: 15px 0; }
+.footer-links a { margin: 0 12px; font-size: 0.9rem; }
+
+/* Responsive */
+@media (max-width: 600px) {
+    header h1 { font-size: 2rem; }
+    header p { font-size: 1rem; }
+    .section-title { font-size: 1.4rem; }
+    .container { padding: 30px 15px; }
+    .tool-card { padding: 25px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+    <h1>🇮🇳 FreeToolIndia</h1>
+    <p>6 Powerful Tools • 100% Free • No Sign-Up • Your Data Stays Private</p>
+    <span class="tagline">✨ No Login • No Tracking • No Watermark</span>
+</header>
+
+<!-- ============ MAIN CONTAINER ============ -->
+<div class="container">
+
+    <!-- Tools Section -->
+    <h2 class="section-title">All Free Tools</h2>
+    <p class="section-sub">Everything you need, right in your browser. No account required.</p>
+
+    <div class="tools-grid">
+
+        <a href="resume-builder.html" class="tool-card">
+            <span class="arrow">→</span>
+            <span class="icon">📄</span>
+            <h3>ATS Resume Builder</h3>
+            <p>Create a professional ATS-friendly resume. Auto-save, instant PDF download, no login needed.</p>
+        </a>
+
+        <a href="tax-calculator.html" class="tool-card">
+            <span class="arrow">→</span>
+            <span class="icon">💰</span>
+            <h3>Salary Tax Calculator <span class="badge">2025-26</span></h3>
+            <p>Compare Old vs New tax regime instantly. Find out which one saves you more money.</p>
+        </a>
+
+        <a href="notepad.html" class="tool-card">
+            <span class="arrow">→</span>
+            <span class="icon">📝</span>
+            <h3>Online Notepad</h3>
+            <p>Auto-saving notepad that works offline. Your notes stay safe in your browser.</p>
+        </a>
+
+        <a href="password-checker.html" class="tool-card">
+            <span class="arrow">→</span>
+            <span class="icon">🔐</span>
+            <h3>Password Strength Checker</h3>
+            <p>Check if your password is strong and leaked. 100% private — nothing is ever stored.</p>
+        </a>
+
+        <a href="ats-scanner.html" class="tool-card">
+            <span class="arrow">→</span>
+            <span class="icon">🎯</span>
+            <h3>ATS Resume Scanner <span class="badge badge-hot">HOT</span></h3>
+            <p>Paid tools charge ₹1500/month. Get your ATS score free with detailed fix suggestions.</p>
+        </a>
+
+        <a href="bg-remover.html" class="tool-card">
+            <span class="arrow">→</span>
+            <span class="icon">🖼️</span>
+            <h3>Background Remover</h3>
+            <p>Remove image backgrounds right in your browser. No upload, no watermark, 100% private.</p>
+        </a>
+
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="why-section">
+        <h2 class="section-title">Why Choose FreeToolIndia?</h2>
+        <p class="section-sub">Built for India, made to be simple and private.</p>
+
+        <div class="why-grid">
+            <div class="why-item">
+                <div class="why-icon">🆓</div>
+                <h4>100% Free Forever</h4>
+                <p>No hidden charges, no premium plans, no credit card. Ever.</p>
+            </div>
+            <div class="why-item">
+                <div class="why-icon">🔒</div>
+                <h4>Privacy First</h4>
+                <p>All processing happens in your browser. Your data never leaves your device.</p>
+            </div>
+            <div class="why-item">
+                <div class="why-icon">⚡</div>
+                <h4>No Sign-Up Needed</h4>
+                <p>Open the tool and start using it instantly. No email, no account, no hassle.</p>
+            </div>
+            <div class="why-item">
+                <div class="why-icon">🇮🇳</div>
+                <h4>Made for India</h4>
+                <p>Indian tax slabs, Indian formats, Indian needs — all in one place.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section (SEO Gold) -->
+    <div class="faq-section">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-sub">Everything you need to know about our free tools.</p>
+
+        <div class="faq-item">
+            <h4>Are these tools really 100% free?</h4>
+            <p>Yes. Every tool on FreeToolIndia is free forever. No hidden charges, no premium plans, no credit card required.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Do I need to create an account?</h4>
+            <p>No. All tools work without any sign-up or login. Just open and use them instantly.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Is my data safe?</h4>
+            <p>Absolutely. Most of our tools run entirely in your browser. Your files, notes, and passwords never leave your device.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Is the tax calculator updated for 2025-26?</h4>
+            <p>Yes, our salary tax calculator uses the latest FY 2025-26 slabs for both Old and New regimes, including standard deduction and 87A rebate.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>Can I use these tools on mobile?</h4>
+            <p>Yes, all tools are fully mobile-responsive and work perfectly on phones, tablets, and desktops.</p>
+        </div>
+
+        <div class="faq-item">
+            <h4>How is the ATS Resume Scanner different from paid tools?</h4>
+            <p>Paid tools like Jobscan charge ₹1500+/month for ATS scoring. Our scanner gives you the same core analysis — score, issues, and fix suggestions — completely free.</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+    <p><strong style="color: #fff;">🇮🇳 FreeToolIndia</strong></p>
+    <p>6 powerful free tools. No login. No tracking. No watermark.</p>
+    <div class="footer-links">
+        <a href="resume-builder.html">Resume Builder</a>
+        <a href="tax-calculator.html">Tax Calculator</a>
+        <a href="notepad.html">Notepad</a>
+        <a href="password-checker.html">Password Checker</a>
+        <a href="ats-scanner.html">ATS Scanner</a>
+        <a href="bg-remover.html">BG Remover</a>
+    </div>
+    <p style="margin-top: 15px;">© 2025 FreeToolIndia.com — All tools free forever. Made with ❤️ for India.</p>
+</footer>
+
+<!-- ============ SEO STRUCTURED DATA ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "FreeToolIndia",
+  "url": "https://www.freetoolindia.com/",
+  "description": "100% free online tools for India. No sign-up, no tracking, privacy-first.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.freetoolindia.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are these tools really 100% free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every tool on FreeToolIndia is free forever. No hidden charges, no premium plans, no credit card required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to create an account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All tools work without any sign-up or login. Just open and use them instantly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data safe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. Most of our tools run entirely in your browser. Your files, notes, and passwords never leave your device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the tax calculator updated for 2025-26?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, our salary tax calculator uses the latest FY 2025-26 slabs for both Old and New regimes."
+      }
+    }
+  ]
+}
+</script>
+
+</body>
+</html>
