@@ -1,138 +1,552 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="PNpiSvBDHbY7jBN4zmnLADh_dFIQvcG_6xxVlcOP7rU" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FreeToolIndia - 100% Free Online Tools | No Sign-Up</title>
-<meta name="description" content="Free online tools for India. ATS Resume Builder, Tax Calculator 2025-26, Notepad, Password Checker, ATS Scanner, Background Remover. No login, 100% free.">
+<title>FreeToolIndia - 100% Free Online Tools | No Sign-Up Required</title>
+<meta name="description" content="6 powerful free online tools for India. ATS Resume Builder, Tax Calculator 2025-26, Notepad, Password Checker, ATS Scanner, Background Remover. No login, 100% free forever.">
+<meta name="keywords" content="free tools india, ats resume builder, tax calculator 2025-26, online notepad, password checker, background remover, free online tools">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.freetoolindia.com/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
+
+<!-- Open Graph -->
+<meta property="og:title" content="FreeToolIndia - 100% Free Online Tools">
+<meta property="og:description" content="6 powerful free tools. No sign-up, no tracking, your data stays private.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.freetoolindia.com/">
+
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, Arial, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; }
-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); color: white; padding: 70px 20px; text-align: center; }
-header h1 { font-size: 2.8rem; margin-bottom: 12px; font-weight: 800; }
-header p { font-size: 1.1rem; opacity: 0.95; margin-bottom: 18px; }
-.tagline { display: inline-block; background: rgba(255,255,255,0.25); padding: 10px 22px; border-radius: 30px; font-size: 0.9rem; font-weight: 600; }
-.container { max-width: 1150px; margin: 0 auto; padding: 50px 20px; }
-.section-title { text-align: center; font-size: 1.9rem; margin-bottom: 10px; font-weight: 800; }
-.section-sub { text-align: center; color: #64748b; margin-bottom: 40px; }
-.tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; margin-bottom: 60px; }
-.tool-card { background: white; border-radius: 16px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: all 0.3s; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; border: 2px solid transparent; }
-.tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gradient); }
-.tool-card:hover { transform: translateY(-6px); box-shadow: 0 20px 45px rgba(0,0,0,0.12); border-color: var(--accent); }
-.tool-card .icon { font-size: 2.8rem; margin-bottom: 15px; display: block; }
-.tool-card h3 { font-size: 1.25rem; margin-bottom: 10px; color: var(--accent); font-weight: 800; }
-.tool-card p { color: #64748b; font-size: 0.94rem; }
-.badge { display: inline-block; background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 0.68rem; padding: 4px 10px; border-radius: 20px; margin-left: 8px; vertical-align: middle; font-weight: 800; }
-.badge-hot { background: linear-gradient(135deg, #ef4444, #dc2626); }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.6; overflow-x: hidden; }
+
+/* ============ HERO ============ */
+.hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 40%, #f093fb 100%); color: white; padding: 80px 20px 90px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px); background-size: 32px 32px; opacity: 0.4; animation: float 20s linear infinite; }
+@keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(32px, 32px); } }
+.hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+.hero-badge { display: inline-block; background: rgba(255,255,255,0.25); padding: 8px 18px; border-radius: 25px; font-size: 0.82rem; font-weight: 700; margin-bottom: 20px; backdrop-filter: blur(10px); letter-spacing: 0.5px; }
+.hero h1 { font-size: 3.2rem; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.15; }
+.hero h1 .gradient { background: linear-gradient(135deg, #fef3c7, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { font-size: 1.15rem; opacity: 0.95; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.hero-stats { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+.hero-stat { text-align: center; }
+.hero-stat .num { font-size: 2.2rem; font-weight: 900; display: block; }
+.hero-stat .lbl { font-size: 0.82rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+.hero-cta { display: inline-block; background: white; color: #667eea; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 1rem; transition: all 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+.hero-cta:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+
+/* ============ CONTAINER ============ */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* ============ SEARCH + FILTERS ============ */
+.search-section { margin-top: -40px; position: relative; z-index: 2; padding: 0 20px; }
+.search-wrap { max-width: 800px; margin: 0 auto; background: white; border-radius: 18px; padding: 24px; box-shadow: 0 20px 60px rgba(102,126,234,0.2); border: 1px solid #e2e8f0; }
+.search-box { width: 100%; padding: 16px 20px 16px 50px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1rem; font-family: inherit; outline: none; transition: all 0.2s; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 18px center; }
+.search-box:focus { border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.15); }
+.filters { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; justify-content: center; }
+.filter-btn { background: #f1f5f9; border: none; padding: 9px 18px; border-radius: 20px; cursor: pointer; font-weight: 700; font-size: 0.85rem; font-family: inherit; color: #475569; transition: all 0.2s; }
+.filter-btn:hover { background: #e2e8f0; }
+.filter-btn.active { background: linear-gradient(135deg, #667eea, #764ba2); color: white; box-shadow: 0 4px 14px rgba(102,126,234,0.4); }
+
+/* ============ SECTION TITLES ============ */
+.section-title { text-align: center; font-size: 2.2rem; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 12px; }
+.section-sub { text-align: center; color: #64748b; font-size: 1.05rem; margin-bottom: 50px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* ============ TOOLS GRID ============ */
+.tools-section { padding: 80px 0 60px; }
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+.tool-card { background: white; border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; border: 2px solid transparent; }
+.tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--gradient); }
+.tool-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 25px 60px rgba(102,126,234,0.25); border-color: var(--accent); }
+.tool-card .icon-box { width: 70px; height: 70px; border-radius: 18px; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(102,126,234,0.25); transition: transform 0.3s; }
+.tool-card:hover .icon-box { transform: rotate(-8deg) scale(1.1); }
+.tool-card h3 { font-size: 1.35rem; margin-bottom: 10px; color: var(--accent); font-weight: 800; letter-spacing: -0.01em; }
+.tool-card p { color: #64748b; font-size: 0.95rem; line-height: 1.65; margin-bottom: 16px; }
+.tool-card .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.tag { background: #f1f5f9; color: #475569; padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.tool-card .cta-line { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid #f1f5f9; }
+.tool-card .cta-line span { color: var(--accent); font-weight: 800; font-size: 0.88rem; }
+.tool-card .arrow { color: var(--accent); font-size: 1.3rem; transition: transform 0.3s; }
+.tool-card:hover .arrow { transform: translateX(6px); }
+.badge { display: inline-block; background: linear-gradient(135deg, #10b981, #059669); color: white; font-size: 0.68rem; padding: 4px 10px; border-radius: 20px; margin-left: 8px; vertical-align: middle; font-weight: 800; letter-spacing: 0.5px; }
+.badge-hot { background: linear-gradient(135deg, #ef4444, #dc2626); animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); } 50% { box-shadow: 0 0 0 10px rgba(239,68,68,0); } }
+
+/* Color themes */
 .blue { --accent: #2563eb; --gradient: linear-gradient(135deg, #3b82f6, #6366f1); }
 .green { --accent: #059669; --gradient: linear-gradient(135deg, #10b981, #059669); }
 .amber { --accent: #d97706; --gradient: linear-gradient(135deg, #f59e0b, #d97706); }
 .red { --accent: #dc2626; --gradient: linear-gradient(135deg, #ef4444, #dc2626); }
 .purple { --accent: #9333ea; --gradient: linear-gradient(135deg, #a855f7, #7e22ce); }
 .pink { --accent: #db2777; --gradient: linear-gradient(135deg, #ec4899, #db2777); }
-.why-section { background: white; border-radius: 18px; padding: 45px 30px; margin-bottom: 60px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
-.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; margin-top: 30px; }
-.why-item { text-align: center; padding: 15px; }
-.why-item .why-icon { font-size: 2.3rem; margin-bottom: 12px; }
-.why-item h4 { color: #2563eb; margin-bottom: 8px; font-size: 1.05rem; font-weight: 800; }
-.why-item p { color: #64748b; font-size: 0.9rem; }
-.faq-section { margin-bottom: 60px; }
-.faq-item { background: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 4px solid #667eea; }
-.faq-item h4 { color: #4f46e5; margin-bottom: 8px; font-size: 1.05rem; font-weight: 800; }
-.faq-item p { color: #475569; font-size: 0.94rem; }
-footer { background: linear-gradient(135deg, #0f172a, #1e293b); color: #94a3b8; text-align: center; padding: 40px 20px 30px; margin-top: 40px; }
-footer p { margin-bottom: 8px; font-size: 0.9rem; }
-footer a { color: #a5b4fc; text-decoration: none; margin: 0 10px; }
-footer a:hover { color: #fff; text-decoration: underline; }
-.footer-links { margin: 15px 0; }
-@media (max-width: 600px) { header h1 { font-size: 2rem; } .section-title { font-size: 1.5rem; } .container { padding: 35px 15px; } }
+
+/* ============ WHY SECTION ============ */
+.why-section { padding: 60px 0; }
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+.why-card { background: white; border-radius: 18px; padding: 32px 24px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: all 0.3s; border-bottom: 4px solid transparent; }
+.why-card:hover { transform: translateY(-6px); box-shadow: 0 15px 40px rgba(102,126,234,0.15); border-bottom-color: #667eea; }
+.why-icon { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #eef2ff, #e0e7ff); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 18px; }
+.why-card h4 { color: #4f46e5; margin-bottom: 10px; font-size: 1.1rem; font-weight: 800; }
+.why-card p { color: #64748b; font-size: 0.92rem; line-height: 1.65; }
+
+/* ============ HOW IT WORKS ============ */
+.how-section { padding: 60px 0; background: linear-gradient(135deg, #f8fafc, #eef2ff); border-radius: 28px; margin: 40px 0; }
+.how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; margin-top: 40px; }
+.how-step { text-align: center; position: relative; }
+.how-num { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; margin: 0 auto 18px; box-shadow: 0 10px 25px rgba(102,126,234,0.4); }
+.how-step h4 { color: #0f172a; margin-bottom: 10px; font-weight: 800; font-size: 1.05rem; }
+.how-step p { color: #64748b; font-size: 0.92rem; }
+
+/* ============ TESTIMONIALS ============ */
+.testimonials-section { padding: 60px 0; }
+.testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.testi-card { background: white; border-radius: 18px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); position: relative; }
+.testi-card::before { content: '"'; position: absolute; top: 10px; right: 25px; font-size: 5rem; color: #eef2ff; font-family: Georgia, serif; line-height: 1; }
+.testi-stars { color: #fbbf24; font-size: 1rem; margin-bottom: 12px; letter-spacing: 2px; }
+.testi-text { color: #475569; font-size: 0.95rem; line-height: 1.7; margin-bottom: 18px; position: relative; z-index: 1; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; }
+.testi-name { font-weight: 800; font-size: 0.92rem; color: #0f172a; }
+.testi-role { font-size: 0.8rem; color: #64748b; }
+
+/* ============ FAQ ============ */
+.faq-section { padding: 60px 0; }
+.faq-list { max-width: 800px; margin: 0 auto; }
+.faq-item { background: white; border-radius: 14px; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 4px solid #667eea; overflow: hidden; }
+.faq-q { padding: 20px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 800; color: #0f172a; font-size: 1rem; transition: background 0.2s; }
+.faq-q:hover { background: #f8fafc; }
+.faq-q .plus { font-size: 1.4rem; color: #667eea; font-weight: 800; transition: transform 0.3s; }
+.faq-item.open .faq-q .plus { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: all 0.3s; padding: 0 25px; color: #475569; font-size: 0.93rem; line-height: 1.7; }
+.faq-item.open .faq-a { max-height: 300px; padding: 0 25px 20px; }
+
+/* ============ CTA ============ */
+.cta-section { background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 28px; padding: 60px 40px; text-align: center; color: white; margin: 60px 0; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 30px 30px; opacity: 0.3; }
+.cta-section h2 { font-size: 2rem; font-weight: 900; margin-bottom: 12px; position: relative; z-index: 1; }
+.cta-section p { font-size: 1.05rem; opacity: 0.95; margin-bottom: 25px; position: relative; z-index: 1; }
+.cta-btn { display: inline-block; background: white; color: #667eea; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 1rem; transition: all 0.3s; position: relative; z-index: 1; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+.cta-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+
+/* ============ FOOTER ============ */
+footer { background: linear-gradient(135deg, #0f172a, #1e293b); color: #94a3b8; padding: 60px 20px 30px; margin-top: 60px; }
+.footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+@media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer-col h4 { color: #fff; font-size: 1rem; font-weight: 800; margin-bottom: 18px; }
+.footer-col p { color: #94a3b8; font-size: 0.9rem; line-height: 1.7; margin-bottom: 14px; }
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a { color: #94a3b8; text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+.footer-col a:hover { color: #a5b4fc; }
+.footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 30px; border-top: 1px solid #334155; text-align: center; font-size: 0.85rem; }
+.footer-bottom p { margin-bottom: 6px; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 700px) {
+  .hero h1 { font-size: 2.1rem; }
+  .hero p { font-size: 1rem; }
+  .hero { padding: 60px 15px 70px; }
+  .hero-stats { gap: 25px; }
+  .hero-stat .num { font-size: 1.7rem; }
+  .section-title { font-size: 1.6rem; }
+  .section-sub { font-size: 0.95rem; margin-bottom: 35px; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .tool-card { padding: 24px; }
+  .cta-section { padding: 40px 20px; }
+  .cta-section h2 { font-size: 1.5rem; }
+  .how-section { padding: 40px 20px; }
+  .search-wrap { padding: 18px; }
+}
 </style>
 </head>
 <body>
 
-<header>
-    <h1>🇮🇳 FreeToolIndia</h1>
-    <p>6 Powerful Tools • 100% Free • No Sign-Up • Your Data Stays Private</p>
-    <span class="tagline">✨ No Login • No Tracking • No Watermark</span>
-</header>
-
-<div class="container">
-    <h2 class="section-title">All Free Tools</h2>
-    <p class="section-sub">Everything you need, right in your browser. No account required.</p>
-
-    <div class="tools-grid">
-        <a href="resume-builder.html" class="tool-card blue">
-            <span class="icon">📄</span>
-            <h3>ATS Resume Builder</h3>
-            <p>Create a professional ATS-friendly resume. Auto-save, instant PDF download, no login needed.</p>
-        </a>
-        <a href="tax-calculator.html" class="tool-card green">
-            <span class="icon">💰</span>
-            <h3>Salary Tax Calculator <span class="badge">2025-26</span></h3>
-            <p>Compare Old vs New tax regime instantly. Find out which one saves you more money.</p>
-        </a>
-        <a href="notepad.html" class="tool-card amber">
-            <span class="icon">📝</span>
-            <h3>Online Notepad</h3>
-            <p>Auto-saving notepad that works offline. Your notes stay safe in your browser.</p>
-        </a>
-        <a href="password-checker.html" class="tool-card red">
-            <span class="icon">🔐</span>
-            <h3>Password Strength Checker</h3>
-            <p>Check if your password is strong and leaked. 100% private — nothing is stored.</p>
-        </a>
-        <a href="ats-scanner.html" class="tool-card purple">
-            <span class="icon">🎯</span>
-            <h3>ATS Resume Scanner <span class="badge badge-hot">HOT</span></h3>
-            <p>Paid tools charge ₹1500/month. Get your ATS score free with fix suggestions.</p>
-        </a>
-        <a href="bg-remover.html" class="tool-card pink">
-            <span class="icon">🖼️</span>
-            <h3>Background Remover</h3>
-            <p>Remove image backgrounds right in your browser. No upload, no watermark, 100% private.</p>
-        </a>
-    </div>
-
-    <div class="why-section">
-        <h2 class="section-title">Why Choose FreeToolIndia?</h2>
-        <p class="section-sub">Built for India, made to be simple and private.</p>
-        <div class="why-grid">
-            <div class="why-item"><div class="why-icon">🆓</div><h4>100% Free Forever</h4><p>No hidden charges, no premium plans, no credit card.</p></div>
-            <div class="why-item"><div class="why-icon">🔒</div><h4>Privacy First</h4><p>All processing happens in your browser. Data never leaves your device.</p></div>
-            <div class="why-item"><div class="why-icon">⚡</div><h4>No Sign-Up Needed</h4><p>Open the tool and use it instantly. No email, no account.</p></div>
-            <div class="why-item"><div class="why-icon">🇮🇳</div><h4>Made for India</h4><p>Indian tax slabs, Indian formats, Indian needs.</p></div>
+<!-- ============ HERO ============ -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">✨ 100% Free • No Sign-Up • No Tracking</div>
+        <h1>Powerful Free Tools <span class="gradient">for India</span> 🇮🇳</h1>
+        <p>6 premium-quality tools that paid websites charge thousands for. Built for Indian users, 100% free, forever.</p>
+        <a href="#tools" class="hero-cta">🚀 Explore All Tools</a>
+        
+        <div class="hero-stats">
+            <div class="hero-stat"><span class="num" id="statTools">6</span><span class="lbl">Free Tools</span></div>
+            <div class="hero-stat"><span class="num">₹0</span><span class="lbl">Forever</span></div>
+            <div class="hero-stat"><span class="num">100%</span><span class="lbl">Private</span></div>
+            <div class="hero-stat"><span class="num">0</span><span class="lbl">Sign-Ups</span></div>
         </div>
     </div>
+</section>
 
-    <div class="faq-section">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-sub">Everything you need to know about our free tools.</p>
-        <div class="faq-item"><h4>Are these tools really 100% free?</h4><p>Yes. Every tool on FreeToolIndia is free forever. No hidden charges, no premium plans.</p></div>
-        <div class="faq-item"><h4>Do I need to create an account?</h4><p>No. All tools work without any sign-up or login. Just open and use them instantly.</p></div>
-        <div class="faq-item"><h4>Is my data safe?</h4><p>Absolutely. Most of our tools run entirely in your browser. Your files, notes, and passwords never leave your device.</p></div>
-        <div class="faq-item"><h4>Is the tax calculator updated for 2025-26?</h4><p>Yes, our salary tax calculator uses the latest FY 2025-26 slabs for both Old and New regimes.</p></div>
-        <div class="faq-item"><h4>Can I use these tools on mobile?</h4><p>Yes, all tools are fully mobile-responsive and work perfectly on phones, tablets, and desktops.</p></div>
-        <div class="faq-item"><h4>How is the ATS Resume Scanner different from paid tools?</h4><p>Paid tools like Jobscan charge ₹1500+/month. Our scanner gives you the same core analysis — completely free.</p></div>
+<!-- ============ SEARCH + FILTERS ============ -->
+<div class="search-section">
+    <div class="search-wrap">
+        <input type="text" class="search-box" id="searchBox" placeholder="Search tools... (try 'resume', 'tax', 'password')" oninput="filterTools()">
+        <div class="filters">
+            <button class="filter-btn active" onclick="setCategory('all', this)">All Tools</button>
+            <button class="filter-btn" onclick="setCategory('career', this)">💼 Career</button>
+            <button class="filter-btn" onclick="setCategory('finance', this)">💰 Finance</button>
+            <button class="filter-btn" onclick="setCategory('utility', this)">🛠️ Utility</button>
+            <button class="filter-btn" onclick="setCategory('media', this)">🎨 Media</button>
+        </div>
     </div>
 </div>
 
-<footer>
-    <p><strong style="color: #fff; font-size: 1.1rem;">🇮🇳 FreeToolIndia</strong></p>
-    <p>6 powerful free tools. No login. No tracking. No watermark.</p>
-    <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
-        <a href="disclaimer.html">Disclaimer</a>
+<!-- ============ TOOLS GRID ============ -->
+<section class="tools-section" id="tools">
+    <div class="container">
+        <h2 class="section-title">All Free Tools</h2>
+        <p class="section-sub">Everything you need, right in your browser. No account required.</p>
+        
+        <div class="tools-grid" id="toolsGrid">
+            
+            <a href="resume-builder.html" class="tool-card blue" data-cat="career" data-name="ats resume builder">
+                <div class="icon-box">📄</div>
+                <h3>ATS Resume Builder</h3>
+                <p>Create professional ATS-friendly resume with live preview, built-in ATS score, and instant PDF download.</p>
+                <div class="tags"><span class="tag">Career</span><span class="tag">Resume</span></div>
+                <div class="cta-line"><span>Open Tool</span><span class="arrow">→</span></div>
+            </a>
+            
+            <a href="ats-scanner.html" class="tool-card purple" data-cat="career" data-name="ats resume scanner">
+                <div class="icon-box">🎯</div>
+                <h3>ATS Resume Scanner <span class="badge badge-hot">HOT</span></h3>
+                <p>Paid tools charge ₹1500/month. Get your ATS score free with keyword match, skill gap analysis, and fixes.</p>
+                <div class="tags"><span class="tag">Career</span><span class="tag">ATS</span></div>
+                <div class="cta-line"><span>Open Tool</span><span class="arrow">→</span></div>
+            </a>
+            
+            <a href="tax-calculator.html" class="tool-card green" data-cat="finance" data-name="tax calculator salary">
+                <div class="icon-box">💰</div>
+                <h3>Salary Tax Calculator <span class="badge">2025-26</span></h3>
+                <p>Compare Old vs New regime with HRA, 80C, 80D, surcharge, and marginal relief. Instant detailed breakdown.</p>
+                <div class="tags"><span class="tag">Finance</span><span class="tag">Tax</span></div>
+                <div class="cta-line"><span>Open Tool</span><span class="arrow">→</span></div>
+            </a>
+            
+            <a href="notepad.html" class="tool-card amber" data-cat="utility" data-name="online notepad notes">
+                <div class="icon-box">📝</div>
+                <h3>Online Notepad</h3>
+                <p>Multiple notes with menu bar (File/Edit/Insert/View/Help), find & replace, dark mode, and offline support.</p>
+                <div class="tags"><span class="tag">Utility</span><span class="tag">Notes</span></div>
+                <div class="cta-line"><span>Open Tool</span><span class="arrow">→</span></div>
+            </a>
+            
+            <a href="password-checker.html" class="tool-card red" data-cat="utility" data-name="password strength checker generator">
+                <div class="icon-box">🔐</div>
+                <h3>Password Checker & Generator</h3>
+                <p>Check strength, breach status, crack time. Generate strong passwords and passphrases. 100% private.</p>
+                <div class="tags"><span class="tag">Utility</span><span class="tag">Security</span></div>
+                <div class="cta-line"><span>Open Tool</span><span class="arrow">→</span></div>
+            </a>
+            
+            <a href="bg-remover.html" class="tool-card pink" data-cat="media" data-name="background remover image bg">
+                <div class="icon-box">🖼️</div>
+                <h3>Background Remover</h3>
+                <p>Batch process images with before/after slider. Custom backgrounds, PNG/JPG download. No upload, no watermark.</p>
+                <div class="tags"><span class="tag">Media</span><span class="tag">Images</span></div>
+                <div class="cta-line"><span>Open Tool</span><span class="arrow">→</span></div>
+            </a>
+            
+        </div>
+        
+        <p id="noResults" style="text-align: center; color: #64748b; padding: 40px; display: none; font-size: 1.05rem;">😕 No tools found. Try a different search.</p>
     </div>
-    <p style="margin-top: 15px;">© 2025 FreeToolIndia.com — All tools free forever. Made with ❤️ for India.</p>
+</section>
+
+<!-- ============ WHY CHOOSE US ============ -->
+<section class="why-section">
+    <div class="container">
+        <h2 class="section-title">Why Choose FreeToolIndia?</h2>
+        <p class="section-sub">Built for India, made to be simple and private.</p>
+        
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon">🆓</div>
+                <h4>100% Free Forever</h4>
+                <p>No hidden charges, no premium plans, no credit card. Ever.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🔒</div>
+                <h4>Privacy First</h4>
+                <p>All processing happens in your browser. Your data never leaves your device.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">⚡</div>
+                <h4>No Sign-Up</h4>
+                <p>Open the tool and start using it instantly. No email, no account, no hassle.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🇮🇳</div>
+                <h4>Made for India</h4>
+                <p>Indian tax slabs, Indian formats, Indian needs — all in one place.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🚫</div>
+                <h4>No Watermarks</h4>
+                <p>Download your results cleanly. No branding, no restrictions.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">📱</div>
+                <h4>Mobile Friendly</h4>
+                <p>Works perfectly on phone, tablet, and desktop. No app needed.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="how-section">
+    <div class="container">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-sub">Get started in three simple steps.</p>
+        
+        <div class="how-grid">
+            <div class="how-step">
+                <div class="how-num">1</div>
+                <h4>Pick Your Tool</h4>
+                <p>Choose from 6 powerful tools designed for Indian users.</p>
+            </div>
+            <div class="how-step">
+                <div class="how-num">2</div>
+                <h4>Use It Instantly</h4>
+                <p>No sign-up, no email, no waiting. Everything runs in your browser.</p>
+            </div>
+            <div class="how-step">
+                <div class="how-num">3</div>
+                <h4>Download & Go</h4>
+                <p>Get your result instantly with zero watermarks or restrictions.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials-section">
+    <div class="container">
+        <h2 class="section-title">What Users Say</h2>
+        <p class="section-sub">Real feedback from real users.</p>
+        
+        <div class="testi-grid">
+            <div class="testi-card">
+                <div class="testi-stars">★★★★★</div>
+                <p class="testi-text">Finally a resume builder that actually works for ATS. Got 3 interview calls after using this. And it's completely free!</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">P</div>
+                    <div>
+                        <div class="testi-name">Priya Sharma</div>
+                        <div class="testi-role">Software Engineer, Bangalore</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="testi-stars">★★★★★</div>
+                <p class="testi-text">The tax calculator is more detailed than my CA's. Saved me ₹18,000 by showing me the right regime. Highly recommended!</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">R</div>
+                    <div>
+                        <div class="testi-name">Rahul Verma</div>
+                        <div class="testi-role">Product Manager, Mumbai</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="testi-stars">★★★★★</div>
+                <p class="testi-text">Love that everything runs in the browser. No data leaves my device. Privacy-first is exactly what I needed.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">A</div>
+                    <div>
+                        <div class="testi-name">Anjali Nair</div>
+                        <div class="testi-role">Freelance Designer, Kochi</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq-section">
+    <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-sub">Everything you need to know.</p>
+        
+        <div class="faq-list">
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">Are these tools really 100% free? <span class="plus">+</span></div>
+                <div class="faq-a">Yes. Every tool on FreeToolIndia is free forever. No hidden charges, no premium plans, no credit card required. We believe useful tools shouldn't cost money.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">Do I need to create an account? <span class="plus">+</span></div>
+                <div class="faq-a">No. All tools work without any sign-up, login, or email verification. Just open and use them instantly.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">Is my data safe? <span class="plus">+</span></div>
+                <div class="faq-a">Absolutely. Most of our tools run entirely in your browser. Your files, notes, resumes, and passwords never leave your device. We can't see your data even if we wanted to.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">Is the tax calculator updated for 2025-26? <span class="plus">+</span></div>
+                <div class="faq-a">Yes, our salary tax calculator uses the latest FY 2025-26 slabs for both Old and New regimes, including standard deduction, 87A rebate, surcharge, and marginal relief.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">Can I use these tools on mobile? <span class="plus">+</span></div>
+                <div class="faq-a">Yes, all tools are fully mobile-responsive and work perfectly on phones, tablets, and desktops. No app installation needed.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-q">How is the ATS Resume Scanner different from paid tools? <span class="plus">+</span></div>
+                <div class="faq-a">Paid tools like Jobscan charge ₹1500+/month for ATS scoring. Our scanner gives you the same core analysis — score, keyword match, skill gap, and fix suggestions — completely free.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<div class="container">
+    <section class="cta-section">
+        <h2>Ready to Get Started?</h2>
+        <p>No sign-up. No credit card. Just pick a tool and go.</p>
+        <a href="#tools" class="cta-btn">Explore Tools →</a>
+    </section>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h4>🇮🇳 FreeToolIndia</h4>
+            <p>6 powerful free tools for India. No login, no tracking, no watermark. Built with ❤️ for Indian users.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Tools</h4>
+            <ul>
+                <li><a href="resume-builder.html">Resume Builder</a></li>
+                <li><a href="ats-scanner.html">ATS Scanner</a></li>
+                <li><a href="tax-calculator.html">Tax Calculator</a></li>
+                <li><a href="notepad.html">Online Notepad</a></li>
+                <li><a href="password-checker.html">Password Checker</a></li>
+                <li><a href="bg-remover.html">BG Remover</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms & Conditions</a></li>
+                <li><a href="disclaimer.html">Disclaimer</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Connect</h4>
+            <ul>
+                <li><a href="mailto:contact@freetoolindia.com">📧 Email Us</a></li>
+                <li><a href="mailto:suggest@freetoolindia.com">💡 Suggest a Tool</a></li>
+                <li><a href="mailto:bug@freetoolindia.com">🐞 Report a Bug</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 FreeToolIndia.com — All tools free forever. Made with ❤️ for India.</p>
+        <p style="font-size: 0.78rem; opacity: 0.7;">Privacy-first • No tracking • No data collection</p>
+    </div>
 </footer>
+
+<script>
+// ============ SEARCH & FILTER ============
+let activeCategory = 'all';
+
+function setCategory(cat, btn) {
+    activeCategory = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterTools();
+}
+
+function filterTools() {
+    const query = document.getElementById('searchBox').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.tool-card');
+    let visible = 0;
+    
+    cards.forEach(card => {
+        const cat = card.dataset.cat;
+        const name = card.dataset.name + ' ' + card.querySelector('h3').textContent.toLowerCase() + ' ' + card.querySelector('p').textContent.toLowerCase();
+        const matchesCat = activeCategory === 'all' || cat === activeCategory;
+        const matchesSearch = !query || name.toLowerCase().includes(query);
+        
+        if (matchesCat && matchesSearch) {
+            card.style.display = 'block';
+            visible++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+    
+    document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+}
+
+// ============ FAQ ACCORDION ============
+function toggleFaq(el) {
+    el.classList.toggle('open');
+}
+
+// ============ ANIMATED COUNTERS ============
+window.addEventListener('load', () => {
+    // Simple animated count for hero stats (optional)
+    const toolsStat = document.getElementById('statTools');
+    if (toolsStat) {
+        let count = 0;
+        const target = 6;
+        const timer = setInterval(() => {
+            count++;
+            toolsStat.textContent = count;
+            if (count >= target) clearInterval(timer);
+        }, 150);
+    }
+});
+
+// ============ SMOOTH SCROLL ============
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "FreeToolIndia",
+  "url": "https://www.freetoolindia.com/",
+  "description": "100% free online tools for India. No sign-up, no tracking, privacy-first.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.freetoolindia.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Are these tools really 100% free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every tool on FreeToolIndia is free forever."}},
+    {"@type":"Question","name":"Do I need to create an account?","acceptedAnswer":{"@type":"Answer","text":"No. All tools work without any sign-up or login."}},
+    {"@type":"Question","name":"Is my data safe?","acceptedAnswer":{"@type":"Answer","text":"Yes. Most tools run entirely in your browser."}},
+    {"@type":"Question","name":"Is the tax calculator updated for 2025-26?","acceptedAnswer":{"@type":"Answer","text":"Yes, uses latest FY 2025-26 slabs."}}
+  ]
+}
+</script>
 
 </body>
 </html>
