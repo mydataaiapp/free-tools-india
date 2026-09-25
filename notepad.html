@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Online Notepad - Multiple Notes, Auto-Save, Dark Mode | FreeToolIndia</title>
-<meta name="description" content="Free online notepad with multiple notes, auto-save, dark mode, search, and download. Works offline, no sign-up. Your notes stay private in your browser.">
-<meta name="keywords" content="online notepad, auto save notepad, multiple notes notepad, free notepad, dark mode notepad, notepad no login">
+<title>Free Online Notepad - Menu Bar, Find & Replace, Dark Mode | FreeToolIndia</title>
+<meta name="description" content="Free online notepad with File/Edit/Insert/View menus, find & replace, multiple notes, auto-save, dark mode. Works offline, no sign-up.">
+<meta name="keywords" content="online notepad, notepad with menus, find replace notepad, free notepad, multiple notes, dark mode notepad">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.freetoolindia.com/notepad.html">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
@@ -13,49 +13,78 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #fffbeb; background-image: radial-gradient(at 0% 0%, rgba(245,158,11,0.15) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(217,119,6,0.15) 0px, transparent 50%); background-attachment: fixed; color: #0f172a; line-height: 1.6; min-height: 100vh; transition: background 0.3s, color 0.3s; }
 body.dark { background: #0f172a; background-image: radial-gradient(at 0% 0%, rgba(245,158,11,0.08) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(217,119,6,0.08) 0px, transparent 50%); color: #e2e8f0; }
-.topbar { background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); padding: 16px 24px; box-shadow: 0 2px 10px rgba(245,158,11,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(245,158,11,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-body.dark .topbar { background: rgba(30,41,59,0.9); border-bottom-color: rgba(245,158,11,0.25); }
+
+/* TOP BAR */
+.topbar { background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); padding: 14px 24px; box-shadow: 0 2px 10px rgba(245,158,11,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(245,158,11,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+body.dark .topbar { background: rgba(30,41,59,0.95); border-bottom-color: rgba(245,158,11,0.25); }
 .topbar a { color: #d97706; text-decoration: none; font-weight: 700; font-size: 0.95rem; }
 .topbar a:hover { color: #b45309; }
 .dark-toggle { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.85rem; font-family: inherit; transition: all 0.2s; }
 .dark-toggle:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(245,158,11,0.4); }
-.container { max-width: 1200px; margin: 0 auto; padding: 25px 20px 60px; }
+
+.container { max-width: 1250px; margin: 0 auto; padding: 25px 20px 60px; }
 h1 { font-size: 2rem; font-weight: 800; color: #d97706; margin-bottom: 6px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 body.dark h1 { color: #fbbf24; }
-.subtitle { color: #64748b; font-size: 1rem; margin-bottom: 22px; }
+.subtitle { color: #64748b; font-size: 1rem; margin-bottom: 18px; }
 body.dark .subtitle { color: #94a3b8; }
-.workspace { display: grid; grid-template-columns: 280px 1fr; gap: 20px; }
+
+/* MENU BAR */
+.menubar { display: flex; gap: 0; background: #fff; border-radius: 12px 12px 0 0; padding: 6px 10px; box-shadow: 0 4px 20px rgba(245,158,11,0.1); position: relative; z-index: 500; border-bottom: 1px solid #fde68a; flex-wrap: wrap; }
+body.dark .menubar { background: #1e293b; border-bottom-color: #334155; }
+.menu-item { position: relative; }
+.menu-btn { background: transparent; border: none; color: #0f172a; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88rem; font-family: inherit; transition: all 0.2s; }
+body.dark .menu-btn { color: #e2e8f0; }
+.menu-btn:hover, .menu-item.open .menu-btn { background: #fef3c7; color: #b45309; }
+body.dark .menu-btn:hover, body.dark .menu-item.open .menu-btn { background: #334155; color: #fbbf24; }
+.dropdown { display: none; position: absolute; top: 100%; left: 0; background: #fff; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); min-width: 220px; padding: 6px; z-index: 600; margin-top: 4px; border: 1px solid #fde68a; }
+body.dark .dropdown { background: #1e293b; border-color: #334155; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+.menu-item.open .dropdown { display: block; animation: fadeIn 0.15s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+.dropdown button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 9px 12px; background: transparent; border: none; text-align: left; cursor: pointer; font-family: inherit; font-size: 0.87rem; color: #0f172a; border-radius: 6px; transition: all 0.15s; }
+body.dark .dropdown button { color: #e2e8f0; }
+.dropdown button:hover { background: #fef3c7; color: #b45309; }
+body.dark .dropdown button:hover { background: #334155; color: #fbbf24; }
+.dropdown button .shortcut { margin-left: auto; color: #94a3b8; font-size: 0.78rem; font-weight: 600; }
+.dropdown hr { border: none; border-top: 1px solid #f1f5f9; margin: 4px 0; }
+body.dark .dropdown hr { border-top-color: #334155; }
+.dropdown .disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* WORKSPACE */
+.workspace { display: grid; grid-template-columns: 260px 1fr; gap: 0; }
 @media (max-width: 800px) { .workspace { grid-template-columns: 1fr; } }
 
 /* SIDEBAR */
-.sidebar { background: #fff; padding: 18px; border-radius: 16px; box-shadow: 0 10px 40px rgba(245,158,11,0.12); height: fit-content; max-height: 88vh; display: flex; flex-direction: column; }
-body.dark .sidebar { background: #1e293b; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
-.sidebar h3 { color: #d97706; font-size: 1rem; margin-bottom: 12px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
+.sidebar { background: #fff; padding: 18px; border-radius: 0 0 0 16px; box-shadow: 0 10px 40px rgba(245,158,11,0.12); height: 100%; max-height: 88vh; display: flex; flex-direction: column; border-right: 1px solid #fde68a; }
+body.dark .sidebar { background: #1e293b; box-shadow: 0 10px 40px rgba(0,0,0,0.4); border-right-color: #334155; }
+@media (max-width: 800px) { .sidebar { border-radius: 0 0 16px 16px; max-height: 300px; } }
+.sidebar h3 { color: #d97706; font-size: 0.95rem; margin-bottom: 12px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
 body.dark .sidebar h3 { color: #fbbf24; }
 .new-note-btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.85rem; width: 100%; margin-bottom: 12px; font-family: inherit; transition: all 0.2s; }
 .new-note-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(245,158,11,0.4); }
 .search-box { width: 100%; padding: 10px 14px; border: 2px solid #fde68a; border-radius: 8px; font-family: inherit; font-size: 0.88rem; margin-bottom: 12px; outline: none; background: #fff; }
 body.dark .search-box { background: #0f172a; border-color: #334155; color: #e2e8f0; }
 .search-box:focus { border-color: #f59e0b; }
-.notes-list { overflow-y: auto; flex: 1; max-height: 60vh; }
+.notes-list { overflow-y: auto; flex: 1; max-height: 55vh; }
 .notes-list::-webkit-scrollbar { width: 6px; }
 .notes-list::-webkit-scrollbar-thumb { background: #fcd34d; border-radius: 3px; }
-.note-item { padding: 12px 14px; border-radius: 8px; cursor: pointer; margin-bottom: 6px; transition: all 0.2s; border-left: 4px solid transparent; background: #fffbeb; }
+.note-item { padding: 11px 13px; border-radius: 8px; cursor: pointer; margin-bottom: 6px; transition: all 0.2s; border-left: 4px solid transparent; background: #fffbeb; }
 body.dark .note-item { background: #334155; }
 .note-item:hover { background: #fef3c7; border-left-color: #f59e0b; }
 body.dark .note-item:hover { background: #475569; }
 .note-item.active { background: #fef3c7; border-left-color: #d97706; }
 body.dark .note-item.active { background: #475569; border-left-color: #fbbf24; }
-.note-item .note-title { font-weight: 700; font-size: 0.9rem; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.note-item .note-title { font-weight: 700; font-size: 0.88rem; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 body.dark .note-item .note-title { color: #e2e8f0; }
-.note-item .note-preview { font-size: 0.75rem; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 3px; }
+.note-item .note-preview { font-size: 0.73rem; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 3px; }
 body.dark .note-item .note-preview { color: #94a3b8; }
 
 /* EDITOR */
-.editor-wrap { background: #fff; padding: 22px; border-radius: 16px; box-shadow: 0 10px 40px rgba(245,158,11,0.12); display: flex; flex-direction: column; }
+.editor-wrap { background: #fff; padding: 0 22px 22px; border-radius: 0 0 16px 0; box-shadow: 0 10px 40px rgba(245,158,11,0.12); display: flex; flex-direction: column; min-height: 500px; }
 body.dark .editor-wrap { background: #1e293b; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
-.editor-toolbar { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; align-items: center; }
-.btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.82rem; font-family: inherit; transition: all 0.2s; box-shadow: 0 3px 10px rgba(245,158,11,0.3); }
+@media (max-width: 800px) { .editor-wrap { border-radius: 0 0 16px 16px; padding: 0 16px 16px; } }
+.editor-toolbar { display: flex; gap: 8px; padding: 14px 0; margin-bottom: 10px; flex-wrap: wrap; align-items: center; border-bottom: 1px solid #fde68a; }
+body.dark .editor-toolbar { border-bottom-color: #334155; }
+.btn { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.8rem; font-family: inherit; transition: all 0.2s; box-shadow: 0 3px 10px rgba(245,158,11,0.3); }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(245,158,11,0.4); }
 .btn-green { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 3px 10px rgba(16,185,129,0.3); }
 .btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 3px 10px rgba(239,68,68,0.3); }
@@ -63,20 +92,41 @@ body.dark .editor-wrap { background: #1e293b; box-shadow: 0 10px 40px rgba(0,0,0
 body.dark .btn-outline { color: #fbbf24; border-color: #475569; }
 .btn-outline:hover { background: #fef3c7; }
 body.dark .btn-outline:hover { background: #334155; }
-.status-badge { margin-left: auto; color: #d97706; font-size: 0.82rem; font-weight: 700; background: #fef3c7; padding: 5px 12px; border-radius: 20px; }
+.status-badge { margin-left: auto; color: #d97706; font-size: 0.8rem; font-weight: 700; background: #fef3c7; padding: 5px 12px; border-radius: 20px; }
 body.dark .status-badge { background: #334155; color: #fbbf24; }
-.title-input { width: 100%; padding: 12px 16px; border: 2px solid #fde68a; border-radius: 10px; font-family: inherit; font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; outline: none; background: #fff; color: #0f172a; }
+.title-input { width: 100%; padding: 11px 14px; border: 2px solid #fde68a; border-radius: 10px; font-family: inherit; font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; outline: none; background: #fff; color: #0f172a; }
 body.dark .title-input { background: #0f172a; border-color: #334155; color: #e2e8f0; }
 .title-input:focus { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.15); }
-textarea.editor { width: 100%; min-height: 380px; padding: 18px; border: 2px solid #fde68a; border-radius: 12px; font-family: 'Courier New', monospace; font-size: 1rem; line-height: 1.7; resize: vertical; background: #fff; color: #0f172a; outline: none; transition: all 0.2s; }
+textarea.editor { width: 100%; flex: 1; min-height: 350px; padding: 16px; border: 2px solid #fde68a; border-radius: 12px; font-family: 'Courier New', monospace; font-size: 1rem; line-height: 1.7; resize: vertical; background: #fff; color: #0f172a; outline: none; transition: all 0.2s; }
 body.dark textarea.editor { background: #0f172a; border-color: #334155; color: #e2e8f0; }
 textarea.editor:focus { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.15); }
-.stats-bar { display: flex; gap: 20px; margin-top: 12px; padding: 12px 18px; background: #fffbeb; border-radius: 10px; font-size: 0.85rem; font-weight: 600; color: #475569; flex-wrap: wrap; }
+textarea.editor.nowrap { white-space: pre; overflow-x: auto; }
+.stats-bar { display: flex; gap: 18px; margin-top: 12px; padding: 11px 16px; background: #fffbeb; border-radius: 10px; font-size: 0.82rem; font-weight: 600; color: #475569; flex-wrap: wrap; }
 body.dark .stats-bar { background: #0f172a; color: #cbd5e1; }
 .stats-bar strong { color: #d97706; font-weight: 800; }
 body.dark .stats-bar strong { color: #fbbf24; }
-.empty-state { text-align: center; padding: 60px 20px; color: #94a3b8; }
-.empty-state .big-icon { font-size: 4rem; margin-bottom: 15px; }
+
+/* MODAL */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.show { display: flex; }
+.modal { background: #fff; border-radius: 16px; padding: 28px; max-width: 500px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto; }
+body.dark .modal { background: #1e293b; color: #e2e8f0; }
+.modal h2 { color: #d97706; margin-bottom: 18px; font-size: 1.3rem; font-weight: 800; }
+body.dark .modal h2 { color: #fbbf24; }
+.modal label { font-weight: 700; font-size: 0.85rem; margin-bottom: 5px; display: block; margin-top: 10px; }
+.modal input { width: 100%; padding: 10px 14px; border: 2px solid #fde68a; border-radius: 8px; font-family: inherit; font-size: 0.92rem; outline: none; background: #fff; }
+body.dark .modal input { background: #0f172a; border-color: #334155; color: #e2e8f0; }
+.modal input:focus { border-color: #f59e0b; }
+.modal .btn-row { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+.modal .btn-row button { flex: 1; min-width: 100px; }
+.modal ul { padding-left: 20px; margin-top: 10px; }
+.modal li { color: #475569; margin-bottom: 6px; font-size: 0.9rem; }
+body.dark .modal li { color: #cbd5e1; }
+.shortcut-table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+.shortcut-table td { padding: 8px 10px; border-bottom: 1px solid #f1f5f9; font-size: 0.88rem; }
+body.dark .shortcut-table td { border-bottom-color: #334155; }
+.shortcut-table td:first-child { font-weight: 700; color: #d97706; width: 40%; font-family: monospace; }
+body.dark .shortcut-table td:first-child { color: #fbbf24; }
 
 /* FAQ */
 .faq-section { margin-top: 60px; }
@@ -106,9 +156,8 @@ footer a:hover { color: #fff; }
 @media (max-width: 600px) {
   h1 { font-size: 1.5rem; }
   .container { padding: 18px 12px 40px; }
-  .editor-wrap { padding: 16px; }
-  textarea.editor { min-height: 300px; }
-  .status-badge { margin-left: 0; }
+  .menu-btn { padding: 7px 10px; font-size: 0.8rem; }
+  .dropdown { min-width: 180px; }
 }
 </style>
 </head>
@@ -121,7 +170,83 @@ footer a:hover { color: #fff; }
 
 <div class="container">
     <h1><span>📝</span> Online Notepad</h1>
-    <p class="subtitle">Multiple Notes • Auto-Save • Dark Mode • Works Offline • 100% Private</p>
+    <p class="subtitle">Menu Bar • Find & Replace • Multiple Notes • Auto-Save • 100% Private</p>
+
+    <!-- MENU BAR -->
+    <div class="menubar" id="menubar">
+        <div class="menu-item" data-menu="file">
+            <button class="menu-btn" onclick="toggleMenu(event, 'file')">File</button>
+            <div class="dropdown">
+                <button onclick="menuAction('new')">📄 New Note <span class="shortcut">Ctrl+N</span></button>
+                <button onclick="menuAction('newtab')">🆕 New Window <span class="shortcut">Ctrl+Shift+N</span></button>
+                <hr>
+                <button onclick="menuAction('save')">💾 Save <span class="shortcut">Ctrl+S</span></button>
+                <button onclick="menuAction('download')">⬇ Download .txt <span class="shortcut">Ctrl+D</span></button>
+                <button onclick="menuAction('exportall')">📦 Export All Notes</button>
+                <hr>
+                <button onclick="menuAction('delete')">🗑 Delete Note</button>
+                <button onclick="menuAction('close')">❌ Close Note <span class="shortcut">Ctrl+W</span></button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-menu="edit">
+            <button class="menu-btn" onclick="toggleMenu(event, 'edit')">Edit</button>
+            <div class="dropdown">
+                <button onclick="menuAction('undo')">↶ Undo <span class="shortcut">Ctrl+Z</span></button>
+                <button onclick="menuAction('redo')">↷ Redo <span class="shortcut">Ctrl+Y</span></button>
+                <hr>
+                <button onclick="menuAction('cut')">✂ Cut <span class="shortcut">Ctrl+X</span></button>
+                <button onclick="menuAction('copy')">📋 Copy <span class="shortcut">Ctrl+C</span></button>
+                <button onclick="menuAction('paste')">📥 Paste <span class="shortcut">Ctrl+V</span></button>
+                <hr>
+                <button onclick="menuAction('find')">🔍 Find <span class="shortcut">Ctrl+F</span></button>
+                <button onclick="menuAction('replace')">🔄 Find & Replace <span class="shortcut">Ctrl+H</span></button>
+                <hr>
+                <button onclick="menuAction('selectall')">☑ Select All <span class="shortcut">Ctrl+A</span></button>
+                <button onclick="menuAction('time')">🕐 Time/Date <span class="shortcut">F5</span></button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-menu="insert">
+            <button class="menu-btn" onclick="toggleMenu(event, 'insert')">Insert</button>
+            <div class="dropdown">
+                <button onclick="menuAction('datetime')">📅 Date & Time <span class="shortcut">F5</span></button>
+                <button onclick="menuAction('shortdate')">📆 Short Date</button>
+                <button onclick="menuAction('separator')">➖ Separator Line</button>
+                <hr>
+                <button onclick="menuAction('bullet')">• Bullet Point</button>
+                <button onclick="menuAction('numbered')">1. Numbered List</button>
+                <button onclick="menuAction('checkbox')">☐ Checkbox Item</button>
+                <hr>
+                <button onclick="menuAction('emoji')">😀 Insert Emoji</button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-menu="view">
+            <button class="menu-btn" onclick="toggleMenu(event, 'view')">View</button>
+            <div class="dropdown">
+                <button onclick="menuAction('darkmode')">🌙 Toggle Dark Mode</button>
+                <hr>
+                <button onclick="menuAction('fontup')">🔍 Increase Font <span class="shortcut">Ctrl++</span></button>
+                <button onclick="menuAction('fontdown')">🔍 Decrease Font <span class="shortcut">Ctrl+-</span></button>
+                <button onclick="menuAction('fontreset')">↺ Reset Font <span class="shortcut">Ctrl+0</span></button>
+                <hr>
+                <button onclick="menuAction('wrap')">↩ Toggle Word Wrap</button>
+                <button onclick="menuAction('fullscreen')">⛶ Fullscreen <span class="shortcut">F11</span></button>
+            </div>
+        </div>
+
+        <div class="menu-item" data-menu="help">
+            <button class="menu-btn" onclick="toggleMenu(event, 'help')">Help</button>
+            <div class="dropdown">
+                <button onclick="menuAction('shortcuts')">⌨ Keyboard Shortcuts</button>
+                <button onclick="menuAction('about')">ℹ About Notepad</button>
+                <button onclick="menuAction('faq')">❓ FAQ</button>
+                <hr>
+                <button onclick="menuAction('contact')">📧 Contact Us</button>
+            </div>
+        </div>
+    </div>
 
     <div class="workspace">
         <!-- SIDEBAR -->
@@ -137,12 +262,12 @@ footer a:hover { color: #fff; }
             <div class="editor-toolbar">
                 <button class="btn btn-green" onclick="downloadCurrent()">⬇ Download</button>
                 <button class="btn btn-outline" onclick="copyAll()">📋 Copy</button>
-                <button class="btn btn-outline" onclick="downloadAll()">📦 Export All</button>
+                <button class="btn btn-outline" onclick="openFindReplace()">🔍 Find & Replace</button>
                 <button class="btn btn-red" onclick="deleteCurrent()">🗑 Delete</button>
                 <span class="status-badge" id="status">✓ Saved</span>
             </div>
             <input type="text" class="title-input" id="noteTitle" placeholder="Note title..." oninput="onTitleChange()">
-            <textarea class="editor" id="noteBody" placeholder="Start typing your notes here... Everything auto-saves in your browser.&#10;&#10;Tip: Click '+ New Note' to create multiple notes."></textarea>
+            <textarea class="editor" id="noteBody" placeholder="Start typing your notes here... Everything auto-saves in your browser.&#10;&#10;Tip: Use the menu bar above for File, Edit, Insert, View, and Help options."></textarea>
             <div class="stats-bar">
                 <span>Characters: <strong id="charCount">0</strong></span>
                 <span>Words: <strong id="wordCount">0</strong></span>
@@ -157,39 +282,39 @@ footer a:hover { color: #fff; }
         <h2>Frequently Asked Questions</h2>
         <div class="faq-item">
             <h3>Is this notepad really free?</h3>
-            <p>Yes, 100% free forever. No sign-up, no ads, no premium plan, no limits on the number of notes.</p>
+            <p>Yes, 100% free forever. No sign-up, no ads, no premium plan, unlimited notes.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What menus does this notepad have?</h3>
+            <p>Just like Windows Notepad, we have File, Edit, Insert, View, and Help menus with all the essential options like Save, Find & Replace, Undo/Redo, Date/Time insert, Dark Mode, Font size, and more.</p>
         </div>
         <div class="faq-item">
             <h3>Where are my notes saved?</h3>
-            <p>Directly in your browser using localStorage. They stay on your device and are never uploaded to any server.</p>
+            <p>In your browser's localStorage. They never leave your device and are never uploaded to any server.</p>
         </div>
         <div class="faq-item">
             <h3>Can I create multiple notes?</h3>
-            <p>Yes! Click "+ New Note" to create unlimited notes. All notes are listed in the left sidebar for quick access.</p>
+            <p>Yes! Click "+ New Note" or File → New Note to create unlimited notes. All notes appear in the left sidebar.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Does it have Find & Replace?</h3>
+            <p>Yes! Press Ctrl+H or go to Edit → Find & Replace. You can search within the current note and replace text easily.</p>
         </div>
         <div class="faq-item">
             <h3>Does it work offline?</h3>
-            <p>Yes. Once the page loads, you can keep typing and creating notes even without internet. Everything saves locally.</p>
-        </div>
-        <div class="faq-item">
-            <h3>Can I access my notes on another device?</h3>
-            <p>No, notes are saved per-browser. Use the Export button to download them as .txt files and transfer manually.</p>
-        </div>
-        <div class="faq-item">
-            <h3>Is there a character limit?</h3>
-            <p>No strict limit, but very large notes (over 5MB total) may slow down your browser. For typical notes, there's no issue.</p>
-        </div>
-        <div class="faq-item">
-            <h3>Can I search within my notes?</h3>
-            <p>Yes. Use the search box in the sidebar to filter notes by title or content.</p>
+            <p>Yes. Once the page loads, you can keep typing even without internet. Everything saves locally.</p>
         </div>
         <div class="faq-item">
             <h3>Is there a dark mode?</h3>
-            <p>Yes! Click the "🌙 Dark Mode" button in the top bar to switch between light and dark themes.</p>
+            <p>Yes! Use View → Toggle Dark Mode or click the top-right button. Your theme preference is saved.</p>
         </div>
         <div class="faq-item">
-            <h3>Can I recover deleted notes?</h3>
-            <p>No, once deleted they're gone. Always export important notes as backup before deleting.</p>
+            <h3>Can I access my notes on another device?</h3>
+            <p>No, notes are saved per-browser. Use File → Export All Notes to download them as .txt and transfer manually.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What keyboard shortcuts are supported?</h3>
+            <p>Ctrl+S (Save), Ctrl+F (Find), Ctrl+H (Replace), Ctrl+N (New), Ctrl+D (Download), F5 (Date/Time), Ctrl+Z (Undo), Ctrl+Y (Redo), and more. See Help → Keyboard Shortcuts for full list.</p>
         </div>
     </div>
 
@@ -207,6 +332,109 @@ footer a:hover { color: #fff; }
     </div>
 </div>
 
+<!-- ============ MODALS ============ -->
+
+<!-- Find & Replace Modal -->
+<div class="modal-overlay" id="findModal">
+    <div class="modal">
+        <h2>🔍 Find & Replace</h2>
+        <label>Find</label>
+        <input type="text" id="findInput" placeholder="Text to find...">
+        <label>Replace with</label>
+        <input type="text" id="replaceInput" placeholder="Replacement text (optional)">
+        <div class="btn-row">
+            <button class="btn" onclick="findNext()">Find Next</button>
+            <button class="btn btn-green" onclick="replaceOne()">Replace</button>
+            <button class="btn btn-green" onclick="replaceAll()">Replace All</button>
+            <button class="btn btn-outline" onclick="closeModal('findModal')">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Shortcuts Modal -->
+<div class="modal-overlay" id="shortcutsModal">
+    <div class="modal">
+        <h2>⌨ Keyboard Shortcuts</h2>
+        <table class="shortcut-table">
+            <tr><td>Ctrl + S</td><td>Save note</td></tr>
+            <tr><td>Ctrl + N</td><td>New note</td></tr>
+            <tr><td>Ctrl + D</td><td>Download current note</td></tr>
+            <tr><td>Ctrl + F</td><td>Find</td></tr>
+            <tr><td>Ctrl + H</td><td>Find & Replace</td></tr>
+            <tr><td>Ctrl + Z</td><td>Undo</td></tr>
+            <tr><td>Ctrl + Y</td><td>Redo</td></tr>
+            <tr><td>Ctrl + A</td><td>Select All</td></tr>
+            <tr><td>Ctrl + +</td><td>Increase font size</td></tr>
+            <tr><td>Ctrl + -</td><td>Decrease font size</td></tr>
+            <tr><td>Ctrl + 0</td><td>Reset font size</td></tr>
+            <tr><td>F5</td><td>Insert date & time</td></tr>
+            <tr><td>F11</td><td>Fullscreen</td></tr>
+            <tr><td>Esc</td><td>Close menu/modal</td></tr>
+        </table>
+        <div class="btn-row">
+            <button class="btn" onclick="closeModal('shortcutsModal')">Got it</button>
+        </div>
+    </div>
+</div>
+
+<!-- About Modal -->
+<div class="modal-overlay" id="aboutModal">
+    <div class="modal">
+        <h2>ℹ About Online Notepad</h2>
+        <p style="margin-bottom: 12px; color: #475569;">A free, privacy-first online notepad built for everyone.</p>
+        <ul>
+            <li>✅ 100% free forever</li>
+            <li>✅ No sign-up required</li>
+            <li>✅ Unlimited notes</li>
+            <li>✅ Auto-save in browser</li>
+            <li>✅ Find & Replace</li>
+            <li>✅ Dark mode support</li>
+            <li>✅ Works offline</li>
+            <li>✅ Your data never leaves your device</li>
+        </ul>
+        <p style="margin-top: 15px; font-size: 0.85rem; color: #64748b;">Version 3.0 • Made with ❤️ for India</p>
+        <div class="btn-row">
+            <button class="btn" onclick="closeModal('aboutModal')">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Emoji Modal -->
+<div class="modal-overlay" id="emojiModal">
+    <div class="modal">
+        <h2>😀 Insert Emoji</h2>
+        <div style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; font-size: 1.5rem; text-align: center;">
+            <span onclick="insertEmoji('😀')" style="cursor:pointer;">😀</span>
+            <span onclick="insertEmoji('😊')" style="cursor:pointer;">😊</span>
+            <span onclick="insertEmoji('😂')" style="cursor:pointer;">😂</span>
+            <span onclick="insertEmoji('👍')" style="cursor:pointer;">👍</span>
+            <span onclick="insertEmoji('❤️')" style="cursor:pointer;">❤️</span>
+            <span onclick="insertEmoji('🔥')" style="cursor:pointer;">🔥</span>
+            <span onclick="insertEmoji('⭐')" style="cursor:pointer;">⭐</span>
+            <span onclick="insertEmoji('✅')" style="cursor:pointer;">✅</span>
+            <span onclick="insertEmoji('❌')" style="cursor:pointer;">❌</span>
+            <span onclick="insertEmoji('⚠️')" style="cursor:pointer;">⚠️</span>
+            <span onclick="insertEmoji('💡')" style="cursor:pointer;">💡</span>
+            <span onclick="insertEmoji('📌')" style="cursor:pointer;">📌</span>
+            <span onclick="insertEmoji('🎯')" style="cursor:pointer;">🎯</span>
+            <span onclick="insertEmoji('🚀')" style="cursor:pointer;">🚀</span>
+            <span onclick="insertEmoji('💰')" style="cursor:pointer;">💰</span>
+            <span onclick="insertEmoji('📝')" style="cursor:pointer;">📝</span>
+            <span onclick="insertEmoji('📅')" style="cursor:pointer;">📅</span>
+            <span onclick="insertEmoji('🕐')" style="cursor:pointer;">🕐</span>
+            <span onclick="insertEmoji('📧')" style="cursor:pointer;">📧</span>
+            <span onclick="insertEmoji('🏆')" style="cursor:pointer;">🏆</span>
+            <span onclick="insertEmoji('🎉')" style="cursor:pointer;">🎉</span>
+            <span onclick="insertEmoji('✨')" style="cursor:pointer;">✨</span>
+            <span onclick="insertEmoji('👉')" style="cursor:pointer;">👉</span>
+            <span onclick="insertEmoji('⬇️')" style="cursor:pointer;">⬇️</span>
+        </div>
+        <div class="btn-row">
+            <button class="btn btn-outline" onclick="closeModal('emojiModal')">Close</button>
+        </div>
+    </div>
+</div>
+
 <footer>
     <p><strong style="color: #fff;">🇮🇳 FreeToolIndia</strong></p>
     <p style="margin-top: 10px;">
@@ -220,24 +448,97 @@ footer a:hover { color: #fff; }
 </footer>
 
 <script>
-const STORAGE_KEY = 'freetool_notes_v2';
-const THEME_KEY = 'freetool_notes_theme';
+const STORAGE_KEY = 'freetool_notes_v3';
+const THEME_KEY = 'freetool_notes_theme_v3';
+const FONT_KEY = 'freetool_notes_font';
+const WRAP_KEY = 'freetool_notes_wrap';
 let notes = [];
 let currentId = null;
 let saveTimer;
+let fontLevel = 1; // 1 = normal, range 0.7 - 1.5
 
 // ========== INIT ==========
 window.addEventListener('load', () => {
     loadTheme();
+    loadFont();
+    loadWrap();
     loadNotes();
     if (notes.length === 0) {
         createNewNote(true);
     } else {
-        const lastId = localStorage.getItem('freetool_notes_lastid');
+        const lastId = localStorage.getItem('freetool_notes_lastid_v3');
         const note = notes.find(n => n.id === lastId) || notes[0];
         selectNote(note.id);
     }
     renderNotesList();
+    attachEvents();
+});
+
+function attachEvents() {
+    const body = document.getElementById('noteBody');
+    body.addEventListener('input', onBodyChange);
+}
+
+// ========== MENU ==========
+function toggleMenu(e, name) {
+    e.stopPropagation();
+    const item = document.querySelector(`[data-menu="${name}"]`);
+    const isOpen = item.classList.contains('open');
+    closeAllMenus();
+    if (!isOpen) item.classList.add('open');
+}
+
+function closeAllMenus() {
+    document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('open'));
+}
+
+document.addEventListener('click', closeAllMenus);
+
+function menuAction(action) {
+    closeAllMenus();
+    switch(action) {
+        case 'new': createNewNote(); break;
+        case 'newtab': window.open(location.href, '_blank'); break;
+        case 'save': saveCurrentNote(); document.getElementById('status').textContent = '✓ Saved'; break;
+        case 'download': downloadCurrent(); break;
+        case 'exportall': downloadAll(); break;
+        case 'delete': deleteCurrent(); break;
+        case 'close': document.getElementById('noteBody').blur(); break;
+        case 'undo': document.execCommand('undo'); break;
+        case 'redo': document.execCommand('redo'); break;
+        case 'cut': document.execCommand('cut'); break;
+        case 'copy': document.execCommand('copy'); break;
+        case 'paste': navigator.clipboard.readText().then(t => insertAtCursor(t)); break;
+        case 'find': openFindReplace(); break;
+        case 'replace': openFindReplace(); setTimeout(() => document.getElementById('replaceInput').focus(), 100); break;
+        case 'selectall': document.getElementById('noteBody').select(); break;
+        case 'time': insertDateTime(); break;
+        case 'datetime': insertDateTime(); break;
+        case 'shortdate': insertShortDate(); break;
+        case 'separator': insertAtCursor('\n' + '─'.repeat(50) + '\n'); break;
+        case 'bullet': insertAtCursor('\n• '); break;
+        case 'numbered': insertAtCursor('\n1. '); break;
+        case 'checkbox': insertAtCursor('\n☐ '); break;
+        case 'emoji': openModal('emojiModal'); break;
+        case 'darkmode': toggleDark(); break;
+        case 'fontup': changeFont(1); break;
+        case 'fontdown': changeFont(-1); break;
+        case 'fontreset': resetFont(); break;
+        case 'wrap': toggleWrap(); break;
+        case 'fullscreen': toggleFullscreen(); break;
+        case 'shortcuts': openModal('shortcutsModal'); break;
+        case 'about': openModal('aboutModal'); break;
+        case 'faq': document.querySelector('.faq-section').scrollIntoView({behavior: 'smooth'}); break;
+        case 'contact': window.location.href = 'contact.html'; break;
+    }
+}
+
+// ========== MODALS ==========
+function openModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+document.querySelectorAll('.modal-overlay').forEach(m => {
+    m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show'); });
 });
 
 // ========== NOTES DATA ==========
@@ -248,22 +549,12 @@ function loadNotes() {
     } catch(e) { notes = []; }
 }
 
-function saveNotes() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-}
+function saveNotes() { localStorage.setItem(STORAGE_KEY, JSON.stringify(notes)); }
 
-function generateId() {
-    return 'note_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
-}
+function generateId() { return 'note_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7); }
 
 function createNewNote(silent) {
-    const newNote = {
-        id: generateId(),
-        title: 'Untitled Note',
-        body: '',
-        created: Date.now(),
-        updated: Date.now()
-    };
+    const newNote = { id: generateId(), title: 'Untitled Note', body: '', created: Date.now(), updated: Date.now() };
     notes.unshift(newNote);
     saveNotes();
     if (!silent) {
@@ -275,14 +566,11 @@ function createNewNote(silent) {
 }
 
 function selectNote(id) {
-    // Save current before switching
     if (currentId) saveCurrentNote(true);
-    
     currentId = id;
-    localStorage.setItem('freetool_notes_lastid', id);
+    localStorage.setItem('freetool_notes_lastid_v3', id);
     const note = notes.find(n => n.id === id);
     if (!note) return;
-    
     document.getElementById('noteTitle').value = note.title;
     document.getElementById('noteBody').value = note.body;
     updateStats();
@@ -294,59 +582,37 @@ function saveCurrentNote(silent) {
     if (!currentId) return;
     const note = notes.find(n => n.id === currentId);
     if (!note) return;
-    
     note.title = document.getElementById('noteTitle').value.trim() || 'Untitled Note';
     note.body = document.getElementById('noteBody').value;
     note.updated = Date.now();
     saveNotes();
-    
     if (!silent) {
         document.getElementById('status').textContent = '✓ Saved';
         document.getElementById('status').style.color = '#10b981';
     }
 }
 
-function onTitleChange() {
-    saveCurrentNote(true);
-    renderNotesList();
-}
+function onTitleChange() { saveCurrentNote(true); renderNotesList(); }
 
 function onBodyChange() {
     document.getElementById('status').textContent = '⏳ Saving...';
     document.getElementById('status').style.color = '#d97706';
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(() => {
-        saveCurrentNote();
-    }, 400);
+    saveTimer = setTimeout(() => saveCurrentNote(), 400);
     updateStats();
 }
 
-// Attach event listeners
-document.addEventListener('DOMContentLoaded', () => {
-    const body = document.getElementById('noteBody');
-    if (body) body.addEventListener('input', onBodyChange);
-});
-
-// ========== RENDER LIST ==========
+// ========== RENDER ==========
 function renderNotesList() {
     const list = document.getElementById('notesList');
     const query = (document.getElementById('searchBox')?.value || '').toLowerCase();
-    
-    let filtered = notes.filter(n => {
-        if (!query) return true;
-        return n.title.toLowerCase().includes(query) || n.body.toLowerCase().includes(query);
-    });
-    
-    // Sort by updated (most recent first)
+    let filtered = notes.filter(n => !query || n.title.toLowerCase().includes(query) || n.body.toLowerCase().includes(query));
     filtered.sort((a, b) => b.updated - a.updated);
-    
     document.getElementById('notesCount').textContent = '(' + notes.length + ')';
-    
     if (filtered.length === 0) {
         list.innerHTML = '<div style="text-align:center;padding:20px;color:#94a3b8;font-size:0.85rem;">No notes found</div>';
         return;
     }
-    
     list.innerHTML = filtered.map(n => {
         const preview = n.body.slice(0, 50).replace(/\n/g, ' ') || 'Empty note';
         const active = n.id === currentId ? 'active' : '';
@@ -369,8 +635,7 @@ function updateStats() {
     const words = text.trim() ? text.trim().split(/\s+/).length : 0;
     document.getElementById('wordCount').textContent = words;
     document.getElementById('lineCount').textContent = text ? text.split('\n').length : 0;
-    const readMin = Math.ceil(words / 200);
-    document.getElementById('readTime').textContent = readMin + ' min';
+    document.getElementById('readTime').textContent = Math.ceil(words / 200) + ' min';
 }
 
 // ========== ACTIONS ==========
@@ -396,12 +661,9 @@ function copyAll() {
 
 function downloadAll() {
     if (notes.length === 0) return alert('No notes to export.');
-    let content = 'MY NOTES - Exported from FreeToolIndia.com\n';
-    content += '='.repeat(50) + '\n\n';
+    let content = 'MY NOTES - Exported from FreeToolIndia.com\n' + '='.repeat(50) + '\n\n';
     notes.forEach((n, i) => {
-        content += `--- Note ${i + 1}: ${n.title} ---\n`;
-        content += `Last updated: ${new Date(n.updated).toLocaleString()}\n\n`;
-        content += n.body + '\n\n' + '='.repeat(50) + '\n\n';
+        content += `--- Note ${i + 1}: ${n.title} ---\nLast updated: ${new Date(n.updated).toLocaleString()}\n\n${n.body}\n\n${'='.repeat(50)}\n\n`;
     });
     const blob = new Blob([content], {type: 'text/plain'});
     const url = URL.createObjectURL(blob);
@@ -414,16 +676,10 @@ function downloadAll() {
 
 function deleteCurrent() {
     if (!currentId) return;
-    if (notes.length === 1) {
-        if (!confirm('This is your only note. Delete it?')) return;
-    } else {
-        if (!confirm('Delete this note? This cannot be undone.')) return;
-    }
+    if (!confirm('Delete this note? This cannot be undone.')) return;
     notes = notes.filter(n => n.id !== currentId);
     saveNotes();
-    if (notes.length === 0) {
-        createNewNote(true);
-    }
+    if (notes.length === 0) createNewNote(true);
     selectNote(notes[0].id);
     renderNotesList();
 }
@@ -432,7 +688,83 @@ function sanitizeFilename(name) {
     return name.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-').toLowerCase();
 }
 
-// ========== THEME ==========
+// ========== INSERT HELPERS ==========
+function insertAtCursor(text) {
+    const ta = document.getElementById('noteBody');
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    ta.value = ta.value.substring(0, start) + text + ta.value.substring(end);
+    ta.selectionStart = ta.selectionEnd = start + text.length;
+    ta.focus();
+    onBodyChange();
+}
+
+function insertDateTime() {
+    const now = new Date();
+    const formatted = now.toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
+    insertAtCursor('\n' + formatted + '\n');
+}
+
+function insertShortDate() {
+    const now = new Date();
+    insertAtCursor(now.toLocaleDateString('en-IN'));
+}
+
+function insertEmoji(emoji) {
+    insertAtCursor(emoji);
+    closeModal('emojiModal');
+}
+
+// ========== FIND & REPLACE ==========
+function openFindReplace() { openModal('findModal'); setTimeout(() => document.getElementById('findInput').focus(), 100); }
+
+function findNext() {
+    const find = document.getElementById('findInput').value;
+    if (!find) return;
+    const ta = document.getElementById('noteBody');
+    const start = ta.selectionEnd;
+    const idx = ta.value.indexOf(find, start);
+    if (idx !== -1) {
+        ta.focus();
+        ta.setSelectionRange(idx, idx + find.length);
+    } else {
+        const idx2 = ta.value.indexOf(find, 0);
+        if (idx2 !== -1) {
+            ta.focus();
+            ta.setSelectionRange(idx2, idx2 + find.length);
+        } else {
+            alert('Text not found.');
+        }
+    }
+}
+
+function replaceOne() {
+    const find = document.getElementById('findInput').value;
+    const replace = document.getElementById('replaceInput').value;
+    if (!find) return;
+    const ta = document.getElementById('noteBody');
+    const selected = ta.value.substring(ta.selectionStart, ta.selectionEnd);
+    if (selected === find) {
+        insertAtCursor(replace);
+    } else {
+        findNext();
+    }
+    onBodyChange();
+}
+
+function replaceAll() {
+    const find = document.getElementById('findInput').value;
+    const replace = document.getElementById('replaceInput').value;
+    if (!find) return;
+    const ta = document.getElementById('noteBody');
+    const count = (ta.value.match(new RegExp(find.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+    ta.value = ta.value.split(find).join(replace);
+    onBodyChange();
+    closeModal('findModal');
+    alert(`Replaced ${count} occurrence(s).`);
+}
+
+// ========== THEME / FONT / WRAP ==========
 function toggleDark() {
     document.body.classList.toggle('dark');
     const isDark = document.body.classList.contains('dark');
@@ -441,12 +773,73 @@ function toggleDark() {
 }
 
 function loadTheme() {
-    const theme = localStorage.getItem(THEME_KEY);
-    if (theme === 'dark') {
+    if (localStorage.getItem(THEME_KEY) === 'dark') {
         document.body.classList.add('dark');
         document.getElementById('darkBtn').textContent = '☀️ Light Mode';
     }
 }
+
+function changeFont(dir) {
+    fontLevel = Math.max(0.7, Math.min(1.6, fontLevel + dir * 0.1));
+    applyFont();
+    localStorage.setItem(FONT_KEY, fontLevel);
+}
+
+function resetFont() { fontLevel = 1; applyFont(); localStorage.setItem(FONT_KEY, fontLevel); }
+
+function applyFont() {
+    document.querySelectorAll('textarea.editor').forEach(el => el.style.fontSize = fontLevel + 'rem');
+}
+
+function loadFont() {
+    const saved = parseFloat(localStorage.getItem(FONT_KEY));
+    if (saved && saved >= 0.7 && saved <= 1.6) { fontLevel = saved; applyFont(); }
+}
+
+function toggleWrap() {
+    const ta = document.getElementById('noteBody');
+    ta.classList.toggle('nowrap');
+    localStorage.setItem(WRAP_KEY, ta.classList.contains('nowrap') ? 'off' : 'on');
+}
+
+function loadWrap() {
+    if (localStorage.getItem(WRAP_KEY) === 'off') {
+        document.getElementById('noteBody').classList.add('nowrap');
+    }
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+// ========== KEYBOARD SHORTCUTS ==========
+document.addEventListener('keydown', e => {
+    if (e.ctrlKey || e.metaKey) {
+        switch(e.key.toLowerCase()) {
+            case 's': e.preventDefault(); saveCurrentNote(); document.getElementById('status').textContent = '✓ Saved'; break;
+            case 'n': e.preventDefault(); createNewNote(); break;
+            case 'd': e.preventDefault(); downloadCurrent(); break;
+            case 'f': e.preventDefault(); openFindReplace(); break;
+            case 'h': e.preventDefault(); openFindReplace(); break;
+            case '=': case '+': e.preventDefault(); changeFont(1); break;
+            case '-': e.preventDefault(); changeFont(-1); break;
+            case '0': e.preventDefault(); resetFont(); break;
+        }
+    } else if (e.key === 'F5') {
+        e.preventDefault();
+        insertDateTime();
+    } else if (e.key === 'F11') {
+        e.preventDefault();
+        toggleFullscreen();
+    } else if (e.key === 'Escape') {
+        closeAllMenus();
+        document.querySelectorAll('.modal-overlay.show').forEach(m => m.classList.remove('show'));
+    }
+});
 </script>
 
 <script type="application/ld+json">
@@ -454,10 +847,10 @@ function loadTheme() {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"Is this notepad really free?","acceptedAnswer":{"@type":"Answer","text":"Yes, 100% free forever. No sign-up, no ads."}},
-    {"@type":"Question","name":"Where are my notes saved?","acceptedAnswer":{"@type":"Answer","text":"In your browser using localStorage. Never uploaded."}},
-    {"@type":"Question","name":"Can I create multiple notes?","acceptedAnswer":{"@type":"Answer","text":"Yes, unlimited notes with sidebar access."}},
-    {"@type":"Question","name":"Does it work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes, once loaded it works without internet."}}
+    {"@type":"Question","name":"Is this notepad really free?","acceptedAnswer":{"@type":"Answer","text":"Yes, 100% free forever with no sign-up."}},
+    {"@type":"Question","name":"What menus does this notepad have?","acceptedAnswer":{"@type":"Answer","text":"File, Edit, Insert, View, and Help menus with full options."}},
+    {"@type":"Question","name":"Does it have Find & Replace?","acceptedAnswer":{"@type":"Answer","text":"Yes, with Ctrl+H shortcut."}},
+    {"@type":"Question","name":"Where are my notes saved?","acceptedAnswer":{"@type":"Answer","text":"In your browser's localStorage only."}}
   ]
 }
 </script>
