@@ -3,86 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Background Remover - No Upload, 100% Private | FreeToolIndia</title>
-<meta name="description" content="Remove image backgrounds instantly. No upload to server, works in browser. 100% private and free.">
-<meta name="keywords" content="background remover, remove bg free, image background remover, no watermark bg remover">
+<title>Free Background Remover - Batch, No Upload, 100% Private | FreeToolIndia</title>
+<meta name="description" content="Remove image backgrounds free. Batch processing, before/after slider, custom backgrounds. No upload, no watermark, 100% private.">
+<meta name="keywords" content="background remover, remove bg free, batch background remover, image background remover, no watermark bg remover">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.freetoolindia.com/bg-remover.html">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #fdf2f8; background-image: radial-gradient(at 0% 0%, rgba(236,72,153,0.15) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(219,39,119,0.15) 0px, transparent 50%); background-attachment: fixed; color: #0f172a; line-height: 1.6; min-height: 100vh; }
-.topbar { background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); padding: 16px 24px; box-shadow: 0 2px 10px rgba(236,72,153,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(236,72,153,0.15); }
-.topbar a { color: #db2777; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; }
-.topbar a:hover { color: #be185d; transform: translateX(-3px); display: inline-block; }
-.container { max-width: 850px; margin: 0 auto; padding: 30px 20px 60px; }
-h1 { font-size: 2.2rem; font-weight: 800; color: #db2777; margin-bottom: 8px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 12px; }
-h1 .emoji { font-size: 2.2rem; }
-.subtitle { color: #64748b; font-size: 1rem; margin-bottom: 30px; font-weight: 500; }
-.card { background: #fff; padding: 32px; border-radius: 16px; box-shadow: 0 10px 40px rgba(236,72,153,0.12); border: 1px solid rgba(236,72,153,0.1); text-align: center; }
-.upload-area { border: 3px dashed #f9a8d4; border-radius: 16px; padding: 60px 20px; cursor: pointer; transition: all 0.3s; margin-bottom: 20px; background: #fdf2f8; }
-.upload-area:hover { background: #fce7f3; border-color: #ec4899; transform: scale(1.01); }
+.topbar { background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); padding: 16px 24px; box-shadow: 0 2px 10px rgba(236,72,153,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(236,72,153,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.topbar a { color: #db2777; text-decoration: none; font-weight: 700; font-size: 0.95rem; }
+.topbar a:hover { color: #be185d; }
+.container { max-width: 1000px; margin: 0 auto; padding: 25px 20px 60px; }
+h1 { font-size: 2rem; font-weight: 800; color: #db2777; margin-bottom: 6px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.badge { background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 800; }
+.subtitle { color: #64748b; font-size: 1rem; margin-bottom: 22px; }
+.card { background: #fff; padding: 28px; border-radius: 16px; box-shadow: 0 10px 40px rgba(236,72,153,0.12); border: 1px solid rgba(236,72,153,0.1); margin-bottom: 20px; }
+.card h3 { color: #db2777; font-size: 1.15rem; margin-bottom: 16px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.upload-area { border: 3px dashed #f9a8d4; border-radius: 14px; padding: 50px 20px; text-align: center; cursor: pointer; transition: all 0.3s; background: #fdf2f8; }
+.upload-area:hover, .upload-area.dragover { background: #fce7f3; border-color: #ec4899; transform: scale(1.01); }
 .upload-area .icon { font-size: 3.5rem; margin-bottom: 12px; }
-.upload-area p { color: #64748b; }
-.upload-area p strong { color: #db2777; }
-input[type="file"] { display: none; }
-button { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); color: white; border: none; padding: 13px 26px; border-radius: 10px; cursor: pointer; font-size: 1rem; font-weight: 700; font-family: inherit; margin: 5px; transition: all 0.25s; box-shadow: 0 4px 14px rgba(236,72,153,0.35); }
-button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(236,72,153,0.45); }
-.btn-green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 4px 14px rgba(16,185,129,0.35); }
-.image-container { margin-top: 20px; }
-.image-container img { max-width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(236,72,153,0.2); }
-.hidden { display: none; }
-.loading { color: #db2777; font-size: 1.1rem; margin: 20px 0; font-weight: 700; }
-.privacy-note { background: #fdf2f8; padding: 16px; border-radius: 10px; margin-top: 20px; font-size: 0.88rem; color: #9d174d; border-left: 4px solid #ec4899; font-weight: 500; text-align: left; }
+.upload-area p { color: #64748b; font-size: 0.95rem; }
+.upload-area strong { color: #db2777; }
+.upload-area input { display: none; }
+.btn { background: linear-gradient(135deg, #ec4899, #db2777); color: white; border: none; padding: 12px 24px; border-radius: 10px; cursor: pointer; font-size: 0.95rem; font-weight: 700; font-family: inherit; transition: all 0.25s; box-shadow: 0 4px 14px rgba(236,72,153,0.35); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(236,72,153,0.45); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-green { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16,185,129,0.35); }
+.btn-outline { background: #fff; color: #db2777; border: 2px solid #fbcfe8; box-shadow: none; }
+.btn-outline:hover { background: #fdf2f8; }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+.btn-row .btn { flex: 1; min-width: 130px; }
+.progress-wrap { margin-top: 18px; display: none; }
+.progress-bar { height: 10px; background: #fce7f3; border-radius: 5px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(135deg, #ec4899, #db2777); width: 0%; transition: width 0.3s; border-radius: 5px; }
+.progress-text { text-align: center; margin-top: 8px; font-size: 0.88rem; font-weight: 700; color: #db2777; }
+.bg-options { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+.bg-option { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #fdf2f8; border-radius: 10px; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; font-weight: 700; font-size: 0.88rem; }
+.bg-option:hover { border-color: #fbcfe8; }
+.bg-option input { accent-color: #db2777; cursor: pointer; }
+.bg-option.color-picker { padding: 6px 12px; }
+.bg-option.color-picker input[type="color"] { width: 40px; height: 30px; border: none; border-radius: 6px; cursor: pointer; padding: 0; }
+.image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+.image-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 25px rgba(236,72,153,0.15); transition: all 0.3s; border: 2px solid transparent; }
+.image-card:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(236,72,153,0.25); }
+.image-card.done { border-color: #10b981; }
+.img-preview-wrap { position: relative; width: 100%; height: 220px; background: repeating-conic-gradient(#f1f5f9 0% 25%, #fff 0% 50%) 50% / 20px 20px; overflow: hidden; }
+.img-preview-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.slider-container { position: relative; width: 100%; height: 100%; cursor: ew-resize; user-select: none; }
+.slider-before, .slider-after { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: repeating-conic-gradient(#f1f5f9 0% 25%, #fff 0% 50%) 50% / 20px 20px; }
+.slider-after { clip-path: inset(0 50% 0 0); }
+.slider-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: #db2777; transform: translateX(-50%); pointer-events: none; box-shadow: 0 0 8px rgba(219,39,119,0.8); }
+.slider-handle::before { content: '⇄'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #db2777; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; box-shadow: 0 4px 12px rgba(219,39,119,0.5); }
+.img-info { padding: 14px 16px; }
+.img-name { font-weight: 700; font-size: 0.88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 6px; color: #0f172a; }
+.img-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.img-actions button { flex: 1; min-width: 60px; padding: 8px 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; font-size: 0.78rem; font-family: inherit; transition: all 0.2s; }
+.action-download { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+.action-copy { background: #eff6ff; color: #2563eb; }
+.action-remove { background: #fee2e2; color: #dc2626; }
+.img-actions button:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.status-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 800; margin-left: 8px; }
+.status-pending { background: #fef3c7; color: #92400e; }
+.status-processing { background: #dbeafe; color: #1e40af; }
+.status-done { background: #d1fae5; color: #065f46; }
+.status-error { background: #fee2e2; color: #991b1b; }
+.privacy-note { background: #fdf2f8; padding: 16px; border-radius: 10px; margin-top: 16px; font-size: 0.88rem; color: #9d174d; border-left: 4px solid #ec4899; font-weight: 500; }
 .faq-section { margin-top: 60px; }
-.faq-section h2 { text-align: center; font-size: 1.9rem; margin-bottom: 30px; color: #0f172a; font-weight: 800; }
-.faq-item { background: #fff; border-radius: 14px; padding: 22px 26px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(236,72,153,0.08); border-left: 4px solid #ec4899; transition: all 0.25s; text-align: left; }
-.faq-item:hover { box-shadow: 0 10px 30px rgba(236,72,153,0.18); transform: translateX(6px); border-left-color: #be185d; }
+.faq-section h2 { text-align: center; font-size: 1.9rem; margin-bottom: 30px; font-weight: 800; }
+.faq-item { background: #fff; border-radius: 14px; padding: 22px 26px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(236,72,153,0.08); border-left: 4px solid #ec4899; transition: all 0.25s; }
+.faq-item:hover { box-shadow: 0 10px 30px rgba(236,72,153,0.18); transform: translateX(6px); }
 .faq-item h3 { color: #db2777; margin-bottom: 8px; font-size: 1.05rem; font-weight: 700; }
 .faq-item p { color: #475569; font-size: 0.93rem; line-height: 1.7; }
-.interlink { margin-top: 60px; background: #fff; padding: 36px 30px; border-radius: 16px; box-shadow: 0 10px 40px rgba(236,72,153,0.12); text-align: left; }
-.interlink h2 { text-align: center; margin-bottom: 28px; font-size: 1.7rem; font-weight: 800; color: #0f172a; }
+.faq-item a { color: #db2777; font-weight: 600; }
+.interlink { margin-top: 60px; background: #fff; padding: 36px 30px; border-radius: 16px; box-shadow: 0 10px 40px rgba(236,72,153,0.12); }
+.interlink h2 { text-align: center; margin-bottom: 28px; font-size: 1.7rem; font-weight: 800; }
 .interlink-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
-.interlink-grid a { display: block; background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); padding: 16px 20px; border-radius: 12px; text-decoration: none; color: #0f172a; font-weight: 700; font-size: 0.93rem; transition: all 0.25s; border-left: 4px solid #ec4899; }
-.interlink-grid a:hover { background: linear-gradient(135deg, #fbcfe8 0%, #f9a8d4 100%); transform: translateX(6px); border-left-color: #be185d; box-shadow: 0 8px 22px rgba(236,72,153,0.25); }
-footer { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #94a3b8; text-align: center; padding: 36px 20px 28px; margin-top: 60px; font-size: 0.9rem; }
-footer a { color: #f9a8d4; text-decoration: none; font-weight: 600; }
+.interlink-grid a { display: block; background: linear-gradient(135deg, #fdf2f8, #fce7f3); padding: 16px 20px; border-radius: 12px; text-decoration: none; color: #0f172a; font-weight: 700; font-size: 0.93rem; transition: all 0.25s; border-left: 4px solid #ec4899; }
+.interlink-grid a:hover { background: linear-gradient(135deg, #fbcfe8, #f9a8d4); transform: translateX(6px); border-left-color: #be185d; }
+footer { background: linear-gradient(135deg, #0f172a, #1e293b); color: #94a3b8; text-align: center; padding: 36px 20px 28px; margin-top: 60px; font-size: 0.9rem; }
+footer a { color: #f9a8d4; text-decoration: none; margin: 0 8px; }
 footer a:hover { color: #fff; }
-@media (max-width: 600px) { h1 { font-size: 1.6rem; } h1 .emoji { font-size: 1.6rem; } .container { padding: 20px 15px 40px; } .card { padding: 22px 18px; } .upload-area { padding: 40px 15px; } }
+@media (max-width: 600px) { h1 { font-size: 1.5rem; } .container { padding: 18px 12px 40px; } .card { padding: 20px 16px; } .upload-area { padding: 30px 15px; } .img-preview-wrap { height: 180px; } }
 </style>
 </head>
 <body>
+
 <div class="topbar"><a href="index.html">← Back to All Tools</a></div>
+
 <div class="container">
-    <h1><span class="emoji">🖼️</span> Background Remover</h1>
-    <p class="subtitle">No Upload • No Watermark • 100% Private • Free Forever</p>
+    <h1><span>🖼️</span> Background Remover <span class="badge">100% FREE</span></h1>
+    <p class="subtitle">Batch Processing • Before/After Slider • No Upload • No Watermark • 100% Private</p>
+
+    <!-- UPLOAD -->
     <div class="card">
-        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+        <h3>📤 Upload Images</h3>
+        <div class="upload-area" id="uploadArea">
             <div class="icon">📤</div>
-            <p><strong>Click to upload</strong> or drag & drop</p>
-            <p style="font-size: 0.85rem; margin-top: 5px;">PNG, JPG, JPEG supported</p>
+            <p><strong>Click to upload</strong> or drag & drop images here</p>
+            <p style="font-size: 0.82rem; margin-top: 6px;">PNG, JPG, JPEG • Multiple files supported</p>
+            <input type="file" id="fileInput" accept="image/*" multiple>
         </div>
-        <input type="file" id="fileInput" accept="image/*" onchange="processImage(event)">
-        <div id="loading" class="loading hidden">⏳ Processing... First time may take 30-60 seconds to download AI model.</div>
-        <div id="result" class="image-container hidden">
-            <h3 style="margin-bottom: 15px; color: #db2777;">✅ Background Removed</h3>
-            <img id="resultImg" alt="Result">
-            <div style="margin-top: 15px;">
-                <button class="btn-green" onclick="downloadResult()">⬇ Download PNG</button>
-                <button onclick="reset()">🔄 Try Another</button>
-            </div>
-        </div>
-        <div class="privacy-note">🔒 <strong>100% Private:</strong> Your image is processed entirely in your browser using AI. Nothing is uploaded. No watermark. No sign-up.</div>
+        <div class="privacy-note">🔒 <strong>100% Private:</strong> Your images are processed entirely in your browser using AI. Nothing is uploaded to any server. No watermark.</div>
     </div>
+
+    <!-- OPTIONS -->
+    <div class="card" id="optionsCard" style="display: none;">
+        <h3>⚙️ Options</h3>
+        <div class="bg-options">
+            <label class="bg-option"><input type="radio" name="bgType" value="transparent" checked onchange="onBgChange()"> Transparent</label>
+            <label class="bg-option"><input type="radio" name="bgType" value="white" onchange="onBgChange()"> White</label>
+            <label class="bg-option"><input type="radio" name="bgType" value="black" onchange="onBgChange()"> Black</label>
+            <label class="bg-option"><input type="radio" name="bgType" value="custom" onchange="onBgChange()"> Custom</label>
+            <label class="bg-option color-picker" style="display: none;" id="colorPicker"><input type="color" id="customColor" value="#6366f1" onchange="onColorChange()"> Color</label>
+        </div>
+        <div class="btn-row">
+            <button class="btn btn-green" id="processBtn" onclick="processAll()">🚀 Process All Images</button>
+            <button class="btn btn-outline" onclick="clearAll()">🗑 Clear All</button>
+        </div>
+        <div class="progress-wrap" id="progressWrap">
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="progress-text" id="progressText">Processing...</div>
+        </div>
+    </div>
+
+    <!-- IMAGE GRID -->
+    <div id="imageGrid" class="image-grid"></div>
+
+    <!-- FAQ -->
     <div class="faq-section">
         <h2>Frequently Asked Questions</h2>
-        <div class="faq-item"><h3>Is this background remover really free?</h3><p>Yes, 100% free forever. No watermark, no sign-up, no limits.</p></div>
-        <div class="faq-item"><h3>Is my image uploaded to a server?</h3><p>No. The AI model runs entirely in your browser. Your image never leaves your device.</p></div>
-        <div class="faq-item"><h3>Why does the first use take longer?</h3><p>The AI model (about 40MB) is downloaded once and cached. Future uses are much faster.</p></div>
-        <div class="faq-item"><h3>What image formats are supported?</h3><p>PNG, JPG, and JPEG. Output is always PNG with transparent background.</p></div>
-        <div class="faq-item"><h3>Is there a file size limit?</h3><p>No strict limit, but images under 5MB work best. Very large images may be slow.</p></div>
-        <div class="faq-item"><h3>Can I use the result commercially?</h3><p>Yes. The output is yours to use anywhere, including commercial projects.</p></div>
+        <div class="faq-item"><h3>Is this background remover really free?</h3><p>Yes, 100% free forever. No watermark, no sign-up, no limits on the number of images.</p></div>
+        <div class="faq-item"><h3>Is my image uploaded to a server?</h3><p>No. The AI model runs entirely in your browser. Your image never leaves your device. We can't see your images even if we wanted to.</p></div>
+        <div class="faq-item"><h3>Can I process multiple images at once?</h3><p>Yes! Upload multiple images and click "Process All" to run batch background removal. Perfect for bulk editing.</p></div>
+        <div class="faq-item"><h3>Why does the first use take longer?</h3><p>The AI model (about 40MB) is downloaded once and cached by your browser. Future uses are much faster.</p></div>
+        <div class="faq-item"><h3>What image formats are supported?</h3><p>PNG, JPG, and JPEG. Output can be downloaded as PNG (with transparency) or JPG (with solid background).</p></div>
+        <div class="faq-item"><h3>Can I change the background color?</h3><p>Yes! After removal, choose from transparent, white, black, or a custom color of your choice.</p></div>
+        <div class="faq-item"><h3>Is there a file size limit?</h3><p>No strict limit, but images under 5MB work best. Very large images may be slow due to browser memory.</p></div>
+        <div class="faq-item"><h3>Can I use the result commercially?</h3><p>Yes. The output is 100% yours to use anywhere, including commercial projects.</p></div>
     </div>
+
+    <!-- INTERLINK -->
     <div class="interlink">
         <h2>🔗 Explore More Free Tools</h2>
         <div class="interlink-grid">
@@ -95,46 +157,270 @@ footer a:hover { color: #fff; }
         </div>
     </div>
 </div>
-<footer><p>© 2025 FreeToolIndia.com — <a href="index.html">Home</a> • All tools free forever.</p></footer>
+
+<footer>
+    <p><strong style="color: #fff;">🇮🇳 FreeToolIndia</strong></p>
+    <p style="margin-top: 10px;">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+    </p>
+    <p style="margin-top: 14px;">© 2025 FreeToolIndia.com — All tools free forever.</p>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/dist/browser.js"></script>
 <script>
-let resultBlob = null;
-async function processImage(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    document.getElementById('loading').classList.remove('hidden');
-    document.getElementById('result').classList.add('hidden');
+let images = []; // [{id, file, originalURL, resultBlob, resultURL, status, name}]
+let processing = false;
+
+const uploadArea = document.getElementById('uploadArea');
+const fileInput = document.getElementById('fileInput');
+
+uploadArea.addEventListener('click', () => fileInput.click());
+uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+uploadArea.addEventListener('dragleave', e => { e.preventDefault(); uploadArea.classList.remove('dragover'); });
+uploadArea.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadArea.classList.remove('dragover');
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+    if (files.length > 0) addFiles(files);
+});
+
+fileInput.addEventListener('change', e => {
+    const files = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));
+    if (files.length > 0) addFiles(files);
+    fileInput.value = '';
+});
+
+function addFiles(files) {
+    files.forEach(file => {
+        const id = 'img_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+        const url = URL.createObjectURL(file);
+        images.push({ id, file, originalURL: url, resultBlob: null, resultURL: null, status: 'pending', name: file.name });
+    });
+    document.getElementById('optionsCard').style.display = 'block';
+    renderGrid();
+}
+
+function renderGrid() {
+    const grid = document.getElementById('imageGrid');
+    if (images.length === 0) { grid.innerHTML = ''; return; }
+    
+    grid.innerHTML = images.map(img => {
+        let statusBadge = '';
+        if (img.status === 'pending') statusBadge = '<span class="status-badge status-pending">Pending</span>';
+        else if (img.status === 'processing') statusBadge = '<span class="status-badge status-processing">Processing...</span>';
+        else if (img.status === 'done') statusBadge = '<span class="status-badge status-done">✓ Done</span>';
+        else if (img.status === 'error') statusBadge = '<span class="status-badge status-error">Error</span>';
+        
+        let preview = '';
+        if (img.status === 'done' && img.resultURL) {
+            // Before/After slider
+            preview = `
+                <div class="slider-container" id="slider_${img.id}">
+                    <img class="slider-before" src="${img.originalURL}" alt="Before">
+                    <img class="slider-after" src="${img.resultURL}" alt="After" id="after_${img.id}">
+                    <div class="slider-handle" id="handle_${img.id}" style="left: 50%;"></div>
+                </div>`;
+        } else {
+            preview = `<img src="${img.originalURL}" alt="${img.name}">`;
+        }
+        
+        const actions = img.status === 'done' ? `
+            <button class="action-download" onclick="downloadImage('${img.id}')">⬇ Download</button>
+            <button class="action-copy" onclick="copyImage('${img.id}')">📋 Copy</button>
+            <button class="action-remove" onclick="removeImage('${img.id}')">🗑</button>
+        ` : `<button class="action-remove" onclick="removeImage('${img.id}')" style="flex: 1;">🗑 Remove</button>`;
+        
+        return `
+            <div class="image-card ${img.status === 'done' ? 'done' : ''}">
+                <div class="img-preview-wrap">${preview}</div>
+                <div class="img-info">
+                    <div class="img-name">${escapeHtml(img.name)} ${statusBadge}</div>
+                    <div class="img-actions">${actions}</div>
+                </div>
+            </div>`;
+    }).join('');
+    
+    // Attach slider events
+    images.filter(i => i.status === 'done' && i.resultURL).forEach(img => {
+        const slider = document.getElementById('slider_' + img.id);
+        if (slider) attachSlider(slider, img.id);
+    });
+}
+
+function attachSlider(slider, id) {
+    let dragging = false;
+    const after = document.getElementById('after_' + id);
+    const handle = document.getElementById('handle_' + id);
+    
+    const update = (e) => {
+        const rect = slider.getBoundingClientRect();
+        let x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+        x = Math.max(0, Math.min(rect.width, x));
+        const pct = (x / rect.width) * 100;
+        after.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+        handle.style.left = pct + '%';
+    };
+    
+    slider.addEventListener('mousedown', e => { dragging = true; update(e); });
+    slider.addEventListener('touchstart', e => { dragging = true; update(e); }, {passive: true});
+    document.addEventListener('mousemove', e => { if (dragging) update(e); });
+    document.addEventListener('touchmove', e => { if (dragging) update(e); }, {passive: true});
+    document.addEventListener('mouseup', () => dragging = false);
+    document.addEventListener('touchend', () => dragging = false);
+}
+
+function onBgChange() {
+    const val = document.querySelector('input[name="bgType"]:checked').value;
+    document.getElementById('colorPicker').style.display = val === 'custom' ? 'flex' : 'none';
+    // Re-render existing done images with new background
+    images.forEach(img => { if (img.status === 'done') applyBg(img); });
+    renderGrid();
+}
+
+function onColorChange() {
+    images.forEach(img => { if (img.status === 'done') applyBg(img); });
+    renderGrid();
+}
+
+async function applyBg(img) {
+    if (!img.resultBlob) return;
+    const val = document.querySelector('input[name="bgType"]:checked').value;
+    if (val === 'transparent') {
+        if (img.resultURL) URL.revokeObjectURL(img.resultURL);
+        img.resultURL = URL.createObjectURL(img.resultBlob);
+        return;
+    }
+    // Create canvas with solid bg
+    const url = await new Promise(resolve => {
+        const image = new Image();
+        image.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = image.width;
+            canvas.height = image.height;
+            const ctx = canvas.getContext('2d');
+            if (val === 'custom') {
+                ctx.fillStyle = document.getElementById('customColor').value;
+            } else {
+                ctx.fillStyle = val;
+            }
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(image, 0, 0);
+            canvas.toBlob(blob => resolve(URL.createObjectURL(blob)), 'image/png');
+        };
+        image.src = URL.createObjectURL(img.resultBlob);
+    });
+    if (img.resultURL) URL.revokeObjectURL(img.resultURL);
+    img.resultURL = url;
+}
+
+async function processAll() {
+    if (processing) return;
+    const pending = images.filter(i => i.status === 'pending' || i.status === 'error');
+    if (pending.length === 0) { alert('No pending images to process.'); return; }
+    
+    processing = true;
+    document.getElementById('processBtn').disabled = true;
+    document.getElementById('progressWrap').style.display = 'block';
+    
+    const { removeBackground } = window.imgly || {};
+    if (!removeBackground) {
+        alert('AI model failed to load. Please refresh the page.');
+        processing = false;
+        document.getElementById('processBtn').disabled = false;
+        return;
+    }
+    
+    let done = 0;
+    for (const img of pending) {
+        img.status = 'processing';
+        updateProgress(done, pending.length, 'Processing: ' + img.name);
+        renderGrid();
+        
+        try {
+            const blob = await removeBackground(img.file);
+            img.resultBlob = blob;
+            img.status = 'done';
+            await applyBg(img);
+        } catch (e) {
+            console.error(e);
+            img.status = 'error';
+        }
+        done++;
+        updateProgress(done, pending.length);
+        renderGrid();
+    }
+    
+    processing = false;
+    document.getElementById('processBtn').disabled = false;
+    updateProgress(pending.length, pending.length, '✅ All done!');
+    setTimeout(() => {
+        document.getElementById('progressWrap').style.display = 'none';
+    }, 2500);
+}
+
+function updateProgress(current, total, msg) {
+    const pct = total > 0 ? (current / total) * 100 : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = msg || `Processing ${current}/${total}...`;
+}
+
+function downloadImage(id) {
+    const img = images.find(i => i.id === id);
+    if (!img || !img.resultURL) return;
+    const a = document.createElement('a');
+    a.href = img.resultURL;
+    a.download = 'no-bg-' + img.name.replace(/\.[^.]+$/, '') + '.png';
+    a.click();
+}
+
+async function copyImage(id) {
+    const img = images.find(i => i.id === id);
+    if (!img || !img.resultURL) return;
     try {
-        const { removeBackground } = window.imgly || {};
-        if (!removeBackground) throw new Error('Library not loaded. Please refresh the page.');
-        resultBlob = await removeBackground(file);
-        const url = URL.createObjectURL(resultBlob);
-        document.getElementById('resultImg').src = url;
-        document.getElementById('loading').classList.add('hidden');
-        document.getElementById('result').classList.remove('hidden');
+        const response = await fetch(img.resultURL);
+        const blob = await response.blob();
+        await navigator.clipboard.write([new ClipboardItem({'image/png': blob})]);
+        alert('✅ Image copied to clipboard!');
     } catch (e) {
-        document.getElementById('loading').textContent = '❌ Error: ' + e.message;
-        console.error(e);
+        alert('Copy failed. Please download instead.');
     }
 }
-function downloadResult() {
-    if (!resultBlob) return;
-    const url = URL.createObjectURL(resultBlob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'no-background-' + Date.now() + '.png';
-    a.click();
-    URL.revokeObjectURL(url);
+
+function removeImage(id) {
+    const img = images.find(i => i.id === id);
+    if (img) {
+        if (img.originalURL) URL.revokeObjectURL(img.originalURL);
+        if (img.resultURL) URL.revokeObjectURL(img.resultURL);
+    }
+    images = images.filter(i => i.id !== id);
+    renderGrid();
+    if (images.length === 0) document.getElementById('optionsCard').style.display = 'none';
 }
-function reset() {
-    document.getElementById('fileInput').value = '';
-    document.getElementById('result').classList.add('hidden');
-    document.getElementById('loading').classList.add('hidden');
-    resultBlob = null;
+
+function clearAll() {
+    if (!confirm('Remove all images?')) return;
+    images.forEach(img => {
+        if (img.originalURL) URL.revokeObjectURL(img.originalURL);
+        if (img.resultURL) URL.revokeObjectURL(img.resultURL);
+    });
+    images = [];
+    renderGrid();
+    document.getElementById('optionsCard').style.display = 'none';
+}
+
+function escapeHtml(text) {
+    if (!text) return '';
+    return text.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 </script>
+
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this background remover free?","acceptedAnswer":{"@type":"Answer","text":"Yes, 100% free forever."}},{"@type":"Question","name":"Is my image uploaded?","acceptedAnswer":{"@type":"Answer","text":"No, everything runs in your browser."}},{"@type":"Question","name":"What formats are supported?","acceptedAnswer":{"@type":"Answer","text":"PNG, JPG, JPEG."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this background remover free?","acceptedAnswer":{"@type":"Answer","text":"Yes, 100% free forever with no watermark."}},{"@type":"Question","name":"Is my image uploaded?","acceptedAnswer":{"@type":"Answer","text":"No, all processing runs in your browser."}},{"@type":"Question","name":"Can I process multiple images?","acceptedAnswer":{"@type":"Answer","text":"Yes, batch processing supported."}},{"@type":"Question","name":"What formats are supported?","acceptedAnswer":{"@type":"Answer","text":"PNG, JPG, JPEG."}}]}
 </script>
+
 </body>
 </html>
