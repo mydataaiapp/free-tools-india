@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universal SEO Optimizer - Full SEO for Any Link, Video, Post | FreeToolIndia</title>
+<meta name="description" content="Free universal SEO tool. Generate full SEO for website, YouTube, Instagram, Twitter, LinkedIn, blog, or product. Meta tags, hashtags, schema. No sign-up.">
+<meta name="keywords" content="universal seo tool, seo generator, youtube seo, instagram hashtags, meta tag generator, blog seo">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.freetoolindia.com/seo-optimizer.html">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #eef2ff; background-image: radial-gradient(at 0% 0%, rgba(99,102,241,0.15) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(139,92,246,0.15) 0px, transparent 50%); background-attachment: fixed; color: #0f172a; line-height: 1.6; min-height: 100vh; }
+.topbar { background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); padding: 16px 24px; box-shadow: 0 2px 10px rgba(99,102,241,0.1); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(99,102,241,0.15); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.topbar a { color: #4f46e5; text-decoration: none; font-weight: 700; font-size: 0.95rem; }
+.topbar a:hover { color: #4338ca; }
+.container { max-width: 1200px; margin: 0 auto; padding: 25px 20px 60px; }
+h1 { font-size: 2.2rem; font-weight: 800; color: #4f46e5; margin-bottom: 6px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; letter-spacing: -0.02em; }
+.subtitle { color: #64748b; font-size: 1.05rem; margin-bottom: 30px; }
+
+/* PLATFORM SELECTOR */
+.platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 25px; }
+.platform-btn { background: #fff; border: 2px solid #e0e7ff; padding: 16px 12px; border-radius: 14px; cursor: pointer; font-family: inherit; transition: all 0.25s; text-align: center; box-shadow: 0 4px 15px rgba(99,102,241,0.06); }
+.platform-btn:hover { transform: translateY(-4px); border-color: #a5b4fc; box-shadow: 0 10px 25px rgba(99,102,241,0.15); }
+.platform-btn.active { background: linear-gradient(135deg, #6366f1, #8b5cf6); border-color: transparent; color: white; box-shadow: 0 10px 30px rgba(99,102,241,0.4); }
+.platform-btn .p-icon { font-size: 1.8rem; display: block; margin-bottom: 6px; }
+.platform-btn .p-name { font-weight: 800; font-size: 0.85rem; }
+
+/* GRID */
+.workspace { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+@media (max-width: 950px) { .workspace { grid-template-columns: 1fr; } }
+
+/* CARDS */
+.card { background: #fff; padding: 26px; border-radius: 16px; box-shadow: 0 10px 40px rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.1); margin-bottom: 20px; }
+.card h3 { color: #4f46e5; margin-bottom: 16px; font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+label { font-weight: 700; font-size: 0.85rem; display: block; margin-top: 12px; margin-bottom: 5px; color: #0f172a; }
+label:first-child { margin-top: 0; }
+input, textarea, select { width: 100%; padding: 11px 14px; border: 2px solid #e0e7ff; border-radius: 9px; font-family: inherit; font-size: 0.92rem; outline: none; transition: all 0.2s; background: #fff; }
+input:focus, textarea:focus, select:focus { border-color: #6366f1; box-shadow: 0 0 0 4px rgba(99,102,241,0.15); }
+textarea { min-height: 80px; resize: vertical; line-height: 1.5; }
+.counter { font-size: 0.75rem; color: #64748b; text-align: right; margin-top: 3px; font-weight: 600; }
+.counter.warn { color: #f59e0b; }
+.counter.bad { color: #dc2626; }
+.hint { font-size: 0.78rem; color: #94a3b8; margin-top: 4px; }
+
+/* BUTTONS */
+.btn { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; padding: 13px 26px; border-radius: 10px; cursor: pointer; font-size: 0.95rem; font-weight: 800; font-family: inherit; transition: all 0.25s; box-shadow: 0 4px 14px rgba(99,102,241,0.35); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(99,102,241,0.45); }
+.btn-green { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 14px rgba(16,185,129,0.35); }
+.btn-outline { background: #fff; color: #4f46e5; border: 2px solid #e0e7ff; box-shadow: none; }
+.btn-outline:hover { background: #eef2ff; }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+
+/* OUTPUT */
+.output-tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.otab { background: #f1f5f9; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.82rem; font-family: inherit; color: #475569; transition: all 0.2s; }
+.otab:hover { background: #e2e8f0; }
+.otab.active { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; }
+.output-box { background: #f8fafc; padding: 18px; border-radius: 12px; border: 1px solid #e2e8f0; font-family: 'Courier New', monospace; font-size: 0.85rem; white-space: pre-wrap; word-break: break-word; color: #334155; line-height: 1.7; max-height: 500px; overflow-y: auto; }
+.copy-btn { position: absolute; top: 12px; right: 12px; background: #4f46e5; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.78rem; font-weight: 700; }
+.output-wrap { position: relative; }
+
+/* GOOGLE PREVIEW */
+.google-preview { background: #fff; padding: 16px; border-radius: 10px; border: 1px solid #e2e8f0; margin-bottom: 16px; }
+.gp-url { color: #059669; font-size: 0.82rem; margin-bottom: 4px; word-break: break-all; }
+.gp-title { color: #1a0dab; font-size: 1.1rem; font-weight: 500; margin-bottom: 4px; line-height: 1.4; }
+.gp-desc { color: #4d5156; font-size: 0.87rem; line-height: 1.5; }
+
+/* YOUTUBE PREVIEW */
+.yt-preview { background: #0f0f0f; border-radius: 12px; padding: 14px; color: white; }
+.yt-thumb { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: 12px; }
+.yt-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; line-height: 1.4; }
+.yt-meta { font-size: 0.8rem; color: #aaa; }
+
+/* INSTAGRAM PREVIEW */
+.ig-preview { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; }
+.ig-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.ig-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 0.9rem; }
+.ig-user { font-weight: 700; font-size: 0.88rem; }
+.ig-img { width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: 10px; }
+.ig-caption { font-size: 0.88rem; line-height: 1.6; }
+
+/* FAQ */
+.faq-section { margin-top: 60px; }
+.faq-section h2 { text-align: center; font-size: 1.9rem; margin-bottom: 30px; font-weight: 800; }
+.faq-item { background: #fff; border-radius: 14px; padding: 22px 26px; margin-bottom: 14px; box-shadow: 0 4px 15px rgba(99,102,241,0.08); border-left: 4px solid #6366f1; transition: all 0.25s; }
+.faq-item:hover { box-shadow: 0 10px 30px rgba(99,102,241,0.18); transform: translateX(6px); }
+.faq-item h3 { color: #4f46e5; margin-bottom: 8px; font-size: 1.05rem; font-weight: 700; }
+.faq-item p { color: #475569; font-size: 0.93rem; line-height: 1.7; }
+.interlink { margin-top: 60px; background: #fff; padding: 36px 30px; border-radius: 16px; box-shadow: 0 10px 40px rgba(99,102,241,0.12); }
+.interlink h2 { text-align: center; margin-bottom: 28px; font-size: 1.7rem; font-weight: 800; }
+.interlink-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.interlink-grid a { display: block; background: linear-gradient(135deg, #eef2ff, #e0e7ff); padding: 16px 20px; border-radius: 12px; text-decoration: none; color: #0f172a; font-weight: 700; font-size: 0.93rem; transition: all 0.25s; border-left: 4px solid #6366f1; }
+.interlink-grid a:hover { background: linear-gradient(135deg, #c7d2fe, #a5b4fc); transform: translateX(6px); }
+footer { background: linear-gradient(135deg, #0f172a, #1e293b); color: #94a3b8; text-align: center; padding: 36px 20px 28px; margin-top: 60px; font-size: 0.9rem; }
+footer a { color: #a5b4fc; text-decoration: none; margin: 0 8px; }
+footer a:hover { color: #fff; }
+@media (max-width: 600px) {
+  h1 { font-size: 1.5rem; }
+  .container { padding: 18px 12px 40px; }
+  .card { padding: 20px 16px; }
+  .platform-grid { grid-template-columns: repeat(2, 1fr); }
+  .platform-btn { padding: 12px 8px; }
+  .platform-btn .p-icon { font-size: 1.5rem; }
+  .platform-btn .p-name { font-size: 0.78rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><a href="index.html">← Back to All Tools</a></div>
+
+<div class="container">
+    <h1><span>🚀</span> Universal SEO Optimizer</h1>
+    <p class="subtitle">One tool. Every platform. Full SEO for any link, video, post, or product — 100% free.</p>
+
+    <!-- PLATFORM SELECTOR -->
+    <div class="platform-grid" id="platformGrid">
+        <button class="platform-btn active" data-platform="website" onclick="selectPlatform('website', this)">
+            <span class="p-icon">🌐</span>
+            <span class="p-name">Website / Blog</span>
+        </button>
+        <button class="platform-btn" data-platform="youtube" onclick="selectPlatform('youtube', this)">
+            <span class="p-icon">▶️</span>
+            <span class="p-name">YouTube Video</span>
+        </button>
+        <button class="platform-btn" data-platform="instagram" onclick="selectPlatform('instagram', this)">
+            <span class="p-icon">📷</span>
+            <span class="p-name">Instagram</span>
+        </button>
+        <button class="platform-btn" data-platform="twitter" onclick="selectPlatform('twitter', this)">
+            <span class="p-icon">🐦</span>
+            <span class="p-name">Twitter / X</span>
+        </button>
+        <button class="platform-btn" data-platform="linkedin" onclick="selectPlatform('linkedin', this)">
+            <span class="p-icon">💼</span>
+            <span class="p-name">LinkedIn</span>
+        </button>
+        <button class="platform-btn" data-platform="facebook" onclick="selectPlatform('facebook', this)">
+            <span class="p-icon">📘</span>
+            <span class="p-name">Facebook</span>
+        </button>
+        <button class="platform-btn" data-platform="product" onclick="selectPlatform('product', this)">
+            <span class="p-icon">🛒</span>
+            <span class="p-name">Product / E-comm</span>
+        </button>
+        <button class="platform-btn" data-platform="blog" onclick="selectPlatform('blog', this)">
+            <span class="p-icon">📝</span>
+            <span class="p-name">Blog Post</span>
+        </button>
+    </div>
+
+    <div class="workspace">
+        <!-- INPUT -->
+        <div>
+            <div class="card">
+                <h3>📝 Enter Your Details</h3>
+                <label>Link / URL (optional)</label>
+                <input type="url" id="url" placeholder="https://example.com" oninput="generate()">
+
+                <label>Content Title / Topic *</label>
+                <input type="text" id="title" placeholder="Best Free SEO Tools for Indian Bloggers in 2025" oninput="generate()">
+                <div class="counter" id="titleCounter">0 / 60</div>
+
+                <label>Main Keywords (comma separated) *</label>
+                <input type="text" id="keywords" placeholder="free seo tools, seo for bloggers, indian seo tools" oninput="generate()">
+                <p class="hint">Add 3-5 main keywords. We'll generate hashtags and tags from these.</p>
+
+                <label>Description / Content Summary</label>
+                <textarea id="description" placeholder="Discover the best free SEO tools for Indian bloggers. Generate meta tags, hashtags, and full SEO for any content in seconds." oninput="generate()"></textarea>
+                <div class="counter" id="descCounter">0 / 160</div>
+
+                <label>Target Audience / Niche (optional)</label>
+                <input type="text" id="niche" placeholder="Bloggers, small business, freelancers" oninput="generate()">
+            </div>
+
+            <div class="card">
+                <h3>⚙️ Advanced (Optional)</h3>
+                <label>Author / Brand Name</label>
+                <input type="text" id="author" placeholder="Your Name" oninput="generate()" value="FreeToolIndia">
+
+                <label>Language</label>
+                <select id="language" onchange="generate()">
+                    <option value="en">English</option>
+                    <option value="hi">Hindi + English</option>
+                </select>
+
+                <label>Include Emojis in Output?</label>
+                <select id="emojis" onchange="generate()">
+                    <option value="yes">Yes (recommended for social)</option>
+                    <option value="no">No (professional)</option>
+                </select>
+
+                <div class="btn-row">
+                    <button class="btn" onclick="generate()">🔄 Generate SEO</button>
+                    <button class="btn btn-outline" onclick="downloadAll()">⬇ Download All</button>
+                    <button class="btn btn-outline" onclick="resetAll()">↺ Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- OUTPUT -->
+        <div>
+            <div class="card">
+                <h3>👁️ Live Preview</h3>
+                <div id="previewArea"></div>
+            </div>
+
+            <div class="card">
+                <h3>💻 Generated SEO Output</h3>
+                <div class="output-tabs" id="outputTabs"></div>
+                <div class="output-wrap">
+                    <button class="copy-btn" onclick="copyOutput()">📋 Copy</button>
+                    <div class="output-box" id="output">Fill the form above to generate SEO output...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item"><h3>What is Universal SEO Optimizer?</h3><p>It's an all-in-one free SEO tool that works for any platform — websites, blogs, YouTube, Instagram, Twitter, LinkedIn, Facebook, and products. Just pick your platform, enter your content, and get full SEO output.</p></div>
+        <div class="faq-item"><h3>Is it really free?</h3><p>Yes, 100% free forever. No sign-up, no credit card, no limits. Paid tools charge ₹2000-10000/month for the same features.</p></div>
+        <div class="faq-item"><h3>How does it work for YouTube?</h3><p>Select YouTube, enter your video title and keywords. The tool generates optimized video titles, descriptions, tags, hashtags, and chapter suggestions.</p></div>
+        <div class="faq-item"><h3>Can it generate Instagram hashtags?</h3><p>Yes! It generates 30 platform-specific hashtags from your keywords, mixing popular and niche tags for maximum reach.</p></div>
+        <div class="faq-item"><h3>Does it generate meta tags for websites?</h3><p>Yes. It creates complete meta tags including title, description, keywords, Open Graph, Twitter Cards, and JSON-LD schema markup.</p></div>
+        <div class="faq-item"><h3>Is my data safe?</h3><p>100%. Everything runs in your browser. Nothing is uploaded or stored. We can't see your content even if we wanted to.</p></div>
+        <div class="faq-item"><h3>Can I use the output commercially?</h3><p>Yes. All generated content is yours to use anywhere, including commercial projects, with no attribution required.</p></div>
+        <div class="faq-item"><h3>Does it work on mobile?</h3><p>Yes, fully mobile-responsive. Works on any phone, tablet, or desktop browser.</p></div>
+    </div>
+
+    <!-- INTERLINK -->
+    <div class="interlink">
+        <h2>🔗 Explore More Free Tools</h2>
+        <div class="interlink-grid">
+            <a href="resume-builder.html">📄 ATS Resume Builder</a>
+            <a href="tax-calculator.html">💰 Salary Tax Calculator 2025-26</a>
+            <a href="notepad.html">📝 Online Auto-Save Notepad</a>
+            <a href="password-checker.html">🔐 Password Strength Checker</a>
+            <a href="ats-scanner.html">🎯 ATS Resume Score Scanner</a>
+            <a href="bg-remover.html">🖼️ Background Remover</a>
+            <a href="index.html">🏠 All Tools Homepage</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p><strong style="color: #fff;">🇮🇳 FreeToolIndia</strong></p>
+    <p style="margin-top: 10px;">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+    </p>
+    <p style="margin-top: 14px;">© 2025 FreeToolIndia.com — All tools free forever.</p>
+</footer>
+
+<script>
+let currentPlatform = 'website';
+let currentTab = 'meta';
+let outputData = {};
+
+const PLATFORM_NAMES = {
+    website: 'Website / Blog',
+    youtube: 'YouTube Video',
+    instagram: 'Instagram Post',
+    twitter: 'Twitter / X Post',
+    linkedin: 'LinkedIn Post',
+    facebook: 'Facebook Post',
+    product: 'Product Listing',
+    blog: 'Blog Post'
+};
+
+function val(id) { return document.getElementById(id).value.trim(); }
+function esc(t) { return (t || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+function selectPlatform(platform, btn) {
+    currentPlatform = platform;
+    document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    generate();
+}
+
+function generate() {
+    const url = val('url') || 'https://example.com';
+    const title = val('title');
+    const keywords = val('keywords');
+    const desc = val('description');
+    const niche = val('niche');
+    const author = val('author') || 'FreeToolIndia';
+    const includeEmojis = document.getElementById('emojis').value === 'yes';
+
+    // Counters
+    updateCounter('titleCounter', title.length, 60, 30);
+    updateCounter('descCounter', desc.length, 160, 70);
+
+    if (!title && !keywords) {
+        document.getElementById('output').textContent = 'Fill title and keywords above to generate SEO output...';
+        document.getElementById('previewArea').innerHTML = '';
+        return;
+    }
+
+    const kwList = keywords.split(',').map(k => k.trim()).filter(k => k);
+    const kwMain = kwList[0] || title.split(' ').slice(0, 3).join(' ');
+    const year = new Date().getFullYear();
+
+    outputData = {};
+
+    // ============ PLATFORM-SPECIFIC GENERATION ============
+    if (currentPlatform === 'website' || currentPlatform === 'blog') {
+        generateWebsiteSEO(url, title, desc, kwList, author);
+    } else if (currentPlatform === 'youtube') {
+        generateYouTubeSEO(title, desc, kwList, includeEmojis);
+    } else if (currentPlatform === 'instagram') {
+        generateInstagramSEO(title, desc, kwList, includeEmojis);
+    } else if (currentPlatform === 'twitter') {
+        generateTwitterSEO(title, desc, kwList, includeEmojis);
+    } else if (currentPlatform === 'linkedin') {
+        generateLinkedInSEO(title, desc, kwList, includeEmojis);
+    } else if (currentPlatform === 'facebook') {
+        generateFacebookSEO(title, desc, kwList, includeEmojis);
+    } else if (currentPlatform === 'product') {
+        generateProductSEO(title, desc, kwList, includeEmojis);
+    }
+
+    renderTabs();
+    renderOutput();
+    renderPreview(url, title, desc);
+}
+
+function updateCounter(id, len, max, min) {
+    const el = document.getElementById(id);
+    el.textContent = len + ' / ' + max;
+    el.className = 'counter';
+    if (len === 0) return;
+    if (len > max) el.classList.add('bad');
+    else if (len > max * 0.9 || len < min) el.classList.add('warn');
+}
+
+// ============ WEBSITE / BLOG ============
+function generateWebsiteSEO(url, title, desc, kwList, author) {
+    const kwString = kwList.join(', ');
+    const finalTitle = title.length > 60 ? title.slice(0, 57) + '...' : title;
+    const finalDesc = desc.length > 160 ? desc.slice(0, 157) + '...' : desc;
+    
+    outputData['Meta Tags'] = `<title>${esc(finalTitle)}</title>
+<meta name="description" content="${esc(finalDesc)}">
+<meta name="keywords" content="${esc(kwString)}">
+<meta name="author" content="${esc(author)}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="${esc(url)}">
+
+<!-- Open Graph -->
+<meta property="og:title" content="${esc(finalTitle)}">
+<meta property="og:description" content="${esc(finalDesc)}">
+<meta property="og:url" content="${esc(url)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="${esc(author)}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(finalTitle)}">
+<meta name="twitter:description" content="${esc(finalDesc)}">`;
+
+    outputData['Schema Markup'] = `{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "${esc(title)}",
+  "description": "${esc(desc)}",
+  "author": {
+    "@type": "Person",
+    "name": "${esc(author)}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "${esc(author)}"
+  },
+  "url": "${esc(url)}",
+  "datePublished": "${new Date().toISOString().split('T')[0]}"
+}`;
+
+    outputData['SEO Checklist'] = `✅ WEBSITE SEO CHECKLIST
+
+TITLE TAG (${finalTitle.length} chars)
+→ ${finalTitle}
+
+META DESCRIPTION (${finalDesc.length} chars)
+→ ${finalDesc}
+
+FOCUS KEYWORDS
+${kwList.map((k, i) => `→ ${i+1}. ${k}`).join('\n')}
+
+ON-PAGE SEO TIPS:
+1. Use focus keyword in H1 tag
+2. Add keyword in first 100 words
+3. Use keyword in at least one H2
+4. Include internal links (2-3)
+5. Add external authoritative links (1-2)
+6. Optimize images with alt text
+7. URL should contain keyword
+8. Aim for 1500+ words
+9. Add FAQ schema (use our tool)
+10. Submit to Google Search Console`;
+}
+
+// ============ YOUTUBE ============
+function generateYouTubeSEO(title, desc, kwList, emojis) {
+    const kwString = kwList.join(', ');
+    const emojiList = emojis ? '🔥 ' : '';
+    
+    // YouTube Title (max 60 chars for best CTR)
+    const ytTitle = title.length > 60 ? title.slice(0, 57) + '...' : title;
+    
+    // YouTube Description
+    const ytDesc = `${emojiList}${title}${emojiList}
+
+${desc}
+
+📌 In this video:
+• Point 1 — What you'll learn
+• Point 2 — Practical tips
+• Point 3 — Actionable steps
+
+⏱️ Timestamps:
+0:00 - Introduction
+0:30 - Overview
+2:00 - Main Content
+5:00 - Tips & Tricks
+8:00 - Conclusion
+
+🔗 Useful Links:
+→ ${kwList[0] || 'Visit our website'}
+
+📱 Follow us:
+→ Website: https://www.freetoolindia.com
+→ More free tools: https://www.freetoolindia.com
+
+${kwList.map(k => '#' + k.replace(/\s+/g, '')).join(' ')}
+
+⚠️ Disclaimer: This video is for educational purposes only.
+
+#SEO #YouTubeSEO #${kwList[0] ? kwList[0].replace(/\s+/g, '') : 'FreeTools'}`;
+
+    outputData['YouTube Title'] = ytTitle + `\n\n📏 Length: ${ytTitle.length}/60 chars\n💡 Tip: Keep under 60 chars for best CTR`;
+    
+    outputData['YouTube Description'] = ytDesc;
+    
+    outputData['YouTube Tags'] = kwString + `, ${kwList.map(k => k + ' tutorial').join(', ')}, ${kwList.map(k => 'best ' + k).join(', ')}, free tools, how to, 2025, hindi, india`;
+    
+    outputData['Hashtags'] = kwList.map(k => '#' + k.replace(/\s+/g, '')).join(' ') + ' #youtubeshorts #viral #trending #shorts #india #2025';
+    
+    outputData['Thumbnail Text Ideas'] = `🎯 THUMBNAIL TEXT OPTIONS (Max 4 words):
+
+Option 1: ${(kwList[0] || title).toUpperCase().slice(0, 30)}
+
+Option 2: ${emojis ? '🔥 ' : ''}FREE ${(kwList[0] || 'TOOL').toUpperCase()}
+
+Option 3: BEST ${(kwList[0] || 'TOOL').toUpperCase()} 2025
+
+Option 4: ${(kwList[0] || 'HOW TO').toUpperCase()} IN 5 MIN
+
+💡 Design Tips:
+→ Use bold, readable fonts
+→ Add face with expression
+→ Use high contrast colors
+→ Keep text minimal
+→ Test on mobile size`;
+    
+    outputData['SEO Tips'] = `📊 YOUTUBE SEO CHECKLIST
+
+✅ Title: Keyword at start, under 60 chars
+✅ Description: Keyword in first 2 lines
+✅ Tags: 8-15 relevant tags
+✅ Hashtags: 3-5 in description
+✅ Thumbnail: Eye-catching, text overlay
+✅ Custom thumbnail: 1280×720
+✅ End screen: Subscribe + next video
+✅ Cards: Link to related videos
+✅ Playlist: Add to relevant playlist
+✅ Chapters: Use timestamps
+✅ Comments: Reply to first 10 comments
+✅ Pinned comment: With your link
+✅ Upload time: 6-9 PM IST (best)
+✅ Consistency: Post same day/time weekly`;
+}
+
+// ============ INSTAGRAM ============
+function generateInstagramSEO(title, desc, kwList, emojis) {
+    const emojiOpen = emojis ? '✨ ' : '';
+    const emojiClose = emojis ? ' 🚀' : '';
+    
+    // Instagram Caption
+    const igCaption = `${emojiOpen}${title}${emojiClose}
+
+${desc}
+
+${emojis ? '👇' : ''} Save this post for later!
+
+${kwList.map((k, i) => `${i+1}. ${k}`).join('\n')}
+
+${emojis ? '💬' : ''} Comment "${kwList[0] ? kwList[0].split(' ')[0].toUpperCase() : 'YES'}" if you want more!
+
+${emojis ? '📌' : ''} Follow for more tips!
+
+${kwList.map(k => '#' + k.replace(/\s+/g, '')).join(' ')}
+#instagood #reels #viral #trending #explore #explorepage #india #indian #2025 #reelsindia #contentcreator #growthtips`;
+
+    outputData['Instagram Caption'] = igCaption;
+    
+    outputData['Hashtags (30)'] = generateHashtags30(kwList);
+    
+    outputData['Reel/Story Ideas'] = `🎬 CONTENT IDEAS FOR REELS:
+
+1. Hook (0-3 sec): "${title.slice(0, 40)}..."
+2. Problem statement (3-7 sec)
+3. Quick solution (7-15 sec)
+4. Result showcase (15-20 sec)
+5. Call to action (20-25 sec)
+
+💡 Reel Tips:
+→ Use trending audio
+→ Add captions/subtitles
+→ Vertical format (9:16)
+→ Hook in first 3 seconds
+→ Post at 7-9 PM IST
+→ Use 3-5 hashtags in caption
+→ Engage in first hour`;
+    
+    outputData['Bio Ideas'] = `📝 INSTAGRAM BIO OPTIONS (150 chars):
+
+Option 1:
+${emojis ? '✨' : ''} ${title.slice(0, 60)}
+${emojis ? '👇' : ''} Free tools & tips
+${emojis ? '🔗' : ''} freetoolindia.com
+
+Option 2:
+${emojis ? '🚀' : ''} Helping you with ${kwList[0] || 'growth'}
+${emojis ? '💡' : ''} Tips daily
+${emojis ? '📌' : ''} Free resources below
+${emojis ? '👇' : ''} Link in bio`;
+}
+
+function generateHashtags30(kwList) {
+    const base = kwList.map(k => k.replace(/\s+/g, ''));
+    const generic = ['viral', 'trending', 'explore', 'explorepage', 'instagood', 'instadaily', 'reels', 'reelsindia', 'reelsinstagram', 'india', 'indian', 'indianblogger', 'contentcreator', 'growthtips', 'smallbusiness', 'digitalindia', '2025', 'today', 'tips', 'howto'];
+    const all = [...base, ...base.map(k => k + 'tips'), ...base.map(k => 'best' + k), ...generic];
+    const unique = [...new Set(all)].slice(0, 30);
+    return unique.map(h => '#' + h).join(' ');
+}
+
+// ============ TWITTER ============
+function generateTwitterSEO(title, desc, kwList, emojis) {
+    const emoji = emojis ? '🧵 ' : '';
+    const tweet = `${emoji}${title.slice(0, 200)}
+
+${desc.slice(0, 150)}
+
+${kwList.map(k => '#' + k.replace(/\s+/g, '')).slice(0, 3).join(' ')}`;
+
+    outputData['Tweet / Thread Starter'] = tweet + `\n\n📏 Length: ${tweet.length}/280 chars`;
+    
+    outputData['Twitter Thread'] = `🧵 THREAD STRUCTURE:
+
+Tweet 1 (Hook):
+${title}
+
+Tweet 2 (Problem):
+Most people struggle with ${kwList[0] || 'this'}.
+
+Here's the simple fix 👇
+
+Tweet 3 (Solution 1):
+✅ ${kwList[0] ? 'Tip: ' + kwList[0] : 'First tip'}
+
+Tweet 4 (Solution 2):
+✅ Second actionable tip
+
+Tweet 5 (Solution 3):
+✅ Third actionable tip
+
+Tweet 6 (Summary):
+TL;DR:
+${kwList.map((k, i) => `${i+1}. ${k}`).join('\n')}
+
+If this helped:
+♻️ Retweet
+❤️ Like
+🔔 Follow for more`;
+    
+    outputData['Hashtags'] = kwList.map(k => '#' + k.replace(/\s+/g, '')).join(' ') + ' #TwitterTips #Thread #Growth';
+}
+
+// ============ LINKEDIN ============
+function generateLinkedInSEO(title, desc, kwList, emojis) {
+    const emoji = emojis ? '💡 ' : '';
+    const post = `${emoji}${title}
+
+${desc}
+
+Here's what I've learned about ${kwList[0] || 'this topic'}:
+
+1️⃣ ${kwList[0] ? 'First insight about ' + kwList[0] : 'Key point 1'}
+
+2️⃣ ${kwList[1] ? 'Second insight about ' + kwList[1] : 'Key point 2'}
+
+3️⃣ ${kwList[2] ? 'Third insight about ' + kwList[2] : 'Key point 3'}
+
+${emojis ? '📌' : ''} The key takeaway?
+
+Start small. Stay consistent. Learn continuously.
+
+What's your experience with ${kwList[0] || 'this'}?
+
+Comment below 👇
+
+${kwList.map(k => '#' + k.replace(/\s+/g, '')).join(' ')}`;
+
+    outputData['LinkedIn Post'] = post;
+    
+    outputData['Hashtags'] = kwList.map(k => '#' + k.replace(/\s+/g, '')).join(' ') + ' #LinkedIn #Growth #Career #India #Professional';
+    
+    outputData['LinkedIn SEO Tips'] = `📊 LINKEDIN POST CHECKLIST:
+
+✅ Hook in first 2 lines (before "see more")
+✅ Short paragraphs (1-2 lines each)
+✅ Use line breaks generously
+✅ Add 3-5 relevant hashtags
+✅ Post between 8-10 AM IST
+✅ Engage with comments in first hour
+✅ Tag relevant people/brands
+✅ Use emoji sparingly (2-3 max)
+✅ Ask a question at the end
+✅ Repost after 48 hours if popular`;
+}
+
+// ============ FACEBOOK ============
+function generateFacebookSEO(title, desc, kwList, emojis) {
+    const emoji = emojis ? '📢 ' : '';
+    const post = `${emoji}${title}
+
+${desc}
+
+${emojis ? '👇' : ''} Here are the key points:
+
+• ${kwList[0] ? kwList[0] : 'Point 1'}
+• ${kwList[1] ? kwList[1] : 'Point 2'}
+• ${kwList[2] ? kwList[2] : 'Point 3'}
+
+${emojis ? '💬' : ''} What do you think? Comment below!
+
+${emojis ? '🔗' : ''} Share with someone who needs this!
+
+${kwList.map(k => '#' + k.replace(/\s+/g, '')).join(' ')}`;
+
+    outputData['Facebook Post'] = post;
+    outputData['Hashtags'] = kwList.map(k => '#' + k.replace(/\s+/g, '')).join(' ') + ' #Facebook #Viral #Trending #India';
+}
+
+// ============ PRODUCT ============
+function generateProductSEO(title, desc, kwList, emojis) {
+    const price = 999;
+    const productDesc = `${emojis ? '✨ ' : ''}${title}
+
+${desc}
+
+🔥 KEY FEATURES:
+• Feature 1 — Benefit
+• Feature 2 — Benefit
+• Feature 3 — Benefit
+• Feature 4 — Benefit
+
+📦 WHAT'S INCLUDED:
+✓ Item 1
+✓ Item 2
+✓ Item 3
+
+💰 PRICE: ₹${price}
+🚚 FREE SHIPPING across India
+↩️ 7-day easy return
+💳 COD available
+
+📞 Call/WhatsApp: +91 XXXXXXXXXX
+
+${kwList.map(k => '#' + k.replace(/\s+/g, '')).join(' ')}`;
+
+    outputData['Product Description'] = productDesc;
+    
+    outputData['Product Schema'] = `{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "${esc(title)}",
+  "description": "${esc(desc)}",
+  "brand": {
+    "@type": "Brand",
+    "name": "Your Brand"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "${price}",
+    "priceCurrency": "INR",
+    "availability": "https://schema.org/InStock"
+  }
+}`;
+    
+    outputData['SEO Keywords'] = kwList.map((k, i) => `${i+1}. ${k} — search volume potential`).join('\n');
+}
+
+// ============ RENDER TABS ============
+function renderTabs() {
+    const tabs = Object.keys(outputData);
+    const container = document.getElementById('outputTabs');
+    if (tabs.length === 0) { container.innerHTML = ''; return; }
+    if (!tabs.includes(currentTab)) currentTab = tabs[0];
+    container.innerHTML = tabs.map(t => 
+        `<button class="otab ${t === currentTab ? 'active' : ''}" onclick="switchTab('${t.replace(/'/g, "\\'")}')">${t}</button>`
+    ).join('');
+}
+
+function switchTab(tab) {
+    currentTab = tab;
+    renderTabs();
+    renderOutput();
+}
+
+function renderOutput() {
+    if (outputData[currentTab]) {
+        document.getElementById('output').textContent = outputData[currentTab];
+    } else {
+        document.getElementById('output').textContent = 'Fill the form to generate...';
+    }
+}
+
+function copyOutput() {
+    const text = document.getElementById('output').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        const orig = btn.textContent;
+        btn.textContent = '✅ Copied!';
+        setTimeout(() => btn.textContent = orig, 1500);
+    });
+}
+
+function renderPreview(url, title, desc) {
+    const area = document.getElementById('previewArea');
+    if (!title) { area.innerHTML = ''; return; }
+    
+    if (currentPlatform === 'youtube') {
+        area.innerHTML = `
+            <div class="yt-preview">
+                <div class="yt-thumb">▶️</div>
+                <div class="yt-title">${esc(title.slice(0, 60))}</div>
+                <div class="yt-meta">Your Channel • 1K views • just now</div>
+            </div>`;
+    } else if (currentPlatform === 'instagram') {
+        area.innerHTML = `
+            <div class="ig-preview">
+                <div class="ig-header">
+                    <div class="ig-avatar">Y</div>
+                    <div class="ig-user">yourhandle</div>
+                </div>
+                <div class="ig-img">📷</div>
+                <div class="ig-caption"><strong>yourhandle</strong> ${esc(title.slice(0, 80))}...</div>
+            </div>`;
+    } else {
+        area.innerHTML = `
+            <div class="google-preview">
+                <div class="gp-url">${esc(url)}</div>
+                <div class="gp-title">${esc(title.slice(0, 60))}</div>
+                <div class="gp-desc">${esc(desc.slice(0, 160))}</div>
+            </div>`;
+    }
+}
+
+function downloadAll() {
+    let text = `UNIVERSAL SEO OUTPUT - ${PLATFORM_NAMES[currentPlatform]}\n`;
+    text += '='.repeat(55) + '\n';
+    text += `Generated: ${new Date().toLocaleString('en-IN')}\n`;
+    text += `Platform: ${PLATFORM_NAMES[currentPlatform]}\n`;
+    text += '='.repeat(55) + '\n\n';
+    
+    Object.entries(outputData).forEach(([key, val]) => {
+        text += `--- ${key} ---\n${val}\n\n${'='.repeat(55)}\n\n`;
+    });
+    
+    text += `Generated by FreeToolIndia.com — 100% Free\n`;
+    
+    const blob = new Blob([text], {type: 'text/plain'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `seo-${currentPlatform}-${Date.now()}.txt`;
+    a.click();
+}
+
+function resetAll() {
+    if (!confirm('Clear all fields?')) return;
+    ['url', 'title', 'keywords', 'description', 'niche'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('output').textContent = 'Fill the form above to generate SEO output...';
+    document.getElementById('previewArea').innerHTML = '';
+    outputData = {};
+    renderTabs();
+}
+
+// Init
+generate();
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Universal SEO Optimizer?","acceptedAnswer":{"@type":"Answer","text":"All-in-one free SEO tool for any platform."}},{"@type":"Question","name":"Is it really free?","acceptedAnswer":{"@type":"Answer","text":"Yes, 100% free forever."}},{"@type":"Question","name":"Does it work for YouTube?","acceptedAnswer":{"@type":"Answer","text":"Yes, generates titles, descriptions, tags, hashtags."}},{"@type":"Question","name":"Is my data safe?","acceptedAnswer":{"@type":"Answer","text":"Yes, runs entirely in browser."}}]}
+</script>
+
+</body>
+</html>
