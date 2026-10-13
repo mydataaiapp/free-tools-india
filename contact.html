@@ -1,21 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us - FreeToolIndia | Get in Touch</title>
-<meta name="description" content="Contact FreeToolIndia for suggestions, bug reports, or questions. We reply within 48 hours.">
-<meta name="keywords" content="contact freetoolindia, feedback, support">
-<meta name="robots" content="index, follow">
+
+<!-- Primary SEO -->
+<title>Contact FreeToolIndia | Suggestions, Bug Reports & Support</title>
+<meta name="description" content="Contact FreeToolIndia for suggestions, bug reports, business inquiries, or questions about our free online tools. We reply within 48 hours on business days.">
+<meta name="keywords" content="contact freetoolindia, feedback, support, suggest tool, report bug, business inquiry">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="author" content="FreeToolIndia">
+<meta name="theme-color" content="#059669">
 <link rel="canonical" href="https://www.freetoolindia.com/contact.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.freetoolindia.com/contact.html">
+<meta property="og:title" content="Contact FreeToolIndia | Suggestions, Bug Reports & Support">
+<meta property="og:description" content="Contact FreeToolIndia for suggestions, bug reports, or questions about our free online tools. We reply within 48 hours.">
+<meta property="og:site_name" content="FreeToolIndia">
+<meta property="og:locale" content="en_IN">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contact FreeToolIndia | Suggestions & Support">
+<meta name="twitter:description" content="Contact FreeToolIndia for suggestions, bug reports, or questions. We reply within 48 hours.">
+
+<!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
+
+<!-- ============================================================
+     STRUCTURED DATA — ContactPage + Organization + Breadcrumb
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://www.freetoolindia.com/contact.html#contactpage",
+      "url": "https://www.freetoolindia.com/contact.html",
+      "name": "Contact FreeToolIndia",
+      "description": "Contact FreeToolIndia for suggestions, bug reports, business inquiries, or questions about our free online tools.",
+      "isPartOf": {
+        "@id": "https://www.freetoolindia.com/#website"
+      },
+      "inLanguage": "en-IN",
+      "datePublished": "2025-01-01",
+      "dateModified": "2025-01-15"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.freetoolindia.com/#organization",
+      "name": "FreeToolIndia",
+      "url": "https://www.freetoolindia.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.freetoolindia.com/logo.png"
+      },
+      "description": "100% free, privacy-first online tools built for Indian users.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "contact@freetoolindia.com",
+          "availableLanguage": ["English", "Hindi"],
+          "areaServed": "IN"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "technical support",
+          "email": "bug@freetoolindia.com",
+          "availableLanguage": ["English", "Hindi"],
+          "areaServed": "IN"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "business@freetoolindia.com",
+          "availableLanguage": ["English", "Hindi"],
+          "areaServed": "IN"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.freetoolindia.com/contact.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.freetoolindia.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact Us",
+          "item": "https://www.freetoolindia.com/contact.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: #f8fafc; background-image: radial-gradient(at 0% 0%, rgba(16,185,129,0.08) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(5,150,105,0.08) 0px, transparent 50%); background-attachment: fixed; color: #0f172a; line-height: 1.7; min-height: 100vh; }
 .topbar { background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); padding: 16px 24px; box-shadow: 0 2px 10px rgba(16,185,129,0.08); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(16,185,129,0.1); }
 .topbar a { color: #059669; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; }
 .topbar a:hover { color: #047857; transform: translateX(-3px); display: inline-block; }
-.container { max-width: 800px; margin: 0 auto; padding: 40px 20px 60px; }
+.breadcrumb { max-width: 800px; margin: 18px auto 0; padding: 0 20px; font-size: 0.85rem; color: #64748b; }
+.breadcrumb a { color: #059669; text-decoration: none; font-weight: 600; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb span { margin: 0 6px; color: #cbd5e1; }
+.container { max-width: 800px; margin: 0 auto; padding: 25px 20px 60px; }
 h1 { font-size: 2.4rem; font-weight: 800; color: #059669; margin-bottom: 10px; letter-spacing: -0.02em; }
 .subtitle { color: #64748b; font-size: 1.05rem; margin-bottom: 35px; }
 .contact-cards { display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 30px; }
@@ -47,27 +151,31 @@ footer a:hover { color: #fff; text-decoration: underline; }
 
 <div class="topbar"><a href="index.html">← Back to Home</a></div>
 
+<nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html">Home</a><span>/</span>Contact Us
+</nav>
+
 <div class="container">
     <h1>Contact Us</h1>
     <p class="subtitle">We'd love to hear from you — suggestions, bugs, or just a hello 👋</p>
 
     <div class="contact-cards">
         <div class="contact-card">
-            <div class="icon">📧</div>
+            <div class="icon" aria-hidden="true">📧</div>
             <div>
                 <h3>Email Us</h3>
                 <p><a href="mailto:contact@freetoolindia.com">contact@freetoolindia.com</a></p>
             </div>
         </div>
         <div class="contact-card">
-            <div class="icon">💡</div>
+            <div class="icon" aria-hidden="true">💡</div>
             <div>
                 <h3>Suggest a Tool</h3>
                 <p><a href="mailto:suggest@freetoolindia.com">suggest@freetoolindia.com</a></p>
             </div>
         </div>
         <div class="contact-card">
-            <div class="icon">🐞</div>
+            <div class="icon" aria-hidden="true">🐞</div>
             <div>
                 <h3>Report a Bug</h3>
                 <p><a href="mailto:bug@freetoolindia.com">bug@freetoolindia.com</a></p>
@@ -77,7 +185,7 @@ footer a:hover { color: #fff; text-decoration: underline; }
 
     <div class="content">
         <h2>How Can We Help?</h2>
-        <p>Whether you have a question about one of our tools, want to suggest a new feature, or need to report an issue — we're here to help.</p>
+        <p>Whether you have a question about one of our tools, want to suggest a new feature, or need to report an issue — we're here to help. FreeToolIndia is built and maintained by a small team that genuinely cares about Indian users. Your feedback directly shapes what we build next.</p>
 
         <h2>What to Include in Your Email</h2>
         <p>To help us respond faster, please include:</p>
@@ -100,6 +208,21 @@ footer a:hover { color: #fff; text-decoration: underline; }
 
         <h2>Before You Contact Us</h2>
         <p>Many common questions are already answered on our tool pages and in the FAQ sections. You might find a quicker answer there. Also check our <a href="about.html">About page</a> for details about how our tools work.</p>
+
+        <h2>Report a Security Issue</h2>
+        <p>If you've found a security vulnerability in any of our tools, please email us directly at <a href="mailto:bug@freetoolindia.com">bug@freetoolindia.com</a> with details. We take security seriously and will respond promptly.</p>
+
+        <h2>Our Tools</h2>
+        <p>While you're here, explore some of our most popular free tools:</p>
+        <ul>
+            <li><a href="resume-builder.html">ATS Resume Builder</a> — Build a professional ATS-friendly resume free</li>
+            <li><a href="tax-calculator.html">Salary Tax Calculator 2025-26</a> — Compare Old vs New regime instantly</li>
+            <li><a href="ats-scanner.html">ATS Resume Scanner</a> — Get your free ATS score with keyword matching</li>
+            <li><a href="bg-remover.html">Background Remover</a> — Remove image backgrounds with AI, free</li>
+            <li><a href="password-checker.html">Password Strength Checker</a> — Check password strength and breach status</li>
+            <li><a href="notepad.html">Online Notepad</a> — Auto-saving notes with dark mode</li>
+            <li><a href="seo-optimizer.html">Universal SEO Optimizer</a> — SEO for any platform, free</li>
+        </ul>
     </div>
 </div>
 
@@ -115,6 +238,12 @@ footer a:hover { color: #fff; text-decoration: underline; }
     </div>
     <p>© 2025 FreeToolIndia.com — All tools free forever.</p>
 </footer>
+
+<noscript>
+    <div style="max-width: 800px; margin: 30px auto; padding: 20px; background: #fef3c7; border-radius: 12px; text-align: center; color: #92400e; font-weight: 600;">
+        ⚠️ Please enable JavaScript to fully experience FreeToolIndia tools.
+    </div>
+</noscript>
 
 </body>
 </html>
