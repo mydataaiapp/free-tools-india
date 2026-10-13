@@ -1,27 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Page Not Found - FreeToolIndia</title>
+
+<!-- Primary SEO — 404 ko index nahi karna chahiye -->
+<title>404 - Page Not Found | FreeToolIndia</title>
+<meta name="description" content="The page you're looking for doesn't exist. Explore our free online tools — ATS Resume Builder, Tax Calculator, Background Remover, Password Checker, and more.">
+<meta name="robots" content="noindex, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="FreeToolIndia">
+<meta name="theme-color" content="#667eea">
+<link rel="canonical" href="https://www.freetoolindia.com/404.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.freetoolindia.com/404.html">
+<meta property="og:title" content="404 - Page Not Found | FreeToolIndia">
+<meta property="og:description" content="The page you're looking for doesn't exist. Explore our free online tools instead.">
+<meta property="og:site_name" content="FreeToolIndia">
+<meta property="og:locale" content="en_IN">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="404 - Page Not Found | FreeToolIndia">
+<meta name="twitter:description" content="The page you're looking for doesn't exist. Explore our free online tools instead.">
+
+<!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
+
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
-.box { max-width: 600px; }
-h1 { font-size: 6rem; font-weight: 900; margin-bottom: 10px; }
-h2 { font-size: 1.8rem; margin-bottom: 15px; }
-p { font-size: 1.05rem; opacity: 0.9; margin-bottom: 30px; }
-a { display: inline-block; background: white; color: #667eea; padding: 14px 30px; border-radius: 10px; text-decoration: none; font-weight: 800; font-size: 1rem; transition: all 0.25s; }
-a:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; padding: 30px 20px; text-align: center; display: flex; align-items: center; justify-content: center; }
+.wrap { max-width: 750px; width: 100%; }
+.box { background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); padding: 40px 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.err-code { font-size: 5rem; font-weight: 900; line-height: 1; margin-bottom: 10px; background: linear-gradient(135deg, #fff 0%, #c7d2fe 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.03em; }
+h1 { font-size: 1.7rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.01em; }
+.subtitle { font-size: 1rem; opacity: 0.9; margin-bottom: 25px; line-height: 1.6; }
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; background: white; color: #667eea; padding: 13px 26px; border-radius: 10px; text-decoration: none; font-weight: 800; font-size: 0.95rem; transition: all 0.25s; box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+.btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
+.btn-outline:hover { background: rgba(255,255,255,0.15); border-color: white; }
+.search-box { position: relative; max-width: 420px; margin: 0 auto 30px; }
+.search-box input { width: 100%; padding: 14px 20px 14px 46px; border: 2px solid rgba(255,255,255,0.25); border-radius: 12px; background: rgba(255,255,255,0.1); color: white; font-size: 0.95rem; font-family: inherit; outline: none; transition: all 0.25s; }
+.search-box input::placeholder { color: rgba(255,255,255,0.65); }
+.search-box input:focus { border-color: white; background: rgba(255,255,255,0.18); box-shadow: 0 0 0 4px rgba(255,255,255,0.1); }
+.search-box::before { content: '🔍'; position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; opacity: 0.7; pointer-events: none; }
+.tools-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; opacity: 0.85; margin-bottom: 16px; }
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 10px; }
+.tool-link { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.1); padding: 12px 14px; border-radius: 10px; text-decoration: none; color: white; font-weight: 700; font-size: 0.85rem; transition: all 0.25s; border: 1px solid rgba(255,255,255,0.12); text-align: left; }
+.tool-link:hover { background: rgba(255,255,255,0.22); transform: translateY(-2px); border-color: rgba(255,255,255,0.35); }
+.tool-link .icon { font-size: 1.2rem; flex-shrink: 0; }
+.footer-note { margin-top: 25px; font-size: 0.8rem; opacity: 0.75; }
+.footer-note a { color: white; text-decoration: underline; font-weight: 600; }
+@media (max-width: 500px) {
+  .err-code { font-size: 3.5rem; }
+  h1 { font-size: 1.35rem; }
+  .box { padding: 28px 20px; }
+  .btn { padding: 11px 20px; font-size: 0.88rem; }
+  .tools-grid { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
-<div class="box">
-    <h1>404</h1>
-    <h2>Oops! Page Not Found</h2>
-    <p>The page you're looking for doesn't exist or has been moved.</p>
-    <a href="index.html">← Back to Homepage</a>
+
+<div class="wrap">
+    <div class="box">
+        <div class="err-code">404</div>
+        <h1>Oops! Page Not Found</h1>
+        <p class="subtitle">The page you're looking for doesn't exist, was moved, or has a typo in the URL. Let's get you back on track 👇</p>
+
+        <div class="btn-row">
+            <a href="index.html" class="btn">🏠 Back to Homepage</a>
+            <a href="about.html" class="btn btn-outline">ℹ️ About Us</a>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search our tools..." onkeydown="if(event.key==='Enter') searchTools()">
+        </div>
+
+        <div class="tools-title">🔗 Popular Free Tools</div>
+        <div class="tools-grid">
+            <a href="resume-builder.html" class="tool-link"><span class="icon">📄</span> ATS Resume Builder</a>
+            <a href="tax-calculator.html" class="tool-link"><span class="icon">💰</span> Tax Calculator 2025-26</a>
+            <a href="ats-scanner.html" class="tool-link"><span class="icon">🎯</span> ATS Resume Scanner</a>
+            <a href="bg-remover.html" class="tool-link"><span class="icon">🖼️</span> Background Remover</a>
+            <a href="password-checker.html" class="tool-link"><span class="icon">🔐</span> Password Checker</a>
+            <a href="notepad.html" class="tool-link"><span class="icon">📝</span> Online Notepad</a>
+            <a href="seo-optimizer.html" class="tool-link"><span class="icon">🚀</span> Universal SEO Optimizer</a>
+            <a href="index.html" class="tool-link"><span class="icon">🏠</span> All Tools Homepage</a>
+        </div>
+
+        <p class="footer-note">
+            Need help? Visit our <a href="contact.html">Contact page</a> or email <a href="mailto:contact@freetoolindia.com">contact@freetoolindia.com</a>
+        </p>
+    </div>
 </div>
+
+<noscript>
+    <div style="max-width: 600px; margin: 20px auto; padding: 18px; background: rgba(255,255,255,0.15); border-radius: 12px; text-align: center; color: white; font-weight: 600;">
+        ⚠️ Please enable JavaScript to search tools. Meanwhile, use the links above to explore our free tools.
+    </div>
+</noscript>
+
+<script>
+function searchTools() {
+    const q = document.getElementById('searchInput').value.trim().toLowerCase();
+    if (!q) return;
+    const map = {
+        'resume': 'resume-builder.html',
+        'cv': 'resume-builder.html',
+        'ats': 'ats-scanner.html',
+        'scanner': 'ats-scanner.html',
+        'tax': 'tax-calculator.html',
+        'income': 'tax-calculator.html',
+        'salary': 'tax-calculator.html',
+        'background': 'bg-remover.html',
+        'bg': 'bg-remover.html',
+        'image': 'bg-remover.html',
+        'password': 'password-checker.html',
+        'breach': 'password-checker.html',
+        'notepad': 'notepad.html',
+        'note': 'notepad.html',
+        'seo': 'seo-optimizer.html',
+        'meta': 'seo-optimizer.html',
+        'hashtag': 'seo-optimizer.html'
+    };
+    for (const key in map) {
+        if (q.includes(key)) {
+            window.location.href = map[key];
+            return;
+        }
+    }
+    // Fallback — Google search the site
+    window.location.href = 'https://www.google.com/search?q=site:freetoolindia.com+' + encodeURIComponent(q);
+}
+</script>
+
 </body>
 </html>
