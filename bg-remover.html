@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en-IN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Primary SEO -->
-<title>Free Background Remover India | Batch, No Upload, No Watermark</title>
+<!-- Global SEO -->
+<title>Free Background Remover | Batch, No Upload, No Watermark</title>
 <meta name="description" content="Remove image backgrounds free with AI. Batch processing, before/after slider, custom backgrounds. No upload to server, no watermark, 100% private. Works on phone & desktop.">
-<meta name="keywords" content="background remover, remove bg free, batch background remover, image background remover india, no watermark bg remover, free bg remover online">
+<meta name="keywords" content="background remover, remove bg free, batch background remover, image background remover, no watermark bg remover, free bg remover online">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="author" content="FreeToolIndia">
 <meta name="theme-color" content="#db2777">
@@ -19,7 +19,7 @@
 <meta property="og:title" content="Free Background Remover | Batch, No Upload, No Watermark">
 <meta property="og:description" content="Remove image backgrounds free with AI. Batch processing, before/after slider, custom backgrounds. 100% private — nothing leaves your device.">
 <meta property="og:site_name" content="FreeToolIndia">
-<meta property="og:locale" content="en_IN">
+<meta property="og:locale" content="en_US">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
@@ -27,15 +27,13 @@
 <meta name="twitter:description" content="Remove image backgrounds free with AI. Batch processing, before/after slider. 100% private.">
 
 <!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
 
 <!-- Performance preconnect -->
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
-<!-- ============================================================
-     STRUCTURED DATA — head me (SEO best practice)
-     ============================================================ -->
+<!-- Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,7 +51,7 @@
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "INR",
+        "priceCurrency": "USD",
         "availability": "https://schema.org/InStock"
       },
       "featureList": [
@@ -133,7 +131,7 @@
           "name": "Is this background remover really free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, 100% free forever. No watermark, no sign-up, no limits on the number of images. Paid tools like remove.bg charge per image or monthly — we give it all free."
+            "text": "Yes, 100% free forever. No watermark, no sign-up, no limits on the number of images. Paid tools like remove.bg charge per image or limit free output to 0.25 megapixels — we give you full resolution, free."
           }
         },
         {
@@ -238,6 +236,7 @@ h1 { font-size: 2rem; font-weight: 800; color: #db2777; margin-bottom: 6px; disp
 .bg-option input { accent-color: #db2777; cursor: pointer; }
 .bg-option.color-picker { padding: 6px 12px; }
 .bg-option.color-picker input[type="color"] { width: 40px; height: 30px; border: none; border-radius: 6px; cursor: pointer; padding: 0; }
+.model-select { padding: 10px 14px; border-radius: 10px; border: 2px solid #fbcfe8; font-family: inherit; font-weight: 700; font-size: 0.88rem; color: #db2777; background: #fff; cursor: pointer; }
 .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
 .image-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 25px rgba(236,72,153,0.15); transition: all 0.3s; border: 2px solid transparent; }
 .image-card:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(236,72,153,0.25); }
@@ -263,6 +262,7 @@ h1 { font-size: 2rem; font-weight: 800; color: #db2777; margin-bottom: 6px; disp
 .status-done { background: #d1fae5; color: #065f46; }
 .status-error { background: #fee2e2; color: #991b1b; }
 .privacy-note { background: #fdf2f8; padding: 16px; border-radius: 10px; margin-top: 16px; font-size: 0.88rem; color: #9d174d; border-left: 4px solid #ec4899; font-weight: 500; }
+.edge-note { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 8px; margin-top: 12px; font-size: 0.82rem; color: #92400e; }
 
 /* SEO Content */
 .seo-content { background: #fff; padding: 32px 30px; border-radius: 16px; box-shadow: 0 10px 40px rgba(236,72,153,0.12); margin-top: 40px; }
@@ -325,6 +325,14 @@ footer a:hover { color: #fff; }
             <label class="bg-option"><input type="radio" name="bgType" value="custom" onchange="onBgChange()"> Custom</label>
             <label class="bg-option color-picker" style="display: none;" id="colorPicker"><input type="color" id="customColor" value="#6366f1" onchange="onColorChange()"> Color</label>
         </div>
+        <div style="margin-bottom: 16px;">
+            <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 8px; color: #0f172a;">AI Model Quality</label>
+            <select class="model-select" id="modelSelect">
+                <option value="balanced" selected>Balanced (fast, good for most images)</option>
+                <option value="precise">Precise (slower, better for hair/fur edges)</option>
+            </select>
+            <p style="font-size: 0.75rem; color: #64748b; margin-top: 6px;">Precise model is ~80MB (downloads once). Better for portraits with fine hair.</p>
+        </div>
         <div class="btn-row">
             <button class="btn btn-green" id="processBtn" onclick="processAll()">🚀 Process All Images</button>
             <button class="btn btn-outline" onclick="clearAll()">🗑 Clear All</button>
@@ -341,9 +349,9 @@ footer a:hover { color: #fff; }
     <!-- SEO CONTENT -->
     <div class="seo-content">
         <h2>Remove Image Backgrounds Free — Right in Your Browser</h2>
-        <p>Need to remove the background from a photo? Whether it's for a <strong>product listing on Amazon or Flipkart</strong>, a <strong>profile picture for LinkedIn</strong>, a <strong>passport-size photo</strong>, or a <strong>social media post</strong>, our free AI background remover does it in seconds — without uploading your image to any server.</p>
+        <p>Need to remove the background from a photo? Whether it's for a <strong>product listing on Shopify or Etsy</strong>, a <strong>profile picture for LinkedIn</strong>, a <strong>passport-size photo</strong>, or a <strong>social media post</strong>, our free AI background remover does it in seconds — without uploading your image to any server.</p>
 
-        <p>Unlike paid tools like remove.bg that charge per image or require a monthly subscription, FreeToolIndia's background remover is <strong>100% free, forever</strong>. No watermark, no sign-up, no credit card, no hidden limits. And because everything runs in your browser, your images never leave your device.</p>
+        <p>Unlike paid tools like remove.bg that limit free output to 0.25 megapixels [citation:7], or Canva Pro which requires a $144/year subscription for background removal [citation:10], FreeToolIndia's background remover is <strong>100% free, forever</strong>. No watermark, no sign-up, no credit card, no hidden limits. And because everything runs in your browser, your images never leave your device.</p>
 
         <h3>Why Use Our Background Remover?</h3>
         <ul>
@@ -356,16 +364,18 @@ footer a:hover { color: #fff; }
         </ul>
 
         <h3>Who Is This For?</h3>
-        <p>This free background remover is built for <strong>Indian users</strong> — e-commerce sellers preparing product photos, students making ID cards and resumes, content creators editing thumbnails, small business owners building their online presence, and anyone who needs a clean cut-out image without paying for expensive software. Whether you're in Delhi, Mumbai, Bangalore, or a small town, the tool works the same — free and private.</p>
+        <p>This free background remover is built for <strong>anyone who needs clean cut-out images</strong> — e-commerce sellers preparing product photos, students making ID cards and resumes, content creators editing thumbnails, small business owners building their online presence, and anyone who needs a clean cut-out image without paying for expensive software. Whether you're in the US, UK, Europe, or anywhere else, the tool works the same — free and private.</p>
 
         <h3>How Is This Different From Paid Background Removers?</h3>
-        <p>Paid tools like remove.bg, Canva Pro, and Photoshop charge <strong>per image or monthly subscriptions</strong> — often ₹500-2000 per month. Our background remover gives you the same AI-powered quality, completely free, with batch processing and custom backgrounds included. The only difference: your images never leave your device.</p>
+        <p>Paid tools like remove.bg, Canva Pro, and Photoshop charge <strong>per image or monthly subscriptions</strong> — often $10-50 per month. Our background remover gives you the same AI-powered quality, completely free, with batch processing and custom backgrounds included. The only difference: your images never leave your device.</p>
+
+        <p style="font-size: 0.82rem; color: #64748b; margin-top: 16px;">Note: This tool uses the open-source @imgly/background-removal library (AGPL license) for in-browser AI processing. Fine details like hair and fur may have minor artifacts — a known limitation of all segmentation models.</p>
     </div>
 
     <!-- FAQ -->
     <div class="faq-section">
         <h2>Frequently Asked Questions</h2>
-        <div class="faq-item"><h3>Is this background remover really free?</h3><p>Yes, 100% free forever. No watermark, no sign-up, no limits on the number of images.</p></div>
+        <div class="faq-item"><h3>Is this background remover really free?</h3><p>Yes, 100% free forever. No watermark, no sign-up, no limits on the number of images. Paid tools like remove.bg limit free output to 0.25 megapixels — we give you full resolution.</p></div>
         <div class="faq-item"><h3>Is my image uploaded to a server?</h3><p>No. The AI model runs entirely in your browser. Your image never leaves your device. We can't see your images even if we wanted to.</p></div>
         <div class="faq-item"><h3>Can I process multiple images at once?</h3><p>Yes! Upload multiple images and click "Process All" to run batch background removal. Perfect for bulk editing.</p></div>
         <div class="faq-item"><h3>Why does the first use take longer?</h3><p>The AI model (about 40MB) is downloaded once and cached by your browser. Future uses are much faster.</p></div>
@@ -380,7 +390,7 @@ footer a:hover { color: #fff; }
         <h2>🔗 Explore More Free Tools</h2>
         <div class="interlink-grid">
             <a href="resume-builder.html">📄 ATS Resume Builder</a>
-            <a href="tax-calculator.html">💰 Salary Tax Calculator 2025-26</a>
+            <a href="tax-calculator.html">💰 Salary Tax Calculator</a>
             <a href="notepad.html">📝 Online Auto-Save Notepad</a>
             <a href="password-checker.html">🔐 Password Strength Checker</a>
             <a href="ats-scanner.html">🎯 ATS Resume Score Scanner</a>
@@ -390,7 +400,7 @@ footer a:hover { color: #fff; }
 </div>
 
 <footer>
-    <p><strong style="color: #fff;">🇮🇳 FreeToolIndia</strong></p>
+    <p><strong style="color: #fff;">🌍 FreeToolIndia</strong></p>
     <p style="margin-top: 10px;">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -408,9 +418,10 @@ footer a:hover { color: #fff; }
     </div>
 </noscript>
 
-<script src="https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.5.5/dist/browser.js"></script>
+<!-- Updated to 1.7.0 -->
+<script src="https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.7.0/dist/browser.js"></script>
 <script>
-let images = []; // [{id, file, originalURL, resultBlob, resultURL, status, name}]
+let images = [];
 let processing = false;
 
 const uploadArea = document.getElementById('uploadArea');
@@ -568,6 +579,14 @@ async function processAll() {
         return;
     }
     
+    // Model quality selection
+    const modelQuality = document.getElementById('modelSelect').value;
+    const config = {
+        device: 'gpu', // Try GPU acceleration, fallback to CPU
+        model: modelQuality === 'precise' ? 'isnet' : 'isnet_fp16',
+        output: { format: 'image/png', quality: 0.9 }
+    };
+    
     let done = 0;
     for (const img of pending) {
         img.status = 'processing';
@@ -575,13 +594,26 @@ async function processAll() {
         renderGrid();
         
         try {
-            const blob = await removeBackground(img.file);
+            const blob = await removeBackground(img.file, config);
             img.resultBlob = blob;
             img.status = 'done';
             await applyBg(img);
         } catch (e) {
             console.error(e);
-            img.status = 'error';
+            // Fallback: retry without GPU if GPU failed
+            if (config.device === 'gpu') {
+                try {
+                    config.device = 'cpu';
+                    const blob = await removeBackground(img.file, config);
+                    img.resultBlob = blob;
+                    img.status = 'done';
+                    await applyBg(img);
+                } catch (e2) {
+                    img.status = 'error';
+                }
+            } else {
+                img.status = 'error';
+            }
         }
         done++;
         updateProgress(done, pending.length);
