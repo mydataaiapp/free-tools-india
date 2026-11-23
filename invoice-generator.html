@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Invoice Generator — Create & Download PDF Invoices (No Signup)</title>
+<meta name="description" content="Generate professional invoices free. Add items, tax, logo, and download as PDF. No signup, no watermark — works in your browser.">
+<meta name="keywords" content="invoice generator, free invoice generator, invoice maker, create invoice online, invoice pdf download, freelance invoice, no signup invoice">
+<link rel="canonical" href="https://www.freetoolindia.com/invoice-generator.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Free Invoice Generator","url":"https://www.freetoolindia.com/invoice-generator.html","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6;padding:20px}
+.container{max-width:800px;margin:0 auto;background:#fff;padding:30px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.05)}
+h1{font-size:2rem;color:#059669;margin-bottom:8px}
+.subtitle{color:#64748b;margin-bottom:20px}
+label{display:block;font-weight:700;font-size:0.85rem;margin-top:12px;margin-bottom:4px}
+input,textarea{width:100%;padding:10px;border:2px solid #d1fae5;border-radius:8px;font-family:inherit;font-size:0.95rem}
+input:focus,textarea:focus{border-color:#10b981;outline:none}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.item-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;margin-bottom:8px;align-items:center}
+.btn{background:#059669;color:#fff;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer;margin-top:15px;font-size:0.95rem}
+.btn:hover{background:#047857}
+.btn-green{background:#10b981}.btn-green:hover{background:#059669}
+.btn-outline{background:#fff;color:#059669;border:2px solid #d1fae5}
+#invoicePreview{margin-top:30px;padding:30px;border:2px solid #e2e8f0;border-radius:12px;background:#fff}
+.preview-header{display:flex;justify-content:space-between;border-bottom:2px solid #e2e8f0;padding-bottom:15px;margin-bottom:15px}
+.preview-total{text-align:right;font-size:1.2rem;font-weight:800;color:#059669;margin-top:15px}
+.note{background:#ecfdf5;padding:16px;border-radius:10px;margin-top:20px;font-size:0.9rem;color:#065f46}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧾 Invoice Generator</h1>
+<p class="subtitle">Create professional invoices — download as PDF. 100% free, no signup.</p>
+
+<label>Your Company Name</label>
+<input type="text" id="companyName" placeholder="Your Company" value="FreeToolIndia">
+
+<label>Client Name</label>
+<input type="text" id="clientName" placeholder="Client Name">
+
+<div class="row">
+<div><label>Invoice Number</label><input type="text" id="invoiceNo" value="INV-001"></div>
+<div><label>Date</label><input type="date" id="invoiceDate"></div>
+</div>
+
+<label>Items</label>
+<div id="itemsContainer">
+<div class="item-row"><input placeholder="Description" class="item-desc"><input type="number" placeholder="Qty" class="item-qty" value="1"><input type="number" placeholder="Price" class="item-price"><span class="item-total">0</span></div>
+</div>
+<button class="btn btn-outline" onclick="addItem()">+ Add Item</button>
+
+<div class="row" style="margin-top:12px">
+<div><label>Tax Rate (%)</label><input type="number" id="taxRate" value="0" oninput="updatePreview()"></div>
+<div><label>Discount</label><input type="number" id="discount" value="0" oninput="updatePreview()"></div>
+</div>
+
+<button class="btn btn-green" onclick="generateInvoice()">📄 Generate Invoice Preview</button>
+<button class="btn" onclick="downloadPDF()" id="downloadBtn" style="display:none">⬇ Download PDF</button>
+
+<div id="invoicePreview"></div>
+
+<div class="note">🔒 <strong>Privacy:</strong> Everything runs in your browser. No data is uploaded.</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+document.getElementById('invoiceDate').valueAsDate = new Date();
+
+function addItem() {
+    const div = document.createElement('div');
+    div.className = 'item-row';
+    div.innerHTML = '<input placeholder="Description" class="item-desc"><input type="number" placeholder="Qty" class="item-qty" value="1"><input type="number" placeholder="Price" class="item-price"><span class="item-total">0</span>';
+    document.getElementById('itemsContainer').appendChild(div);
+}
+
+function generateInvoice() {
+    const company = document.getElementById('companyName').value;
+    const client = document.getElementById('clientName').value;
+    const invNo = document.getElementById('invoiceNo').value;
+    const date = document.getElementById('invoiceDate').value;
+    const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+    const discount = parseFloat(document.getElementById('discount').value) || 0;
+    
+    let itemsHtml = '';
+    let subtotal = 0;
+    document.querySelectorAll('.item-row').forEach(row => {
+        const desc = row.querySelector('.item-desc').value;
+        const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+        const price = parseFloat(row.querySelector('.item-price').value) || 0;
+        const total = qty * price;
+        subtotal += total;
+        if (desc) itemsHtml += `<tr><td>${desc}</td><td>${qty}</td><td>$${price.toFixed(2)}</td><td>$${total.toFixed(2)}</td></tr>`;
+    });
+    
+    const tax = subtotal * (taxRate / 100);
+    const grandTotal = subtotal + tax - discount;
+    
+    document.getElementById('invoicePreview').innerHTML = `
+        <div class="preview-header"><div><h2>${company}</h2></div><div><p>Invoice: ${invNo}</p><p>Date: ${date}</p></div></div>
+        <p><strong>Bill To:</strong> ${client}</p>
+        <table style="width:100%;margin-top:15px;border-collapse:collapse"><thead><tr style="background:#ecfdf5"><th style="padding:8px;text-align:left">Description</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>${itemsHtml}</tbody></table>
+        <div class="preview-total">Subtotal: $${subtotal.toFixed(2)}<br>Tax (${taxRate}%): $${tax.toFixed(2)}<br>Discount: -$${discount.toFixed(2)}<br><strong>Total: $${grandTotal.toFixed(2)}</strong></div>
+    `;
+    document.getElementById('downloadBtn').style.display = 'block';
+}
+
+function downloadPDF() {
+    html2pdf().from(document.getElementById('invoicePreview')).set({filename: 'invoice.pdf', margin: 10}).save();
+}
+</script>
+</body>
+</html>
