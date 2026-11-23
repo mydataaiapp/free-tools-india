@@ -3,12 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free PDF Merge & Split Online — No Upload, No Signup</title>
-<meta name="description" content="Merge multiple PDFs or split a PDF into pages free. Works in your browser — files never uploaded. No signup, no watermark.">
-<meta name="keywords" content="pdf merge, pdf split, merge pdf free, split pdf online, combine pdf, pdf merger no upload, free pdf tools">
+<title>Free PDF Merge & Split — No Upload, No Limits, No Signup</title>
+<meta name="description" content="Merge multiple PDFs or split by custom page ranges (1-3, 7, 10-12) — free, in your browser. No upload, no signup, no limits. Files never leave your device.">
+<meta name="keywords" content="pdf merge, pdf split, merge pdf free, split pdf online, combine pdf, pdf merger no upload, free pdf tools, split pdf by page range, merge pdf no limit">
 <link rel="canonical" href="https://www.freetoolindia.com/pdf-tools.html">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Free PDF Merge & Split","url":"https://www.freetoolindia.com/pdf-tools.html","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Free PDF Merge & Split",
+  "url": "https://www.freetoolindia.com/pdf-tools.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Merge PDFs or split by custom page ranges in your browser. No upload, no signup, no limits."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a limit on how many PDFs I can merge?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Unlike iLovePDF (25 files per merge on free) or Smallpdf (daily limits), we have no file count limit. Merge as many PDFs as your browser can handle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I split a PDF by custom page ranges like 1-3, 7, 10-12?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Our Split tool accepts custom page ranges. Enter '1-3, 7, 10-12' and we extract exactly those pages into a new PDF. This is a paid feature in many tools."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my PDF files uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All processing happens in your browser using pdf-lib. Your files never leave your device. Unlike Smallpdf and iLovePDF, which upload files to their servers and delete them after 1-2 hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a file size limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No hard limit. Since processing is local, the only constraint is your browser memory. Files up to 100 MB+ typically work fine."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will merging or splitting reduce PDF quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Our tool uses lossless copying — original pages are preserved exactly. Fonts, images, and formatting remain intact."
+      }
+    }
+  ]
+}
 </script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -17,50 +74,114 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 h1{font-size:2rem;color:#dc2626;margin-bottom:8px}
 .subtitle{color:#64748b;margin-bottom:20px}
 .tabs{display:flex;gap:10px;margin-bottom:20px}
-.tab{padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:700;border:2px solid #e2e8f0;background:#fff}
+.tab{padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:700;border:2px solid #e2e8f0;background:#fff;font-family:inherit;font-size:0.9rem}
 .tab.active{background:#dc2626;color:#fff;border-color:#dc2626}
 .panel{display:none}.panel.active{display:block}
 .dropzone{border:3px dashed #cbd5e1;border-radius:16px;padding:40px 20px;text-align:center;cursor:pointer;background:#f8fafc}
 .dropzone:hover{background:#fef2f2;border-color:#ef4444}
 .dropzone input{display:none}
-.btn{background:#dc2626;color:#fff;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer;margin:5px;font-size:0.95rem}
+.btn{background:#dc2626;color:#fff;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer;margin:5px;font-size:0.95rem;font-family:inherit}
 .btn:hover{background:#b91c1c}
 .btn-green{background:#10b981}.btn-green:hover{background:#059669}
+.btn-outline{background:#fff;color:#dc2626;border:2px solid #fecaca;font-family:inherit}
 .file-list{margin:15px 0}
-.file-item{display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #e2e8f0}
+.file-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #e2e8f0;font-size:0.9rem;flex-wrap:wrap;gap:5px}
+.file-item .remove{background:#ef4444;color:#fff;border:none;padding:3px 10px;border-radius:6px;cursor:pointer;font-size:0.75rem;font-weight:700}
 .note{background:#fef2f2;padding:16px;border-radius:10px;margin-top:20px;font-size:0.9rem;color:#991b1b}
+.page-range-input{width:100%;padding:12px;border:2px solid #fecaca;border-radius:8px;font-size:1rem;font-family:inherit;margin-top:10px}
+.page-range-input:focus{border-color:#ef4444;outline:none}
+.faq-section{margin-top:40px;border-top:1px solid #e2e8f0;padding-top:30px}
+.faq-section h2{color:#dc2626;font-size:1.4rem;margin-bottom:16px}
+.faq-item{background:#f8fafc;padding:18px 20px;border-radius:12px;margin-bottom:12px;border-left:4px solid #dc2626}
+.faq-item h3{color:#0f172a;font-size:1rem;margin-bottom:6px;font-weight:700}
+.faq-item p{color:#475569;font-size:0.9rem;line-height:1.6}
+.interlink{margin-top:30px;background:#f8fafc;padding:24px;border-radius:12px}
+.interlink h2{color:#dc2626;font-size:1.2rem;margin-bottom:16px}
+.interlink-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.interlink-grid a{display:block;background:#fff;padding:12px 16px;border-radius:8px;text-decoration:none;color:#0f172a;font-weight:600;font-size:0.88rem;border-left:3px solid #dc2626;transition:all 0.2s}
+.interlink-grid a:hover{transform:translateX(4px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+@media(max-width:600px){.file-item{flex-direction:column;align-items:flex-start}.tabs{flex-wrap:wrap}}
 </style>
 </head>
 <body>
 <div class="container">
 <h1>📄 PDF Merge & Split</h1>
-<p class="subtitle">Combine or split PDFs — 100% private, in your browser.</p>
+<p class="subtitle">Merge or split by custom page ranges — 100% in your browser. No upload, no signup, no limits.</p>
 
 <div class="tabs">
 <div class="tab active" onclick="switchTab('merge', this)">🔗 Merge PDFs</div>
 <div class="tab" onclick="switchTab('split', this)">✂️ Split PDF</div>
 </div>
 
+<!-- MERGE PANEL -->
 <div id="mergePanel" class="panel active">
 <div class="dropzone" onclick="document.getElementById('mergeInput').click()">
-<p>📤 Drop PDF files here or click to browse</p>
-<p style="color:#64748b;font-size:0.85rem">Select multiple PDFs to merge</p>
+<p style="font-size:1.1rem">📤 Drop PDF files here or click to browse</p>
+<p style="color:#64748b;font-size:0.85rem">Select multiple PDFs — they'll merge in the order shown</p>
 <input type="file" id="mergeInput" accept=".pdf" multiple>
 </div>
 <div class="file-list" id="mergeList"></div>
 <button class="btn btn-green" onclick="mergePDFs()" id="mergeBtn" style="display:none">🔗 Merge & Download</button>
+<div class="note">🔒 <strong>Privacy:</strong> PDFs are processed in your browser. Nothing is uploaded.</div>
 </div>
 
+<!-- SPLIT PANEL -->
 <div id="splitPanel" class="panel">
 <div class="dropzone" onclick="document.getElementById('splitInput').click()">
-<p>📤 Drop a PDF file here or click to browse</p>
+<p style="font-size:1.1rem">📤 Drop a PDF file here or click to browse</p>
 <input type="file" id="splitInput" accept=".pdf">
 </div>
 <div class="file-list" id="splitList"></div>
+<div id="splitOptions" style="display:none;margin-top:15px">
+<label style="font-weight:700;font-size:0.9rem">Page ranges to extract</label>
+<input type="text" class="page-range-input" id="pageRange" placeholder="e.g., 1-3, 7, 10-12 (leave empty to split every page)" value="">
+<p style="font-size:0.8rem;color:#64748b;margin-top:4px">Use commas for multiple ranges. Leave empty to split every page into separate PDFs.</p>
+</div>
 <button class="btn btn-green" onclick="splitPDF()" id="splitBtn" style="display:none">✂️ Split & Download</button>
+<div class="note">🔒 <strong>Privacy:</strong> PDFs are processed in your browser. Nothing is uploaded.</div>
 </div>
 
-<div class="note">🔒 <strong>Privacy:</strong> PDFs are processed in your browser. Nothing is uploaded.</div>
+<!-- FAQ Section -->
+<section class="faq-section">
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+<h3>Is there a limit on how many PDFs I can merge?</h3>
+<p>No. Unlike iLovePDF (25 files per merge on free) or Smallpdf (daily limits), we have <strong>no file count limit</strong>. Merge as many PDFs as your browser can handle.</p>
+</div>
+
+<div class="faq-item">
+<h3>Can I split a PDF by custom page ranges like 1-3, 7, 10-12?</h3>
+<p>Yes. Our Split tool accepts custom page ranges. Enter "1-3, 7, 10-12" and we extract exactly those pages into a new PDF. This is a paid feature in many tools.</p>
+</div>
+
+<div class="faq-item">
+<h3>Are my PDF files uploaded to a server?</h3>
+<p>No. All processing happens <strong>in your browser</strong> using pdf-lib. Your files never leave your device. Unlike Smallpdf and iLovePDF, which upload files to their servers and delete them after 1-2 hours.</p>
+</div>
+
+<div class="faq-item">
+<h3>Is there a file size limit?</h3>
+<p>No hard limit. Since processing is local, the only constraint is your browser memory. Files up to <strong>100 MB+</strong> typically work fine.</p>
+</div>
+
+<div class="faq-item">
+<h3>Will merging or splitting reduce PDF quality?</h3>
+<p>No. Our tool uses <strong>lossless copying</strong> — original pages are preserved exactly. Fonts, images, and formatting remain intact.</p>
+</div>
+</section>
+
+<!-- Interlinking -->
+<div class="interlink">
+<h2>🔗 Related Free Tools</h2>
+<div class="interlink-grid">
+<a href="image-compressor.html">🖼️ Image Compressor — Compress to 100 KB target</a>
+<a href="invoice-generator.html">🧾 Invoice Generator — Create PDF invoices</a>
+<a href="ats-scanner.html">🎯 ATS Resume Scanner — Check your resume</a>
+<a href="resume-builder.html">📄 ATS Resume Builder — Build a resume</a>
+<a href="index.html">🏠 All Free Tools</a>
+</div>
+</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
@@ -68,12 +189,26 @@ h1{font-size:2rem;color:#dc2626;margin-bottom:8px}
 const { PDFDocument } = PDFLib;
 let mergeFiles = [], splitFile = null;
 
-// Merge
+// ========== MERGE ==========
 document.getElementById('mergeInput').addEventListener('change', e => {
     mergeFiles = Array.from(e.target.files);
-    document.getElementById('mergeList').innerHTML = mergeFiles.map(f => `<div class="file-item"><span>${f.name}</span><span>${(f.size/1024).toFixed(1)} KB</span></div>`).join('');
-    document.getElementById('mergeBtn').style.display = mergeFiles.length > 1 ? 'block' : 'none';
+    renderMergeList();
 });
+
+function renderMergeList() {
+    const list = document.getElementById('mergeList');
+    list.innerHTML = mergeFiles.map((f, i) => `<div class="file-item">
+        <span>${i+1}. ${f.name}</span>
+        <span>${formatSize(f.size)}</span>
+        <button class="remove" onclick="removeMergeFile(${i})">✕</button>
+    </div>`).join('');
+    document.getElementById('mergeBtn').style.display = mergeFiles.length > 1 ? 'block' : 'none';
+}
+
+function removeMergeFile(i) {
+    mergeFiles.splice(i, 1);
+    renderMergeList();
+}
 
 async function mergePDFs() {
     const mergedPdf = await PDFDocument.create();
@@ -87,27 +222,73 @@ async function mergePDFs() {
     downloadBlob(new Blob([bytes], {type: 'application/pdf'}), 'merged.pdf');
 }
 
-// Split
+// ========== SPLIT ==========
 document.getElementById('splitInput').addEventListener('change', e => {
     splitFile = e.target.files[0];
-    document.getElementById('splitList').innerHTML = `<div class="file-item"><span>${splitFile.name}</span><span>${(splitFile.size/1024).toFixed(1)} KB</span></div>`;
+    if (!splitFile) return;
+    document.getElementById('splitList').innerHTML = `<div class="file-item"><span>${splitFile.name}</span><span>${formatSize(splitFile.size)}</span></div>`;
     document.getElementById('splitBtn').style.display = 'block';
+    document.getElementById('splitOptions').style.display = 'block';
 });
 
 async function splitPDF() {
+    if (!splitFile) return;
     const bytes = await splitFile.arrayBuffer();
     const pdf = await PDFDocument.load(bytes);
     const pageCount = pdf.getPageCount();
+    const rangeStr = document.getElementById('pageRange').value.trim();
     
-    // Simple split: each page as separate PDF, bundled in one download (or download individually)
-    for (let i = 0; i < pageCount; i++) {
-        const newPdf = await PDFDocument.create();
-        const [page] = await newPdf.copyPages(pdf, [i]);
-        newPdf.addPage(page);
-        const newBytes = await newPdf.save();
-        downloadBlob(new Blob([newBytes], {type: 'application/pdf'}), `page-${i+1}.pdf`);
+    if (!rangeStr) {
+        // Split every page
+        for (let i = 0; i < pageCount; i++) {
+            const newPdf = await PDFDocument.create();
+            const [page] = await newPdf.copyPages(pdf, [i]);
+            newPdf.addPage(page);
+            const newBytes = await newPdf.save();
+            downloadBlob(new Blob([newBytes], {type: 'application/pdf'}), `page-${i+1}.pdf`);
+        }
+        alert(`Split into ${pageCount} PDFs. Check your downloads.`);
+        return;
     }
-    alert(`Split into ${pageCount} PDFs. Check your downloads.`);
+    
+    // Parse custom ranges
+    const pagesToExtract = parseRanges(rangeStr, pageCount);
+    if (pagesToExtract.length === 0) {
+        alert('Invalid page range. Use format: 1-3, 7, 10-12');
+        return;
+    }
+    
+    const newPdf = await PDFDocument.create();
+    const copiedPages = await newPdf.copyPages(pdf, pagesToExtract);
+    copiedPages.forEach(p => newPdf.addPage(p));
+    const newBytes = await newPdf.save();
+    downloadBlob(new Blob([newBytes], {type: 'application/pdf'}), 'extracted-pages.pdf');
+    alert(`Extracted ${pagesToExtract.length} page(s): ${rangeStr}`);
+}
+
+function parseRanges(str, max) {
+    const pages = new Set();
+    const parts = str.split(',');
+    for (const part of parts) {
+        const trimmed = part.trim();
+        if (trimmed.includes('-')) {
+            const [start, end] = trimmed.split('-').map(Number);
+            if (start && end && start <= end) {
+                for (let i = start; i <= Math.min(end, max); i++) pages.add(i - 1);
+            }
+        } else {
+            const n = Number(trimmed);
+            if (n && n <= max) pages.add(n - 1);
+        }
+    }
+    return Array.from(pages).sort((a, b) => a - b);
+}
+
+// ========== HELPERS ==========
+function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1048576).toFixed(1) + ' MB';
 }
 
 function downloadBlob(blob, name) {
