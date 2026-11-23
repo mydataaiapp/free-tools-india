@@ -3,12 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Image Compressor — Compress JPEG, PNG, WebP Online (No Upload)</title>
-<meta name="description" content="Compress images free in your browser. Reduce JPEG, PNG, WebP file size without losing quality. No signup, no upload — files never leave your device.">
-<meta name="keywords" content="image compressor, compress image online, reduce image size, free image compressor, compress jpeg, compress png, compress webp, no upload image compressor">
+<title>Free Image Compressor — Compress to 100KB, 50KB (No Upload)</title>
+<meta name="description" content="Compress images to a target size (50KB, 100KB) or quality level — free, in your browser. JPEG, PNG, WebP. No signup, no upload, no limits.">
+<meta name="keywords" content="image compressor, compress image to 100kb, compress image to 50kb, reduce image size, free image compressor, compress jpeg, compress png, compress webp, no upload image compressor, target file size compressor">
 <link rel="canonical" href="https://www.freetoolindia.com/image-compressor.html">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Free Image Compressor","url":"https://www.freetoolindia.com/image-compressor.html","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Compress images in your browser. No upload, no signup. JPEG, PNG, WebP supported."}
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Free Image Compressor",
+  "url": "https://www.freetoolindia.com/image-compressor.html",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "Compress images to a target file size or quality level in your browser. No upload, no signup. JPEG, PNG, WebP supported."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I compress an image to a specific size like 100 KB or 50 KB?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Our Target Size mode lets you set any file size limit (e.g., 100 KB, 50 KB, 200 KB). The tool automatically finds the best quality that fits your target. If the target cannot be reached, we tell you honestly — just like paid tools."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it support batch processing for multiple images?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Drop multiple images at once. The tool compresses them all and bundles the results into a single ZIP file for download. No limits on how many images you can process."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my images uploaded to a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All compression happens entirely in your browser using the Canvas API. Your images never leave your device. This is more private than most paid tools, which upload files to their servers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What image formats are supported?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JPEG, PNG, and WebP. These cover almost all use cases. If you need format conversion, our tool handles it during compression."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a limit on file size or number of images?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Unlike paid tools that cap free usage, we have no limits. Compress as many images as you want, as often as you want. It's free forever."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will compressing reduce my image quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our smart compression minimizes visible quality loss. You can choose a quality level (70–80% is ideal for web use) or let Target Size mode find the best balance. For most uses, the compressed image looks identical to the original."
+      }
+    }
+  ]
+}
 </script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -19,20 +84,39 @@ h1{font-size:2rem;color:#2563eb;margin-bottom:8px}
 .dropzone{border:3px dashed #cbd5e1;border-radius:16px;padding:40px 20px;text-align:center;cursor:pointer;transition:0.2s;background:#f8fafc}
 .dropzone:hover{background:#eff6ff;border-color:#3b82f6}
 .dropzone input{display:none}
-.btn{background:#2563eb;color:white;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer;margin:5px;font-size:0.95rem}
+.mode-tabs{display:flex;gap:8px;margin-bottom:15px}
+.mode-tab{padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:700;border:2px solid #e2e8f0;background:#fff;font-family:inherit;font-size:0.9rem}
+.mode-tab.active{background:#2563eb;color:#fff;border-color:#2563eb}
+.mode-panel{display:none}.mode-panel.active{display:block}
+.btn{background:#2563eb;color:white;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer;margin:5px;font-size:0.95rem;font-family:inherit}
 .btn:hover{background:#1d4ed8}
 .btn-green{background:#10b981}.btn-green:hover{background:#059669}
-.btn-outline{background:#fff;color:#2563eb;border:2px solid #dbeafe}
+.btn-outline{background:#fff;color:#2563eb;border:2px solid #dbeafe;font-family:inherit}
 .file-list{margin-top:20px}
-.file-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #e2e8f0;font-size:0.9rem}
-.status{color:#10b981;font-weight:700}
+.file-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #e2e8f0;font-size:0.9rem;flex-wrap:wrap;gap:5px}
+.file-item .sizes{color:#64748b;font-size:0.8rem}
+.status{font-weight:700;font-size:0.8rem;padding:3px 8px;border-radius:12px}
+.status.pending{background:#f1f5f9;color:#64748b}
+.status.done{background:#d1fae5;color:#065f46}
+.status.warn{background:#fef3c7;color:#92400e}
 .note{background:#eff6ff;padding:16px;border-radius:10px;margin-top:20px;font-size:0.9rem;color:#1e40af}
+.faq-section{margin-top:40px;border-top:1px solid #e2e8f0;padding-top:30px}
+.faq-section h2{color:#2563eb;font-size:1.4rem;margin-bottom:16px}
+.faq-item{background:#f8fafc;padding:18px 20px;border-radius:12px;margin-bottom:12px;border-left:4px solid #2563eb}
+.faq-item h3{color:#0f172a;font-size:1rem;margin-bottom:6px;font-weight:700}
+.faq-item p{color:#475569;font-size:0.9rem;line-height:1.6}
+.interlink{margin-top:30px;background:#f8fafc;padding:24px;border-radius:12px}
+.interlink h2{color:#2563eb;font-size:1.2rem;margin-bottom:16px}
+.interlink-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.interlink-grid a{display:block;background:#fff;padding:12px 16px;border-radius:8px;text-decoration:none;color:#0f172a;font-weight:600;font-size:0.88rem;border-left:3px solid #2563eb;transition:all 0.2s}
+.interlink-grid a:hover{transform:translateX(4px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+@media(max-width:600px){.file-item{flex-direction:column;align-items:flex-start}.mode-tabs{flex-wrap:wrap}}
 </style>
 </head>
 <body>
 <div class="container">
 <h1>🖼️ Image Compressor</h1>
-<p class="subtitle">Compress JPEG, PNG, WebP — 100% in your browser. No upload, no signup.</p>
+<p class="subtitle">Compress to a target size (100 KB, 50 KB) or quality level — 100% in your browser. No upload, no signup, no limits.</p>
 
 <div class="dropzone" id="dropzone">
 <p style="font-size:1.2rem;margin-bottom:8px">📤 Drop images here or click to browse</p>
@@ -40,9 +124,25 @@ h1{font-size:2rem;color:#2563eb;margin-bottom:8px}
 <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple>
 </div>
 
-<div style="margin-top:15px">
+<div class="mode-tabs" style="margin-top:20px">
+<button class="mode-tab active" onclick="switchMode('quality', this)">🎚️ Quality Mode</button>
+<button class="mode-tab" onclick="switchMode('target', this)">🎯 Target Size Mode</button>
+</div>
+
+<div id="qualityPanel" class="mode-panel active">
+<div style="margin-top:10px">
 <label>Quality: <span id="qualityVal">70</span>%</label>
 <input type="range" id="quality" min="10" max="100" value="70" style="width:100%" oninput="document.getElementById('qualityVal').textContent=this.value">
+<p style="font-size:0.8rem;color:#64748b;margin-top:4px">70–80% is ideal for web use. Lower = smaller file, less quality.</p>
+</div>
+</div>
+
+<div id="targetPanel" class="mode-panel">
+<div style="margin-top:10px">
+<label>Target File Size (KB)</label>
+<input type="number" id="targetSize" value="100" min="10" max="5000" style="width:200px;padding:10px;border:2px solid #e2e8f0;border-radius:8px;font-size:1rem;font-family:inherit">
+<p style="font-size:0.8rem;color:#64748b;margin-top:4px">Set your limit (e.g., 100 KB for passport/Aadhaar forms). We'll find the best quality that fits.</p>
+</div>
 </div>
 
 <div class="file-list" id="fileList"></div>
@@ -54,6 +154,53 @@ h1{font-size:2rem;color:#2563eb;margin-bottom:8px}
 <div class="note">
 🔒 <strong>Privacy:</strong> All processing happens in your browser. Your images are never uploaded to any server.
 </div>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+<h3>Can I compress an image to a specific size like 100 KB or 50 KB?</h3>
+<p>Yes. Our <strong>Target Size mode</strong> lets you set any file size limit (e.g., 100 KB, 50 KB, 200 KB). The tool automatically finds the best quality that fits your target. If the target cannot be reached, we tell you honestly — just like paid tools.</p>
+</div>
+
+<div class="faq-item">
+<h3>Does it support batch processing for multiple images?</h3>
+<p>Yes. Drop multiple images at once. The tool compresses them all and bundles the results into a single ZIP file for download. No limits on how many images you can process.</p>
+</div>
+
+<div class="faq-item">
+<h3>Are my images uploaded to a server?</h3>
+<p>No. All compression happens <strong>entirely in your browser</strong> using the Canvas API. Your images never leave your device. This is more private than most paid tools, which upload files to their servers.</p>
+</div>
+
+<div class="faq-item">
+<h3>What image formats are supported?</h3>
+<p>JPEG, PNG, and WebP. These cover almost all use cases. If you need format conversion, our tool handles it during compression.</p>
+</div>
+
+<div class="faq-item">
+<h3>Is there a limit on file size or number of images?</h3>
+<p>No. Unlike paid tools that cap free usage, we have <strong>no limits</strong>. Compress as many images as you want, as often as you want. It's free forever.</p>
+</div>
+
+<div class="faq-item">
+<h3>Will compressing reduce my image quality?</h3>
+<p>Our smart compression minimizes visible quality loss. You can choose a quality level (70–80% is ideal for web use) or let Target Size mode find the best balance. For most uses, the compressed image looks identical to the original.</p>
+</div>
+</section>
+
+<!-- Interlinking -->
+<div class="interlink">
+<h2>🔗 Related Free Tools</h2>
+<div class="interlink-grid">
+<a href="bg-remover.html">🖼️ Background Remover — Remove backgrounds with AI</a>
+<a href="pdf-tools.html">📄 PDF Merge & Split — Combine or split PDFs privately</a>
+<a href="invoice-generator.html">🧾 Invoice Generator — Create professional invoices</a>
+<a href="unit-converter.html">📏 Unit Converter — Length, weight, temperature</a>
+<a href="index.html">🏠 All Free Tools</a>
+</div>
+</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -61,12 +208,21 @@ h1{font-size:2rem;color:#2563eb;margin-bottom:8px}
 const dropzone = document.getElementById('dropzone');
 const fileInput = document.getElementById('fileInput');
 let files = [];
+let currentMode = 'quality';
 
 dropzone.addEventListener('click', () => fileInput.click());
 dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.style.background = '#eff6ff'; });
 dropzone.addEventListener('dragleave', () => dropzone.style.background = '#f8fafc');
 dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.style.background = '#f8fafc'; handleFiles(e.dataTransfer.files); });
 fileInput.addEventListener('change', e => handleFiles(e.target.files));
+
+function switchMode(mode, btn) {
+    currentMode = mode;
+    document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.mode-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(mode + 'Panel').classList.add('active');
+}
 
 function handleFiles(newFiles) {
     for (const f of newFiles) {
@@ -75,13 +231,23 @@ function handleFiles(newFiles) {
     renderList();
 }
 
+function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1048576).toFixed(1) + ' MB';
+}
+
 function renderList() {
     const list = document.getElementById('fileList');
-    list.innerHTML = files.map((f, i) => `<div class="file-item"><span>${f.name}</span><span>${(f.size/1024).toFixed(1)} KB</span><span class="status" id="status-${i}">Pending</span></div>`).join('');
+    list.innerHTML = files.map((f, i) => `<div class="file-item" id="item-${i}">
+        <span>${f.name}</span>
+        <span class="sizes" id="sizes-${i}">${formatSize(f.size)}</span>
+        <span class="status pending" id="status-${i}">Pending</span>
+    </div>`).join('');
     document.getElementById('actions').style.display = files.length ? 'block' : 'none';
 }
 
-async function compressImage(file, quality) {
+function compressImage(file, quality) {
     return new Promise((resolve) => {
         const img = new Image();
         img.onload = () => {
@@ -96,15 +262,69 @@ async function compressImage(file, quality) {
     });
 }
 
+async function compressToTarget(file, targetKB) {
+    const targetBytes = targetKB * 1024;
+    let low = 1, high = 100;
+    let bestBlob = null;
+    let bestQuality = 100;
+    
+    // Binary search for best quality that fits target
+    for (let i = 0; i < 8; i++) {
+        const mid = Math.round((low + high) / 2);
+        const blob = await compressImage(file, mid);
+        if (blob.size <= targetBytes) {
+            bestBlob = blob;
+            bestQuality = mid;
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    
+    // If no quality fits, use lowest quality
+    if (!bestBlob) {
+        bestBlob = await compressImage(file, 1);
+        bestQuality = 1;
+    }
+    
+    return { blob: bestBlob, quality: bestQuality, met: bestBlob.size <= targetBytes };
+}
+
 async function compressAll() {
-    const quality = parseInt(document.getElementById('quality').value);
     const zip = new JSZip();
+    const targetKB = parseInt(document.getElementById('targetSize').value) || 100;
     
     for (let i = 0; i < files.length; i++) {
-        document.getElementById(`status-${i}`).textContent = 'Compressing...';
-        const blob = await compressImage(files[i], quality);
+        const statusEl = document.getElementById(`status-${i}`);
+        const sizesEl = document.getElementById(`sizes-${i}`);
+        statusEl.textContent = 'Compressing...';
+        statusEl.className = 'status pending';
+        
+        let blob, met = true;
+        
+        if (currentMode === 'target') {
+            const result = await compressToTarget(files[i], targetKB);
+            blob = result.blob;
+            met = result.met;
+        } else {
+            const quality = parseInt(document.getElementById('quality').value);
+            blob = await compressImage(files[i], quality);
+        }
+        
+        const originalSize = files[i].size;
+        const newSize = blob.size;
+        const saving = ((1 - newSize / originalSize) * 100).toFixed(0);
+        
         zip.file(files[i].name.replace(/\.[^.]+$/, '') + '_compressed.' + files[i].name.split('.').pop(), blob);
-        document.getElementById(`status-${i}`).textContent = '✅ Done';
+        
+        if (met) {
+            statusEl.textContent = `✅ ${formatSize(newSize)} (−${saving}%)`;
+            statusEl.className = 'status done';
+        } else {
+            statusEl.textContent = `⚠️ Target not met — best: ${formatSize(newSize)}`;
+            statusEl.className = 'status warn';
+        }
+        sizesEl.textContent = `${formatSize(originalSize)} → ${formatSize(newSize)}`;
     }
     
     const content = await zip.generateAsync({ type: 'blob' });
