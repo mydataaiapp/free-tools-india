@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free PDF Merge & Split Online — No Upload, No Signup</title>
+<meta name="description" content="Merge multiple PDFs or split a PDF into pages free. Works in your browser — files never uploaded. No signup, no watermark.">
+<meta name="keywords" content="pdf merge, pdf split, merge pdf free, split pdf online, combine pdf, pdf merger no upload, free pdf tools">
+<link rel="canonical" href="https://www.freetoolindia.com/pdf-tools.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Free PDF Merge & Split","url":"https://www.freetoolindia.com/pdf-tools.html","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6;padding:20px}
+.container{max-width:800px;margin:0 auto;background:#fff;padding:30px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.05)}
+h1{font-size:2rem;color:#dc2626;margin-bottom:8px}
+.subtitle{color:#64748b;margin-bottom:20px}
+.tabs{display:flex;gap:10px;margin-bottom:20px}
+.tab{padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:700;border:2px solid #e2e8f0;background:#fff}
+.tab.active{background:#dc2626;color:#fff;border-color:#dc2626}
+.panel{display:none}.panel.active{display:block}
+.dropzone{border:3px dashed #cbd5e1;border-radius:16px;padding:40px 20px;text-align:center;cursor:pointer;background:#f8fafc}
+.dropzone:hover{background:#fef2f2;border-color:#ef4444}
+.dropzone input{display:none}
+.btn{background:#dc2626;color:#fff;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer;margin:5px;font-size:0.95rem}
+.btn:hover{background:#b91c1c}
+.btn-green{background:#10b981}.btn-green:hover{background:#059669}
+.file-list{margin:15px 0}
+.file-item{display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #e2e8f0}
+.note{background:#fef2f2;padding:16px;border-radius:10px;margin-top:20px;font-size:0.9rem;color:#991b1b}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📄 PDF Merge & Split</h1>
+<p class="subtitle">Combine or split PDFs — 100% private, in your browser.</p>
+
+<div class="tabs">
+<div class="tab active" onclick="switchTab('merge', this)">🔗 Merge PDFs</div>
+<div class="tab" onclick="switchTab('split', this)">✂️ Split PDF</div>
+</div>
+
+<div id="mergePanel" class="panel active">
+<div class="dropzone" onclick="document.getElementById('mergeInput').click()">
+<p>📤 Drop PDF files here or click to browse</p>
+<p style="color:#64748b;font-size:0.85rem">Select multiple PDFs to merge</p>
+<input type="file" id="mergeInput" accept=".pdf" multiple>
+</div>
+<div class="file-list" id="mergeList"></div>
+<button class="btn btn-green" onclick="mergePDFs()" id="mergeBtn" style="display:none">🔗 Merge & Download</button>
+</div>
+
+<div id="splitPanel" class="panel">
+<div class="dropzone" onclick="document.getElementById('splitInput').click()">
+<p>📤 Drop a PDF file here or click to browse</p>
+<input type="file" id="splitInput" accept=".pdf">
+</div>
+<div class="file-list" id="splitList"></div>
+<button class="btn btn-green" onclick="splitPDF()" id="splitBtn" style="display:none">✂️ Split & Download</button>
+</div>
+
+<div class="note">🔒 <strong>Privacy:</strong> PDFs are processed in your browser. Nothing is uploaded.</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+const { PDFDocument } = PDFLib;
+let mergeFiles = [], splitFile = null;
+
+// Merge
+document.getElementById('mergeInput').addEventListener('change', e => {
+    mergeFiles = Array.from(e.target.files);
+    document.getElementById('mergeList').innerHTML = mergeFiles.map(f => `<div class="file-item"><span>${f.name}</span><span>${(f.size/1024).toFixed(1)} KB</span></div>`).join('');
+    document.getElementById('mergeBtn').style.display = mergeFiles.length > 1 ? 'block' : 'none';
+});
+
+async function mergePDFs() {
+    const mergedPdf = await PDFDocument.create();
+    for (const file of mergeFiles) {
+        const bytes = await file.arrayBuffer();
+        const pdf = await PDFDocument.load(bytes);
+        const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+        pages.forEach(p => mergedPdf.addPage(p));
+    }
+    const bytes = await mergedPdf.save();
+    downloadBlob(new Blob([bytes], {type: 'application/pdf'}), 'merged.pdf');
+}
+
+// Split
+document.getElementById('splitInput').addEventListener('change', e => {
+    splitFile = e.target.files[0];
+    document.getElementById('splitList').innerHTML = `<div class="file-item"><span>${splitFile.name}</span><span>${(splitFile.size/1024).toFixed(1)} KB</span></div>`;
+    document.getElementById('splitBtn').style.display = 'block';
+});
+
+async function splitPDF() {
+    const bytes = await splitFile.arrayBuffer();
+    const pdf = await PDFDocument.load(bytes);
+    const pageCount = pdf.getPageCount();
+    
+    // Simple split: each page as separate PDF, bundled in one download (or download individually)
+    for (let i = 0; i < pageCount; i++) {
+        const newPdf = await PDFDocument.create();
+        const [page] = await newPdf.copyPages(pdf, [i]);
+        newPdf.addPage(page);
+        const newBytes = await newPdf.save();
+        downloadBlob(new Blob([newBytes], {type: 'application/pdf'}), `page-${i+1}.pdf`);
+    }
+    alert(`Split into ${pageCount} PDFs. Check your downloads.`);
+}
+
+function downloadBlob(blob, name) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.click();
+}
+
+function switchTab(tab, el) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById(tab + 'Panel').classList.add('active');
+}
+</script>
+</body>
+</html>
