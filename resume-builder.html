@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en-IN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Primary SEO -->
-<title>Free ATS Resume Builder India | Professional Resume Maker, PDF Download</title>
+<!-- Global SEO -->
+<title>Free ATS Resume Builder | Professional Resume Maker, PDF Download</title>
 <meta name="description" content="Build a professional ATS-friendly resume free with live preview, built-in ATS score, auto-save, and instant PDF download. No sign-up, 100% private — your data never leaves your browser.">
-<meta name="keywords" content="ats resume builder, free resume maker india, professional resume builder, resume pdf download, ats friendly resume, free resume builder india">
+<meta name="keywords" content="ats resume builder, free resume maker, professional resume builder, resume pdf download, ats friendly resume, free resume builder">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="author" content="FreeToolIndia">
 <meta name="theme-color" content="#2563eb">
@@ -19,7 +19,7 @@
 <meta property="og:title" content="Free ATS Resume Builder | Professional Resume Maker, PDF Download">
 <meta property="og:description" content="Build a professional ATS-friendly resume free with live preview, built-in ATS score, auto-save, and instant PDF download. No sign-up, 100% private.">
 <meta property="og:site_name" content="FreeToolIndia">
-<meta property="og:locale" content="en_IN">
+<meta property="og:locale" content="en_US">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
@@ -27,11 +27,12 @@
 <meta name="twitter:description" content="Build a professional ATS-friendly resume free with live preview, ATS score, and PDF download.">
 
 <!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>">
 
-<!-- ============================================================
-     STRUCTURED DATA — head me (SEO best practice)
-     ============================================================ -->
+<!-- html2pdf.js for real PDF download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<!-- Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -49,7 +50,7 @@
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "INR",
+        "priceCurrency": "USD",
         "availability": "https://schema.org/InStock"
       },
       "featureList": [
@@ -58,18 +59,11 @@
         "Auto-save in browser localStorage",
         "Professional single-column ATS-friendly layout",
         "Experience, education, skills, projects, certifications sections",
-        "PDF download via print",
+        "Real PDF download",
         "No sign-up, no watermark, no limits"
       ],
       "publisher": {
         "@id": "https://www.freetoolindia.com/#organization"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "ratingCount": "234",
-        "bestRating": "5",
-        "worstRating": "1"
       }
     },
     {
@@ -177,7 +171,7 @@
           "name": "What format is the downloaded resume?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You can download it as PDF using the built-in print option (Ctrl+P / Cmd+P). The layout is clean, single-column, and ATS-compatible."
+            "text": "You can download it as a real PDF file with one click. The layout is clean, single-column, and ATS-compatible."
           }
         },
         {
@@ -284,12 +278,6 @@ footer { background: linear-gradient(135deg, #0f172a, #1e293b); color: #94a3b8; 
 footer a { color: #93c5fd; text-decoration: none; margin: 0 8px; }
 footer a:hover { color: #fff; }
 
-@media print {
-  body * { visibility: hidden; }
-  .preview-content, .preview-content * { visibility: visible; }
-  .preview-content { position: absolute; left: 0; top: 0; width: 100%; padding: 30px; }
-  .preview-toolbar { display: none !important; }
-}
 @media (max-width: 600px) {
   h1 { font-size: 1.5rem; }
   .container { padding: 18px 12px 40px; }
@@ -321,25 +309,25 @@ footer a:hover { color: #fff; }
             <div class="section-block">
                 <h3>👤 Personal Information</h3>
                 <label for="fullName">Full Name *</label>
-                <input type="text" id="fullName" placeholder="Rahul Sharma" oninput="update()">
+                <input type="text" id="fullName" placeholder="John Smith" oninput="update()">
                 <div class="row-2">
                     <div>
                         <label for="email">Email *</label>
-                        <input type="email" id="email" placeholder="rahul@email.com" oninput="update()">
+                        <input type="email" id="email" placeholder="john@email.com" oninput="update()">
                     </div>
                     <div>
                         <label for="phone">Phone *</label>
-                        <input type="tel" id="phone" placeholder="+91 98765 43210" oninput="update()">
+                        <input type="tel" id="phone" placeholder="+1 555 123 4567" oninput="update()">
                     </div>
                 </div>
                 <div class="row-2">
                     <div>
                         <label for="location">Location</label>
-                        <input type="text" id="location" placeholder="Mumbai, India" oninput="update()">
+                        <input type="text" id="location" placeholder="New York, USA" oninput="update()">
                     </div>
                     <div>
                         <label for="linkedin">LinkedIn / Portfolio</label>
-                        <input type="text" id="linkedin" placeholder="linkedin.com/in/rahul" oninput="update()">
+                        <input type="text" id="linkedin" placeholder="linkedin.com/in/johnsmith" oninput="update()">
                     </div>
                 </div>
                 <label for="jobTitle">Job Title / Target Role</label>
@@ -395,7 +383,7 @@ footer a:hover { color: #fff; }
             <div class="section-block">
                 <h3>🌐 Languages</h3>
                 <label for="languages">Languages (comma separated)</label>
-                <input type="text" id="languages" placeholder="English (Fluent), Hindi (Native), Spanish (Basic)" oninput="update()">
+                <input type="text" id="languages" placeholder="English (Fluent), Spanish (Basic)" oninput="update()">
             </div>
 
             <div class="btn-row">
@@ -427,7 +415,7 @@ footer a:hover { color: #fff; }
         <!-- SEO CONTENT -->
         <div class="seo-content">
             <h2>Free ATS Resume Builder — Create a Professional Resume in Minutes</h2>
-            <p>Did you know that over <strong>75% of resumes are rejected by ATS (Applicant Tracking System)</strong> before a human recruiter ever sees them? In India, top companies like TCS, Infosys, Wipro, Amazon, Flipkart, and thousands of startups use ATS software to filter job applications. If your resume isn't ATS-friendly, it doesn't matter how qualified you are — you won't get the interview call.</p>
+            <p>Did you know that over <strong>75% of resumes are rejected by ATS (Applicant Tracking System)</strong> before a human recruiter ever sees them? Top companies worldwide — from Fortune 500s to fast-growing startups — use ATS software to filter job applications. If your resume isn't ATS-friendly, it doesn't matter how qualified you are — you won't get the interview call.</p>
 
             <p>Our <strong>free ATS Resume Builder</strong> solves this problem. It guides you through building a clean, single-column, ATS-optimized resume — with a live preview, built-in ATS score, and instant PDF download. No sign-up, no watermark, and your data never leaves your browser.</p>
 
@@ -441,15 +429,15 @@ footer a:hover { color: #fff; }
             </ul>
 
             <h3>Who Is This For?</h3>
-            <p>This free resume builder is built for <strong>Indian job seekers</strong> — freshers applying for their first job, experienced professionals switching companies, students preparing for campus placements, and anyone who wants a professional resume without paying for expensive tools. Whether you're applying to IT services, product companies, banks, consulting firms, or government jobs, this builder gives you a strong foundation.</p>
+            <p>This free resume builder is built for <strong>job seekers worldwide</strong> — freshers applying for their first job, experienced professionals switching companies, students preparing for campus placements, and anyone who wants a professional resume without paying for expensive tools. Whether you're applying to tech companies, banks, consulting firms, or any other industry, this builder gives you a strong foundation.</p>
 
             <h3>How Is This Different From Paid Resume Builders?</h3>
-            <p>Paid tools like Novoresume, Zety, and Canva Pro charge <strong>₹500-2000 per month</strong> for similar features. Many of them add watermarks on free plans or require sign-up before you can download. Our builder is <strong>100% free, no sign-up, no watermark</strong>, with a built-in ATS score that most paid tools don't even offer.</p>
+            <p>Paid tools like Novoresume, Zety, and Canva Pro charge <strong>$9-29 per month</strong> for similar features. Many of them add watermarks on free plans or require sign-up before you can download. Our builder is <strong>100% free, no sign-up, no watermark</strong>, with a built-in ATS score that most paid tools don't even offer.</p>
 
             <h3>Pro Tips for a Better ATS Score</h3>
             <ul>
                 <li>Use action verbs: Led, Developed, Increased, Reduced, Launched</li>
-                <li>Add numbers: "Increased sales by 25%", "Led team of 5", "Saved ₹10 lakh annually"</li>
+                <li>Add numbers: "Increased sales by 25%", "Led team of 5", "Saved $50,000 annually"</li>
                 <li>Keep it 1-2 pages (300-700 words)</li>
                 <li>Include keywords from the job description naturally</li>
                 <li>Use a professional email like firstname.lastname@gmail.com</li>
@@ -487,7 +475,7 @@ footer a:hover { color: #fff; }
             </div>
             <div class="faq-item">
                 <h3>What format is the downloaded resume?</h3>
-                <p>You can download it as PDF using the built-in print option (Ctrl+P / Cmd+P). The layout is clean, single-column, and ATS-compatible.</p>
+                <p>You can download it as a real PDF file with one click. The layout is clean, single-column, and ATS-compatible.</p>
             </div>
             <div class="faq-item">
                 <h3>Can I use this resume for any job?</h3>
@@ -500,7 +488,7 @@ footer a:hover { color: #fff; }
             <h2>🔗 Explore More Free Tools</h2>
             <div class="interlink-grid">
                 <a href="ats-scanner.html">🎯 ATS Resume Score Scanner</a>
-                <a href="tax-calculator.html">💰 Salary Tax Calculator 2025-26</a>
+                <a href="tax-calculator.html">💰 Salary Tax Calculator</a>
                 <a href="notepad.html">📝 Online Auto-Save Notepad</a>
                 <a href="password-checker.html">🔐 Password Strength Checker</a>
                 <a href="bg-remover.html">🖼️ Background Remover</a>
@@ -511,7 +499,7 @@ footer a:hover { color: #fff; }
 </div>
 
 <footer>
-    <p><strong style="color: #fff;">🇮🇳 FreeToolIndia</strong></p>
+    <p><strong style="color: #fff;">🌍 FreeToolIndia</strong></p>
     <p style="margin-top: 10px;">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -520,7 +508,7 @@ footer a:hover { color: #fff; }
         <a href="terms.html">Terms</a>
         <a href="disclaimer.html">Disclaimer</a>
     </p>
-    <p style="margin-top: 14px;">© 2025 FreeToolIndia.com — All tools free forever.</p>
+    <p style="margin-top: 14px;">© 2026 FreeToolIndia.com — All tools free forever.</p>
 </footer>
 
 <noscript>
@@ -564,11 +552,11 @@ function addEducation(data) {
         <label>Degree</label>
         <input type="text" class="edu-degree" placeholder="B.Tech in Computer Science" oninput="update()" value="${data?.degree || ''}">
         <div class="row-2">
-            <div><label>Institution</label><input type="text" class="edu-school" placeholder="IIT Delhi" oninput="update()" value="${data?.school || ''}"></div>
+            <div><label>Institution</label><input type="text" class="edu-school" placeholder="Stanford University" oninput="update()" value="${data?.school || ''}"></div>
             <div><label>Year</label><input type="text" class="edu-year" placeholder="2016 - 2020" oninput="update()" value="${data?.year || ''}"></div>
         </div>
         <label>Details (optional)</label>
-        <input type="text" class="edu-details" placeholder="CGPA: 8.5/10" oninput="update()" value="${data?.details || ''}">
+        <input type="text" class="edu-details" placeholder="GPA: 3.8/4.0" oninput="update()" value="${data?.details || ''}">
     `;
     document.getElementById('educationList').appendChild(div);
     update();
@@ -754,7 +742,7 @@ function calculateATS() {
     const edus = collect('educationList', ['edu-degree','edu-school','edu-year','edu-details']);
     if (edus.length >= 1) score += 15;
 
-    const skillsCount = val('skills').split(',').filter(x => x.trim()).length;
+    const skillsCount = (val('skills') || '').split(',').filter(x => x.trim()).length;
     if (skillsCount >= 6) score += 15;
     else if (skillsCount >= 3) score += 10;
     else if (skillsCount >= 1) score += 5;
@@ -830,9 +818,21 @@ function loadData() {
     update();
 }
 
-// ========== PDF ==========
+// ========== REAL PDF DOWNLOAD ==========
 function downloadPDF() {
-    window.print();
+    const element = document.getElementById('preview');
+    const name = val('fullName') || 'resume';
+    const filename = name.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '_resume.pdf';
+    
+    const opt = {
+        margin: 0,
+        filename: filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    
+    html2pdf().set(opt).from(element).save();
 }
 
 // ========== CLEAR ==========
