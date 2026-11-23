@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Unit Converter — Length, Weight, Temperature (Instant)</title>
+<meta name="description" content="Convert length, weight, and temperature instantly. Free online unit converter — no signup, works in your browser, 100% private.">
+<meta name="keywords" content="unit converter, length converter, weight converter, temperature converter, free unit converter, cm to inches, kg to lbs, celsius to fahrenheit">
+<link rel="canonical" href="https://www.freetoolindia.com/unit-converter.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Free Unit Converter","url":"https://www.freetoolindia.com/unit-converter.html","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6;padding:20px}
+.container{max-width:700px;margin:0 auto;background:#fff;padding:30px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.05)}
+h1{font-size:2rem;color:#7c3aed;margin-bottom:8px}
+.subtitle{color:#64748b;margin-bottom:20px}
+.tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.tab{padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:700;border:2px solid #e2e8f0;background:#fff}
+.tab.active{background:#7c3aed;color:#fff;border-color:#7c3aed}
+.panel{display:none}.panel.active{display:block}
+.row{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end;margin-top:15px}
+label{display:block;font-weight:700;font-size:0.85rem;margin-bottom:4px}
+input,select{width:100%;padding:12px;border:2px solid #e9d5ff;border-radius:8px;font-family:inherit;font-size:1rem}
+input:focus,select:focus{border-color:#a855f7;outline:none}
+.swap{background:#f3e8ff;border:none;padding:12px;border-radius:8px;cursor:pointer;font-size:1.2rem}
+.result{background:#faf5ff;padding:20px;border-radius:10px;margin-top:15px;text-align:center;font-size:1.3rem;font-weight:800;color:#7c3aed}
+.note{background:#faf5ff;padding:16px;border-radius:10px;margin-top:20px;font-size:0.9rem;color:#6b21a8}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📏 Unit Converter</h1>
+<p class="subtitle">Length, Weight, Temperature — instant, private, free.</p>
+
+<div class="tabs">
+<div class="tab active" onclick="switchTab('length', this)">📐 Length</div>
+<div class="tab" onclick="switchTab('weight', this)">⚖️ Weight</div>
+<div class="tab" onclick="switchTab('temp', this)">🌡️ Temperature</div>
+</div>
+
+<div id="lengthPanel" class="panel active">
+<div class="row">
+<div><label>From</label><select id="lenFrom" onchange="convertLength()"><option value="m">Meters</option><option value="km">Kilometers</option><option value="cm">Centimeters</option><option value="mm">Millimeters</option><option value="mi">Miles</option><option value="yd">Yards</option><option value="ft">Feet</option><option value="in">Inches</option></select></div>
+<button class="swap" onclick="swap('len')">⇄</button>
+<div><label>To</label><select id="lenTo" onchange="convertLength()"><option value="ft">Feet</option><option value="in">Inches</option><option value="m">Meters</option><option value="km">Kilometers</option><option value="cm">Centimeters</option><option value="mm">Millimeters</option><option value="mi">Miles</option><option value="yd">Yards</option></select></div>
+</div>
+<input type="number" id="lenInput" placeholder="Enter value" value="1" oninput="convertLength()" style="margin-top:10px">
+<div class="result" id="lenResult">1 Meter = 3.28084 Feet</div>
+</div>
+
+<div id="weightPanel" class="panel">
+<div class="row">
+<div><label>From</label><select id="wFrom" onchange="convertWeight()"><option value="kg">Kilograms</option><option value="g">Grams</option><option value="mg">Milligrams</option><option value="lb">Pounds</option><option value="oz">Ounces</option><option value="t">Metric Tons</option></select></div>
+<button class="swap" onclick="swap('w')">⇄</button>
+<div><label>To</label><select id="wTo" onchange="convertWeight()"><option value="lb">Pounds</option><option value="oz">Ounces</option><option value="kg">Kilograms</option><option value="g">Grams</option><option value="mg">Milligrams</option><option value="t">Metric Tons</option></select></div>
+</div>
+<input type="number" id="wInput" placeholder="Enter value" value="1" oninput="convertWeight()" style="margin-top:10px">
+<div class="result" id="wResult">1 Kilogram = 2.20462 Pounds</div>
+</div>
+
+<div id="tempPanel" class="panel">
+<div class="row">
+<div><label>From</label><select id="tFrom" onchange="convertTemp()"><option value="c">Celsius</option><option value="f">Fahrenheit</option><option value="k">Kelvin</option></select></div>
+<button class="swap" onclick="swap('t')">⇄</button>
+<div><label>To</label><select id="tTo" onchange="convertTemp()"><option value="f">Fahrenheit</option><option value="c">Celsius</option><option value="k">Kelvin</option></select></div>
+</div>
+<input type="number" id="tInput" placeholder="Enter value" value="0" oninput="convertTemp()" style="margin-top:10px">
+<div class="result" id="tResult">0 Celsius = 32 Fahrenheit</div>
+</div>
+
+<div class="note">🔒 <strong>Privacy:</strong> All conversions happen in your browser. No data is sent anywhere.</div>
+</div>
+
+<script>
+function switchTab(tab, el) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById(tab + 'Panel').classList.add('active');
+}
+
+const lenFactors = { m: 1, km: 1000, cm: 0.01, mm: 0.001, mi: 1609.344, yd: 0.9144, ft: 0.3048, in: 0.0254 };
+const wFactors = { kg: 1, g: 0.001, mg: 0.000001, lb: 0.453592, oz: 0.0283495, t: 1000 };
+
+function convertLength() {
+    const val = parseFloat(document.getElementById('lenInput').value) || 0;
+    const from = document.getElementById('lenFrom').value;
+    const to = document.getElementById('lenTo').value;
+    const result = val * lenFactors[from] / lenFactors[to];
+    document.getElementById('lenResult').textContent = `${val} ${from} = ${result.toFixed(6)} ${to}`;
+}
+
+function convertWeight() {
+    const val = parseFloat(document.getElementById('wInput').value) || 0;
+    const from = document.getElementById('wFrom').value;
+    const to = document.getElementById('wTo').value;
+    const result = val * wFactors[from] / wFactors[to];
+    document.getElementById('wResult').textContent = `${val} ${from} = ${result.toFixed(6)} ${to}`;
+}
+
+function convertTemp() {
+    const val = parseFloat(document.getElementById('tInput').value) || 0;
+    const from = document.getElementById('tFrom').value;
+    const to = document.getElementById('tTo').value;
+    let celsius = from === 'c' ? val : from === 'f' ? (val - 32) * 5/9 : val - 273.15;
+    let result = to === 'c' ? celsius : to === 'f' ? celsius * 9/5 + 32 : celsius + 273.15;
+    document.getElementById('tResult').textContent = `${val} ${from.toUpperCase()} = ${result.toFixed(2)} ${to.toUpperCase()}`;
+}
+
+function swap(type) {
+    if (type === 'len') { const a = document.getElementById('lenFrom').value, b = document.getElementById('lenTo').value; document.getElementById('lenFrom').value = b; document.getElementById('lenTo').value = a; convertLength(); }
+    if (type === 'w') { const a = document.getElementById('wFrom').value, b = document.getElementById('wTo').value; document.getElementById('wFrom').value = b; document.getElementById('wTo').value = a; convertWeight(); }
+    if (type === 't') { const a = document.getElementById('tFrom').value, b = document.getElementById('tTo').value; document.getElementById('tFrom').value = b; document.getElementById('tTo').value = a; convertTemp(); }
+}
+
+convertLength();
+</script>
+</body>
+</html>
