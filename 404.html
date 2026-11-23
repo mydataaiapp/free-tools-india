@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en-IN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Primary SEO — 404 ko index nahi karna chahiye -->
+<!-- Global SEO — 404 ko index nahi karna chahiye -->
 <title>404 - Page Not Found | FreeToolIndia</title>
 <meta name="description" content="The page you're looking for doesn't exist. Explore our free online tools — ATS Resume Builder, Tax Calculator, Background Remover, Password Checker, and more.">
 <meta name="robots" content="noindex, follow, max-snippet:-1, max-image-preview:large">
@@ -18,7 +18,7 @@
 <meta property="og:title" content="404 - Page Not Found | FreeToolIndia">
 <meta property="og:description" content="The page you're looking for doesn't exist. Explore our free online tools instead.">
 <meta property="og:site_name" content="FreeToolIndia">
-<meta property="og:locale" content="en_IN">
+<meta property="og:locale" content="en_US">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
@@ -26,7 +26,7 @@
 <meta name="twitter:description" content="The page you're looking for doesn't exist. Explore our free online tools instead.">
 
 <!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -76,7 +76,8 @@ h1 { font-size: 1.7rem; font-weight: 800; margin-bottom: 12px; letter-spacing: -
         </div>
 
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search our tools..." onkeydown="if(event.key==='Enter') searchTools()">
+            <label for="searchInput" style="position:absolute;left:-9999px;">Search tools</label>
+            <input type="text" id="searchInput" placeholder="Search our tools..." aria-label="Search tools" onkeydown="if(event.key==='Enter') searchTools()">
         </div>
 
         <div class="tools-title">🔗 Popular Free Tools</div>
