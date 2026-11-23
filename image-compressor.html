@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Image Compressor — Compress JPEG, PNG, WebP Online (No Upload)</title>
+<meta name="description" content="Compress images free in your browser. Reduce JPEG, PNG, WebP file size without losing quality. No signup, no upload — files never leave your device.">
+<meta name="keywords" content="image compressor, compress image online, reduce image size, free image compressor, compress jpeg, compress png, compress webp, no upload image compressor">
+<link rel="canonical" href="https://www.freetoolindia.com/image-compressor.html">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Free Image Compressor","url":"https://www.freetoolindia.com/image-compressor.html","applicationCategory":"MultimediaApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Compress images in your browser. No upload, no signup. JPEG, PNG, WebP supported."}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6;padding:20px}
+.container{max-width:850px;margin:0 auto;background:#fff;padding:30px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.05)}
+h1{font-size:2rem;color:#2563eb;margin-bottom:8px}
+.subtitle{color:#64748b;margin-bottom:20px}
+.dropzone{border:3px dashed #cbd5e1;border-radius:16px;padding:40px 20px;text-align:center;cursor:pointer;transition:0.2s;background:#f8fafc}
+.dropzone:hover{background:#eff6ff;border-color:#3b82f6}
+.dropzone input{display:none}
+.btn{background:#2563eb;color:white;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer;margin:5px;font-size:0.95rem}
+.btn:hover{background:#1d4ed8}
+.btn-green{background:#10b981}.btn-green:hover{background:#059669}
+.btn-outline{background:#fff;color:#2563eb;border:2px solid #dbeafe}
+.file-list{margin-top:20px}
+.file-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid #e2e8f0;font-size:0.9rem}
+.status{color:#10b981;font-weight:700}
+.note{background:#eff6ff;padding:16px;border-radius:10px;margin-top:20px;font-size:0.9rem;color:#1e40af}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🖼️ Image Compressor</h1>
+<p class="subtitle">Compress JPEG, PNG, WebP — 100% in your browser. No upload, no signup.</p>
+
+<div class="dropzone" id="dropzone">
+<p style="font-size:1.2rem;margin-bottom:8px">📤 Drop images here or click to browse</p>
+<p style="color:#64748b;font-size:0.9rem">Supports JPEG, PNG, WebP — multiple files allowed</p>
+<input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple>
+</div>
+
+<div style="margin-top:15px">
+<label>Quality: <span id="qualityVal">70</span>%</label>
+<input type="range" id="quality" min="10" max="100" value="70" style="width:100%" oninput="document.getElementById('qualityVal').textContent=this.value">
+</div>
+
+<div class="file-list" id="fileList"></div>
+<div id="actions" style="margin-top:20px;display:none">
+<button class="btn btn-green" onclick="compressAll()">📦 Compress & Download ZIP</button>
+<button class="btn btn-outline" onclick="location.reload()">↺ Reset</button>
+</div>
+
+<div class="note">
+🔒 <strong>Privacy:</strong> All processing happens in your browser. Your images are never uploaded to any server.
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+let files = [];
+
+dropzone.addEventListener('click', () => fileInput.click());
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.style.background = '#eff6ff'; });
+dropzone.addEventListener('dragleave', () => dropzone.style.background = '#f8fafc');
+dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.style.background = '#f8fafc'; handleFiles(e.dataTransfer.files); });
+fileInput.addEventListener('change', e => handleFiles(e.target.files));
+
+function handleFiles(newFiles) {
+    for (const f of newFiles) {
+        if (f.type.startsWith('image/')) files.push(f);
+    }
+    renderList();
+}
+
+function renderList() {
+    const list = document.getElementById('fileList');
+    list.innerHTML = files.map((f, i) => `<div class="file-item"><span>${f.name}</span><span>${(f.size/1024).toFixed(1)} KB</span><span class="status" id="status-${i}">Pending</span></div>`).join('');
+    document.getElementById('actions').style.display = files.length ? 'block' : 'none';
+}
+
+async function compressImage(file, quality) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            canvas.toBlob(blob => resolve(blob), file.type, quality / 100);
+        };
+        img.src = URL.createObjectURL(file);
+    });
+}
+
+async function compressAll() {
+    const quality = parseInt(document.getElementById('quality').value);
+    const zip = new JSZip();
+    
+    for (let i = 0; i < files.length; i++) {
+        document.getElementById(`status-${i}`).textContent = 'Compressing...';
+        const blob = await compressImage(files[i], quality);
+        zip.file(files[i].name.replace(/\.[^.]+$/, '') + '_compressed.' + files[i].name.split('.').pop(), blob);
+        document.getElementById(`status-${i}`).textContent = '✅ Done';
+    }
+    
+    const content = await zip.generateAsync({ type: 'blob' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(content);
+    a.download = 'compressed-images.zip';
+    a.click();
+}
+</script>
+</body>
+</html>
