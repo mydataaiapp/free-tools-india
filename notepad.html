@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en-IN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Primary SEO -->
-<title>Free Online Notepad India | Menu Bar, Find & Replace, Dark Mode</title>
+<!-- Global SEO -->
+<title>Free Online Notepad | Menu Bar, Find & Replace, Dark Mode</title>
 <meta name="description" content="Free online notepad with File/Edit/Insert/View menus, find & replace, multiple notes, auto-save, dark mode. Works offline, no sign-up, 100% private — your notes never leave your device.">
-<meta name="keywords" content="online notepad, notepad with menus, find replace notepad, free notepad india, multiple notes, dark mode notepad, offline notepad, browser notepad">
+<meta name="keywords" content="online notepad, notepad with menus, find replace notepad, free notepad, multiple notes, dark mode notepad, offline notepad, browser notepad, private notepad">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="author" content="FreeToolIndia">
 <meta name="theme-color" content="#d97706">
@@ -19,19 +19,17 @@
 <meta property="og:title" content="Free Online Notepad | Menu Bar, Find & Replace, Dark Mode">
 <meta property="og:description" content="Free online notepad with File/Edit/Insert/View menus, find & replace, multiple notes, auto-save, dark mode. Works offline, 100% private.">
 <meta property="og:site_name" content="FreeToolIndia">
-<meta property="og:locale" content="en_IN">
+<meta property="og:locale" content="en_US">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Free Online Notepad | Menu Bar, Find & Replace, Dark Mode">
-<meta name="twitter:description" content="Free online notepad with menus, find & replace, multiple notes, auto-save, dark mode. 100% private.">
+<meta name="twitter:description" content="Free online notepad with menus, find & replace, auto-save, dark mode. 100% private.">
 
 <!-- Favicon -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇮🇳</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
 
-<!-- ============================================================
-     STRUCTURED DATA — head me (SEO best practice)
-     ============================================================ -->
+<!-- Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -49,7 +47,7 @@
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "INR",
+        "priceCurrency": "USD",
         "availability": "https://schema.org/InStock"
       },
       "featureList": [
@@ -67,13 +65,6 @@
       ],
       "publisher": {
         "@id": "https://www.freetoolindia.com/#organization"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "156",
-        "bestRating": "5",
-        "worstRating": "1"
       }
     },
     {
@@ -522,7 +513,7 @@ footer a:hover { color: #fff; }
         </ul>
 
         <h3>Who Is This For?</h3>
-        <p>This free notepad is perfect for <strong>students, professionals, writers, and anyone in India</strong> who needs a quick place to write. Whether you're drafting an email, taking meeting notes, preparing for exams, or just jotting down ideas — the online notepad is fast, private, and always available. Works on phone, tablet, and desktop.</p>
+        <p>This free notepad is perfect for <strong>students, professionals, writers, developers, and anyone</strong> who needs a quick place to write. Whether you're drafting an email, taking meeting notes, preparing for exams, or just jotting down ideas — the online notepad is fast, private, and always available. Works on phone, tablet, and desktop.</p>
 
         <h3>How Is This Different From Other Online Notepads?</h3>
         <p>Most online notepads are either too simple (no menus, no find & replace) or too complex (require sign-up, store your data on servers, show ads). Our notepad hits the sweet spot — <strong>Windows Notepad-like features, zero sign-up, 100% private, and completely free</strong>. Your notes never leave your browser.</p>
@@ -643,7 +634,7 @@ footer a:hover { color: #fff; }
             <li>✅ Works offline</li>
             <li>✅ Your data never leaves your device</li>
         </ul>
-        <p style="margin-top: 15px; font-size: 0.85rem; color: #64748b;">Version 3.0 • Made with ❤️ for India</p>
+        <p style="margin-top: 15px; font-size: 0.85rem; color: #64748b;">Version 3.0 • Made with ❤️ for the World</p>
         <div class="btn-row">
             <button class="btn" onclick="closeModal('aboutModal')">Close</button>
         </div>
@@ -687,7 +678,7 @@ footer a:hover { color: #fff; }
 </div>
 
 <footer>
-    <p><strong style="color: #fff;">🇮🇳 FreeToolIndia</strong></p>
+    <p><strong style="color: #fff;">🌍 FreeToolIndia</strong></p>
     <p style="margin-top: 10px;">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -772,22 +763,22 @@ function menuAction(action) {
         case 'selectall': document.getElementById('noteBody').select(); break;
         case 'time': insertDateTime(); break;
         case 'datetime': insertDateTime(); break;
-        case 'shortdate': insertShortDate(); break;
-        case 'separator': insertAtCursor('\n' + '─'.repeat(50) + '\n'); break;
-        case 'bullet': insertAtCursor('\n• '); break;
-        case 'numbered': insertAtCursor('\n1. '); break;
-        case 'checkbox': insertAtCursor('\n☐ '); break;
-        case 'emoji': openModal('emojiModal'); break;
-        case 'darkmode': toggleDark(); break;
-        case 'fontup': changeFont(1); break;
-        case 'fontdown': changeFont(-1); break;
-        case 'fontreset': resetFont(); break;
-        case 'wrap': toggleWrap(); break;
-        case 'fullscreen': toggleFullscreen(); break;
-        case 'shortcuts': openModal('shortcutsModal'); break;
-        case 'about': openModal('aboutModal'); break;
-        case 'faq': document.querySelector('.faq-section').scrollIntoView({behavior: 'smooth'}); break;
-        case 'contact': window.location.href = 'contact.html'; break;
+        'shortdate': insertShortDate(); break;
+        'separator': insertAtCursor('\n' + '─'.repeat(50) + '\n'); break;
+        'bullet': insertAtCursor('\n• '); break;
+        'numbered': insertAtCursor('\n1. '); break;
+        'checkbox': insertAtCursor('\n☐ '); break;
+        'emoji': openModal('emojiModal'); break;
+        'darkmode': toggleDark(); break;
+        'fontup': changeFont(1); break;
+        'fontdown': changeFont(-1); break;
+        'fontreset': resetFont(); break;
+        'wrap': toggleWrap(); break;
+        'fullscreen': toggleFullscreen(); break;
+        'shortcuts': openModal('shortcutsModal'); break;
+        'about': openModal('aboutModal'); break;
+        'faq': document.querySelector('.faq-section').scrollIntoView({behavior: 'smooth'}); break;
+        'contact': window.location.href = 'contact.html'; break;
     }
 }
 
@@ -959,13 +950,13 @@ function insertAtCursor(text) {
 
 function insertDateTime() {
     const now = new Date();
-    const formatted = now.toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
+    const formatted = now.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
     insertAtCursor('\n' + formatted + '\n');
 }
 
 function insertShortDate() {
     const now = new Date();
-    insertAtCursor(now.toLocaleDateString('en-IN'));
+    insertAtCursor(now.toLocaleDateString('en-US'));
 }
 
 function insertEmoji(emoji) {
