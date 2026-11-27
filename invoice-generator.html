@@ -3,41 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Invoice Generator — Create & Download PDF Invoices (No Signup)</title>
-<meta name="description" content="Generate professional invoices free. Add items, tax, logo, and download as PDF. No signup, no watermark — works in your browser.">
-<meta name="keywords" content="invoice generator, free invoice generator, invoice maker, create invoice online, invoice pdf download, freelance invoice, no signup invoice">
+<title>Free Invoice Generator — Unlimited Invoices, No Watermark, No Signup</title>
+<meta name="description" content="Create professional PDF invoices free — unlimited, no watermark, multi-currency, logo upload. Works in your browser. No signup, no limits.">
+<meta name="keywords" content="invoice generator, free invoice generator, invoice maker, create invoice online, invoice pdf download, freelance invoice, no signup invoice, unlimited invoice generator, multi currency invoice">
 <link rel="canonical" href="https://www.freetoolindia.com/invoice-generator.html">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Free Invoice Generator","url":"https://www.freetoolindia.com/invoice-generator.html","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Free Invoice Generator","url":"https://www.freetoolindia.com/invoice-generator.html","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Unlimited PDF invoices with multi-currency and logo upload. No watermark, no signup."}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there a limit on how many invoices I can create?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Unlike Zoho Invoice, which caps free users at 500 invoices per year and 2 users, our generator has no limits. Create unlimited invoices forever."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it support multiple currencies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Choose from USD, EUR, GBP, INR, and more. Paid tools like FreshBooks charge extra for multi-currency — here it's free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add my company logo to the invoice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Upload your logo and it appears on the invoice. This is a premium feature in many invoicing tools."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the PDF have a watermark?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Our PDFs are completely clean — no 'Created with...' watermark. Your invoice looks 100% professional."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my invoice data stored on a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Everything is stored locally in your browser. We never see your client names, amounts, or business details."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it calculate tax and discounts automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Enter your tax rate (e.g., 18% GST, 10% VAT) and discount, and totals calculate automatically."
+      }
+    }
+  ]
+}
 </script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6;padding:20px}
-.container{max-width:800px;margin:0 auto;background:#fff;padding:30px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.05)}
+.container{max-width:850px;margin:0 auto;background:#fff;padding:30px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.05)}
 h1{font-size:2rem;color:#059669;margin-bottom:8px}
 .subtitle{color:#64748b;margin-bottom:20px}
 label{display:block;font-weight:700;font-size:0.85rem;margin-top:12px;margin-bottom:4px}
-input,textarea{width:100%;padding:10px;border:2px solid #d1fae5;border-radius:8px;font-family:inherit;font-size:0.95rem}
-input:focus,textarea:focus{border-color:#10b981;outline:none}
+input,textarea,select{width:100%;padding:10px;border:2px solid #d1fae5;border-radius:8px;font-family:inherit;font-size:0.95rem}
+input:focus,textarea:focus,select:focus{border-color:#10b981;outline:none}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.item-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;margin-bottom:8px;align-items:center}
-.btn{background:#059669;color:#fff;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer;margin-top:15px;font-size:0.95rem}
+.row3{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;margin-bottom:8px;align-items:center}
+.btn{background:#059669;color:#fff;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer;margin-top:15px;font-size:0.95rem;font-family:inherit}
 .btn:hover{background:#047857}
 .btn-green{background:#10b981}.btn-green:hover{background:#059669}
-.btn-outline{background:#fff;color:#059669;border:2px solid #d1fae5}
+.btn-outline{background:#fff;color:#059669;border:2px solid #d1fae5;font-family:inherit}
 #invoicePreview{margin-top:30px;padding:30px;border:2px solid #e2e8f0;border-radius:12px;background:#fff}
 .preview-header{display:flex;justify-content:space-between;border-bottom:2px solid #e2e8f0;padding-bottom:15px;margin-bottom:15px}
 .preview-total{text-align:right;font-size:1.2rem;font-weight:800;color:#059669;margin-top:15px}
 .note{background:#ecfdf5;padding:16px;border-radius:10px;margin-top:20px;font-size:0.9rem;color:#065f46}
+.logo-preview{max-height:60px;margin-top:8px;display:none;border-radius:6px}
+.faq-section{margin-top:40px;border-top:1px solid #e2e8f0;padding-top:30px}
+.faq-section h2{color:#059669;font-size:1.4rem;margin-bottom:16px}
+.faq-item{background:#f8fafc;padding:18px 20px;border-radius:12px;margin-bottom:12px;border-left:4px solid #059669}
+.faq-item h3{color:#0f172a;font-size:1rem;margin-bottom:6px;font-weight:700}
+.faq-item p{color:#475569;font-size:0.9rem;line-height:1.6}
+.interlink{margin-top:30px;background:#f8fafc;padding:24px;border-radius:12px}
+.interlink h2{color:#059669;font-size:1.2rem;margin-bottom:16px}
+.interlink-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.interlink-grid a{display:block;background:#fff;padding:12px 16px;border-radius:8px;text-decoration:none;color:#0f172a;font-weight:600;font-size:0.88rem;border-left:3px solid #059669;transition:all 0.2s}
+.interlink-grid a:hover{transform:translateX(4px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+@media(max-width:600px){.row,.row3{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="container">
 <h1>🧾 Invoice Generator</h1>
-<p class="subtitle">Create professional invoices — download as PDF. 100% free, no signup.</p>
+<p class="subtitle">Unlimited PDF invoices — multi-currency, logo upload, no watermark. 100% free, no signup.</p>
 
 <label>Your Company Name</label>
 <input type="text" id="companyName" placeholder="Your Company" value="FreeToolIndia">
+
+<label>Company Logo (optional)</label>
+<input type="file" id="logoInput" accept="image/*">
+<img id="logoPreview" class="logo-preview" alt="Logo preview">
 
 <label>Client Name</label>
 <input type="text" id="clientName" placeholder="Client Name">
@@ -47,9 +119,23 @@ input:focus,textarea:focus{border-color:#10b981;outline:none}
 <div><label>Date</label><input type="date" id="invoiceDate"></div>
 </div>
 
+<div class="row">
+<div><label>Currency</label>
+<select id="currency">
+<option value="$">USD ($)</option>
+<option value="€">EUR (€)</option>
+<option value="£">GBP (£)</option>
+<option value="₹">INR (₹)</option>
+<option value="¥">JPY (¥)</option>
+<option value="A$">AUD (A$)</option>
+<option value="C$">CAD (C$)</option>
+</select></div>
+<div><label>Due Date</label><input type="date" id="dueDate"></div>
+</div>
+
 <label>Items</label>
 <div id="itemsContainer">
-<div class="item-row"><input placeholder="Description" class="item-desc"><input type="number" placeholder="Qty" class="item-qty" value="1"><input type="number" placeholder="Price" class="item-price"><span class="item-total">0</span></div>
+<div class="row3"><input placeholder="Description" class="item-desc"><input type="number" placeholder="Qty" class="item-qty" value="1"><input type="number" placeholder="Price" class="item-price"><span class="item-total">0</span></div>
 </div>
 <button class="btn btn-outline" onclick="addItem()">+ Add Item</button>
 
@@ -63,18 +149,84 @@ input:focus,textarea:focus{border-color:#10b981;outline:none}
 
 <div id="invoicePreview"></div>
 
-<div class="note">🔒 <strong>Privacy:</strong> Everything runs in your browser. No data is uploaded.</div>
+<div class="note">🔒 <strong>Privacy:</strong> Everything runs in your browser. No data is uploaded. Invoices auto-save locally.</div>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+<h3>Is there a limit on how many invoices I can create?</h3>
+<p>No. Unlike Zoho Invoice, which caps free users at <strong>500 invoices per year and 2 users</strong>, our generator has no limits. Create unlimited invoices forever.</p>
+</div>
+
+<div class="faq-item">
+<h3>Does it support multiple currencies?</h3>
+<p>Yes. Choose from USD, EUR, GBP, INR, JPY, AUD, CAD, and more. Paid tools like FreshBooks charge extra for multi-currency — here it's free.</p>
+</div>
+
+<div class="faq-item">
+<h3>Can I add my company logo to the invoice?</h3>
+<p>Yes. Upload your logo and it appears on the invoice. This is a premium feature in many invoicing tools.</p>
+</div>
+
+<div class="faq-item">
+<h3>Does the PDF have a watermark?</h3>
+<p>No. Our PDFs are <strong>completely clean</strong> — no "Created with..." watermark. Your invoice looks 100% professional.</p>
+</div>
+
+<div class="faq-item">
+<h3>Is my invoice data stored on a server?</h3>
+<p>No. Everything is stored <strong>locally in your browser</strong>. We never see your client names, amounts, or business details.</p>
+</div>
+
+<div class="faq-item">
+<h3>Does it calculate tax and discounts automatically?</h3>
+<p>Yes. Enter your tax rate (e.g., 18% GST, 10% VAT) and discount, and totals calculate automatically.</p>
+</div>
+</section>
+
+<!-- Interlinking -->
+<div class="interlink">
+<h2>🔗 Related Free Tools</h2>
+<div class="interlink-grid">
+<a href="pdf-tools.html">📄 PDF Merge & Split — Combine or split PDFs</a>
+<a href="image-compressor.html">🖼️ Image Compressor — Optimize your logo</a>
+<a href="resume-builder.html">📄 ATS Resume Builder — Build a resume</a>
+<a href="tax-calculator.html">💰 Tax Calculator — Calculate your tax</a>
+<a href="index.html">🏠 All Free Tools</a>
+</div>
+</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
 document.getElementById('invoiceDate').valueAsDate = new Date();
+let logoDataUrl = '';
+
+// Logo upload
+document.getElementById('logoInput').addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        logoDataUrl = ev.target.result;
+        const img = document.getElementById('logoPreview');
+        img.src = logoDataUrl;
+        img.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+});
 
 function addItem() {
     const div = document.createElement('div');
-    div.className = 'item-row';
+    div.className = 'row3';
     div.innerHTML = '<input placeholder="Description" class="item-desc"><input type="number" placeholder="Qty" class="item-qty" value="1"><input type="number" placeholder="Price" class="item-price"><span class="item-total">0</span>';
     document.getElementById('itemsContainer').appendChild(div);
+}
+
+function updatePreview() {
+    if (document.getElementById('invoicePreview').innerHTML) generateInvoice();
 }
 
 function generateInvoice() {
@@ -82,34 +234,44 @@ function generateInvoice() {
     const client = document.getElementById('clientName').value;
     const invNo = document.getElementById('invoiceNo').value;
     const date = document.getElementById('invoiceDate').value;
+    const dueDate = document.getElementById('dueDate').value;
+    const currency = document.getElementById('currency').value;
     const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
     const discount = parseFloat(document.getElementById('discount').value) || 0;
     
     let itemsHtml = '';
     let subtotal = 0;
-    document.querySelectorAll('.item-row').forEach(row => {
-        const desc = row.querySelector('.item-desc').value;
-        const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
-        const price = parseFloat(row.querySelector('.item-price').value) || 0;
+    document.querySelectorAll('.row3').forEach(row => {
+        const desc = row.querySelector('.item-desc')?.value || '';
+        const qty = parseFloat(row.querySelector('.item-qty')?.value) || 0;
+        const price = parseFloat(row.querySelector('.item-price')?.value) || 0;
         const total = qty * price;
         subtotal += total;
-        if (desc) itemsHtml += `<tr><td>${desc}</td><td>${qty}</td><td>$${price.toFixed(2)}</td><td>$${total.toFixed(2)}</td></tr>`;
+        if (desc) itemsHtml += `<tr><td style="padding:8px;border-bottom:1px solid #e2e8f0">${desc}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${qty}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${currency}${price.toFixed(2)}</td><td style="padding:8px;border-bottom:1px solid #e2e8f0">${currency}${total.toFixed(2)}</td></tr>`;
     });
     
     const tax = subtotal * (taxRate / 100);
     const grandTotal = subtotal + tax - discount;
     
+    const logoHtml = logoDataUrl ? `<img src="${logoDataUrl}" style="max-height:60px;margin-bottom:10px">` : '';
+    
     document.getElementById('invoicePreview').innerHTML = `
-        <div class="preview-header"><div><h2>${company}</h2></div><div><p>Invoice: ${invNo}</p><p>Date: ${date}</p></div></div>
-        <p><strong>Bill To:</strong> ${client}</p>
-        <table style="width:100%;margin-top:15px;border-collapse:collapse"><thead><tr style="background:#ecfdf5"><th style="padding:8px;text-align:left">Description</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>${itemsHtml}</tbody></table>
-        <div class="preview-total">Subtotal: $${subtotal.toFixed(2)}<br>Tax (${taxRate}%): $${tax.toFixed(2)}<br>Discount: -$${discount.toFixed(2)}<br><strong>Total: $${grandTotal.toFixed(2)}</strong></div>
+        <div class="preview-header">
+            <div>${logoHtml}<h2 style="margin:0;color:#059669">${company}</h2></div>
+            <div style="text-align:right"><p style="margin:0"><strong>Invoice:</strong> ${invNo}</p><p style="margin:0"><strong>Date:</strong> ${date}</p>${dueDate ? `<p style="margin:0"><strong>Due:</strong> ${dueDate}</p>` : ''}</div>
+        </div>
+        <p><strong>Bill To:</strong> ${client || '—'}</p>
+        <table style="width:100%;margin-top:15px;border-collapse:collapse"><thead><tr style="background:#ecfdf5"><th style="padding:8px;text-align:left">Description</th><th style="padding:8px;text-align:left">Qty</th><th style="padding:8px;text-align:left">Price</th><th style="padding:8px;text-align:left">Total</th></tr></thead><tbody>${itemsHtml}</tbody></table>
+        <div class="preview-total">Subtotal: ${currency}${subtotal.toFixed(2)}<br>Tax (${taxRate}%): ${currency}${tax.toFixed(2)}<br>Discount: −${currency}${discount.toFixed(2)}<br><strong style="font-size:1.3rem">Total: ${currency}${grandTotal.toFixed(2)}</strong></div>
     `;
     document.getElementById('downloadBtn').style.display = 'block';
+    
+    // Auto-save to localStorage
+    localStorage.setItem('freetool_invoice', JSON.stringify({ company, client, invNo, date, dueDate, currency, taxRate, discount }));
 }
 
 function downloadPDF() {
-    html2pdf().from(document.getElementById('invoicePreview')).set({filename: 'invoice.pdf', margin: 10}).save();
+    html2pdf().from(document.getElementById('invoicePreview')).set({filename: 'invoice-' + document.getElementById('invoiceNo').value + '.pdf', margin: 10}).save();
 }
 </script>
 </body>
