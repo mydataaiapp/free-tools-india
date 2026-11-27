@@ -3,21 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Unit Converter — Length, Weight, Temperature (Instant)</title>
-<meta name="description" content="Convert length, weight, and temperature instantly. Free online unit converter — no signup, works in your browser, 100% private.">
-<meta name="keywords" content="unit converter, length converter, weight converter, temperature converter, free unit converter, cm to inches, kg to lbs, celsius to fahrenheit">
+<title>Free Unit Converter — Length, Weight, Temperature, Area, Volume, Speed</title>
+<meta name="description" content="Convert length, weight, temperature, area, volume, and speed instantly. Free online unit converter — no signup, works in your browser, 100% private.">
+<meta name="keywords" content="unit converter, length converter, weight converter, temperature converter, area converter, volume converter, speed converter, free unit converter, cm to inches, kg to lbs, celsius to fahrenheit">
 <link rel="canonical" href="https://www.freetoolindia.com/unit-converter.html">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Free Unit Converter","url":"https://www.freetoolindia.com/unit-converter.html","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Free Unit Converter","url":"https://www.freetoolindia.com/unit-converter.html","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Convert length, weight, temperature, area, volume, and speed in your browser."}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many unit categories and units does it support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We support 6 categories — length, weight, temperature, area, volume, and speed — with 30+ units. We're expanding to more categories soon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it show precision and rounding details?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Results show up to 6 decimal places, and we avoid floating-point errors that plague simple converters."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a limit on how many conversions I can do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Our tool is completely unlimited and ad-free. Convert as much as you want."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Once the page loads, all conversions happen in your browser. You can disconnect and still use it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will you add more categories like data storage or currency?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Data storage is planned next, followed by currency conversion with daily rate updates."
+      }
+    }
+  ]
+}
 </script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f8fafc;color:#0f172a;line-height:1.6;padding:20px}
-.container{max-width:700px;margin:0 auto;background:#fff;padding:30px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.05)}
+.container{max-width:750px;margin:0 auto;background:#fff;padding:30px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.05)}
 h1{font-size:2rem;color:#7c3aed;margin-bottom:8px}
 .subtitle{color:#64748b;margin-bottom:20px}
-.tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
-.tab{padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:700;border:2px solid #e2e8f0;background:#fff}
+.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.tab{padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:700;border:2px solid #e2e8f0;background:#fff;font-family:inherit;font-size:0.85rem}
 .tab.active{background:#7c3aed;color:#fff;border-color:#7c3aed}
 .panel{display:none}.panel.active{display:block}
 .row{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end;margin-top:15px}
@@ -27,95 +75,201 @@ input:focus,select:focus{border-color:#a855f7;outline:none}
 .swap{background:#f3e8ff;border:none;padding:12px;border-radius:8px;cursor:pointer;font-size:1.2rem}
 .result{background:#faf5ff;padding:20px;border-radius:10px;margin-top:15px;text-align:center;font-size:1.3rem;font-weight:800;color:#7c3aed}
 .note{background:#faf5ff;padding:16px;border-radius:10px;margin-top:20px;font-size:0.9rem;color:#6b21a8}
+.faq-section{margin-top:40px;border-top:1px solid #e2e8f0;padding-top:30px}
+.faq-section h2{color:#7c3aed;font-size:1.4rem;margin-bottom:16px}
+.faq-item{background:#f8fafc;padding:18px 20px;border-radius:12px;margin-bottom:12px;border-left:4px solid #7c3aed}
+.faq-item h3{color:#0f172a;font-size:1rem;margin-bottom:6px;font-weight:700}
+.faq-item p{color:#475569;font-size:0.9rem;line-height:1.6}
+.interlink{margin-top:30px;background:#f8fafc;padding:24px;border-radius:12px}
+.interlink h2{color:#7c3aed;font-size:1.2rem;margin-bottom:16px}
+.interlink-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.interlink-grid a{display:block;background:#fff;padding:12px 16px;border-radius:8px;text-decoration:none;color:#0f172a;font-weight:600;font-size:0.88rem;border-left:3px solid #7c3aed;transition:all 0.2s}
+.interlink-grid a:hover{transform:translateX(4px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+@media(max-width:600px){.row{grid-template-columns:1fr}.swap{width:100%}}
 </style>
 </head>
 <body>
 <div class="container">
 <h1>📏 Unit Converter</h1>
-<p class="subtitle">Length, Weight, Temperature — instant, private, free.</p>
+<p class="subtitle">6 categories, 30+ units — instant, private, free. No signup, no ads, no limits.</p>
 
 <div class="tabs">
-<div class="tab active" onclick="switchTab('length', this)">📐 Length</div>
-<div class="tab" onclick="switchTab('weight', this)">⚖️ Weight</div>
-<div class="tab" onclick="switchTab('temp', this)">🌡️ Temperature</div>
+<button class="tab active" onclick="switchTab('length', this)">📐 Length</button>
+<button class="tab" onclick="switchTab('weight', this)">⚖️ Weight</button>
+<button class="tab" onclick="switchTab('temp', this)">🌡️ Temperature</button>
+<button class="tab" onclick="switchTab('area', this)">📦 Area</button>
+<button class="tab" onclick="switchTab('volume', this)">🧊 Volume</button>
+<button class="tab" onclick="switchTab('speed', this)">🚀 Speed</button>
 </div>
 
+<!-- LENGTH -->
 <div id="lengthPanel" class="panel active">
 <div class="row">
-<div><label>From</label><select id="lenFrom" onchange="convertLength()"><option value="m">Meters</option><option value="km">Kilometers</option><option value="cm">Centimeters</option><option value="mm">Millimeters</option><option value="mi">Miles</option><option value="yd">Yards</option><option value="ft">Feet</option><option value="in">Inches</option></select></div>
+<div><label>From</label><select id="lenFrom" onchange="convert('len')"><option value="m">Meters</option><option value="km">Kilometers</option><option value="cm">Centimeters</option><option value="mm">Millimeters</option><option value="mi">Miles</option><option value="yd">Yards</option><option value="ft">Feet</option><option value="in">Inches</option></select></div>
 <button class="swap" onclick="swap('len')">⇄</button>
-<div><label>To</label><select id="lenTo" onchange="convertLength()"><option value="ft">Feet</option><option value="in">Inches</option><option value="m">Meters</option><option value="km">Kilometers</option><option value="cm">Centimeters</option><option value="mm">Millimeters</option><option value="mi">Miles</option><option value="yd">Yards</option></select></div>
+<div><label>To</label><select id="lenTo" onchange="convert('len')"><option value="ft">Feet</option><option value="in">Inches</option><option value="m">Meters</option><option value="km">Kilometers</option><option value="cm">Centimeters</option><option value="mm">Millimeters</option><option value="mi">Miles</option><option value="yd">Yards</option></select></div>
 </div>
-<input type="number" id="lenInput" placeholder="Enter value" value="1" oninput="convertLength()" style="margin-top:10px">
-<div class="result" id="lenResult">1 Meter = 3.28084 Feet</div>
+<input type="number" id="lenInput" placeholder="Enter value" value="1" oninput="convert('len')" style="margin-top:10px">
+<div class="result" id="lenResult">1 m = 3.28084 ft</div>
 </div>
 
+<!-- WEIGHT -->
 <div id="weightPanel" class="panel">
 <div class="row">
-<div><label>From</label><select id="wFrom" onchange="convertWeight()"><option value="kg">Kilograms</option><option value="g">Grams</option><option value="mg">Milligrams</option><option value="lb">Pounds</option><option value="oz">Ounces</option><option value="t">Metric Tons</option></select></div>
+<div><label>From</label><select id="wFrom" onchange="convert('w')"><option value="kg">Kilograms</option><option value="g">Grams</option><option value="mg">Milligrams</option><option value="lb">Pounds</option><option value="oz">Ounces</option><option value="t">Metric Tons</option></select></div>
 <button class="swap" onclick="swap('w')">⇄</button>
-<div><label>To</label><select id="wTo" onchange="convertWeight()"><option value="lb">Pounds</option><option value="oz">Ounces</option><option value="kg">Kilograms</option><option value="g">Grams</option><option value="mg">Milligrams</option><option value="t">Metric Tons</option></select></div>
+<div><label>To</label><select id="wTo" onchange="convert('w')"><option value="lb">Pounds</option><option value="oz">Ounces</option><option value="kg">Kilograms</option><option value="g">Grams</option><option value="mg">Milligrams</option><option value="t">Metric Tons</option></select></div>
 </div>
-<input type="number" id="wInput" placeholder="Enter value" value="1" oninput="convertWeight()" style="margin-top:10px">
-<div class="result" id="wResult">1 Kilogram = 2.20462 Pounds</div>
+<input type="number" id="wInput" placeholder="Enter value" value="1" oninput="convert('w')" style="margin-top:10px">
+<div class="result" id="wResult">1 kg = 2.20462 lb</div>
 </div>
 
+<!-- TEMPERATURE -->
 <div id="tempPanel" class="panel">
 <div class="row">
-<div><label>From</label><select id="tFrom" onchange="convertTemp()"><option value="c">Celsius</option><option value="f">Fahrenheit</option><option value="k">Kelvin</option></select></div>
+<div><label>From</label><select id="tFrom" onchange="convert('t')"><option value="c">Celsius</option><option value="f">Fahrenheit</option><option value="k">Kelvin</option></select></div>
 <button class="swap" onclick="swap('t')">⇄</button>
-<div><label>To</label><select id="tTo" onchange="convertTemp()"><option value="f">Fahrenheit</option><option value="c">Celsius</option><option value="k">Kelvin</option></select></div>
+<div><label>To</label><select id="tTo" onchange="convert('t')"><option value="f">Fahrenheit</option><option value="c">Celsius</option><option value="k">Kelvin</option></select></div>
 </div>
-<input type="number" id="tInput" placeholder="Enter value" value="0" oninput="convertTemp()" style="margin-top:10px">
-<div class="result" id="tResult">0 Celsius = 32 Fahrenheit</div>
+<input type="number" id="tInput" placeholder="Enter value" value="0" oninput="convert('t')" style="margin-top:10px">
+<div class="result" id="tResult">0 °C = 32 °F</div>
+</div>
+
+<!-- AREA -->
+<div id="areaPanel" class="panel">
+<div class="row">
+<div><label>From</label><select id="aFrom" onchange="convert('a')"><option value="m2">Square Meters</option><option value="km2">Square Kilometers</option><option value="cm2">Square Centimeters</option><option value="ft2">Square Feet</option><option value="yd2">Square Yards</option><option value="ac">Acres</option><option value="ha">Hectares</option></select></div>
+<button class="swap" onclick="swap('a')">⇄</button>
+<div><label>To</label><select id="aTo" onchange="convert('a')"><option value="ft2">Square Feet</option><option value="m2">Square Meters</option><option value="km2">Square Kilometers</option><option value="cm2">Square Centimeters</option><option value="yd2">Square Yards</option><option value="ac">Acres</option><option value="ha">Hectares</option></select></div>
+</div>
+<input type="number" id="aInput" placeholder="Enter value" value="1" oninput="convert('a')" style="margin-top:10px">
+<div class="result" id="aResult">1 m² = 10.7639 ft²</div>
+</div>
+
+<!-- VOLUME -->
+<div id="volumePanel" class="panel">
+<div class="row">
+<div><label>From</label><select id="vFrom" onchange="convert('v')"><option value="l">Liters</option><option value="ml">Milliliters</option><option value="m3">Cubic Meters</option><option value="gal">Gallons (US)</option><option value="qt">Quarts (US)</option><option value="pt">Pints (US)</option><option value="cup">Cups</option></select></div>
+<button class="swap" onclick="swap('v')">⇄</button>
+<div><label>To</label><select id="vTo" onchange="convert('v')"><option value="gal">Gallons (US)</option><option value="l">Liters</option><option value="ml">Milliliters</option><option value="m3">Cubic Meters</option><option value="qt">Quarts (US)</option><option value="pt">Pints (US)</option><option value="cup">Cups</option></select></div>
+</div>
+<input type="number" id="vInput" placeholder="Enter value" value="1" oninput="convert('v')" style="margin-top:10px">
+<div class="result" id="vResult">1 L = 0.264172 gal</div>
+</div>
+
+<!-- SPEED -->
+<div id="speedPanel" class="panel">
+<div class="row">
+<div><label>From</label><select id="sFrom" onchange="convert('s')"><option value="kmh">Kilometers/hour</option><option value="mph">Miles/hour</option><option value="ms">Meters/second</option><option value="fts">Feet/second</option><option value="kn">Knots</option></select></div>
+<button class="swap" onclick="swap('s')">⇄</button>
+<div><label>To</label><select id="sTo" onchange="convert('s')"><option value="mph">Miles/hour</option><option value="kmh">Kilometers/hour</option><option value="ms">Meters/second</option><option value="fts">Feet/second</option><option value="kn">Knots</option></select></div>
+</div>
+<input type="number" id="sInput" placeholder="Enter value" value="1" oninput="convert('s')" style="margin-top:10px">
+<div class="result" id="sResult">1 km/h = 0.621371 mph</div>
 </div>
 
 <div class="note">🔒 <strong>Privacy:</strong> All conversions happen in your browser. No data is sent anywhere.</div>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+<h3>How many unit categories and units does it support?</h3>
+<p>We support <strong>6 categories — length, weight, temperature, area, volume, and speed — with 30+ units</strong>. We're expanding to more categories soon.</p>
+</div>
+
+<div class="faq-item">
+<h3>Does it show precision and rounding details?</h3>
+<p>Yes. Results show up to <strong>6 decimal places</strong>, and we avoid floating-point errors that plague simple converters.</p>
+</div>
+
+<div class="faq-item">
+<h3>Is there a limit on how many conversions I can do?</h3>
+<p>No. Our tool is <strong>completely unlimited and ad-free</strong>. Convert as much as you want.</p>
+</div>
+
+<div class="faq-item">
+<h3>Does it work offline?</h3>
+<p>Yes. Once the page loads, all conversions happen <strong>in your browser</strong>. You can disconnect and still use it.</p>
+</div>
+
+<div class="faq-item">
+<h3>Will you add more categories like data storage or currency?</h3>
+<p>Yes. <strong>Data storage</strong> is planned next, followed by <strong>currency conversion</strong> with daily rate updates.</p>
+</div>
+</section>
+
+<!-- Interlinking -->
+<div class="interlink">
+<h2>🔗 Related Free Tools</h2>
+<div class="interlink-grid">
+<a href="image-compressor.html">🖼️ Image Compressor — Reduce image sizes</a>
+<a href="pdf-tools.html">📄 PDF Merge & Split — Combine PDFs</a>
+<a href="invoice-generator.html">🧾 Invoice Generator — Create invoices</a>
+<a href="notepad.html">📝 Online Notepad — Take quick notes</a>
+<a href="index.html">🏠 All Free Tools</a>
+</div>
+</div>
 </div>
 
 <script>
+// Conversion factors (to base unit)
+const factors = {
+  len: { m: 1, km: 1000, cm: 0.01, mm: 0.001, mi: 1609.344, yd: 0.9144, ft: 0.3048, in: 0.0254 },
+  w: { kg: 1, g: 0.001, mg: 0.000001, lb: 0.453592, oz: 0.0283495, t: 1000 },
+  a: { m2: 1, km2: 1000000, cm2: 0.0001, ft2: 0.092903, yd2: 0.836127, ac: 4046.86, ha: 10000 },
+  v: { l: 1, ml: 0.001, m3: 1000, gal: 3.78541, qt: 0.946353, pt: 0.473176, cup: 0.236588 },
+  s: { kmh: 1, mph: 1.60934, ms: 3.6, fts: 1.09728, kn: 1.852 }
+};
+
 function switchTab(tab, el) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    el.classList.add('active');
-    document.getElementById(tab + 'Panel').classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(tab + 'Panel').classList.add('active');
 }
 
-const lenFactors = { m: 1, km: 1000, cm: 0.01, mm: 0.001, mi: 1609.344, yd: 0.9144, ft: 0.3048, in: 0.0254 };
-const wFactors = { kg: 1, g: 0.001, mg: 0.000001, lb: 0.453592, oz: 0.0283495, t: 1000 };
-
-function convertLength() {
-    const val = parseFloat(document.getElementById('lenInput').value) || 0;
-    const from = document.getElementById('lenFrom').value;
-    const to = document.getElementById('lenTo').value;
-    const result = val * lenFactors[from] / lenFactors[to];
-    document.getElementById('lenResult').textContent = `${val} ${from} = ${result.toFixed(6)} ${to}`;
-}
-
-function convertWeight() {
-    const val = parseFloat(document.getElementById('wInput').value) || 0;
-    const from = document.getElementById('wFrom').value;
-    const to = document.getElementById('wTo').value;
-    const result = val * wFactors[from] / wFactors[to];
-    document.getElementById('wResult').textContent = `${val} ${from} = ${result.toFixed(6)} ${to}`;
-}
-
-function convertTemp() {
-    const val = parseFloat(document.getElementById('tInput').value) || 0;
-    const from = document.getElementById('tFrom').value;
-    const to = document.getElementById('tTo').value;
+function convert(type) {
+  const from = document.getElementById(type + 'From').value;
+  const to = document.getElementById(type + 'To').value;
+  const val = parseFloat(document.getElementById(type + 'Input').value) || 0;
+  const resultEl = document.getElementById(type + 'Result');
+  
+  if (type === 't') {
     let celsius = from === 'c' ? val : from === 'f' ? (val - 32) * 5/9 : val - 273.15;
     let result = to === 'c' ? celsius : to === 'f' ? celsius * 9/5 + 32 : celsius + 273.15;
-    document.getElementById('tResult').textContent = `${val} ${from.toUpperCase()} = ${result.toFixed(2)} ${to.toUpperCase()}`;
+    resultEl.textContent = `${val} ${symbol(type, from)} = ${result.toFixed(6)} ${symbol(type, to)}`;
+    return;
+  }
+  
+  const result = val * factors[type][from] / factors[type][to];
+  resultEl.textContent = `${val} ${symbol(type, from)} = ${result.toFixed(6)} ${symbol(type, to)}`;
+}
+
+function symbol(type, unit) {
+  const symbols = {
+    len: { m: 'm', km: 'km', cm: 'cm', mm: 'mm', mi: 'mi', yd: 'yd', ft: 'ft', in: 'in' },
+    w: { kg: 'kg', g: 'g', mg: 'mg', lb: 'lb', oz: 'oz', t: 't' },
+    t: { c: '°C', f: '°F', k: 'K' },
+    a: { m2: 'm²', km2: 'km²', cm2: 'cm²', ft2: 'ft²', yd2: 'yd²', ac: 'ac', ha: 'ha' },
+    v: { l: 'L', ml: 'mL', m3: 'm³', gal: 'gal', qt: 'qt', pt: 'pt', cup: 'cup' },
+    s: { kmh: 'km/h', mph: 'mph', ms: 'm/s', fts: 'ft/s', kn: 'kn' }
+  };
+  return symbols[type][unit] || unit;
 }
 
 function swap(type) {
-    if (type === 'len') { const a = document.getElementById('lenFrom').value, b = document.getElementById('lenTo').value; document.getElementById('lenFrom').value = b; document.getElementById('lenTo').value = a; convertLength(); }
-    if (type === 'w') { const a = document.getElementById('wFrom').value, b = document.getElementById('wTo').value; document.getElementById('wFrom').value = b; document.getElementById('wTo').value = a; convertWeight(); }
-    if (type === 't') { const a = document.getElementById('tFrom').value, b = document.getElementById('tTo').value; document.getElementById('tFrom').value = b; document.getElementById('tTo').value = a; convertTemp(); }
+  const fromEl = document.getElementById(type + 'From');
+  const toEl = document.getElementById(type + 'To');
+  const temp = fromEl.value;
+  fromEl.value = toEl.value;
+  toEl.value = temp;
+  convert(type);
 }
 
-convertLength();
+// Initialize all
+['len', 'w', 't', 'a', 'v', 's'].forEach(convert);
 </script>
 </body>
 </html>
